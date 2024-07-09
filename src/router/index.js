@@ -57,7 +57,7 @@ const router = createRouter({
       component: () => import('../views/user/myInfo.vue')
     },
     {
-      path: '/secession',
+      path: '/user/secession',
       name: 'secession',
       component: () => import('../views/user/secession.vue')
     },
