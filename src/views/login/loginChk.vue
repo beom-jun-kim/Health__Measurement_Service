@@ -48,10 +48,10 @@
     width: 200px;
     padding: 15px 40px;
     margin: 10px 0;
-    border: 2px solid #00BFA5;
+    border: 2px solid var(--main-color);
     border-radius: 10px;
-    font-size: 18px;
-    color: #00BFA5;
+    font-size: var(--font-n-size);
+    color: var(--main-color);
     background-color: #fff;
     cursor: pointer;
     text-align: center;
@@ -61,7 +61,7 @@
   }
   
   .signup-button {
-    background-color: #00BFA5;
+    background-color: var(--main-color);
     color: #fff;
   }
   

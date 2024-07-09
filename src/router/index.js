@@ -18,6 +18,10 @@ const router = createRouter({
     //   component: () => import('../views/AboutView.vue')
     // },
     {
+      path: '/',
+      redirect: '/login/loginChk'
+    },
+    {
       path: '/login/userLogin',
       name: 'userLogin',
       component: () => import('../views/login/userLogin.vue')
@@ -86,7 +90,7 @@ const router = createRouter({
       path: '/welcome',
       name: 'welcome',
       component: () => import('../views/signup/welcome.vue')
-    },
+    }
   ]
 })
 
