@@ -14,7 +14,7 @@
       <button type="submit" class="login-button">로그인</button>
     </form>
     <div class="links">
-      <RouterLink to="/user/userIdFind">아이디 찾기</RouterLink> | <RouterLink to="/user/userPasswordFind">비밀번호 찾기</RouterLink>
+      <RouterLink to="/user/userIdFind">아이디 찾기</RouterLink> | <RouterLink to="/user/userIdFind">비밀번호 찾기</RouterLink>
     </div>
   </div>
 </template>
@@ -80,6 +80,7 @@ export default {
 .login-button {
   padding: 15px;
   margin-top: 10px;
+  
   border: none;
   border-radius: 5px;
   font-size: var(--font-n-size);

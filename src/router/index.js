@@ -42,11 +42,6 @@ const router = createRouter({
       component: () => import('../views/user/userIdFind.vue')
     },
     {
-      path: '/user/userPasswordFind',
-      name: 'userIdFind',
-      component: () => import('../views/user/userPasswordFind.vue')
-    },
-    {
       path: '/home',
       name: 'home',
       component: () => import('../views/home.vue')
