@@ -24,11 +24,11 @@ export default {
         return {
             reports: [
                 { date: '2024-06-30', new: true },
-                { date: '2024-06-15', new: false },
-                { date: '2024-06-13', new: false },
-                { date: '2024-06-05', new: false },
-                { date: '2024-05-10', new: false },
-                { date: '2024-04-23', new: false }
+                { date: '2024-06-15', new: true },
+                { date: '2024-06-13', new: true },
+                { date: '2024-06-05', new: true },
+                { date: '2024-05-10', new: true },
+                { date: '2024-04-23', new: true }
             ]
         };
     }
