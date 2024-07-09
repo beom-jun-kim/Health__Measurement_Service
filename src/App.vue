@@ -3,6 +3,8 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
+  
+  <RouterView />
   <header>
     <div class="wrapper">
       <nav>
@@ -33,17 +35,11 @@ import { RouterLink, RouterView } from 'vue-router'
       </nav>
     </div>
   </header>
-
-  <RouterView />
 </template>
 
 <style scoped>
 header .wrapper {
-  position: absolute;
-  left: 0;
-  bottom: 0;
   border-top: 1px solid var(--input-border-color);
-width: 100%;
 }
 
 nav {

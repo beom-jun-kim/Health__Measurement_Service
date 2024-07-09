@@ -14,14 +14,16 @@
                 <input type="radio" id="protect" name="userJoinChk">
                 <label for="protect">보호자</label>
             </div>
-            <button type="submit" class="next-btn">다음</button>
+            <RouterLink to="/signup/signupView">
+                <button type="submit" class="next-btn">다음</button>
+            </RouterLink>
         </form>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'userLogin',
+    name: 'signupChk',
 };
 </script>
 
@@ -53,11 +55,6 @@ export default {
 }
 
 .radio-box input[type="radio"] {
-    /* margin-right: 15px;
-    width: 20px;
-    height: 20px;
-    accent-color: var(--main-color); */
-
     margin-right: 15px;
     appearance: none;
     border: max(2px, 0.1em) solid var(--input-border-color);
@@ -67,7 +64,7 @@ export default {
 }
 
 .radio-box input[type="radio"]:checked {
-  border: 0.4em solid var(--main-color);
+    border: 0.4em solid var(--main-color);
 }
 
 .radio-box label {
@@ -86,6 +83,7 @@ export default {
 
 .page-title h2 {
     font-weight: var(--font-b-weight);
+    font-size: var(--font-b-size);
     margin-top: 20px;
 }
 

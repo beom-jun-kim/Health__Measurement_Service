@@ -9,7 +9,7 @@
           </div>
         </button>
       </RouterLink>
-      <RouterLink to="/signup/signupView">
+      <RouterLink to="/signup/signupChk">
         <button class="signup-button">
           <span>회원가입</span>
           <div class="img-box">
