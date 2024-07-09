@@ -52,14 +52,19 @@ const router = createRouter({
       component: () => import('../views/signup/qr.vue')
     },
     {
-      path: '/mypage',
-      name: 'mypage',
-      component: () => import('../views/user/mypage.vue')
+      path: '/user/myInfo',
+      name: 'myInfo',
+      component: () => import('../views/user/myInfo.vue')
     },
     {
       path: '/secession',
       name: 'secession',
       component: () => import('../views/user/secession.vue')
+    },
+    {
+      path: '/user/mypage',
+      name: 'mypage',
+      component: () => import('../views/user/mypage.vue')
     },
     {
       path: '/report',
