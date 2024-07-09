@@ -43,7 +43,7 @@ header .wrapper {
   left: 0;
   bottom: 0;
   border-top: 1px solid var(--input-border-color);
-  width: 100%;
+width: 100%;
 }
 
 nav {
@@ -51,6 +51,7 @@ nav {
   font-size: var(--font-n-sec-size);
   text-align: center;
   padding: 10px 0;
+  white-space: nowrap;
 }
 
 nav a.router-link-exact-active {
