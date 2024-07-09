@@ -1,5 +1,5 @@
 <template>
-    <div class="login-container">
+    <div class="container">
         <img src="../../../public/img/app_logo_01.png" alt="G-CON Logo" class="logo">
         <div class="qr-hand-img">
             <img src="../../../public/img/madeqr.png" alt="QR">
@@ -15,18 +15,6 @@ export default {
 </script>
 
 <style scoped>
-.login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-}
-
 .qr-hand-img {
     width: 200px;
     margin: 30px 0 20px;

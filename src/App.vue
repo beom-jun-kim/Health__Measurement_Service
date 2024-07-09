@@ -1,11 +1,12 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView, useRoute } from 'vue-router'
+
+const route = useRoute();
 </script>
 
 <template>
-  
   <RouterView />
-  <header>
+  <header v-if="route.path !== '/login/loginChk'">
     <div class="wrapper">
       <nav>
         <RouterLink to="/home">
@@ -40,7 +41,7 @@ import { RouterLink, RouterView } from 'vue-router'
 <style scoped>
 header .wrapper {
   border-top: 1px solid var(--input-border-color);
-}
+} 
 
 nav {
   width: 100%;

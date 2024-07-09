@@ -1,5 +1,5 @@
 <template>
-  <div class="login-container">
+  <div class="container">
     <img src="../../../public/img/app_logo_01.png" alt="G-CON Logo" class="logo">
     <p class="login-text">아이디, 비밀번호를 입력 후<br><span>로그인 버튼</span>을 눌러주세요</p>
     <form class="login-form">
@@ -26,18 +26,6 @@ export default {
 </script>
 
 <style scoped>
-.login-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-}
-
 .login-text {
   word-break: keep-all;
   text-align: center;

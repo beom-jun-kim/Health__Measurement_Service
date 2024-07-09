@@ -87,7 +87,7 @@ const router = createRouter({
       component: () => import('../views/userInfo/weight.vue')
     },
     {
-      path: '/welcome',
+      path: '/signup/welcome',
       name: 'welcome',
       component: () => import('../views/signup/welcome.vue')
     }

@@ -23,11 +23,15 @@ export default {
 
 <style scoped>
 
+.home-container {
+    padding: 20px;
+    height: 100vh;
+}
+
 .home-header {
-    width: 100%;
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .notification-icon {

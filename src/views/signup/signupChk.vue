@@ -1,5 +1,5 @@
 <template>
-    <div class="login-container">
+    <div class="container">
         <img src="../../../public/img/app_logo_01.png" alt="G-CON Logo" class="logo">
         <div class="page-title">
             <h2>회원가입</h2>
@@ -28,18 +28,6 @@ export default {
 </script>
 
 <style scoped>
-.login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-}
-
 .user-join-chk {
     width: 100%;
     text-align: center;

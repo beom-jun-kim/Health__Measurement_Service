@@ -1,5 +1,5 @@
 <template>
-    <div class="find-id-container">
+    <div class="container">
         <div class="tab-menu">
             <button :class="{ 'active-tab': currentComponent === 'FindId' }"
                 @click="updateState('FindId')">아이디찾기</button>
@@ -36,14 +36,6 @@ export default {
 </script>
 
 <style scoped>
-.find-id-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 100%;
-}
-
 .tab-menu {
     display: flex;
     justify-content: center;
@@ -57,6 +49,7 @@ export default {
     cursor: pointer;
     font-size: var(--font-n-size);
     border-bottom: 2px solid var(--input-border-color);
+    word-break: keep-all;
 }
 
 .tab-menu .active-tab {
@@ -66,7 +59,7 @@ export default {
 }
 
 .component-box {
-    padding: 20px 50px;
+    padding: 20px;
     word-break: keep-all;
     height: 400px;
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="signup-container">
+    <div class="container">
         <img src="../../../public/img/app_logo_01.png" alt="G-CON Logo" class="logo">
         <div class="page-title">
             <h2>회원가입</h2>
@@ -75,13 +75,6 @@ export default {
 </script>
 
 <style scoped>
-.signup-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 20px;
-}
-
 .logo {
     width: 150px;
     margin-bottom: 20px;
