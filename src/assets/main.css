@@ -13,7 +13,7 @@ a,
   padding: 3px;
 }
 
-input {
+input,select {
   outline: none;
 }
 
