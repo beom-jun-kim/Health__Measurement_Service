@@ -13,6 +13,10 @@ a,
   padding: 3px;
 }
 
+ul {
+  list-style: none;
+}
+
 input,select {
   outline: none;
 }

@@ -9,8 +9,8 @@
             <p class="home-text">오늘 하루도 건강을 잘 챙기시고 계시나요?</p>
         </div>
         <div class="action-buttons">
-            <button class="action-button">MY 건강 Data<br>측정하기<br>(QR 코드 생성)</button>
-            <button class="action-button">측정기록<br>확인하기</button>
+            <button class="qr-button">MY 건강 Data<br>측정하기<br>(QR 코드 생성)</button>
+            <button class="chk-button">측정기록<br>확인하기</button>
         </div>
     </div>
 </template>
@@ -22,7 +22,6 @@ export default {
 </script>
 
 <style scoped>
-
 .home-container {
     padding: 20px;
     height: 100vh;
@@ -64,17 +63,28 @@ export default {
     width: 100%;
     gap: 20px;
     margin-bottom: 20px;
+} 
+
+.qr-button {
+    background: url("../../public/img/main_img_01_bg.png") no-repeat center/cover;
 }
 
-.action-button {
+.chk-button {
+    background: url("../../public/img/main_img_02.png") no-repeat center/cover;
+}
+
+.action-buttons button {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    padding-bottom: 15px;
     line-height: 25px;
     flex: 1;
-    padding: 25px 15px;
+    height: 200px;
     font-size: var(--font-n-size);
-    text-align: center;
-    border: 2px solid var(--input-border-color);
-    background-color: #fff;
-    color: var(--main-color);
+    border-radius: 10px;
+    color: #fff;
     font-weight: var(--font-b-weight);
+    border: none;
 }
 </style>
