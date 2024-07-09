@@ -1,11 +1,11 @@
 <template>
     <div class="login-container">
-      <img src="/public/img/app_logo_01.png" alt="G-CON Logo" class="logo">
+      <img src="../../../public/img/app_logo_01.png" alt="G-CON Logo" class="logo">
       <RouterLink to="/login/userLogin">
         <button class="login-button">
           <span>로그인</span>
           <div class="img-box">
-            <img src="/public/img/app_icon_login.png" alt="G-CON Login" class="logo">
+            <img src="../../../public/img/app_icon_login.png" alt="G-CON Login" class="logo">
           </div>
         </button>
       </RouterLink>
@@ -13,7 +13,7 @@
         <button class="signup-button">
           <span>회원가입</span>
           <div class="img-box">
-            <img src="/public/img/app_icon_signup.png" alt="G-CON Login" class="logo">
+            <img src="../../../public/img/app_icon_signup.png" alt="G-CON Login" class="logo">
           </div>
         </button>
       </RouterLink>
@@ -36,6 +36,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+    width: 100%;
   }
   
   .logo {
@@ -45,7 +46,7 @@
   
   .login-button,
   .signup-button {
-    width: 200px;
+    width: 300px;
     padding: 15px 40px;
     margin: 10px 0;
     border: 2px solid var(--main-color);

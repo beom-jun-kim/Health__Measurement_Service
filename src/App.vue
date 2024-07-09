@@ -6,10 +6,30 @@ import { RouterLink, RouterView } from 'vue-router'
   <header>
     <div class="wrapper">
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/mypage">측정기록</RouterLink>
-        <RouterLink to="/findContainer">G-CON 찾기</RouterLink>
-        <RouterLink to="/report">더보기</RouterLink>
+        <RouterLink to="/home">
+          <div class="bottom-bar-img">
+            <img src="../public/img/bottom_menu_01.png" alt="">
+          </div>
+          <span>Home</span>
+        </RouterLink>
+        <RouterLink to="/mypage">
+          <div class="bottom-bar-img">
+            <img src="../public/img/bottom_menu_02.png" alt="">
+          </div>
+          <span>측정기록</span>
+        </RouterLink>
+        <RouterLink to="/findContainer">
+          <div class="bottom-bar-img">
+            <img src="../public/img/bottom_menu_03.png" alt="">
+          </div>
+          <span>G-CON 찾기</span>
+        </RouterLink>
+        <RouterLink to="/report">
+          <div class="bottom-bar-img">
+            <img src="../public/img/bottom_menu_04.png" alt="">
+          </div>
+          <span>더보기</span>
+        </RouterLink>
       </nav>
     </div>
   </header>
@@ -20,34 +40,25 @@ import { RouterLink, RouterView } from 'vue-router'
 <style scoped>
 header .wrapper {
   position: absolute;
+  left: 0;
   bottom: 0;
-  border-top: 1px solid #000;
+  border-top: 1px solid var(--input-border-color);
   width: 100%;
 }
 
 nav {
   width: 100%;
-  font-size: 12px;
+  font-size: var(--font-n-sec-size);
   text-align: center;
-  /* margin-top: 2rem; */
+  padding: 10px 0;
 }
 
 nav a.router-link-exact-active {
-  color: var(--color-text);
+  color: var(--main-color);
 }
-
-/* nav a.router-link-exact-active:hover {
-  background-color: transparent;
-} */
 
 nav a {
   display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+  padding: 10px 20px;
 }
-
-/* nav a:first-of-type {
-  border: 0;
-} */
-
 </style>
