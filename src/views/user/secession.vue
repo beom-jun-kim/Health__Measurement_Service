@@ -29,7 +29,7 @@ export default {
             router.push("/");
         },
         cancel() {
-            this.$router.push('/user/myInfo');
+            this.$router.push('/home');
         }
     }
 };
