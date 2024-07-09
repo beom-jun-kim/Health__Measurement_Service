@@ -39,6 +39,7 @@ export default {
 
 .login-text {
   word-break: keep-all;
+  text-align: center;
 }
 
 .login-text span {
