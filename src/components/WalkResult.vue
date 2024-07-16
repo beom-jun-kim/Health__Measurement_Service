@@ -1,6 +1,8 @@
 <template>
     <div class="container">
-      <h1>보행결과</h1>
+      <div class="table-title">
+        <h1>보행결과</h1>
+      </div>
       <table border>
         <thead>
           <tr>
@@ -64,15 +66,23 @@
         </tbody>
       </table>
       <div class="graph">
-        <div class="graph-wrap">
+        <div class="graph-wrap" v-for="(graph , index) in graphList" :Key=index>
             <div class="graph-title">
-                <span>정상보행</span>
+                <span>{{ graph.disease }}</span>
             </div>
             <div class="graph-box">
-                <span class="stick">
-                    <span class="content"></span>
-                </span>
+                <div class="content" :style="{ width: graph.percent }"></div>
             </div>
+        </div>
+      </div>
+      <div class="gen-opi">
+        <div class="total-title">
+          <h2>종합의견</h2>
+        </div>
+        <div class="total-text">
+          <p>
+            {{user.username}} 님은
+            </p>
         </div>
       </div>
     </div>
@@ -81,14 +91,71 @@
   <script>
   export default {
     name: 'reportDetail',
+    data(){
+      return {
+        graphList : [
+          {
+            disease:"정상보행",
+            percent:"60%",
+          },
+          {
+            disease:"뇌졸중",
+            percent:"50%",
+          },
+          {
+            disease:"파킨슨",
+            percent:"60%",
+          },
+          {
+            disease:"퇴행성",
+            percent:"80%",
+          },
+          {
+            disease:"관절염",
+            percent:"100%",
+          },
+          {
+            disease:"치매",
+            percent:"92%",
+          },
+        ]
+      }
+    }
   };
   </script>
   
   <style scoped>
-  .stick {
+  .table-title {
+    margin-bottom: 20px;
+  }
+  .graph {
     width: 100%;
+    margin-top: 30px;
+  }
+
+  .graph-title {
+    white-space: nowrap;
+  }
+
+  .graph-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .graph-box {
+    width: 80%;
     height: 10px;
-    background: red;
+    background: var(--input-border-color);
+    border-radius: 10px;
+  }
+
+  .graph-box .content {
+    width: 80%;
+    background: var(--main-color);
+    height: 100%;
+    border-radius: 10px;
   }
   </style>
   
