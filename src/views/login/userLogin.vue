@@ -36,11 +36,6 @@ export default {
   font-weight: var(--font-b-weight);
 }
 
-.logo {
-  width: 150px;
-  margin-bottom: 50px;
-}
-
 .login-form {
   width: 100%;
   max-width: 300px;

@@ -27,11 +27,6 @@ export default {
 </script>
 
 <style scoped>
-.logo {
-  width: 150px;
-  margin-bottom: 50px;
-}
-
 .login-button,
 .signup-button {
   width: 300px;
@@ -72,6 +67,3 @@ button span {
   margin-right: 10px;
 }
 </style>
-
-
-<!-- test commit-->

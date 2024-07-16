@@ -34,11 +34,6 @@ export default {
 </script>
 
 <style scoped>
-.logo {
-    width: 150px;
-    margin-bottom: 20px;
-}
-
 .container a {
     width: 100%;
     text-align: center;

@@ -1,6 +1,5 @@
-/* color palette from <https://github.com/vuejs/theme> */
 :root {
-  --main-color : #00BFA5;
+  --main-color : #36b1a7;
   --font-b-size : 24px;
   --font-n-size : 18px;
   --font-n-sec-size : 16px;
@@ -8,8 +7,7 @@
   --font-b-weight : 600;
 }
 
-/* semantic color variables for this project */
-:root {
+/* :root {
   --color-background: var(--vt-c-white);
   --color-background-soft: var(--vt-c-white-soft);
   --color-background-mute: var(--vt-c-white-mute);
@@ -35,7 +33,7 @@
     --color-heading: var(--vt-c-text-dark-1);
     --color-text: var(--vt-c-text-dark-2);
   }
-}
+} */
 
 *,
 *::before,
@@ -43,9 +41,10 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-weight: normal;
-}
-
-body {
+  /* font-weight: normal; */
   font-family: "Spoqa Han Sans Neo", "sans-serif";
 }
+
+/* body {
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+} */

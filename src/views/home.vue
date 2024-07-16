@@ -5,12 +5,16 @@
         </header>
         <div class="welcome-section">
             <img src="../../public/img/img_main.png" alt="Health Illustration" class="illustration">
-            <h1 class="home-text-user">홍길동님</h1>
+            <h1 class="home-text-user">{{ user.username }}님</h1>
             <p class="home-text">오늘 하루도 건강을 잘 챙기시고 계시나요?</p>
         </div>
         <div class="action-buttons">
-            <button class="qr-button">MY 건강 Data<br>측정하기<br>(QR 코드 생성)</button>
-            <button class="chk-button">측정기록<br>확인하기</button>
+            <RouterLink to="/signup/qr">
+                <button class="qr-button">MY 건강 Data<br>측정하기<br>(QR 코드 생성)</button>
+            </RouterLink>
+            <RouterLink to="/user/report">
+                <button class="chk-button">측정기록<br>확인하기</button>
+            </RouterLink>
         </div>
     </div>
 </template>
@@ -18,6 +22,17 @@
 <script>
 export default {
     name: 'home',
+    data() {
+        return {
+            user: {
+                id: 1,
+                username: '김범준',
+                password: 'ddd',
+                생년월일: '1995.12.05',
+                성별: '남'
+            }
+        }
+    }
 };
 </script>
 
@@ -63,7 +78,7 @@ export default {
     width: 100%;
     gap: 20px;
     margin-bottom: 20px;
-} 
+}
 
 .qr-button {
     background: url("../../public/img/main_img_01_bg.png") no-repeat center/cover;
@@ -73,7 +88,12 @@ export default {
     background: url("../../public/img/main_img_02.png") no-repeat center/cover;
 }
 
+.action-buttons a {
+    width: 100%;
+}
+
 .action-buttons button {
+    width: 100%;
     display: flex;
     align-items: end;
     justify-content: center;

@@ -34,7 +34,8 @@ const router = createRouter({
     {
       path: '/signup/signupView',
       name: 'signupView',
-      component: () => import('../views/signup/signupView.vue')
+      component: () => import('../views/signup/signupView.vue'),
+      props: (route) => ({ userType: route.query.userType })
     },
     {
       path: '/user/userIdFind',
@@ -47,7 +48,7 @@ const router = createRouter({
       component: () => import('../views/home.vue')
     },
     {
-      path: '/qr',
+      path: '/signup/qr',
       name: 'qr',
       component: () => import('../views/signup/qr.vue')
     },
@@ -70,6 +71,11 @@ const router = createRouter({
       path: '/user/report',
       name: 'report',
       component: () => import('../views/user/report.vue')
+    },
+    {
+      path: '/user/report/:id',
+      name: 'reportDetail',
+      component: () => import('../views/user/report/reportDetail.vue')
     },
     {
       path: '/findContainer',
@@ -95,7 +101,7 @@ const router = createRouter({
       path: '/signup/welcome',
       name: 'welcome',
       component: () => import('../views/signup/welcome.vue')
-    }
+    },
   ]
 })
 

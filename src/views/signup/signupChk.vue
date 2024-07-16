@@ -4,19 +4,17 @@
         <div class="page-title">
             <h2>회원가입</h2>
         </div>
-        <form class="user-join-chk">
+        <form class="user-join-chk" @submit.prevent="joinPageMove">
             <p>대상자 입니까? 보호자 입니까?</p>
             <div class="radio-box">
-                <input type="radio" id="self" name="userJoinChk">
+                <input type="radio" id="self" name="userJoinChk" v-model="userType">
                 <label for="self">대상자</label>
             </div>
             <div class="radio-box">
-                <input type="radio" id="protect" name="userJoinChk">
+                <input type="radio" id="protect" name="userJoinChk" v-model="userType">
                 <label for="protect">보호자</label>
             </div>
-            <RouterLink to="/signup/signupView">
-                <button type="submit" class="next-btn">다음</button>
-            </RouterLink>
+            <button type="submit" class="next-btn">다음</button>
         </form>
     </div>
 </template>
@@ -24,6 +22,20 @@
 <script>
 export default {
     name: 'signupChk',
+    data() {
+        return {
+            userType: null
+        }
+    },
+    methods: {
+        joinPageMove() {
+            if (this.userType) {
+                this.$router.push("/signup/signupView");
+            } else {
+                alert("대상자 또는 보호자를 선택해주세요");
+            }
+        }
+    }
 };
 </script>
 

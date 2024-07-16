@@ -5,26 +5,26 @@
             <h2>회원가입</h2>
             <p>회원가입을 위한 정보들을 입력해주세요</p>
         </div>
-        <form class="signup-form">
+        <form class="signup-form" @submit.prevent="userJoin">
             <div class="input-group">
                 <label for="username">아이디</label>
-                <input type="text" id="username" name="username">
+                <input type="text" id="username" name="username" v-model="form.id">
             </div>
             <div class="input-group">
                 <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password">
+                <input type="password" id="password" name="password" v-model="form.password">
             </div>
             <div class="input-group">
                 <label for="password-confirm">비밀번호확인</label>
-                <input type="password" id="password-confirm" name="password-confirm">
+                <input type="password" id="password-confirm" name="password-confirm" v-model="form.pwdChk">
             </div>
             <div class="input-group">
                 <label for="name">이름</label>
-                <input type="text" id="name" name="name">
+                <input type="text" id="name" name="name" v-model="form.username">
             </div>
             <div class="input-group">
                 <label for="gender">성별</label>
-                <select id="gender">
+                <select id="gender" v-model="form.gender">
                     <option value="male">남</option>
                     <option value="female">여</option>
                 </select>
@@ -32,7 +32,7 @@
             <div class="input-group">
                 <label for="birth">생년월일</label>
                 <div class="birth-select">
-                    <select id="year">
+                    <select id="year" v-model="form.birth">
                         <option value="">년</option>
                         <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
                     </select>
@@ -46,6 +46,10 @@
                     </select>
                 </div>
             </div>
+            <!-- <div class="input-group">
+                <label for="phone">전화번호 (-없이 입력)</label>
+                <input type="tel" id="phone" name="phone" v-model="form.phone">
+            </div> -->
             <button type="submit" class="signup-button">회원가입</button>
         </form>
     </div>
@@ -54,13 +58,53 @@
 <script>
 export default {
     name: 'SignupView',
+    props: {
+        userType: {
+            type: String,
+            required: true,
+        }
+    },
     data() {
         return {
             currentYear: new Date().getFullYear(),
             startYear: 1900,
             months: Array.from({ length: 12 }, (v, k) => k + 1),
-            days: Array.from({ length: 31 }, (v, k) => k + 1)
+            days: Array.from({ length: 31 }, (v, k) => k + 1),
+            form: {
+                id: "",
+                password: "",
+                pwdChk: "",
+                username: "",
+                gender: "",
+                birth: "",
+                // phone: "",
+            }
         };
+    },
+    methods: {
+        async userJoin(evt) {
+            evt.preventDefault();
+            if (this.form.password !== this.form.pwdChk) {
+                alert("비밀번호가 일치하지 않습니다");
+            } else {
+                try {
+                    // const data = {
+                    //     name: this.form.id,
+                    //     password: this.form.password,
+                    //     pwdChk: this.form.pwdChk,
+                    //     username: this.form.username,
+                    //     gender: this.form.gender,
+                    //     birth: this.form.birth,
+                    // }
+                    // console.log("유저 데이터", data);
+                    // const response = await userApi.createUser(data);
+                    alert("회원가입이 완료되었습니다");
+                    this.$router.push("/signup/welcome");
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+        }
     },
     computed: {
         years() {
@@ -75,11 +119,9 @@ export default {
 </script>
 
 <style scoped>
-.logo {
-    width: 150px;
-    margin-bottom: 20px;
+form {
+    margin-bottom: 100px;
 }
-
 .page-title {
     text-align: center;
     margin-bottom: 20px;
