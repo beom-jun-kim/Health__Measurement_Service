@@ -18,6 +18,10 @@ const router = createRouter({
     //   component: () => import('../views/AboutView.vue')
     // },
     {
+      path: '/',
+      redirect: '/login/loginChk'
+    },
+    {
       path: '/login/userLogin',
       name: 'userLogin',
       component: () => import('../views/login/userLogin.vue')
@@ -30,10 +34,11 @@ const router = createRouter({
     {
       path: '/signup/signupView',
       name: 'signupView',
-      component: () => import('../views/signup/signupView.vue')
+      component: () => import('../views/signup/signupView.vue'),
+      props: (route) => ({ userType: route.query.userType })
     },
     {
-      path: '/userIdFind',
+      path: '/user/userIdFind',
       name: 'userIdFind',
       component: () => import('../views/user/userIdFind.vue')
     },
@@ -43,24 +48,34 @@ const router = createRouter({
       component: () => import('../views/home.vue')
     },
     {
-      path: '/qr',
+      path: '/signup/qr',
       name: 'qr',
       component: () => import('../views/signup/qr.vue')
     },
     {
-      path: '/mypage',
-      name: 'mypage',
-      component: () => import('../views/user/mypage.vue')
+      path: '/user/myInfo',
+      name: 'myInfo',
+      component: () => import('../views/user/myInfo.vue')
     },
     {
-      path: '/secession',
+      path: '/user/secession',
       name: 'secession',
       component: () => import('../views/user/secession.vue')
     },
     {
-      path: '/report',
+      path: '/user/mypage',
+      name: 'mypage',
+      component: () => import('../views/user/mypage.vue')
+    },
+    {
+      path: '/user/report',
       name: 'report',
       component: () => import('../views/user/report.vue')
+    },
+    {
+      path: '/user/report/:id',
+      name: 'reportDetail',
+      component: () => import('../views/user/report/reportDetail.vue')
     },
     {
       path: '/findContainer',
@@ -68,7 +83,7 @@ const router = createRouter({
       component: () => import('../views/findContainer.vue')
     },
     {
-      path: '/signupChk',
+      path: '/signup/signupChk',
       name: 'signupChk',
       component: () => import('../views/signup/signupChk.vue')
     },
@@ -83,7 +98,7 @@ const router = createRouter({
       component: () => import('../views/userInfo/weight.vue')
     },
     {
-      path: '/welcome',
+      path: '/signup/welcome',
       name: 'welcome',
       component: () => import('../views/signup/welcome.vue')
     },
