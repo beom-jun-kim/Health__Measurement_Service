@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <div class="tab-menu">
-      <button :class="{ 'active-tab': currentComponent === 'WalkResult' }" @click="updateState('WalkResult')">보행결과</button>
+      <button :class="{ 'active-tab': currentComponent === 'WalkResult' }"
+        @click="updateState('WalkResult')">보행결과</button>
       <button :class="{ 'active-tab': currentComponent === 'WalkArea' }" @click="updateState('WalkArea')">보행면적</button>
     </div>
 
@@ -39,7 +40,13 @@ export default {
   margin-bottom: 100px;
 }
 
+.tab-menu {
+  width: 100%;
+  display: flex;
+}
+
 .tab-menu button {
+  width: 100%;
   padding: 10px 8.421052631578947vw;
   color: #aaa;
   border: none;
@@ -54,11 +61,5 @@ export default {
   color: #000;
   font-weight: var(--font-b-weight);
   border-bottom: 6px solid var(--main-color);
-}
-
-.component-box {
-    padding: 20px;
-    word-break: keep-all;
-    height: 400px;
 }
 </style>

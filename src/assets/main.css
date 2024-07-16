@@ -39,6 +39,8 @@ img {
 table {
   border-collapse: collapse;
   text-align: center;
+  width: 100%;
+  table-layout: fixed;
 }
 
 table th,

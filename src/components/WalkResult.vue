@@ -62,8 +62,19 @@
             <td>21</td>
           </tr>
         </tbody>
-  
       </table>
+      <div class="graph">
+        <div class="graph-wrap">
+            <div class="graph-title">
+                <span>정상보행</span>
+            </div>
+            <div class="graph-box">
+                <span class="stick">
+                    <span class="content"></span>
+                </span>
+            </div>
+        </div>
+      </div>
     </div>
   </template>
   
@@ -74,5 +85,10 @@
   </script>
   
   <style scoped>
+  .stick {
+    width: 100%;
+    height: 10px;
+    background: red;
+  }
   </style>
   
