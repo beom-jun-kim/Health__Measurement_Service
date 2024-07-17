@@ -77,6 +77,11 @@ const router = createRouter({
       name: 'reportDetail',
       component: () => import('../views/user/report/reportDetail.vue')
     },
+    // {
+    //   path: '/user/reportDate/:id',
+    //   name: 'diseaseDetail',
+    //   component: () => import('../views/user/reportDate/diseaseDetail.vue')
+    // },
     {
       path: '/findContainer',
       name: 'findContainer',
