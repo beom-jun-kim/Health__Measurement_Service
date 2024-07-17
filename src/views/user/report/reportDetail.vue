@@ -80,7 +80,7 @@
       </div>
     </div>
     <div v-if="diseaseModal" class="diseaseModal">
-      <DiseaseDetail @closeModalBtn="closeModalBtn"/>
+      <DiseaseDetail @closeModalBtn="closeModalBtn" :paramAppId="appId" :graphList="graphList" :user="user"/>
     </div>
   </div>
 </template>
@@ -98,32 +98,41 @@ export default {
   data() {
     return {
       diseaseModal: false,
-      appId: 0,
       graphList: [
         {
           id: 1,
           disease: "정상보행",
           percent: 72,
+          avg: 2,
+          myResult: 4,
         },
         {
           id: 2,
           disease: "뇌졸중",
           percent: 90,
+          avg: 4,
+          myResult: 2,
         },
         {
           id: 3,
           disease: "파킨슨",
           percent: 60,
+          avg: 1,
+          myResult: 4,
         },
         {
           id: 4,
           disease: "퇴행성",
           percent: 70,
+          avg: 5,
+          myResult: 3,
         },
         {
           id: 5,
           disease: "치매",
           percent: 92,
+          avg: 5,
+          myResult: 5,
         },
       ],
       user: {
@@ -138,7 +147,7 @@ export default {
       this.appId = appId;
       this.diseaseModal = true;
     },
-    closeModalBtn(){
+    closeModalBtn() {
       this.diseaseModal = false;
     }
   }
