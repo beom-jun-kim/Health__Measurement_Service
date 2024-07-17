@@ -109,7 +109,7 @@
 }
 
 .disease-detail .slider {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .disease-detail .slider-title {
@@ -226,15 +226,15 @@
 
 .disease-detail .message {
   border-top: 1px solid var(--input-border-color);
-  padding-top: 20px;
+  padding-top: 30px;
 }
 
 .disease-detail .message p {
     border-radius: 10px;
-    padding: 10px;
-    color: var(--main-color);
+    padding: 15px;
     border: 1px solid var(--main-color);
-    margin-top: 10px;    
+    margin-top: 20px;   
+    word-break: keep-all;
 }
 
 </style>
