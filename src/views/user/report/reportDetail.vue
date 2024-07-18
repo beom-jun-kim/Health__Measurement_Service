@@ -110,7 +110,7 @@ export default {
           id: 2,
           disease: "뇌졸중",
           percent: 90,
-          avg: 4,
+          avg: 0,
           myResult: 2,
         },
         {
@@ -124,14 +124,14 @@ export default {
           id: 4,
           disease: "퇴행성",
           percent: 70,
-          avg: 5,
+          avg: 1,
           myResult: 3,
         },
         {
           id: 5,
           disease: "치매",
           percent: 92,
-          avg: 5,
+          avg: 1,
           myResult: 5,
         },
       ],
@@ -289,7 +289,7 @@ export default {
 
 .diseaseModal {
   width: 100%;
-  height: 100%;
+  height: 91.6%;
   background: #fff;
   position: fixed;
   top: 0;

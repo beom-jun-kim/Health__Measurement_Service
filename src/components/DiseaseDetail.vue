@@ -54,7 +54,7 @@
                     {{ user.username }}님의 결과는 {{ currentGraph.myResult }}단계로 나왔습니다. 평균 수치보다 높게 나와 {{ currentGraph.disease }} 가능성이 있습니다. 전문의와 상담받아 보시기 바랍니다.
                 </p>
             </div>
-        </div>    
+        </div>
     </div>
 </template>
   
@@ -121,40 +121,40 @@
 .disease-detail .slider-bar {
   position: relative;
   margin-bottom: 10px;
-  height: 8px;
-  border-radius: 5px;
+  height: 15px;
+  border-radius: 10px;
 }
 
 .disease-detail .slider-bar .filled-bar {
     height: 100%;
     background: var(--main-color);
     position: absolute;
-    top: 9px;
-    border-radius: 5px;
+    top: 2.5px;
+    border-radius: 10px;
 }
 
 .disease-detail .slider-bar input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 8px;
+  height: 15px;
   background: #e0e0e0;
   outline: none;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .disease-detail .slider-bar input[type="range"]::-webkit-slider-runnable-track {
   width: 100%;
-  height: 8px;
+  height: 15px;
   background: #e0e0e0;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .disease-detail .slider-bar input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   background: var(--main-color);
   border-radius: 50%;
   cursor: pointer;
@@ -171,9 +171,9 @@
 
 .disease-detail .slider-bar input[type="range"]::-moz-range-track {
   width: 100%;
-  height: 8px;
+  height: 15px;
   background: #e0e0e0;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .disease-detail .slider-bar input[type="range"]:disabled::-webkit-slider-thumb {
@@ -190,7 +190,7 @@
 
 .disease-detail .slider-bar input[type="range"]::-ms-track {
   width: 100%;
-  height: 8px;
+  height: 15px;
   background: transparent;
   border-color: transparent;
   border-width: 6px 0;
@@ -199,18 +199,18 @@
 
 .disease-detail .slider-bar input[type="range"]::-ms-fill-lower {
   background: var(--main-color);
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .disease-detail .slider-bar input[type="range"]::-ms-fill-upper {
   background: #e0e0e0;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .disease-detail .slider-values {
   display: flex;
   justify-content: space-between;
-  margin-top: 5px;
+  /* margin-top: 5px; */
 }
 
 .disease-detail .slider-values span {
