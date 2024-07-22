@@ -26,10 +26,21 @@
       <button type="submit" class="search-button" @click="getGeocode">검색하기</button>
     </form>
     <div id="map" style="width: 100%; height: 400px"></div>
-    <div>
-      <h2>가까운 컨테이너 목록</h2>
+    <div class="g-con-list" v-if="sortedLocations.length > 0">
+      <h2>가장 가까운 거리순</h2>
       <ul>
-        <li v-for="(location, index) in sortedLocations" :key="index">{{ location.address }} - {{ location.distance.toFixed(2) }} km</li>
+        <li v-for="(location, index) in sortedLocations" :key="index">
+          <a :href="`https://map.naver.com/v5/search/${encodeURIComponent(location.address)}`">
+            <div class="location-text">
+              <span>
+                {{ location.address.length > 18 ? `${location.address.slice(0, 18)}...` : location.address }}
+              </span>
+              <span>
+                {{ formatDistance(location.distance) }} km
+              </span>
+            </div>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
@@ -90,7 +101,7 @@ export default {
     updateMap(latitude, longitude) {
       const position = new naver.maps.LatLng(latitude, longitude);
       this.map.setCenter(position);
-      this.map.setZoom(15); // 줌 레벨 설정
+      this.map.setZoom(15);
       const marker = new naver.maps.Marker({
         position: position,
         map: this.map
@@ -105,8 +116,6 @@ export default {
           icon: {
             url: '../../../public/img/app_logo_04.png',
             size: new naver.maps.Size(50, 13),
-            // origin: new naver.maps.Point(0, 0),
-            // anchor: new naver.maps.Point(11, 35)
           }
         });
         const infowindow = new naver.maps.InfoWindow({
@@ -143,6 +152,10 @@ export default {
           distance: calculateDistance(lat, lng, location.lat, location.lng)
         };
       }).sort((a, b) => a.distance - b.distance);
+    },
+    formatDistance(distance) {
+      const formattedDistance = distance.toFixed(2);
+      return parseFloat(formattedDistance) % 1 === 0 ? parseInt(formattedDistance) : formattedDistance;
     }
   },
   mounted() {
@@ -196,5 +209,39 @@ select {
   background-color: var(--main-color);
   text-align: center;
   font-weight: var(--font-b-weight);
+}
+
+#map {
+  margin-top: 50px;
+}
+
+.g-con-list {
+  width: 100%;
+  margin-bottom: 100px;
+}
+
+.g-con-list h2 {
+  margin: 20px 0 0;
+  /* padding-left: 15px; */
+}
+
+.g-con-list li {
+  border-bottom: 1px solid var(--input-border-color);
+  height: 68px;
+  line-height: 68px;
+}
+
+.g-con-list li:last-child {
+  border-bottom: none;
+}
+
+.g-con-list a {
+  display: block;
+}
+
+.location-text {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 </style>
