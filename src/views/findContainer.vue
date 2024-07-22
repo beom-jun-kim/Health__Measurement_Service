@@ -25,17 +25,14 @@
       </div>
       <button type="submit" class="search-button" @click="getGeocode">검색하기</button>
     </form>
-  </div>
-  <!-- <div>
-    <input v-model="address" placeholder="Enter address" />
-    <button @click="getGeocode">Search</button>
-    <div v-if="result">
-      <p>Latitude: {{ result.addresses[0].y }}</p>
-      <p>Longitude: {{ result.addresses[0].x }}</p>
-      <p>Address: {{ result.addresses[0].roadAddress }}</p>
+    <div id="map" style="width: 100%; height: 400px"></div>
+    <div>
+      <h2>가까운 컨테이너 목록</h2>
+      <ul>
+        <li v-for="(location, index) in sortedLocations" :key="index">{{ location.address }} - {{ location.distance.toFixed(2) }} km</li>
+      </ul>
     </div>
-  </div> -->
-  <div id="map" style="width: 100%; height: 400px"></div>
+  </div>
 </template>
 
 <script>
@@ -52,70 +49,24 @@ export default {
       districts: [],
       neighborhoods: [],
       address: "",
+      map: null,
+      markers: [],
+      locations: [
+        { lat: 35.876083, lng: 128.596031, address: '대구 광역시 중구 동성로 2가 1' },
+        { lat: 37.458666, lng: 126.4419679, address: '인천광역시 서구 경서동 120-1' },
+        { lat: 35.1728688, lng: 128.9471783, address: '경상남도 창원시 마산합포구 창포동2가 30-1' },
+        { lat: 35.1689218, lng: 129.1296311, address: '부산광역시 해운대구 중동 1392-102' },
+      ],
+      sortedLocations: [],
     };
   },
   methods: {
-    async fetchCities() {
-      const url = 'YOUR_API_ENDPOINT_FOR_CITIES';
-      try {
-        const response = await axios.get(url);
-        this.cities = response.data.cities;
-      } catch (error) {
-        console.error('Error fetching cities:', error);
-      }
-    },
-    // async updateDistricts() {
-    //   if (this.selectedCity) {
-    //     const url = `YOUR_API_ENDPOINT_FOR_DISTRICTS?city=${this.selectedCity}`;
-    //     try {
-    //       const response = await axios.get(url);
-    //       this.districts = response.data.districts;
-    //     } catch (error) {
-    //       console.error('Error fetching districts:', error);
-    //     }
-    //   }
-    //   this.selectedDistrict = '';
-    //   this.selectedNeighborhood = '';
-    //   this.neighborhoods = [];
-    // },
-    // async updateNeighborhoods() {
-    //   if (this.selectedDistrict) {
-    //     const url = `YOUR_API_ENDPOINT_FOR_NEIGHBORHOODS?city=${this.selectedCity}&district=${this.selectedDistrict}`;
-    //     try {
-    //       const response = await axios.get(url);
-    //       this.neighborhoods = response.data.neighborhoods;
-    //     } catch (error) {
-    //       console.error('Error fetching neighborhoods:', error);
-    //     }
-    //   }
-    //   this.selectedNeighborhood = '';
-    // },
-    async getCities() {
-      try {
-        const apiKey = '082236BE-5A59-35FC-BF24-5425A3B16BD2';
-        const response = await axios.get('/api/req/data', {
-          params: {
-            service: 'data',
-            request: 'GetFeature',
-            data: 'LT_C_ADSIGG_INFO',
-            key: apiKey,
-            domain: 'localhost',
-            format: 'json',
-            geomFilter: `point(127.105399 37.3595704)`
-          },
-        });
-        console.log("response",response);
-        const features = response.data.response.result.featureCollection.features;
-        this.cities = [...new Set(features.map(feature => feature.properties.sido_nm))];
-      } catch (error) {
-        console.error('Error fetching cities:', error);
-      }
-    },
     async getGeocode() {
-      this.address = `${this.selectedCity} ${this.selectedDistrict} ${this.selectedNeighborhood}`;
+      // this.address = `${this.selectedCity} ${this.selectedDistrict} ${this.selectedNeighborhood}`;
+      this.address = "부산광역시 수영구 광서로16번길 33";
       const client_id = 'anlunuki13';
       const client_secret = 'at2t14up0S0XAnxQNWmgu04sIgWZ6ZVvMXYxPnv4';
-      const url = 'https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode';
+      const url = '/map-geocode/v2/geocode';
       const headers = {
         'X-NCP-APIGW-API-KEY-ID': client_id,
         'X-NCP-APIGW-API-KEY': client_secret,
@@ -126,23 +77,77 @@ export default {
       };
       try {
         const response = await axios.get(url, { headers, params });
-        console.log(response.data);
+        console.log("1234", response.data);
+        const result = response.data.addresses[0];
+        const lng = result.x;
+        const lat = result.y;
+        this.updateMap(lat, lng);
+        this.sortLocationsByDistance(lat, lng);
       } catch (error) {
         console.error('Error fetching geocode data:', error);
       }
     },
+    updateMap(latitude, longitude) {
+      const position = new naver.maps.LatLng(latitude, longitude);
+      this.map.setCenter(position);
+      this.map.setZoom(15); // 줌 레벨 설정
+      const marker = new naver.maps.Marker({
+        position: position,
+        map: this.map
+      });
+      this.markers.push(marker);
+    },
+    placeMarkers() {
+      this.locations.forEach(location => {
+        const marker = new naver.maps.Marker({
+          position: new naver.maps.LatLng(location.lat, location.lng),
+          map: this.map,
+          icon: {
+            url: '../../../public/img/app_logo_04.png',
+            size: new naver.maps.Size(50, 13),
+            // origin: new naver.maps.Point(0, 0),
+            // anchor: new naver.maps.Point(11, 35)
+          }
+        });
+        const infowindow = new naver.maps.InfoWindow({
+          content: `<div style="padding:10px;"><a href="https://map.naver.com/v5/search/${encodeURIComponent(location.address)}" style="color: rgb(0, 104, 195);">${location.address}</a></div>`,
+          borderWidth: 0,
+          disableAnchor: true,
+        });
+        naver.maps.Event.addListener(marker, 'click', () => {
+          if (infowindow.getMap()) {
+            infowindow.close();
+          } else {
+            infowindow.open(this.map, marker);
+          }
+        });
+        this.markers.push(marker);
+      });
+    },
+    sortLocationsByDistance(lat, lng) {
+      const calculateDistance = (lat1, lng1, lat2, lng2) => {
+        const toRad = (value) => (value * Math.PI) / 180;
+        const R = 6371; // km
+        const dLat = toRad(lat2 - lat1);
+        const dLng = toRad(lng2 - lng1);
+        const a =
+          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c;
+      };
+
+      this.sortedLocations = this.locations.map(location => {
+        return {
+          ...location,
+          distance: calculateDistance(lat, lng, location.lat, location.lng)
+        };
+      }).sort((a, b) => a.distance - b.distance);
+    }
   },
   mounted() {
-    var mapOptions = {
-      center: new naver.maps.LatLng(37.3595704, 127.105399),
-      zoom: 10,
-    };
-    var map = new naver.maps.Map("map", {
-      center: new naver.maps.LatLng(37.3595704, 127.105399),
-      zoom: 10,
-    });
-    this.fetchCities();
-    this.getCities();
+    this.map = new naver.maps.Map('map', this.placeMarkers());
+    this.placeMarkers();
   }
 };
 </script>
