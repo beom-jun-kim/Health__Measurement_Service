@@ -73,8 +73,8 @@ export default {
   },
   methods: {
     async getGeocode() {
-      // this.address = `${this.selectedCity} ${this.selectedDistrict} ${this.selectedNeighborhood}`;
-      this.address = "부산광역시 수영구 광서로16번길 33";
+      this.address = `${this.selectedCity} ${this.selectedDistrict} ${this.selectedNeighborhood}`;
+      // this.address = "부산광역시 수영구 광서로16번길 33";
       const client_id = 'anlunuki13';
       const client_secret = 'at2t14up0S0XAnxQNWmgu04sIgWZ6ZVvMXYxPnv4';
       const url = '/map-geocode/v2/geocode';
