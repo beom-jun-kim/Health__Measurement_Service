@@ -83,7 +83,12 @@ const router = createRouter({
       path: '/user/userInfoEdit',
       name: 'userInfoEdit',
       component: () => import('../views/user/userInfoEdit.vue')
-    }
+    },
+    {
+      path: '/follow/addFollow',
+      name: 'addFollow',
+      component: () => import('../views/follow/addFollow.vue')
+    },
   ]
 })
 

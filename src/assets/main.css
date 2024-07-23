@@ -17,7 +17,8 @@ ul {
   list-style: none;
 }
 
-input,select {
+input,
+select {
   outline: none;
 }
 
@@ -47,4 +48,9 @@ table {
 table th,
 table td {
   padding: 10px 5px;
+}
+
+input,
+button {
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
 }

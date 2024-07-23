@@ -21,6 +21,12 @@ const route = useRoute();
           </div>
           <span>측정기록</span>
         </RouterLink>
+        <RouterLink to="/follow/addFollow">
+          <div class="bottom-bar-img">
+            <img src="../public/img/bottom_menu_05.png" alt="">
+          </div>
+          <span>친구추가</span>
+        </RouterLink>
         <RouterLink to="/findContainer">
           <div class="bottom-bar-img">
             <img src="../public/img/bottom_menu_03.png" alt="">
@@ -39,7 +45,7 @@ const route = useRoute();
 </template>
 
 <style scoped>
-header .wrapper {}
+header .wrapper {} 
 
 nav {
   width: 100%;
@@ -53,6 +59,7 @@ nav {
   position: fixed;
   bottom: 0;
   background: #fff;
+  z-index: 9999;
 }
 
 nav a.router-link-exact-active {
