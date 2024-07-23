@@ -103,7 +103,7 @@ export default {
           id: 1,
           disease: "정상보행",
           percent: 72,
-          avg: 2,
+          avg: 3,
           myResult: 4,
         },
         {
@@ -117,8 +117,8 @@ export default {
           id: 3,
           disease: "파킨슨",
           percent: 60,
-          avg: 1,
-          myResult: 4,
+          avg: 4,
+          myResult: 5,
         },
         {
           id: 4,
@@ -131,8 +131,8 @@ export default {
           id: 5,
           disease: "치매",
           percent: 92,
-          avg: 1,
-          myResult: 5,
+          avg: 2,
+          myResult: 1,
         },
       ],
       user: {

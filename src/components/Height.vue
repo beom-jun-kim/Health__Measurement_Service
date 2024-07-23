@@ -15,21 +15,56 @@
             </div>
             <div class="unit">cm</div>
         </div>
-        <RouterLink to="/userInfo/weight">
-            <button class="submit-button">완료</button>
-        </RouterLink>
+
+        <div class="page-title" style="margin-top: 50px;">
+            <h2>몸무게를 알려주세요</h2>
+            <p>회원님의 몸무게를 정확하게 입력해주세요</p>
+        </div>
+        <div class="height-picker">
+            <div class="picker-wrapper">
+                <select v-model="selectedweight">
+                    <option v-for="weight in weights" :key="weight" :value="weight">
+                        {{ weight }}
+                    </option>
+                </select>
+            </div>
+            <div class="unit">kg</div>
+        </div>
+        <button class="submit-button" @click="bodyInfoSave">완료</button>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'height',
+    name: 'Height',    
     data() {
         return {
             selectedHeight: null,
-            heights: Array.from({ length: 150 }, (v, k) => k + 100)
+            selectedweight: null,
+            heights: Array.from({ length: 150 }, (v, k) => k + 100),
+            weights: Array.from({ length: 150 }, (v, k) => k + 1)
         };
     },
+    methods:{
+        bodyInfoSave(){
+            if(this.selectedHeight === null) {
+                alert("키를 입력하여 주세요");
+            } else if (this.selectedweight === null) {
+                alert("몸무게를 입력하여 주세요");
+            } else {
+                try {
+                    // 몸무게 , 키 저장 로직
+                    this.$emit('save-body-info',{
+                        height:this.selectedHeight,
+                        weight:this.selectedweight,
+                    });
+                    alert("키와 몸무게는 '내정보 > 내정보 변경하기'에서 수정할 수 있습니다");
+                } catch (error) {
+                    console.log("키, 몸무게 저장실패",error);
+                }
+            }
+        }
+    }
 };
 </script>
 
@@ -40,7 +75,7 @@ export default {
 }
 
 .page-title {
-    text-align: center;
+    /* text-align: center; */
     margin-bottom: 20px;
 }
 
@@ -59,6 +94,7 @@ export default {
 
 .height-picker {
     display: flex;
+    justify-content: center;
     align-items: center;
     margin-bottom: 20px;
 }

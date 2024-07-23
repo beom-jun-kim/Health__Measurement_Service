@@ -4,40 +4,48 @@
             <button class="back-button" @click="goBack">←</button>
         </header>
         <div class="profile-section">
-            <div class="profile-image"></div>
-            <h2>{{ user.username }}</h2>
+            <label for="profile-img">
+                <div class="img-upload">
+                    <div v-if="!imgPathUrl" class="null-img">
+                        <span>+</span>
+                    </div>
+                    <div v-else class="v-img" :style="{ 'background-image': 'url(' + imgPathUrl + ')' }"></div>
+                </div>
+            </label>
+            <input id="profile-img" type="file" class="profile-input" name="profile-img" accept="image/*">
+            <input type="text" class="value" name="username" v-model="user.username">
             <p>G-CON 사용자</p>
             <div class="buttons">
-                <RouterLink to="/user/userInfoEdit">
-                    <button class="info-button">내정보 변경하기</button>
-                </RouterLink>
-                <button class="logout-button">로그아웃</button>
+                <h1 class="info-button">내정보 변경하기</h1>
             </div>
         </div>
         <div class="info-section">
-            <h3>내 정보</h3>
-            <div class="info-item">
-                <span class="label">연락처</span>
-                <input type="text" class="value" name="phoneNum" v-model="user.phoneNum">
-            </div>
-            <div class="info-item">
-                <span class="label">성별</span>
-                <span class="value">{{ user.gender }}</span>
-            </div>
-            <div class="info-item">
-                <span class="label">생년월일</span>
-                <span class="value">{{ user.birth }}</span>
-            </div>
-            <div class="info-item">
-                <span class="label">키</span>
-                <span class="value">{{ user.height }}</span>
-            </div>
-            <div class="info-item">
-                <span class="label">체중</span>
-                <span class="value">{{ user.weight }}</span>
-            </div>
+            <form class="edit-form" @submit.prevent="editSave">
+                <h3>내 정보</h3>
+                <div class="info-item">
+                    <span class="label">연락처</span>
+                    <input type="text" class="value" name="phoneNum" v-model="user.phoneNum">
+                </div>
+                <div class="info-item">
+                    <span class="label">성별</span>
+                    <input type="text" class="value" name="gender" v-model="user.gender">
+                </div>
+                <div class="info-item">
+                    <span class="label">생년월일</span>
+                    <input type="text" class="value" name="birth" v-model="user.birth">
+                </div>
+                <div class="info-item">
+                    <span class="label">키</span>
+                    <input type="text" class="value" name="height" v-model="user.height">
+                </div>
+                <div class="info-item">
+                    <span class="label">체중</span>
+                    <input type="text" class="value" name="weight" v-model="user.weight">
+                </div>
+                <button type="submit" class="edit-save">저장</button>
+            </form>
         </div>
-        <RouterLink to="/user/secession" class="secession">
+        <!-- <RouterLink to="/user/secession" class="secession">
             <div class="actions-section">
                 <div class="action-item">회원탈퇴</div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" viewBox="0 0 24 24" fill="none">
@@ -46,7 +54,7 @@
                         fill="#ccc" />
                 </svg>
             </div>
-        </RouterLink>
+        </RouterLink> -->
     </div>
 </template>
 
@@ -68,12 +76,19 @@ export default {
     methods: {
         goBack() {
             this.$router.go(-1);
+        },
+        editSave() {
+            this.$router.push("/user/myInfo");
         }
     }
 };
 </script>
 
 <style scoped>
+.edit-form {
+    position: relative;
+}
+
 .myInfo-container {
     padding: 20px;
     height: 100vh;
@@ -101,16 +116,22 @@ export default {
     margin-bottom: 20px;
 }
 
-.profile-image {
-    width: 100px;
-    height: 100px;
+.profile-input {
+    display: none;
+}
+
+.img-upload {
     border-radius: 50%;
-    background-color: #00BFA5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-    background: url("../../../public/img/accessories-8826708_640.jpg") no-repeat center/cover;
+    height: 90px;
+    width: 90px;
+    border: 1px dashed var(--input-border-color);
+    line-height: 90px;
+    text-align: center;
+}
+
+.img-upload .null-img span {
+    color: var(--input-border-color);
+    font-size: var(--font-b-size);
 }
 
 .profile-section h2 {
@@ -135,11 +156,6 @@ export default {
 
 .info-button,
 .logout-button {
-    padding: 10px 20px;
-    border: 1px solid var(--input-border-color);
-    border-radius: 5px;
-    background-color: #f5f5f5;
-    cursor: pointer;
     font-size: var(--font-n-sec-size);
 }
 
@@ -154,6 +170,7 @@ export default {
 .info-item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 10px 0;
     border-bottom: 1px solid var(--input-border-color);
 }
@@ -171,5 +188,30 @@ export default {
 
 .action-item {
     cursor: pointer;
+}
+
+input {
+    border: 1px solid var(--input-border-color);
+}
+
+input[class="value"] {
+    padding: 10px 5px;
+}
+
+input[name="username"] {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.edit-save {
+    background: var(--main-color);
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    position: absolute;
+    right: 0;
+    margin-top: 10px;
+    font-weight: var(--font-b-weight);
+    font-size: var(--font-n-sec-size);
 }
 </style>
