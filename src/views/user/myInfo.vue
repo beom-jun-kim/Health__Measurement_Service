@@ -5,10 +5,12 @@
         </header>
         <div class="profile-section">
             <div class="profile-image"></div>
-            <h2>홍 길 동</h2>
+            <h2>{{ user.username }}</h2>
             <p>G-CON 사용자</p>
             <div class="buttons">
-                <button class="info-button">내정보 변경하기</button>
+                <RouterLink to="/user/userInfoEdit">
+                    <button class="info-button">내정보 변경하기</button>
+                </RouterLink>
                 <button class="logout-button">로그아웃</button>
             </div>
         </div>
@@ -16,23 +18,23 @@
             <h3>내 정보</h3>
             <div class="info-item">
                 <span class="label">연락처</span>
-                <span class="value">010-1234-5678</span>
+                <span class="value">{{ user.phoneNum }}</span>
             </div>
             <div class="info-item">
                 <span class="label">성별</span>
-                <span class="value">남</span>
+                <span class="value">{{ user.gender }}</span>
             </div>
             <div class="info-item">
                 <span class="label">생년월일</span>
-                <span class="value">1960년 01월 01일</span>
+                <span class="value">{{ user.birth }}</span>
             </div>
             <div class="info-item">
                 <span class="label">키</span>
-                <span class="value">165 cm</span>
+                <span class="value">{{ user.height }}</span>
             </div>
             <div class="info-item">
                 <span class="label">체중</span>
-                <span class="value">65 kg</span>
+                <span class="value">{{ user.weight }}</span>
             </div>
         </div>
         <RouterLink to="/user/secession" class="secession">
@@ -51,6 +53,18 @@
 <script>
 export default {
     name: 'myInfo',
+    data() {
+        return {
+            user: {
+                username: "홍길동",
+                phoneNum: "010-1234-4567",
+                gender: "남",
+                birth: "1960년 01월 01일",
+                height: "165cm",
+                weight: "65kg",
+            }
+        }
+    },
     methods: {
         goBack() {
             this.$router.go(-1);

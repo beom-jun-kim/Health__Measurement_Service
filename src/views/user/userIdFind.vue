@@ -37,11 +37,13 @@ export default {
 
 <style scoped>
 .tab-menu {
+    width: 100%;
     display: flex;
-    justify-content: center;
+
 }
 
 .tab-menu button {
+    width: 100%;
     padding: 10px 8.421052631578947vw;
     color: #aaa;
     border: none;
@@ -59,7 +61,7 @@ export default {
 }
 
 .component-box {
-    padding: 20px;
+    padding: 20px 0;
     word-break: keep-all;
     height: 400px;
 }

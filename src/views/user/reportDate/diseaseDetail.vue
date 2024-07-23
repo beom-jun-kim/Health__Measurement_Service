@@ -1,5 +1,5 @@
 <template>
-    <h1>보행 면적 페이지</h1>
+    <span>질병 상세페이지</span>
 </template>
 
 <script>
