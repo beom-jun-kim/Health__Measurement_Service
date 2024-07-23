@@ -15,7 +15,7 @@ const route = useRoute();
           </div>
           <span>Home</span>
         </RouterLink>
-        <RouterLink to="/report">
+        <RouterLink to="/user/report">
           <div class="bottom-bar-img">
             <img src="../public/img/bottom_menu_02.png" alt="">
           </div>
@@ -27,13 +27,13 @@ const route = useRoute();
           </div>
           <span>G-CON 찾기</span>
         </RouterLink>
-        <RouterLink to="/user/mypage">
+        <RouterLink to="/user/myInfo">
           <div class="bottom-bar-img">
             <img src="../public/img/bottom_menu_04.png" alt="">
           </div>
           <span>내정보</span>
         </RouterLink>
-      </nav>
+    </nav>
     </div>
   </header>
 </template>

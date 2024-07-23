@@ -18,7 +18,7 @@
             <h3>내 정보</h3>
             <div class="info-item">
                 <span class="label">연락처</span>
-                <span class="value">{{ user.phoneNum }}</span>
+                <input type="text" class="value" name="phoneNum" v-model="user.phoneNum">
             </div>
             <div class="info-item">
                 <span class="label">성별</span>
@@ -52,7 +52,7 @@
 
 <script>
 export default {
-    name: 'myInfo',
+    name: 'userInfoEdit',
     data() {
         return {
             user: {

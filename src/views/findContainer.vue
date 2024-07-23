@@ -410,7 +410,7 @@ export default {
           map: this.map,
           icon: {
             url: '../../../public/img/app_logo_04.png',
-            size: new naver.maps.Size(50, 13),
+            size: new naver.maps.Size(55, 53),
           }
         });
         const infowindow = new naver.maps.InfoWindow({

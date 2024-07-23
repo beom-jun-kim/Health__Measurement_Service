@@ -107,6 +107,11 @@ const router = createRouter({
       name: 'welcome',
       component: () => import('../views/signup/welcome.vue')
     },
+    {
+      path: '/user/userInfoEdit',
+      name: 'userInfoEdit',
+      component: () => import('../views/user/userInfoEdit.vue')
+    }
   ]
 })
 
