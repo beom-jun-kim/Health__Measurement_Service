@@ -89,6 +89,16 @@ const router = createRouter({
       name: 'addFollow',
       component: () => import('../views/follow/addFollow.vue')
     },
+    {
+      path: '/follow/followList',
+      name: 'followList',
+      component: () => import('../views/follow/followList.vue')
+    },
+    {
+      path: '/follow/followDetail/:id',
+      name: 'followDetail',
+      component: () => import('../views/follow/followDetail/followDetail.vue')
+    },
   ]
 })
 

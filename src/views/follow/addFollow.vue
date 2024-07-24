@@ -21,11 +21,11 @@ export default {
     name: "addFollow",
     components: {
         GoBack,
-    }
+    } 
 }
 </script>
 
-<style>
+<style scoped>
 .container {
     padding: 20px;
 }

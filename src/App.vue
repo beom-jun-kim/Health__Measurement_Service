@@ -21,7 +21,7 @@ const route = useRoute();
           </div>
           <span>측정기록</span>
         </RouterLink>
-        <RouterLink to="/follow/addFollow">
+        <RouterLink to="/follow/followList">
           <div class="bottom-bar-img">
             <img src="../public/img/bottom_menu_05.png" alt="">
           </div>
