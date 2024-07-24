@@ -383,7 +383,6 @@ export default {
       };
       try {
         const response = await axios.get(url, { headers, params });
-        console.log("1234", response.data);
         const result = response.data.addresses[0];
         const lng = result.x;
         const lat = result.y;

@@ -69,11 +69,11 @@ const router = createRouter({
       name: 'findContainer',
       component: () => import('../views/findContainer.vue')
     },
-    {
-      path: '/signup/signupChk',
-      name: 'signupChk',
-      component: () => import('../views/signup/signupChk.vue')
-    },
+    // {
+    //   path: '/signup/signupChk',
+    //   name: 'signupChk',
+    //   component: () => import('../views/signup/signupChk.vue')
+    // },
     {
       path: '/signup/welcome',
       name: 'welcome',

@@ -28,7 +28,7 @@
             <input type="text" id="usePhone" name="usePhone" placeholder="'-'를 제외하고 입력" v-model="findPhoneChk">
             <button class="add-fri-btn" @click="findPhoneAdd">확인</button>
         </div>
-        <div v-if="followPhoneBox" class="profile-box">
+        <div v-if="followPhoneBox" class="profile-box"> 
             <div v-if="foundPhoneUser">
                 <div class="user-img-box" v-if="foundPhoneUser.imgUrl">
                     <div class="user-profile" :style="{ backgroundImage: `url(${foundPhoneUser.imgUrl})` }"></div>
@@ -42,7 +42,7 @@
                 <button class="req-follow" @click="addRequest(foundIdUser.id)" >친구 신청하기</button> -->
             </div>
             <div v-else>
-                <p>해당 유저가 없습니다</p>
+                <p>해당 유저가 없습니다</p> 
             </div>
         </div>
     </div>
@@ -55,11 +55,11 @@ export default {
     name: "addFollow",
     components: {
         GoBack,
-    },
+    }, 
     data() {
         return {
             userList: [
-                {
+                {  
                     id: 1,
                     username: "김범준",
                     imgUrl: '../../../public/img/accessories-8826708_640.jpg',

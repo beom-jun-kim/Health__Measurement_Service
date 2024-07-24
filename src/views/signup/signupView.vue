@@ -46,24 +46,32 @@
                     </select>
                 </div>
             </div>
-            <!-- <div class="input-group">
+            <div class="input-group">
                 <label for="phone">전화번호 (-없이 입력)</label>
                 <input type="tel" id="phone" name="phone" v-model="form.phone">
-            </div> -->
-            <button type="submit" class="signup-button">회원가입</button>
+                <button type="button" class="signup-button" @click="sendVerificationCode">인증번호 발급</button>
+            </div>
+            <div class="input-group" v-if="verificationSent">
+                <label for="verification-code">인증번호</label>
+                <input type="text" id="verification-code" name="verification-code" v-model="form.verificationCode">
+                <button type="button" class="signup-button" @click="verifyCode">인증번호 확인</button>
+            </div>
+            <button type="submit" class="signup-button" :disabled="!isVerified">회원가입</button>
         </form>
     </div>
 </template>
 
 <script>
+import userDataService from '@/api/userDataService';
+
 export default {
     name: 'SignupView',
-    props: {
-        userType: {
-            type: String,
-            required: true,
-        }
-    },
+    // props: {
+    //     userType: {
+    //         type: String,
+    //         required: true,
+    //     }
+    // },
     data() {
         return {
             currentYear: new Date().getFullYear(),
@@ -77,8 +85,11 @@ export default {
                 username: "",
                 gender: "",
                 birth: "",
-                // phone: "",
-            }
+                phone: "",
+                verificationCode: "",
+            },
+            verificationSent: false,
+            isVerified: false
         };
     },
     methods: {
@@ -86,23 +97,54 @@ export default {
             evt.preventDefault();
             if (this.form.password !== this.form.pwdChk) {
                 alert("비밀번호가 일치하지 않습니다");
-            } else {
-                try {
-                    // const data = {
-                    //     name: this.form.id,
-                    //     password: this.form.password,
-                    //     pwdChk: this.form.pwdChk,
-                    //     username: this.form.username,
-                    //     gender: this.form.gender,
-                    //     birth: this.form.birth,
-                    // }
-                    // console.log("유저 데이터", data);
-                    // const response = await userApi.createUser(data);
-                    alert("회원가입이 완료되었습니다");
-                    this.$router.push("/signup/welcome");
-                } catch (error) {
-                    console.log(error);
+            }
+            try {
+                const data = {
+                    userId: this.form.id,
+                    password: this.form.password,
+                    name: this.form.username,
+                    gender: this.form.gender,
+                    birthday: this.form.birth,
+                    phoneNumber: this.form.phone,
                 }
+                console.log("유저 데이터", data);
+                const response = await userDataService.createUser(data);
+                console.log("회원가입 성공", response);
+                alert("회원가입이 완료되었습니다");
+                this.$router.push("/signup/welcome");
+            } catch (error) {
+                console.log("회원가입 실패", error);
+            }
+        },
+        async sendVerificationCode() {
+            try {
+                const data = {
+                    phoneNumber: this.form.phone,
+                }
+                console.log("xxxxxxxxdataxxxxxxxx", data);
+                const response = await userDataService.sms(data);
+                console.log("인증번호 발급 성공", response);
+                this.verificationSent = true;
+                alert("인증번호가 발송되었습니다");
+            } catch (error) {
+                console.log("인증번호 발급 실패", error);
+            }
+        },
+        async verifyCode() {
+            try {
+                const data = {
+                    phoneNumber: this.form.phone,
+                    verificationCode: this.form.verificationCode
+                }
+                console.log("------data-----", data);
+                const response = await userDataService.smsChk(data);
+                console.log("인증번호 확인 성공", response);
+                this.isVerified = true;
+                alert("인증번호가 확인되었습니다");
+            } catch (error) {
+                console.log("인증번호 확인 실패", error);
+                this.isVerified = false;
+                alert("인증번호가 올바르지 않습니다");
             }
         }
     },
@@ -122,6 +164,7 @@ export default {
 form {
     margin-bottom: 100px;
 }
+
 .page-title {
     text-align: center;
     margin-bottom: 20px;

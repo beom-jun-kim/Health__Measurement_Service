@@ -36,7 +36,7 @@ export default {
                     id: 1,
                     username: "김범준",
                     imgUrl: '../../../public/img/accessories-8826708_640.jpg',
-                },
+                }, 
                 {
                     id: 2,
                     username: "최지콘",
@@ -50,13 +50,13 @@ export default {
             ],
         }
     },
-    methods:{
-        delFollow(){
-            if(confirm("친구를 삭제하시겠습니까?")){
+    methods: {
+        delFollow() {
+            if (confirm("친구를 삭제하시겠습니까?")) {
                 try {
                     // 삭제로직 추가
                 } catch (error) {
-                    console.log("친구 삭제 실패",error);
+                    console.log("친구 삭제 실패", error);
                 }
             }
         }
