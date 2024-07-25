@@ -13,22 +13,15 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      // '/api': {
-      //   target: 'http://api.vworld.kr',
-      //   changeOrigin: true,
-      //   rewrite: (path) => path.replace(/^\/api/, '')
-      // },
       '/map-geocode/v2/geocode': {
         target: 'https://naveropenapi.apigw.ntruss.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/map-geocode\/v2\/geocode/, '/map-geocode/v2/geocode')
-      }
-    },
-    proxy: {
+      },
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'http://221.161.177.193:8080',
         changeOrigin: true,
       }
-    }
+    },
   }
 })

@@ -9,6 +9,7 @@
             <div class="input-group">
                 <label for="username">아이디</label>
                 <input type="text" id="username" name="username" v-model="form.id">
+                <button type="button" class="signup-button" @click="idCheck(form.id)">중복확인</button>
             </div>
             <div class="input-group">
                 <label for="password">비밀번호</label>
@@ -25,8 +26,8 @@
             <div class="input-group">
                 <label for="gender">성별</label>
                 <select id="gender" v-model="form.gender">
-                    <option value="male">남</option>
-                    <option value="female">여</option>
+                    <option value="M">남</option>
+                    <option value="F">여</option>
                 </select>
             </div>
             <div class="input-group">
@@ -36,11 +37,11 @@
                         <option value="">년</option>
                         <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
                     </select>
-                    <select id="month">
+                    <select id="month" v-model="form.month">
                         <option value="">월</option>
                         <option v-for="month in months" :key="month" :value="month">{{ month }}</option>
                     </select>
-                    <select id="day">
+                    <select id="day" v-model="form.day">
                         <option value="">일</option>
                         <option v-for="day in days" :key="day" :value="day">{{ day }}</option>
                     </select>
@@ -85,26 +86,45 @@ export default {
                 username: "",
                 gender: "",
                 birth: "",
+                month: "",
+                day: "",
                 phone: "",
                 verificationCode: "",
             },
             verificationSent: false,
-            isVerified: false
+            isVerified: false,
+            idChk:"",
         };
     },
     methods: {
+        async idCheck(id) {
+            try {
+                const response = await userDataService.idChk(id);
+                this.idChk = response.data;
+                if(this.idChk === true) {
+                    alert("이미 존재하는 아이디가 있습니다");
+                } else {
+                    alert("사용 가능한 아이디 입니다");
+                }
+            } catch (error) {
+                console.log("아이디중복체크 실패", error);
+            }
+        },
         async userJoin(evt) {
             evt.preventDefault();
             if (this.form.password !== this.form.pwdChk) {
                 alert("비밀번호가 일치하지 않습니다");
             }
+
+            const birthday = `${this.form.birth}-${String(this.form.month).padStart(2, '0')}-${String(this.form.day).padStart(2, '0')}`;
+
             try {
                 const data = {
                     userId: this.form.id,
                     password: this.form.password,
                     name: this.form.username,
                     gender: this.form.gender,
-                    birthday: this.form.birth,
+                    birthday: birthday,
                     phoneNumber: this.form.phone,
                 }
                 console.log("유저 데이터", data);

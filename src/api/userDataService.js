@@ -1,15 +1,21 @@
-import http from '../http-common';
+import http from '../http-common'
 
 class userDataService {
   createUser(data) {
-    return http.post('/user/signup', data);
+    return http.post('/user', data)
   }
   sms(data) {
-    return http.post('/verification/sms', data);
+    return http.post('/verification/sms', data)
   }
   smsChk(data) {
-    return http.patch('/verification/sms', data);
+    return http.patch('/verification/sms', data)
+  }
+  idChk(id) {
+    return http.get(`/user/check/${id}`)
+  }
+  login(data) {
+    return http.post(`/auth/login`, data)
   }
 }
 
-export default new userDataService();
+export default new userDataService()
