@@ -1,5 +1,5 @@
 <template>
-  <div class="report-container">
+  <div class="report-container margin-bottom">
     <header>
       <img src="../../../public/img/app_logo_01.png" alt="G-CON Logo" class="logo">
       <h1>REPORT</h1>
@@ -57,7 +57,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
   padding: 50px 20px;
 }
 

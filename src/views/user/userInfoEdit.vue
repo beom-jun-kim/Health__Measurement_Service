@@ -1,5 +1,5 @@
 <template>
-    <div class="myInfo-container">
+    <div class="myInfo-container margin-bottom">
         <header class="header">
             <button class="back-button" @click="goBack">←</button>
         </header>
@@ -91,7 +91,6 @@ export default {
 
 .myInfo-container {
     padding: 20px;
-    height: 100vh;
 }
 
 .header {

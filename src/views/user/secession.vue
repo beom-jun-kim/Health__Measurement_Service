@@ -1,5 +1,5 @@
 <template>
-    <div class="delete-account-container">
+    <div class="delete-account-container margin-bottom">
         <div class="content">
             <p class="username"><span>홍길동</span> 님</p>
             <h3>회원탈퇴시 주의사항</h3>
@@ -40,7 +40,6 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
     padding: 20px;
 }
 

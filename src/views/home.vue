@@ -1,5 +1,5 @@
 <template>
-    <div class="home-container">
+    <div class="home-container margin-bottom">
         <header class="home-header">
             <img src="../../public/img/icon_alarm.png" alt="Notification" class="notification-icon">
         </header>
@@ -39,7 +39,6 @@ export default {
 <style scoped>
 .home-container {
     padding: 20px;
-    height: 100vh;
 }
 
 .home-header {

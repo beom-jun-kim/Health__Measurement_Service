@@ -57,7 +57,7 @@ export default {
 
 .qr-container {
     text-align: center;
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
 }
 
 .logo {

@@ -39,13 +39,13 @@ const route = useRoute();
           </div>
           <span>내정보</span>
         </RouterLink>
-    </nav>
+      </nav>
     </div>
   </header>
 </template>
 
 <style scoped>
-header .wrapper {} 
+header .wrapper {}
 
 nav {
   width: 100%;
@@ -60,6 +60,15 @@ nav {
   bottom: 0;
   background: #fff;
   z-index: 9999;
+}
+
+nav .bottom-bar-img {
+  width: 33px;
+  margin: 0 auto;
+}
+
+nav span {
+  font-size: var(--font-small-size);
 }
 
 nav a.router-link-exact-active {

@@ -1,22 +1,24 @@
 <template>
-  <div class="container">
+  <div class="login-container margin-bottom-zero">
     <img src="../../../public/img/app_logo_01.png" alt="G-CON Logo" class="logo">
-    <RouterLink to="/login/userLogin">
-      <button class="login-button">
-        <span>로그인</span>
-        <div class="img-box">
-          <img src="../../../public/img/app_icon_login.png" alt="G-CON Login" class="logo">
-        </div>
-      </button>
-    </RouterLink>
-    <RouterLink to="/signup/signupView">
-      <button class="signup-button">
-        <span>회원가입</span>
-        <div class="img-box">
-          <img src="../../../public/img/app_icon_signup.png" alt="G-CON Login" class="logo">
-        </div>
-      </button>
-    </RouterLink>
+    <div class="login-btn-wrap">
+      <RouterLink to="/login/userLogin">
+        <button class="login-button">
+          <span>로그인</span>
+          <div class="img-box">
+            <img src="../../../public/img/app_icon_login.png" alt="G-CON Login" class="logo">
+          </div>
+        </button>
+      </RouterLink>
+      <RouterLink to="/signup/signupView">
+        <button class="signup-button">
+          <span>회원가입</span>
+          <div class="img-box">
+            <img src="../../../public/img/app_icon_signup.png" alt="G-CON Login" class="logo">
+          </div>
+        </button>
+      </RouterLink>
+    </div>
   </div>
 </template>
 
@@ -27,6 +29,22 @@ export default {
 </script>
 
 <style scoped>
+.login-container {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.login-btn-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .login-button,
 .signup-button {
   width: 300px;

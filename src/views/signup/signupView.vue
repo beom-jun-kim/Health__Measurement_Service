@@ -127,7 +127,6 @@ export default {
                     birthday: birthday,
                     phoneNumber: this.form.phone,
                 }
-                console.log("유저 데이터", data);
                 const response = await userDataService.createUser(data);
                 console.log("회원가입 성공", response);
                 alert("회원가입이 완료되었습니다");
@@ -140,8 +139,7 @@ export default {
             try {
                 const data = {
                     phoneNumber: this.form.phone,
-                }
-                console.log("xxxxxxxxdataxxxxxxxx", data);
+                }                
                 const response = await userDataService.sms(data);
                 console.log("인증번호 발급 성공", response);
                 this.verificationSent = true;
@@ -156,7 +154,6 @@ export default {
                     phoneNumber: this.form.phone,
                     verificationCode: this.form.verificationCode
                 }
-                console.log("------data-----", data);
                 const response = await userDataService.smsChk(data);
                 console.log("인증번호 확인 성공", response);
                 this.isVerified = true;
@@ -181,9 +178,9 @@ export default {
 </script>
 
 <style scoped>
-form {
+/* form {
     margin-bottom: 100px;
-}
+} */
 
 .page-title {
     text-align: center;
