@@ -6,7 +6,7 @@ const route = useRoute();
 
 <template>
   <RouterView />
-  <header v-if="route.path !== '/signup/welcome'">
+  <header v-if="route.path !== '/signup/welcome' && route.path !== '/login/loginChk' && route.path !== '/user/userIdFind'">
     <div class="wrapper">
       <nav>
         <RouterLink to="/home">

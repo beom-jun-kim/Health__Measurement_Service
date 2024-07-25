@@ -1,6 +1,20 @@
 <template>
     <div class="container">
-        <GoBack />
+        <!-- <GoBack /> -->
+        <div class="add-follow-title">
+            <h3>친구추가하기</h3>
+            <p>아이디 혹은 전화번호로 친구추가가 가능합니다.</p>
+        </div>
+        <div class="radio-box">
+            <div class="radio-box-wrap">
+                <input type="radio" id="addId" name="addId" v-model="addIdRadio">
+                <label for="addId">id로 추가하기</label>
+            </div>
+            <div class="radio-box-wrap">
+                <input type="radio" id="addPassword" name="addPassword" v-model="addPasswordRadio">
+                <label for="addPassword">id로 추가하기</label>
+            </div>
+        </div>
         <div class="add-friend">
             <h3>아이디로 친구 찾기</h3>
             <input type="text" id="userId" name="userId" placeholder="추가할 유저의 아이디를 입력" v-model="findIdChk">
@@ -53,9 +67,9 @@ import GoBack from "@/components/GoBack.vue";
 
 export default {
     name: "addFollow",
-    components: {
-        GoBack,
-    }, 
+    // components: {
+    //     GoBack,
+    // }, 
     data() {
         return {
             userList: [
@@ -157,6 +171,17 @@ export default {
     padding: 0 5px;
 }
 
+.add-follow-title {
+    border-bottom: 1px solid var(--input-border-color);
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.add-follow-title h3 {
+    margin-bottom: 10px;
+    color: var(--main-color);
+}
+
 .add-friend button {
     height: 35px;
     padding: 0 10px;
@@ -208,5 +233,20 @@ export default {
     color: #fff;
     letter-spacing: 1px;
     font-size: var(--font-n-sec-size);
+}
+
+.radio-box {
+    display: flex;
+    width: 100%;
+    margin: 25px 0;
+}
+
+.radio-box .radio-box-wrap:first-child {
+    margin-right: 50px;
+}
+
+.radio-box input {
+    margin-right: 10px;
+    accent-color: #111;
 }
 </style>
