@@ -7,56 +7,60 @@
         </div>
         <div class="radio-box">
             <div class="radio-box-wrap">
-                <input type="radio" id="addId" name="addId" v-model="addIdRadio">
-                <label for="addId">id로 추가하기</label>
+                <input type="radio" id="addId" name="addId" v-model="addRadio" value="id">
+                <label for="addId">아이디로 추가하기</label>
             </div>
             <div class="radio-box-wrap">
-                <input type="radio" id="addPassword" name="addPassword" v-model="addPasswordRadio">
-                <label for="addPassword">id로 추가하기</label>
+                <input type="radio" id="addPhone" name="addId" v-model="addRadio" value="phone">
+                <label for="addPhone">전화번호로 추가하기</label>
             </div>
         </div>
-        <div class="add-friend">
-            <h3>아이디로 친구 찾기</h3>
-            <input type="text" id="userId" name="userId" placeholder="추가할 유저의 아이디를 입력" v-model="findIdChk">
-            <button class="add-fri-btn" @click="findIdAdd">확인</button>
-        </div>
-        <div v-if="followIdBox" class="profile-box">
-            <div v-if="foundIdUser">
-                <div class="user-img-box" v-if="foundIdUser.imgUrl">
-                    <div class="user-profile" :style="{ backgroundImage: `url(${foundIdUser.imgUrl})` }"></div>
-                </div>
-                <div v-else class="user-img-box">
-                    <div class="user-not-profile"></div>
-                </div>
-                <p class="username">{{ foundIdUser.username }}</p>
-                <button class="req-follow" @click="addRequest(foundIdUser.id)">친구 신청하기</button>
-                <!-- <button class="req-follow" @click="addRequest(foundIdUser.id)" @click="cancelRequest">신청 취소</button>
-                <button class="req-follow" @click="addRequest(foundIdUser.id)" >친구 신청하기</button> -->
+        <div class="add-friend-wrap" v-if="addRadio === 'id'">
+            <div class="add-friend">
+                <h3>아이디로 친구 찾기</h3>
+                <input type="text" id="userId" name="userId" placeholder="추가할 유저의 아이디를 입력" v-model="findIdChk">
+                <button class="add-fri-btn" @click="findIdAdd">확인</button>
             </div>
-            <div v-else>
-                <p>해당 유저가 없습니다</p>
+            <div v-if="followIdBox" class="profile-box">
+                <div v-if="foundIdUser">
+                    <div class="user-img-box" v-if="foundIdUser.imgUrl">
+                        <div class="user-profile" :style="{ backgroundImage: `url(${foundIdUser.imgUrl})` }"></div>
+                    </div>
+                    <div v-else class="user-img-box">
+                        <div class="user-not-profile"></div>
+                    </div>
+                    <p class="username">{{ foundIdUser.username }}</p>
+                    <button class="req-follow" @click="addRequest(foundIdUser.id)">친구 신청하기</button>
+                    <!-- <button class="req-follow" @click="addRequest(foundIdUser.id)" @click="cancelRequest">신청 취소</button>
+                    <button class="req-follow" @click="addRequest(foundIdUser.id)" >친구 신청하기</button> -->
+                </div>
+                <div v-else>
+                    <p>해당 유저가 없습니다</p>
+                </div>
             </div>
         </div>
-        <div class="add-friend">
-            <h3>연락처로 친구 찾기</h3>
-            <input type="text" id="usePhone" name="usePhone" placeholder="'-'를 제외하고 입력" v-model="findPhoneChk">
-            <button class="add-fri-btn" @click="findPhoneAdd">확인</button>
-        </div>
-        <div v-if="followPhoneBox" class="profile-box"> 
-            <div v-if="foundPhoneUser">
-                <div class="user-img-box" v-if="foundPhoneUser.imgUrl">
-                    <div class="user-profile" :style="{ backgroundImage: `url(${foundPhoneUser.imgUrl})` }"></div>
-                </div>
-                <div v-else class="user-img-box">
-                    <div class="user-not-profile"></div>
-                </div>
-                <p class="username">{{ foundPhoneUser.username }}</p>
-                <button class="req-follow" @click="addRequest(foundPhoneUser.id)">친구 신청하기</button>
-                <!-- <button class="req-follow" @click="addRequest(foundIdUser.id)" @click="cancelRequest">신청 취소</button>
-                <button class="req-follow" @click="addRequest(foundIdUser.id)" >친구 신청하기</button> -->
+        <div class="add-friend-wrap" v-if="addRadio === 'phone'">
+            <div class="add-friend">
+                <h3>연락처로 친구 찾기</h3>
+                <input type="text" id="usePhone" name="usePhone" placeholder="'-'를 제외하고 입력" v-model="findPhoneChk">
+                <button class="add-fri-btn" @click="findPhoneAdd">확인</button>
             </div>
-            <div v-else>
-                <p>해당 유저가 없습니다</p> 
+            <div v-if="followPhoneBox" class="profile-box">
+                <div v-if="foundPhoneUser">
+                    <div class="user-img-box" v-if="foundPhoneUser.imgUrl">
+                        <div class="user-profile" :style="{ backgroundImage: `url(${foundPhoneUser.imgUrl})` }"></div>
+                    </div>
+                    <div v-else class="user-img-box">
+                        <div class="user-not-profile"></div>
+                    </div>
+                    <p class="username">{{ foundPhoneUser.username }}</p>
+                    <button class="req-follow" @click="addRequest(foundPhoneUser.id)">친구 신청하기</button>
+                    <!-- <button class="req-follow" @click="addRequest(foundIdUser.id)" @click="cancelRequest">신청 취소</button>
+                    <button class="req-follow" @click="addRequest(foundIdUser.id)" >친구 신청하기</button> -->
+                </div>
+                <div v-else>
+                    <p>해당 유저가 없습니다</p>
+                </div>
             </div>
         </div>
     </div>
@@ -73,7 +77,7 @@ export default {
     data() {
         return {
             userList: [
-                {  
+                {
                     id: 1,
                     username: "김범준",
                     imgUrl: '../../../public/img/accessories-8826708_640.jpg',
@@ -98,6 +102,7 @@ export default {
             followPhoneBox: false,
             foundIdUser: null,
             foundPhoneUser: null,
+            addRadio: "id",
         }
     },
     methods: {
@@ -248,5 +253,9 @@ export default {
 .radio-box input {
     margin-right: 10px;
     accent-color: #111;
+}
+
+.add-friend-wrap {
+    width: 100%;
 }
 </style>
