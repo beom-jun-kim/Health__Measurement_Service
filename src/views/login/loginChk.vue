@@ -1,12 +1,12 @@
 <template>
   <div class="login-container margin-bottom-zero">
-    <img src="../../../public/img/app_logo_01.png" alt="G-CON Logo" class="logo">
+    <img src="@/assets/img/app_logo_01.png" alt="G-CON Logo" class="logo">
     <div class="login-btn-wrap">
       <RouterLink to="/login/userLogin">
         <button class="login-button">
           <span>로그인</span>
           <div class="img-box">
-            <img src="../../../public/img/app_icon_login.png" alt="G-CON Login" class="logo">
+            <img src="@/assets/img/app_icon_login.png" alt="G-CON Login" class="logo">
           </div>
         </button>
       </RouterLink>
@@ -14,7 +14,7 @@
         <button class="signup-button">
           <span>회원가입</span>
           <div class="img-box">
-            <img src="../../../public/img/app_icon_signup.png" alt="G-CON Login" class="logo">
+            <img src="@/assets/img/app_icon_signup.png" alt="G-CON Login" class="logo">
           </div>
         </button>
       </RouterLink>

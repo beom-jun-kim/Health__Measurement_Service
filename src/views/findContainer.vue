@@ -27,7 +27,7 @@
           <a :href="`https://map.naver.com/v5/search/${encodeURIComponent(location.address)}`">
             <div class="location-text">
               <span>
-                {{ location.address.length > 18 ? `${location.address.slice(0, 18)}...` : location.address }}
+                {{ location.address.length > 17 ? `${location.address.slice(0, 17)}...` : location.address }}
               </span>
               <span>
                 {{ formatDistance(location.distance) }} km
@@ -383,7 +383,10 @@ export default {
       };
       try {
         const response = await axios.get(url, { headers, params });
+        console.log("xxxxxxresponsexxxxxxxxx",response);
+        console.log("xxxxxxresponse.dataxxxxxxxxx",response.data);
         const result = response.data.addresses[0];
+        console.log("xxxxxxresultxxxxxx",result);
         const lng = result.x;
         const lat = result.y;
         this.updateMap(lat, lng);
@@ -408,7 +411,7 @@ export default {
           position: new naver.maps.LatLng(location.lat, location.lng),
           map: this.map,
           icon: {
-            url: '../../../public/img/app_logo_04.png',
+            url: '@/assets/img/app_logo_04.png',
             size: new naver.maps.Size(55, 53),
           }
         });

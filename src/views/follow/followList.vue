@@ -35,7 +35,7 @@ export default {
                 {
                     id: 1,
                     username: "김범준",
-                    imgUrl: '../../../public/img/accessories-8826708_640.jpg',
+                    imgUrl: '@/assets/img/accessories-8826708_640.jpg',
                 }, 
                 {
                     id: 2,
@@ -85,7 +85,7 @@ export default {
     text-align: right;
     width: 110px;
     height: 35px;
-    background: url("../../../public/img/empty_person_add_black.png") no-repeat left 10px center / 20px auto;
+    background: url("@/assets/img/empty_person_add_black.png") no-repeat left 10px center / 20px auto;
     border-radius: 5px;
     border: 1px solid #000;
     font-size: var(--font-n-sec-size);
@@ -109,7 +109,7 @@ export default {
 .user-not-profile {
     width: 100%;
     height: 100%;
-    background: url("../../../public/img/empty_person.png") no-repeat center/cover;
+    background: url("@/assets/img/empty_person.png") no-repeat center/cover;
 }
 
 .follow-detail-btn,

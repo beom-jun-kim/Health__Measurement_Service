@@ -1,13 +1,13 @@
 <template>
     <transition name="fade">
         <div class="container" v-if="visible">
-            <img src="../../../public/img/app_logo_02.png" alt="G-CON Logo" class="logo">
-            <img src="../../../public/img/app_a0004_tt.png" alt="welcome join" class="welcome-text">
+            <img src="@/assets/img/app_logo_02.png" alt="G-CON Logo" class="logo">
+            <img src="@/assets/img/app_a0004_tt.png" alt="welcome join" class="welcome-text">
             <p>
                 <span>회원가입</span>이 완료 되었습니다.<br>
                 G-CON과 함께 건강과 행복을 챙겨가세요.
             </p>
-            <img src="../../../public/img/app_img_people.png" alt="welcome join">
+            <img src="@/assets/img/app_img_people.png" alt="welcome join">
         </div>
     </transition>
 </template>

@@ -1,10 +1,10 @@
 <template>
     <div class="home-container margin-bottom">
         <header class="home-header">
-            <img src="../../public/img/icon_alarm.png" alt="Notification" class="notification-icon">
+            <img src="@/assets/img/icon_alarm.png" alt="Notification" class="notification-icon">
         </header>
         <div class="welcome-section">
-            <img src="../../public/img/img_main.png" alt="Health Illustration" class="illustration">
+            <img src="@/assets/img/img_main.png" alt="Health Illustration" class="illustration">
             <h1 class="home-text-user">{{ user.username }}님</h1>
             <p class="home-text">오늘 하루도 건강을 잘 챙기시고 계시나요?</p>
         </div>
@@ -80,11 +80,11 @@ export default {
 }
 
 .qr-button {
-    background: url("../../public/img/main_img_01_bg.png") no-repeat center/cover;
+    background: url("@/assets/img/main_img_01_bg.png") no-repeat center/cover;
 }
 
 .chk-button {
-    background: url("../../public/img/main_img_02.png") no-repeat center/cover;
+    background: url("@/assets/img/main_img_02.png") no-repeat center/cover;
 }
 
 .action-buttons a {

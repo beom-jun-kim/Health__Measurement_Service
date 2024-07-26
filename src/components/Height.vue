@@ -1,5 +1,5 @@
 <template>
-    <img src="../../public/img/app_logo_02.png" alt="G-CON Logo" class="logo">
+    <img src="@/assets/img/app_logo_02.png" alt="G-CON Logo" class="logo">
     <div class="page-title">
         <h2>키를 알려주세요</h2>
         <p>회원님의 신장을 정확하게 입력해주세요</p>

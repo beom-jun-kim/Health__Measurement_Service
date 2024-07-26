@@ -123,7 +123,7 @@ export default {
     align-items: center;
     justify-content: center;
     margin-bottom: 10px;
-    background: url("../../../public/img/accessories-8826708_640.jpg") no-repeat center/cover;
+    background: url("@/assets/img/accessories-8826708_640.jpg") no-repeat center/cover;
 }
 
 .profile-section h2 {

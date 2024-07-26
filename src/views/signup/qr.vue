@@ -1,9 +1,9 @@
 <template>
     <div class="container">
         <div class="qr-container" v-if="user.height && user.weight">
-            <img src="../../../public/img/app_logo_02.png" alt="G-CON Logo" class="logo">
+            <img src="@/assets/img/app_logo_02.png" alt="G-CON Logo" class="logo">
             <div class="qr-hand-img" v-if="qrCreateBtn">
-                <img src="../../../public/img/madeqr.png" alt="QR">
+                <img src="@/assets/img/madeqr.png" alt="QR">
             </div>
             <button v-if="qrCreateBtn" class="qr-btn" @click="displayNone">인증용 QR생성하기</button>
             <div class="img_box">

@@ -7,7 +7,7 @@
                 </svg></span>
         </div>
         <div class="logo-img-box">
-            <img src="../../public/img/app_logo_02.png" alt="logo header">
+            <img src="@/assets/img/app_logo_02.png" alt="logo header">
         </div>
         <div style="width: 40px;"></div>
     </header>

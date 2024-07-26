@@ -1,7 +1,7 @@
 <template>
   <div class="report-container margin-bottom">
     <header>
-      <img src="../../../public/img/app_logo_02.png" alt="G-CON Logo" class="logo">
+      <img src="@/assets/img/app_logo_02.png" alt="G-CON Logo" class="logo">
       <h1>REPORT</h1>
       <p v-if="reportList.length > 0">지난측정과 오늘의 측정결과를 볼 수 있습니다.</p>
       <p v-else>측정된 데이터가 없습니다</p>

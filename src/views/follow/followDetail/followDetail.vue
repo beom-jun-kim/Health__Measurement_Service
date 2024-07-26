@@ -44,7 +44,7 @@ export default {
             user: {
                 id: 1,
                 username: "김범준",
-                imgUrl: '../../../public/img/accessories-8826708_640.jpg',
+                imgUrl: '@/assets/img/accessories-8826708_640.jpg',
                 userId: "gcon1945",
                 gender: "남",
                 birth:"1995.12.05"
@@ -88,7 +88,7 @@ export default {
 .user-not-profile {
     width: 100%;
     height: 100%;
-    background: url("../../../public/img/empty_person.png") no-repeat center/cover;
+    background: url("@/assets/img/empty_person.png") no-repeat center/cover;
 }
 
 .user-info-box {

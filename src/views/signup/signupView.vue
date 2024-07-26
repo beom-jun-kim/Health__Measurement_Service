@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <img src="../../../public/img/app_logo_02.png" alt="G-CON Logo" class="logo">
+        <img src="@/assets/img/app_logo_02.png" alt="G-CON Logo" class="logo">
         <div class="page-title">
             <h2>회원가입</h2>
             <p>회원가입을 위한 정보들을 입력해주세요</p>

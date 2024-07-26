@@ -215,7 +215,7 @@ export default {
 .user-not-profile {
     width: 100%;
     height: 100%;
-    background: url("../../../public/img/empty_person.png") no-repeat center/cover;
+    background: url("@/assets/img/empty_person.png") no-repeat center/cover;
 }
 
 .req-follow {

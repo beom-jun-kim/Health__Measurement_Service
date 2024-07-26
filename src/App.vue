@@ -1,38 +1,38 @@
 <template>
   <RouterView />
   <header
-    v-if="route.path !== '/signup/welcome' && route.path !== '/login/loginChk' && route.path !== '/user/userIdFind'">
+    v-if="route.path !== '/signup/welcome' && route.path !== '/login/loginChk' && route.path !== '/user/userIdFind' && route.path !== '/signup/signupView'">
     <div class="wrapper">
       <nav>
         <RouterLink to="/home" :class="{ active: isActive(['/home', '/signup/qr']).value }">
           <div class="bottom-bar-img">
-            <img src="../public/img/bottom_menu_01.png" alt="">
+            <img src="@/assets/img/bottom_menu_01.png" alt="">
           </div>
           <span>Home</span>
         </RouterLink>
         <RouterLink to="/user/report" :class="{ active: isActive(['/user/report']).value }">
           <div class="bottom-bar-img">
-            <img src="../public/img/bottom_menu_02.png" alt="">
+            <img src="@/assets/img/bottom_menu_02.png" alt="">
           </div>
           <span>측정기록</span>
         </RouterLink>
         <RouterLink to="/follow/followList"
           :class="{ active: isActive(['/follow/followList', '/follow/addFollow', '/follow/followDetail']).value }">
           <div class="bottom-bar-img">
-            <img src="../public/img/bottom_menu_05.png" alt="">
+            <img src="@/assets/img/bottom_menu_05.png" alt="">
           </div>
           <span>친구추가</span>
         </RouterLink>
         <RouterLink to="/findContainer" active-class="active">
           <div class="bottom-bar-img">
-            <img src="../public/img/bottom_menu_03.png" alt="">
+            <img src="@/assets/img/bottom_menu_03.png" alt="">
           </div>
           <span>G-CON 찾기</span>
         </RouterLink>
         <RouterLink to="/user/myInfo"
           :class="{ active: isActive(['/user/myInfo', '/user/userInfoEdit', '/user/secession']).value }">
           <div class="bottom-bar-img">
-            <img src="../public/img/bottom_menu_04.png" alt="">
+            <img src="@/assets/img/bottom_menu_04.png" alt="">
           </div>
           <span>내정보</span>
         </RouterLink>
