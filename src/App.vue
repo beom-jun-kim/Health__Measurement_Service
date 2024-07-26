@@ -71,7 +71,7 @@ nav {
 }
 
 nav .bottom-bar-img {
-  width: 30px;
+  width: 25px;
   margin: 0 auto;
 }
 
