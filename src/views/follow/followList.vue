@@ -2,9 +2,21 @@
     <div class="container">
         <div class="follow-list">
             <h2>친구리스트</h2>
-            <RouterLink to="/follow/addFollow">
-                <button class="add-follow-btn">추가하기</button>
-            </RouterLink>
+            <div class="add-follow-icon">
+                <RouterLink to="/follow/addFollow">
+                    <div class="req-chk-icon">
+                        <button class="add-follow-btn">
+                            추가하기
+                        </button>
+                    </div>
+                </RouterLink>
+                <RouterLink to="/follow/reqFollowList">
+                    <img src="@/assets/img/alarm_mint.png" alt="친구리스트 알림 이미지">
+                    <div v-if="addFollowIcon" class="new-icon-box">
+                        <div class="new-icon">N</div>
+                    </div>
+                </RouterLink>
+            </div>
         </div>
         <div class="tab-menu">
             <button :class="{ 'active-tab': currentComponent === 'GuardianList' }"
@@ -48,6 +60,7 @@ export default {
                 },
             ],
             currentComponent: 'GuardianList',
+            addFollowIcon:true,
         }
     },
     methods: {
@@ -122,5 +135,37 @@ export default {
     border: 1px solid #000;
     font-size: var(--font-n-sec-size);
     color: #111;
+}
+
+.add-follow-icon {
+    display: flex;
+    align-items: center;
+}
+
+.add-follow-icon a:last-child {
+    margin-left: 10px;
+    width: 30px;
+    transform: translateY(2px);
+}
+
+.req-chk-icon {
+    position: relative;
+}
+
+.new-icon-box {
+    border: 1px solid red;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    color: red;
+    text-align: center;
+    line-height: 15px;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 11px;
+    background: #fff;
+    font-weight: var(--font-b-weight);
 }
 </style>

@@ -99,6 +99,16 @@ const router = createRouter({
       name: 'followDetail',
       component: () => import('../views/follow/followDetail/followDetail.vue')
     },
+    {
+      path: '/follow/reqFollowList',
+      name: 'reqFollowList',
+      component: () => import('../views/follow/reqFollowList.vue')
+    },
+    {
+      path: '/follow/reqFollowDetailChk/:id',
+      name: 'reqFollowChk',
+      component: () => import('../views/follow/reqFollowDetailChk/reqFollowChk.vue')
+    }
   ]
 })
 
