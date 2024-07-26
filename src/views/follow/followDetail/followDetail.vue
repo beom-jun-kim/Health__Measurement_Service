@@ -44,7 +44,7 @@ export default {
             user: {
                 id: 1,
                 username: "김범준",
-                imgUrl: '@/assets/img/accessories-8826708_640.jpg',
+                imgUrl: '../../public/img/accessories-8826708_640.jpg',
                 userId: "gcon1945",
                 gender: "남",
                 birth:"1995.12.05"
