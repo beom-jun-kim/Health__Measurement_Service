@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import GoBack from "@/components/GoBack.vue";
+import Follow from '@/api/Follow';
 
 export default {
     name: "addFollow",
@@ -76,26 +76,7 @@ export default {
     // }, 
     data() {
         return {
-            userList: [
-                {
-                    id: 1,
-                    username: "김범준",
-                    imgUrl: '../../../public/img/accessories-8826708_640.jpg',
-                    phone: "010-3395-2934",
-                    userId: "gcon1945",
-                    gender: "남",
-                    birth: "1995.12.05"
-                },
-                {
-                    id: 2,
-                    username: "김개똥",
-                    imgUrl: '',
-                    phone: "010-1234-4567",
-                    userId: "IamID",
-                    gender: "여",
-                    birth: "1997.12.01"
-                },
-            ],
+            userList: [],
             findIdChk: "",
             findPhoneChk: "",
             followIdBox: false,
@@ -106,14 +87,21 @@ export default {
         }
     },
     methods: {
-        findIdAdd() {
-            const user = this.userList.find((user) => user.userId === this.findIdChk);
-            if (user) {
-                this.foundIdUser = user;
-                this.followIdBox = true;
-            } else {
-                this.foundIdUser = null;
-                this.followIdBox = true;
+        async findIdAdd() {
+            try {
+                const response = await Follow.getFollowId();
+                console.log("친구 조회 성공", response);
+                this.userList = response.data;
+                const user = this.userList.find((user) => user.userId === this.findIdChk);
+                if (user) {
+                    this.foundIdUser = user;
+                    this.followIdBox = true;
+                } else {
+                    this.foundIdUser = null;
+                    this.followIdBox = true;
+                }
+            } catch (error) {
+                console.log("아이디로 찾기 실패", error);
             }
         },
         findPhoneAdd() {
@@ -151,7 +139,7 @@ export default {
                 console.log("친구추가 요청 실패", error);
             }
         }
-    }
+    },
 }
 </script>
 

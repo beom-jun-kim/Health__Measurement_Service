@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import userDataService from '@/api/userDataService';
+import UserDataService from '@/api/UserDataService';
 
 export default {
   name: 'userLogin',
@@ -37,7 +37,7 @@ export default {
           userId: this.userId,
           password: this.password,
         }
-        const response = await userDataService.login(data);
+        const response = await UserDataService.login(data);
         console.log("로그인성공", response);
         this.$router.push("/home");
       } catch (error) {

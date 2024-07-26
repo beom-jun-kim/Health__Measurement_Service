@@ -289,9 +289,8 @@ export default {
 
 .diseaseModal {
   width: 100%;
-  height: 91.6%;
   background: #fff;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 999;

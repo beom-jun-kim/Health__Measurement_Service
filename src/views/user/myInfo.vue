@@ -11,7 +11,7 @@
                 <RouterLink to="/user/userInfoEdit">
                     <button class="info-button">내정보 변경하기</button>
                 </RouterLink>
-                <button class="logout-button">로그아웃</button>
+                <button class="logout-button" @click="logout">로그아웃</button>
             </div>
         </div>
         <div class="info-section">
@@ -51,6 +51,8 @@
 </template>
 
 <script>
+import UserDataService from "@/api/UserDataService";
+
 export default {
     name: 'myInfo',
     data() {
@@ -68,6 +70,16 @@ export default {
     methods: {
         goBack() {
             this.$router.go(-1);
+        },
+        async logout() {
+            try {
+                const response = await UserDataService.logout();
+                console.log("로그아웃 성공", response);
+                this.$router.push("/login/userLogin");
+            } catch (error) {
+                console.log("로그아웃 실패", error);
+            }
+
         }
     }
 };

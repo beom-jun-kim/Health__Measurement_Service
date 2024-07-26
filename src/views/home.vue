@@ -32,7 +32,7 @@ export default {
                 성별: '남'
             }
         }
-    }
+    },
 };
 </script>
 

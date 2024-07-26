@@ -19,7 +19,8 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/map-geocode\/v2\/geocode/, '/map-geocode/v2/geocode')
       },
       '/api': {
-        target: 'http://221.161.177.193',
+        // target: 'http://221.161.177.193',
+        target: 'http://192.168.0.41:8080',
         changeOrigin: true,
       }
     },

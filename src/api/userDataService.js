@@ -1,21 +1,24 @@
 import http from '../http-common'
 
-class userDataService {
-  createUser(data) {
-    return http.post('/user', data)
+class UserDataService {
+  async createUser(data) {
+    return await http.post('/user', data)
   }
-  sms(data) {
-    return http.post('/verification/sms', data)
+  async sms(data) {
+    return await http.post('/verification/sms', data)
   }
-  smsChk(data) {
-    return http.patch('/verification/sms', data)
+  async smsChk(data) {
+    return await http.patch('/verification/sms', data)
   }
-  idChk(id) {
-    return http.get(`/user/check/${id}`)
+  async idChk(id) {
+    return await http.get(`/user/check/${id}`)
   }
-  login(data) {
-    return http.post(`/auth/login`, data)
+  async login(data) {
+    return await http.post('/auth/login', data)
+  }
+  async logout() {
+    return await http.post('/auth/logout')
   }
 }
 
-export default new userDataService()
+export default new UserDataService()

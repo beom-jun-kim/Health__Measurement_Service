@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import userDataService from '@/api/userDataService';
+import UserDataService from '@/api/UserDataService';
 
 export default {
     name: 'SignupView',
@@ -99,7 +99,7 @@ export default {
     methods: {
         async idCheck(id) {
             try {
-                const response = await userDataService.idChk(id);
+                const response = await UserDataService.idChk(id);
                 this.idChk = response.data;
                 if(this.idChk === true) {
                     alert("이미 존재하는 아이디가 있습니다");
@@ -127,7 +127,7 @@ export default {
                     birthday: birthday,
                     phoneNumber: this.form.phone,
                 }
-                const response = await userDataService.createUser(data);
+                const response = await UserDataService.createUser(data);
                 console.log("회원가입 성공", response);
                 alert("회원가입이 완료되었습니다");
                 this.$router.push("/signup/welcome");
@@ -140,7 +140,7 @@ export default {
                 const data = {
                     phoneNumber: this.form.phone,
                 }                
-                const response = await userDataService.sms(data);
+                const response = await UserDataService.sms(data);
                 console.log("인증번호 발급 성공", response);
                 this.verificationSent = true;
                 alert("인증번호가 발송되었습니다");
@@ -154,7 +154,7 @@ export default {
                     phoneNumber: this.form.phone,
                     verificationCode: this.form.verificationCode
                 }
-                const response = await userDataService.smsChk(data);
+                const response = await UserDataService.smsChk(data);
                 console.log("인증번호 확인 성공", response);
                 this.isVerified = true;
                 alert("인증번호가 확인되었습니다");
