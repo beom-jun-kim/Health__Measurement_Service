@@ -13,13 +13,13 @@
             </div>
             <div class="user-info-box">
                 <div class="user-info">
-                    <p>연락처</p>
+                    <!-- <p>연락처</p> -->
                     <p>아이디</p>
                     <p>성별</p>
                     <p>생년월일</p> 
                 </div>
                 <div>
-                    <p class="username">{{ user.phone }}</p>
+                    <!-- <p class="username">{{ user.phone }}</p> -->
                     <p class="username">{{ user.userId }}</p>
                     <p class="username">{{ user.gender }}</p>
                     <p class="username">{{ user.birth }}</p>
@@ -45,7 +45,6 @@ export default {
                 id: 1,
                 username: "김범준",
                 imgUrl: '../../../public/img/accessories-8826708_640.jpg',
-                phone: "010-3395-2934",
                 userId: "gcon1945",
                 gender: "남",
                 birth:"1995.12.05"
