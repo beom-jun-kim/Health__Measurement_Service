@@ -1,10 +1,16 @@
 <template>
     <div class="container">
+        <div class="follow-list">
+            <h2>친구리스트</h2>
+            <RouterLink to="/follow/addFollow">
+                <button class="add-follow-btn">추가하기</button>
+            </RouterLink>
+        </div>
         <div class="tab-menu">
             <button :class="{ 'active-tab': currentComponent === 'GuardianList' }"
                 @click="updateState('GuardianList')">나의 보호자</button>
-            <button :class="{ 'active-tab': currentComponent === 'Protector' }"
-                @click="updateState('Protector')">나의 보호인</button>
+            <button :class="{ 'active-tab': currentComponent === 'Protector' }" @click="updateState('Protector')">나의
+                보호인</button>
         </div>
         <div class="component-box">
             <component :is="currentComponent"></component>
@@ -18,7 +24,7 @@ import Protector from "@/components/Protector.vue";
 
 export default {
     name: "followList",
-    components:{
+    components: {
         GuardianList,
         Protector,
     },
@@ -45,7 +51,7 @@ export default {
         }
     },
     methods: {
-        updateState(componentName){
+        updateState(componentName) {
             this.currentComponent = componentName;
         },
         delFollow() {
@@ -62,6 +68,10 @@ export default {
 </script>
 
 <style scoped>
+.container {
+    padding: 20px;
+}
+
 .tab-menu {
     width: 100%;
     display: flex;
@@ -89,6 +99,28 @@ export default {
 .component-box {
     padding: 20px 0;
     word-break: keep-all;
-    height: 400px;
+    width: 100%;
+}
+
+.follow-list {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    color: var(--main-color);
+    font-size: var(--font-n-size);
+}
+
+.add-follow-btn {
+    padding: 0 10px;
+    text-align: right;
+    width: 110px;
+    height: 35px;
+    background: url("@/assets/img/empty_person_add_black.png") no-repeat left 10px center / 20px auto;
+    border-radius: 5px;
+    border: 1px solid #000;
+    font-size: var(--font-n-sec-size);
+    color: #111;
 }
 </style>

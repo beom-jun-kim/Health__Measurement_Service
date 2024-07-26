@@ -1,38 +1,26 @@
 <template>
-    <div class="container">
-        <div class="follow-list">
-            <h2>친구리스트</h2>
-            <RouterLink to="/follow/addFollow">
-                <button class="add-follow-btn">추가하기</button>
-            </RouterLink>
+    <div class="list-box" v-for="(user, index) in userList" :key="index">
+        <div class="list-box-wrap">
+            <div v-if="user.imgUrl" class="user-img-box">
+                <div class="user-profile" :style="{ backgroundImage: `url(${user.imgUrl})` }"></div>
+            </div>
+            <div v-else class="user-img-box">
+                <div class="user-not-profile"></div>
+            </div>
+            <span class="username">{{ user.username }}</span>
         </div>
-        <div class="list-box" v-for="(user, index) in userList" :key="index">
-            <div class="list-box-wrap">
-                <div v-if="user.imgUrl" class="user-img-box">
-                    <div class="user-profile" :style="{ backgroundImage: `url(${user.imgUrl})` }"></div>
-                </div>
-                <div v-else class="user-img-box">
-                    <div class="user-not-profile"></div>
-                </div>
-                <span class="username">{{ user.username }}</span>
-            </div>
-            <div class="list-box-wrap">
-                <RouterLink :to="`/follow/followDetail/${user.id}`">
-                    <button class="follow-detail-btn">상세보기</button>
-                </RouterLink>
-                <button class="del-btn" @click="delFollow">삭제</button>
-            </div>
+        <div class="list-box-wrap">
+            <RouterLink :to="`/follow/followDetail/${user.id}`">
+                <button class="follow-detail-btn">상세보기</button>
+            </RouterLink>
+            <button class="del-btn" @click="delFollow">삭제</button>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: "followList",
-    components: {
-        GuardianList,
-        Protector,
-    },
+    name: "GuardianList",
     data() {
         return {
             userList: [
@@ -52,13 +40,9 @@ export default {
                     imgUrl: "",
                 },
             ],
-            currentComponent: 'GuardianList',
         }
     },
     methods: {
-        updateState(componentName) {
-            this.currentComponent = componentName;
-        },
         delFollow() {
             if (confirm("친구를 삭제하시겠습니까?")) {
                 try {
@@ -73,29 +57,6 @@ export default {
 </script>
 
 <style scoped>
-.follow-list {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid var(--input-border-color);
-    padding-bottom: 8px;
-    color: var(--main-color);
-    font-size: var(--font-n-size);
-}
-
-.add-follow-btn {
-    padding: 0 10px;
-    text-align: right;
-    width: 110px;
-    height: 35px;
-    background: url("@/assets/img/empty_person_add_black.png") no-repeat left 10px center / 20px auto;
-    border-radius: 5px;
-    border: 1px solid #000;
-    font-size: var(--font-n-sec-size);
-    color: #111;
-}
-
 .user-img-box {
     width: 50px;
     height: 50px;
@@ -126,7 +87,6 @@ export default {
     padding: 10px 0;
     display: flex;
     justify-content: space-between;
-    width: 100%;
     align-items: center;
 }
 
