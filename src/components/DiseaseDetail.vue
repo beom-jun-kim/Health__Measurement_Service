@@ -129,7 +129,7 @@
     height: 100%;
     background: var(--main-color);
     position: absolute;
-    top: 2.5px;
+    top: 2px;
     border-radius: 10px;
 }
 

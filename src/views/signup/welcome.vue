@@ -1,7 +1,7 @@
 <template>
     <transition name="fade">
         <div class="container" v-if="visible">
-            <img src="../../../public/img/app_logo_01.png" alt="G-CON Logo" class="logo">
+            <img src="../../../public/img/app_logo_02.png" alt="G-CON Logo" class="logo">
             <img src="../../../public/img/app_a0004_tt.png" alt="welcome join" class="welcome-text">
             <p>
                 <span>회원가입</span>이 완료 되었습니다.<br>

@@ -76,6 +76,10 @@ export default {
     font-size: var(--font-n-size);
 }
 
+.follow-list a {
+    color: inherit;
+}
+
 .add-follow-btn {
     padding: 0 10px;
     text-align: right;

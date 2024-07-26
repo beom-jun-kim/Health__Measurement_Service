@@ -162,6 +162,7 @@ export default {
     height: 35px;
     margin: 10px 10px 30px 0;
     padding: 0 5px;
+    font-size: var(--font-n-sec-size);
 }
 
 .add-follow-title {
@@ -183,7 +184,7 @@ export default {
     border-radius: 5px;
     color: #fff;
     font-size: var(--font-n-size);
-    transform: translateY(3px);
+    transform: translateY(1px);
 }
 
 .profile-box {
@@ -234,12 +235,16 @@ export default {
     margin: 25px 0;
 }
 
+.radio-box .radio-box-wrap {
+    white-space: nowrap;
+}
+
 .radio-box .radio-box-wrap:first-child {
-    margin-right: 50px;
+    margin-right: 40px;
 }
 
 .radio-box input {
-    margin-right: 10px;
+    margin-right: 7px;
     accent-color: #111;
 }
 

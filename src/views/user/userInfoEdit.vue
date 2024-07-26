@@ -1,8 +1,6 @@
 <template>
     <div class="myInfo-container margin-bottom">
-        <header class="header">
-            <button class="back-button" @click="goBack">←</button>
-        </header>
+        <GoBack />
         <div class="profile-section">
             <label for="profile-img">
                 <div class="img-upload">
@@ -59,8 +57,13 @@
 </template>
 
 <script>
+import GoBack from "@/components/GoBack.vue";
+
 export default {
     name: 'userInfoEdit',
+    components: {
+        GoBack,
+    },
     data() {
         return {
             user: {

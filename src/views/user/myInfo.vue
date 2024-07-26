@@ -1,8 +1,6 @@
 <template>
     <div class="myInfo-container margin-bottom">
-        <header class="header">
-            <button class="back-button" @click="goBack">←</button>
-        </header>
+        <GoBack />
         <div class="profile-section">
             <div class="profile-image"></div>
             <h2>{{ user.username }}</h2>
@@ -52,9 +50,13 @@
 
 <script>
 import UserDataService from "@/api/UserDataService";
+import GoBack from "@/components/GoBack.vue";
 
 export default {
     name: 'myInfo',
+    components:{
+        GoBack,
+    },
     data() {
         return {
             user: {
@@ -90,19 +92,19 @@ export default {
     padding: 20px;
 }
 
-.header {
+/* .header {
     width: 100%;
     display: flex;
     justify-content: flex-start;
     margin-bottom: 20px;
-}
+} */
 
-.back-button {
+/* .back-button {
     font-size: 30px;
     border: none;
     background: none;
     cursor: pointer;
-}
+} */
 
 .profile-section {
     display: flex;
@@ -137,6 +139,10 @@ export default {
     display: flex;
     gap: 10px;
     margin-top: 10px;
+}
+
+.buttons button {
+    color: inherit;
 }
 
 .secession {

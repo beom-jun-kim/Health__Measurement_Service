@@ -1,5 +1,6 @@
 <template>
     <div class="delete-account-container margin-bottom">
+        <GoBack />
         <div class="content">
             <p class="username"><span>홍길동</span> 님</p>
             <h3>회원탈퇴시 주의사항</h3>
@@ -21,8 +22,13 @@
 </template>
 
 <script>
+import GoBack from "@/components/GoBack.vue";
+
 export default {
     name: 'DeleteAccountView',
+    components: {
+        GoBack,
+    },
     methods: {
         deleteAccount() {
             alert('회원탈퇴가 처리되었습니다.');

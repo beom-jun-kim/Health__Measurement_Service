@@ -44,7 +44,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'FindContainerView',
+  name: 'findContainer',
   data() {
     return {
       selectedCity: '',

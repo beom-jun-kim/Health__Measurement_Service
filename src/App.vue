@@ -58,7 +58,7 @@ const isActive = (paths) => {
 nav {
   width: 100%;
   border-top: 1px solid var(--input-border-color);
-  font-size: var(--font-n-sec-size);
+  font-size: var(--font-small-size);
   text-align: center;
   padding: 8px 0;
   white-space: nowrap;
