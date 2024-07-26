@@ -16,7 +16,8 @@
           </div>
           <span>측정기록</span>
         </RouterLink>
-        <RouterLink to="/follow/followList" :class="{ active: isActive(['/follow/followList','/follow/addFollow','/follow/followDetail']).value }">
+        <RouterLink to="/follow/followList"
+          :class="{ active: isActive(['/follow/followList', '/follow/addFollow', '/follow/followDetail']).value }">
           <div class="bottom-bar-img">
             <img src="../public/img/bottom_menu_05.png" alt="">
           </div>
@@ -28,7 +29,8 @@
           </div>
           <span>G-CON 찾기</span>
         </RouterLink>
-        <RouterLink to="/user/myInfo" :class="{ active: isActive(['/user/myInfo','/user/userInfoEdit','/user/secession']).value }">
+        <RouterLink to="/user/myInfo"
+          :class="{ active: isActive(['/user/myInfo', '/user/userInfoEdit', '/user/secession']).value }">
           <div class="bottom-bar-img">
             <img src="../public/img/bottom_menu_04.png" alt="">
           </div>
@@ -46,14 +48,13 @@ import { computed } from 'vue';
 const route = useRoute();
 
 const isActive = (paths) => {
-  return computed(() => paths.some(path => route.path.startsWith(path)));
+  const computedValue = computed(() => paths.some(path => route.path.startsWith(path)));
+  return computedValue;
 };
 
 </script>
 
 <style scoped>
-header .wrapper {}
-
 nav {
   width: 100%;
   border-top: 1px solid var(--input-border-color);
