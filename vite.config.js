@@ -18,9 +18,13 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/map-geocode\/v2\/geocode/, '/map-geocode/v2/geocode')
       },
-      '/api': {
+      '/api/dev': {
         // target: 'http://221.161.177.193',
         target: 'http://192.168.0.41:8080',
+        changeOrigin: true,
+      },
+      '/api/prod': {
+        target: 'http://221.161.177.193',
         changeOrigin: true,
       }
     },
