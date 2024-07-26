@@ -32,7 +32,7 @@
               <span>
                 {{ formatDistance(location.distance) }} km
               </span>
-            </div>
+            </div>            
           </a>
         </li>
       </ul>
@@ -370,8 +370,8 @@ export default {
     async getGeocode() {
       this.address = `${this.selectedCity} ${this.selectedDistrict}`;
       // this.address = "부산광역시 수영구 광서로 16번길 33";
-      const client_id = 'anlunuki13';
-      const client_secret = 'at2t14up0S0XAnxQNWmgu04sIgWZ6ZVvMXYxPnv4';
+      const client_id = import.meta.env.VITE_APP_API_CLIENT_ID;
+      const client_secret = import.meta.env.VITE_APP_API_CLIENTSECRET;
       const url = '/map-geocode/v2/geocode';
       const headers = {
         'X-NCP-APIGW-API-KEY-ID': client_id,
@@ -411,7 +411,7 @@ export default {
           position: new naver.maps.LatLng(location.lat, location.lng),
           map: this.map,
           icon: {
-            url: '@/assets/img/app_logo_04.png',
+            url: './img/app_logo_04.png',
             size: new naver.maps.Size(55, 53),
           }
         });

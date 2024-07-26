@@ -76,10 +76,6 @@ export default {
     font-size: var(--font-n-size);
 }
 
-.follow-list a {
-    color: inherit;
-}
-
 .add-follow-btn {
     padding: 0 10px;
     text-align: right;
@@ -89,6 +85,7 @@ export default {
     border-radius: 5px;
     border: 1px solid #000;
     font-size: var(--font-n-sec-size);
+    color: inherit;
 }
 
 .user-img-box {
