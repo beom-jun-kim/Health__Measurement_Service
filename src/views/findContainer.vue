@@ -369,6 +369,7 @@ export default {
     },
     async getGeocode() {
       this.address = `${this.selectedCity} ${this.selectedDistrict}`;
+      console.log("this.address",this.address);
       // this.address = "부산광역시 수영구 광서로 16번길 33";
       const client_id = import.meta.env.VITE_APP_API_CLIENT_ID;
       const client_secret = import.meta.env.VITE_APP_API_CLIENTSECRET;
@@ -378,11 +379,14 @@ export default {
         'X-NCP-APIGW-API-KEY': client_secret,
         "Accept": "application/json",
       };
+      console.log("headers",headers);
       const params = {
         query: this.address,
       };
+      console.log("params",params);
       try {
         const response = await axios.get(url, { headers, params });
+        console.log("xxxxxxxxxurlxxxxxxxxx",url);
         console.log("xxxxxxresponsexxxxxxxxx",response);
         console.log("xxxxxxresponse.dataxxxxxxxxx",response.data);
         const result = response.data.addresses[0];
