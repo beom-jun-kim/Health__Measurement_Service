@@ -372,7 +372,7 @@ export default {
       console.log("this.address",this.address);
       // this.address = "부산광역시 수영구 광서로 16번길 33";
       const client_id = import.meta.env.VITE_APP_API_CLIENT_ID;
-      const client_secret = import.meta.env.VITE_APP_API_CLIENTSECRET;
+      const client_secret = import.meta.env.VITE_APP_API_CLIENT_SECRET;
       const url = '/map-geocode/v2/geocode';
       const headers = {
         'X-NCP-APIGW-API-KEY-ID': client_id,

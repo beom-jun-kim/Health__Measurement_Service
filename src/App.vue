@@ -1,7 +1,7 @@
 <template>
   <RouterView />
   <header
-    v-if="route.path !== '/signup/welcome' && route.path !== '/login/loginChk' && route.path !== '/user/userIdFind' && route.path !== '/signup/signupView'">
+    v-if="route.path !== '/signup/welcome' && route.path !== '/login/loginChk' && route.path !== '/user/userIdFind' && route.path !== '/signup/signupView' && route.path !== '/login/userLogin'">
     <div class="wrapper">
       <nav>
         <RouterLink to="/home" :class="{ active: isActive(['/home', '/signup/qr']).value }">
