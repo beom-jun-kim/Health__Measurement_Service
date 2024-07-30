@@ -1,5 +1,5 @@
 <template>
-    <transition name="fade">
+    <transition>
         <div class="container" v-if="visible">
             <img src="@/assets/img/app_logo_02.png" alt="G-CON Logo" class="logo">
             <img src="@/assets/img/app_a0004_tt.png" alt="welcome join" class="welcome-text">
@@ -24,8 +24,8 @@ export default {
             this.visible = false;
             setTimeout(() => {
                 this.$router.push('/home');
-            }, 1000);
-        }, 1500);
+            }, 800);
+        }, 1200);
     }
 };
 </script>
@@ -48,10 +48,10 @@ export default {
     font-weight: var(--font-b-weight);
 }
 
-.fade-enter-active, .fade-leave-active {
-    transition: opacity 1s;
+.v-enter-active, .v-leave-active {
+    transition: opacity .8s;
 }
-.fade-enter, .fade-leave-to {
+.v-enter-from, .v-leave-to{
     opacity: 0;
 }
 </style>
