@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import HomeView from '../views/HomeView.vue'
+import UserDataService from '@/api/UserDataService'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -111,5 +111,19 @@ const router = createRouter({
     }
   ]
 })
+
+// router.beforeEach(async (to, from, next) => {
+//   try {
+//     const response = await UserDataService.userLoginInfo(id)
+//     if (response.data.id !== null) {
+//       next({ path: '/home' })
+//     } else {
+//       next()
+//     }
+//   } catch (error) {
+//     console.error('경로이동 실패:', error)
+//     next()
+//   }
+// })
 
 export default router

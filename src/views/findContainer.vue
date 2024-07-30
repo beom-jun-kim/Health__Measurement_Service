@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Map from '@/api/Map';
 
 export default {

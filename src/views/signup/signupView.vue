@@ -110,8 +110,7 @@ export default {
                 console.log("아이디중복체크 실패", error);
             }
         },
-        async userJoin(evt) {
-            evt.preventDefault();
+        async userJoin() {
             if (this.form.password !== this.form.pwdChk) {
                 alert("비밀번호가 일치하지 않습니다");
             }

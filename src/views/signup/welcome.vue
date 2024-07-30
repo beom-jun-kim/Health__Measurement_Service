@@ -14,9 +14,10 @@
 
 <script>
 export default {
+    name: "welcome",
     data() {
         return {
-            visible: true
+            visible: true,
         };
     },
     mounted() {
@@ -25,7 +26,7 @@ export default {
             setTimeout(() => {
                 this.$router.push('/home');
             }, 800);
-        }, 1200);
+        }, 800);
     }
 };
 </script>
@@ -48,10 +49,13 @@ export default {
     font-weight: var(--font-b-weight);
 }
 
-.v-enter-active, .v-leave-active {
+.v-enter-active,
+.v-leave-active {
     transition: opacity .8s;
 }
-.v-enter-from, .v-leave-to{
+
+.v-enter-from,
+.v-leave-to {
     opacity: 0;
 }
 </style>

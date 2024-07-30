@@ -19,6 +19,12 @@ class UserDataService {
   async logout() {
     return await http.post('/auth/logout')
   }
+
+  // 본인 로그인 정보 api
+  // async userLoginInfo(id) {
+  //   return await http.get(`/auth/userLoginInfo/${id}`);
+  // }
+  
 }
 
 export default new UserDataService()

@@ -64,10 +64,6 @@ export default {
     margin-bottom: 0;
 }
 
-.qr-hand-img img {
-    max-width: 100%;
-}
-
 .qr-btn {
     width: 100%;
     padding: 20px 0;
@@ -79,5 +75,9 @@ export default {
     background-color: var(--main-color);
     cursor: pointer;
     font-weight: var(--font-b-weight);
+}
+
+.qr-hand-img {
+    width: 250px;
 }
 </style>
