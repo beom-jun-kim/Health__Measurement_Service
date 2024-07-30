@@ -32,7 +32,7 @@
               <span>
                 {{ formatDistance(location.distance) }} km
               </span>
-            </div>            
+            </div>
           </a>
         </li>
       </ul>
@@ -42,6 +42,7 @@
 
 <script>
 import axios from 'axios';
+import Map from '@/api/Map';
 
 export default {
   name: 'findContainer',
@@ -72,6 +73,7 @@ export default {
       address: "",
       map: null,
       markers: [],
+      container: [],
       locations: [
         { lat: 35.876083, lng: 128.596031, address: '대구 광역시 중구 동성로 2가 1' },
         { lat: 37.458666, lng: 126.4419679, address: '인천광역시 서구 경서동 120-1' },
@@ -369,30 +371,10 @@ export default {
     },
     async getGeocode() {
       this.address = `${this.selectedCity} ${this.selectedDistrict}`;
-      console.log("this.address",this.address);
-      // this.address = "부산광역시 수영구 광서로 16번길 33";
-      const client_id = import.meta.env.VITE_APP_API_CLIENT_ID;
-      const client_secret = import.meta.env.VITE_APP_API_CLIENT_SECRET;
-      const url = '/map-geocode/v2/geocode';
-      const headers = {
-        'X-NCP-APIGW-API-KEY-ID': client_id,
-        'X-NCP-APIGW-API-KEY': client_secret,
-        "Accept": "application/json",
-      };
-      console.log("headers",headers);
-      const params = {
-        query: this.address,
-      };
-      console.log("params",params);
       try {
-        const response = await axios.get(url, { headers, params });
-        console.log("xxxxxxxxxurlxxxxxxxxx",url);
-        console.log("xxxxxxresponsexxxxxxxxx",response);
-        console.log("xxxxxxresponse.dataxxxxxxxxx",response.data);
-        const result = response.data.addresses[0];
-        console.log("xxxxxxresultxxxxxx",result);
-        const lng = result.x;
-        const lat = result.y;
+        const response = await Map.searchAddr(this.address);
+        const lng = response.data.longitude;
+        const lat = response.data.latitude;
         this.updateMap(lat, lng);
         this.sortLocationsByDistance(lat, lng);
       } catch (error) {
@@ -400,9 +382,13 @@ export default {
       }
     },
     updateMap(latitude, longitude) {
+      this.markers.forEach(marker => marker.setMap(null));
+      this.markers = [];
+      
       const position = new naver.maps.LatLng(latitude, longitude);
       this.map.setCenter(position);
       this.map.setZoom(15);
+
       const marker = new naver.maps.Marker({
         position: position,
         map: this.map
@@ -431,13 +417,13 @@ export default {
             infowindow.open(this.map, marker);
           }
         });
-        this.markers.push(marker);
+        this.container.push(marker);
       });
     },
     sortLocationsByDistance(lat, lng) {
       const calculateDistance = (lat1, lng1, lat2, lng2) => {
         const toRad = (value) => (value * Math.PI) / 180;
-        const R = 6371; // km
+        const R = 6371;
         const dLat = toRad(lat2 - lat1);
         const dLng = toRad(lng2 - lng1);
         const a =

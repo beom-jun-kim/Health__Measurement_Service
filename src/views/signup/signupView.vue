@@ -93,7 +93,7 @@ export default {
             },
             verificationSent: false,
             isVerified: false,
-            idChk:"",
+            idChk: "",
         };
     },
     methods: {
@@ -101,7 +101,7 @@ export default {
             try {
                 const response = await UserDataService.idChk(id);
                 this.idChk = response.data;
-                if(this.idChk === true) {
+                if (this.idChk === true) {
                     alert("이미 존재하는 아이디가 있습니다");
                 } else {
                     alert("사용 가능한 아이디 입니다");
@@ -139,7 +139,7 @@ export default {
             try {
                 const data = {
                     phoneNumber: this.form.phone,
-                }                
+                }
                 const response = await UserDataService.sms(data);
                 console.log("인증번호 발급 성공", response);
                 this.verificationSent = true;

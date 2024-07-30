@@ -105,9 +105,9 @@ export default {
             }
         },
         findPhoneAdd() {
-            const formattedPhone = this.formatPhone(this.findPhoneChk);
-            console.log("formattedPhone", formattedPhone);
-            const user = this.userList.find((user) => user.phone === formattedPhone);
+            // const formattedPhone = this.formatPhone(this.findPhoneChk);
+            // console.log("formattedPhone", formattedPhone);
+            const user = this.userList.find((user) => user.phone === this.findPhoneChk);
             console.log("user", user);
             if (user) {
                 this.foundPhoneUser = user;
@@ -117,14 +117,14 @@ export default {
                 this.followPhoneBox = true;
             }
         },
-        formatPhone(phone) {
-            if (phone.length === 11) {
-                return phone.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
-            } else if (phone.length === 10) {
-                return phone.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
-            }
-            return phone;
-        },
+        // formatPhone(phone) {
+        //     if (phone.length === 11) {
+        //         return phone.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+        //     } else if (phone.length === 10) {
+        //         return phone.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+        //     }
+        //     return phone;
+        // },
         addRequest(userId) {
             try {
                 // 신청 로직 작성

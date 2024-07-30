@@ -27,7 +27,7 @@ export default {
                 {
                     id: 1,
                     username: "김범준",
-                    imgUrl: '../../public/img/accessories-8826708_640.jpg',
+                    imgUrl: '../img/accessories-8826708_640.jpg',
                 },
                 {
                     id: 2,

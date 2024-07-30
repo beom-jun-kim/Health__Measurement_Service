@@ -5,11 +5,11 @@
     <form class="login-form" @submit.prevent="login">
       <div class="input-group">
         <label for="username">아이디</label>
-        <input type="text" id="username" name="username" v-model="userId">
+        <input type="text" id="username" name="username" v-model="userId" required>
       </div>
       <div class="input-group">
         <label for="password">비밀번호</label>
-        <input type="password" id="password" name="password" v-model="password">
+        <input type="password" id="password" name="password" v-model="password" required>
       </div>
       <button type="submit" class="login-button">로그인</button>
     </form>
@@ -42,6 +42,9 @@ export default {
         this.$router.push("/home");
       } catch (error) {
         console.log("로그인실패", error);
+        if (error.response.data === "Invalid password" || error.response.data.includes("subject not found with userid")) {
+          alert("아이디 또는 비밀번호가 잘못되었습니다");
+        }
       }
     }
   }

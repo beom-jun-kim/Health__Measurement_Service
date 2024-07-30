@@ -2,7 +2,14 @@
     <div class="myInfo-container margin-bottom">
         <GoBack />
         <div class="profile-section">
-            <div class="profile-image"></div>
+            <div class="profile-image">
+                <div v-if="user.imgUrl" class="user-img-box">
+                    <div class="user-profile" :style="{ backgroundImage: `url(${user.imgUrl})` }"></div>
+                </div>
+                <div v-else class="user-img-box">
+                    <div class="user-not-profile"></div>
+                </div>
+            </div>
             <h2>{{ user.username }}</h2>
             <p>G-CON 사용자</p>
             <div class="buttons">
@@ -54,7 +61,7 @@ import GoBack from "@/components/GoBack.vue";
 
 export default {
     name: 'myInfo',
-    components:{
+    components: {
         GoBack,
     },
     data() {
@@ -66,6 +73,7 @@ export default {
                 birth: "1960년 01월 01일",
                 height: "165cm",
                 weight: "65kg",
+                imgUrl: "../img/accessories-8826708_640.jpg",
             }
         }
     },
@@ -92,20 +100,6 @@ export default {
     padding: 20px;
 }
 
-/* .header {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 20px;
-} */
-
-/* .back-button {
-    font-size: 30px;
-    border: none;
-    background: none;
-    cursor: pointer;
-} */
-
 .profile-section {
     display: flex;
     flex-direction: column;
@@ -114,16 +108,25 @@ export default {
     margin-bottom: 20px;
 }
 
-.profile-image {
+.user-img-box {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background-color: #00BFA5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-    background: url("../../public/img/accessories-8826708_640.jpg") no-repeat center/cover;
+    overflow: hidden;
+    background: var(--input-border-color);
+}
+
+.user-img-box .user-profile {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.user-not-profile {
+    width: 100%;
+    height: 100%;
+    background: url("@/assets/img/empty_person.png") no-repeat center/cover;
 }
 
 .profile-section h2 {
