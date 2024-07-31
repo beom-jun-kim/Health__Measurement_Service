@@ -15,12 +15,12 @@ export default defineConfig({
     proxy: {
       '/api/dev': {
         target: 'http://localhost:8080',
-        changeOrigin: true,
+        changeOrigin: true
       },
       '/api/prod': {
         target: 'http://221.161.177.193',
-        changeOrigin: true,
+        changeOrigin: true
       }
-    },
+    }
   }
 })

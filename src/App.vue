@@ -65,6 +65,7 @@ nav {
   display: flex;
   justify-content: space-around;
   position: fixed;
+  left: 0;
   bottom: 0;
   background: #fff;
   z-index: 9999;
