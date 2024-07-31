@@ -2,7 +2,7 @@
     <div class="container">
         <div class="follow-list">
             <h2>보호자 추가 신청</h2>
-            <p>나의 보호자로 신청한 친구 리스트입니다.</p>
+            <p>나를 보호자로 신청한 보호자 리스트입니다.</p>
         </div>
         <div class="list-box" v-for="(user, index) in userList" :key="index">
             <div class="list-box-wrap">

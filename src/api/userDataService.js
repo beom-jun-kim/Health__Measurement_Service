@@ -20,11 +20,17 @@ class UserDataService {
     return await http.post('/auth/logout')
   }
 
-  // 본인 로그인 정보 api
-  // async userLoginInfo(id) {
-  //   return await http.get(`/auth/userLoginInfo/${id}`);
-  // }
-  
+  // 본인 로그인 정보
+  async getUserInfo() {
+    return await http.get('/user/info')
+  }
+  async editUserInfo(data) {
+    return await http.patch('/user/info', data)
+  }
+
+  async deleteUser() {
+    return await http.delete('/user')
+  }
 }
 
 export default new UserDataService()

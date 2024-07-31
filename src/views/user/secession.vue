@@ -12,7 +12,7 @@
                 <p>· 동일한 명의로 G-Con에 재가입하기 위해서는 삭제일 기준 15일 이후 가능합니다.</p>
                 <p>· 개인정보에 관한 문의사항은 1599-1000으로 문의바랍니다.</p>
             </div>
-            <p class="confirmation-text">정말 회원탈퇴 하시겠습니까?</p>
+            <p class="confirmation-text"></p>
             <div class="buttons">
                 <button class="delete-button" @click="deleteAccount">회원탈퇴</button>
                 <button class="cancel-button" @click="cancel">취소</button>
@@ -23,6 +23,7 @@
 
 <script>
 import GoBack from "@/components/GoBack.vue";
+import UserDataService from "@/api/UserDataService";
 
 export default {
     name: 'DeleteAccountView',
@@ -30,12 +31,19 @@ export default {
         GoBack,
     },
     methods: {
-        deleteAccount() {
-            alert('회원탈퇴가 처리되었습니다.');
-            router.push("/");
+        async deleteAccount() {
+            if (confirm("탈퇴를 진행하시겠습니까?")) {
+                try {
+                    await UserDataService.deleteUser();
+                    alert('탈퇴가 완료되었습니다');
+                    this.$router.push("/");
+                } catch (error) {
+                    console.log("회원 탈퇴 실패", error);
+                }
+            }
         },
         cancel() {
-            this.$router.push('/home');
+            this.$router.push('/user/myInfo');
         }
     }
 };
@@ -84,8 +92,6 @@ delete-account-container .warnings {
 
 .confirmation-text {
     margin: 20px 0;
-    font-size: var(--font-b-size);
-    text-align: center;
 }
 
 .buttons {

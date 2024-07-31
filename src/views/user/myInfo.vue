@@ -10,7 +10,7 @@
                     <div class="user-not-profile"></div>
                 </div>
             </div>
-            <h2>{{ user.username }}</h2>
+            <h2>{{ user.name }}</h2>
             <p>G-CON 사용자</p>
             <div class="buttons">
                 <RouterLink to="/user/userInfoEdit">
@@ -23,23 +23,23 @@
             <h3>내 정보</h3>
             <div class="info-item">
                 <span class="label">연락처</span>
-                <span class="value">{{ user.phoneNum }}</span>
+                <span class="value">{{ user.phoneNumber }}</span>
             </div>
             <div class="info-item">
                 <span class="label">성별</span>
-                <span class="value">{{ user.gender }}</span>
+                <span class="value">{{ user.gender === "M" ? "남" : "여" }}</span>
             </div>
             <div class="info-item">
                 <span class="label">생년월일</span>
-                <span class="value">{{ user.birth }}</span>
+                <span class="value">{{ user.birthday }}</span>
             </div>
             <div class="info-item">
                 <span class="label">키</span>
-                <span class="value">{{ user.height }}</span>
+                <span class="value">{{ user.height ? user.height : "정보가 없습니다." }}</span>
             </div>
             <div class="info-item">
                 <span class="label">체중</span>
-                <span class="value">{{ user.weight }}</span>
+                <span class="value">{{ user.weight ? user.weight : "정보가 없습니다." }}</span>
             </div>
         </div>
         <RouterLink to="/user/secession" class="secession">
@@ -66,15 +66,7 @@ export default {
     },
     data() {
         return {
-            user: {
-                username: "홍길동",
-                phoneNum: "010-1234-4567",
-                gender: "남",
-                birth: "1960년 01월 01일",
-                height: "165cm",
-                weight: "65kg",
-                imgUrl: "../img/accessories-8826708_640.jpg",
-            }
+            user: {}
         }
     },
     methods: {
@@ -84,13 +76,25 @@ export default {
         async logout() {
             try {
                 const response = await UserDataService.logout();
+                alert("로그아웃 하시겠습니까?");
                 console.log("로그아웃 성공", response);
                 this.$router.push("/login/userLogin");
             } catch (error) {
                 console.log("로그아웃 실패", error);
             }
 
+        },
+        async getUserInfo() {
+            try {
+                const response = await UserDataService.getUserInfo()
+                this.user = response.data;
+            } catch (error) {
+                console.log("조회실패",error);
+            }
         }
+    },
+    async mounted() {
+        await this.getUserInfo();
     }
 };
 </script>
@@ -153,14 +157,25 @@ export default {
     width: 100%;
 }
 
+
 .info-button,
 .logout-button {
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
     border: 1px solid var(--input-border-color);
     border-radius: 5px;
     background-color: #f5f5f5;
     cursor: pointer;
     font-size: var(--font-n-sec-size);
+    height: 51px;
+}
+
+.info-button {
+    width: 148.63px;
+}
+
+.logout-button {
+    width: 100.89px;
+    transform: translateY(3px);
 }
 
 .info-section {

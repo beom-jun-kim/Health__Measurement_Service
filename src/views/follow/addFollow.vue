@@ -89,8 +89,10 @@ export default {
     methods: {
         async findIdAdd() {
             try {
-                const response = await Follow.getFollowId();
-                console.log("친구 조회 성공", response);
+                const data = {
+                    userId: this.findIdChk,
+                }
+                const response = await Follow.getFollowId(data);
                 this.userList = response.data;
                 const user = this.userList.find((user) => user.userId === this.findIdChk);
                 if (user) {

@@ -11,7 +11,7 @@
                 </div>
             </label>
             <input id="profile-img" type="file" class="profile-input" name="profile-img" accept="image/*">
-            <input type="text" class="value" name="username" v-model="user.username">
+            <input type="text" class="value" name="username" v-model="user.name">
             <p>G-CON 사용자</p>
             <div class="buttons">
                 <h1 class="info-button">내정보 변경하기</h1>
@@ -22,41 +22,44 @@
                 <h3>내 정보</h3>
                 <div class="info-item">
                     <span class="label">연락처</span>
-                    <input type="text" class="value" name="phoneNum" v-model="user.phoneNum">
+                    <input type="text" class="value" name="phoneNum" v-model="user.phoneNumber">
                 </div>
                 <div class="info-item">
                     <span class="label">성별</span>
-                    <input type="text" class="value" name="gender" v-model="user.gender">
+                    <div class="gender-chk">
+                        <input type="radio" id="men" class="value" name="gender" value="M"v-model="user.gender">
+                        <label for="men">남</label>
+    
+                        <input type="radio" id="woman" class="value" name="gender" value="F" v-model="user.gender">
+                        <label for="woman">여</label>
+                    </div>
                 </div>
                 <div class="info-item">
                     <span class="label">생년월일</span>
-                    <input type="text" class="value" name="birth" v-model="user.birth">
+                    <input type="text" class="value" name="birth" v-model="user.birthday">
                 </div>
                 <div class="info-item">
                     <span class="label">키</span>
-                    <input type="text" class="value" name="height" v-model="user.height">
+                    <div class="info-item-box">
+                        <input type="text" class="value" name="height" v-model="user.height">
+                        <span class="height">cm</span>
+                    </div>
                 </div>
                 <div class="info-item">
                     <span class="label">체중</span>
-                    <input type="text" class="value" name="weight" v-model="user.weight">
+                    <div class="info-item-box">
+                        <input type="text" class="value" name="weight" v-model="user.weight">
+                        <span class="weight">kg</span>
+                    </div>
                 </div>
                 <button type="submit" class="edit-save">저장</button>
             </form>
         </div>
-        <!-- <RouterLink to="/user/secession" class="secession">
-            <div class="actions-section">
-                <div class="action-item">회원탈퇴</div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" viewBox="0 0 24 24" fill="none">
-                    <path
-                        d="M9.71069 18.2929C10.1012 18.6834 10.7344 18.6834 11.1249 18.2929L16.0123 13.4006C16.7927 12.6195 16.7924 11.3537 16.0117 10.5729L11.1213 5.68254C10.7308 5.29202 10.0976 5.29202 9.70708 5.68254C9.31655 6.07307 9.31655 6.70623 9.70708 7.09676L13.8927 11.2824C14.2833 11.6729 14.2833 12.3061 13.8927 12.6966L9.71069 16.8787C9.32016 17.2692 9.32016 17.9023 9.71069 18.2929Z"
-                        fill="#ccc" />
-                </svg>
-            </div>
-        </RouterLink> -->
     </div>
 </template>
 
 <script>
+import UserDataService from "@/api/UserDataService";
 import GoBack from "@/components/GoBack.vue";
 
 export default {
@@ -66,23 +69,43 @@ export default {
     },
     data() {
         return {
-            user: {
-                username: "홍길동",
-                phoneNum: "010-1234-4567",
-                gender: "남",
-                birth: "1960년 01월 01일",
-                height: "165cm",
-                weight: "65kg",
-            }
+            user: {}
         }
     },
     methods: {
         goBack() {
             this.$router.go(-1);
         },
-        editSave() {
-            this.$router.push("/user/myInfo");
+        async editSave() {
+            if (confirm("수정하시겠습니까?")) {
+                try {
+                    const data = {
+                        name: this.user.name,
+                        gender: this.user.gender,
+                        birthday: this.user.birthday,
+                        phoneNumber: this.user.phoneNumber,
+                        height: this.user.height,
+                        weight: this.user.weight,
+                    }
+                    await UserDataService.editUserInfo(data);
+                    alert("수정되었습니다");
+                    this.$router.push("/user/myInfo");
+                } catch (error) {
+                    console.log("수정실패", error);
+                }
+            }
+        },
+        async getUserInfo() {
+            try {
+                const response = await UserDataService.getUserInfo()
+                this.user = response.data;
+            } catch (error) {
+                console.log("조회실패", error);
+            }
         }
+    },
+    async mounted() {
+        await this.getUserInfo();
     }
 };
 </script>
@@ -205,6 +228,19 @@ input[name="username"] {
     text-align: center;
 }
 
+.info-item-box .height {
+    margin-left: 10px;
+}
+
+.info-item-box .weight {
+    margin-left: 15px;
+}
+
+.info-item-box input {
+    width: 127px;
+
+}
+
 .edit-save {
     background: var(--main-color);
     color: #fff;
@@ -215,5 +251,13 @@ input[name="username"] {
     margin-top: 10px;
     font-weight: var(--font-b-weight);
     font-size: var(--font-n-sec-size);
+}
+
+.gender-chk label {
+    margin-left: 10px;
+}
+
+.gender-chk input[id="woman"] {
+    margin-left: 80px;
 }
 </style>
