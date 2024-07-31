@@ -2,7 +2,7 @@
     <div class="delete-account-container margin-bottom">
         <GoBack />
         <div class="content">
-            <p class="username"><span>홍길동</span> 님</p>
+            <p class="username"><span>{{ user.name }}</span> 님</p>
             <h3>회원탈퇴시 주의사항</h3>
             <div class="warnings">
                 <p>· 더 이상 해당계정으로 G-Con App에 로그인할 수 없게 됩니다.</p>
@@ -30,6 +30,11 @@ export default {
     components: {
         GoBack,
     },
+    data() {
+        return {
+            user: {},
+        }
+    },
     methods: {
         async deleteAccount() {
             if (confirm("탈퇴를 진행하시겠습니까?")) {
@@ -42,9 +47,20 @@ export default {
                 }
             }
         },
+        async getUserInfo() {
+            try {
+                const response = await UserDataService.getUserInfo();
+                this.user = response.data;
+            } catch (error) {
+                console.log("유저정보조회 실패", error);
+            }
+        },
         cancel() {
             this.$router.push('/user/myInfo');
         }
+    },
+    async mounted() {
+        await this.getUserInfo();
     }
 };
 </script>

@@ -95,6 +95,7 @@ export default {
                 const response = await Follow.getFollowId(data);
                 this.userList = response.data;
                 const user = this.userList.find((user) => user.userId === this.findIdChk);
+                console.log("조회된 아이디 정보", user);
                 if (user) {
                     this.foundIdUser = user;
                     this.followIdBox = true;
@@ -110,7 +111,7 @@ export default {
             // const formattedPhone = this.formatPhone(this.findPhoneChk);
             // console.log("formattedPhone", formattedPhone);
             const user = this.userList.find((user) => user.phone === this.findPhoneChk);
-            console.log("user", user);
+            console.log("조회된 연락처 정보", user);
             if (user) {
                 this.foundPhoneUser = user;
                 this.followPhoneBox = true;
