@@ -10,14 +10,12 @@
     </div>
     <div class="graph">
       <div class="graph-wrap" v-for="(graph, index) in graphList" :Key=index>
-        <!-- <RouterLink :to="`/user/reportDate/${graph.id}`"> -->
         <div class="graph-title" @click="modalApp(graph.id)">
           <span>{{ graph.disease }}</span>
         </div>
         <div class="graph-box" @click="modalApp(graph.id)">
           <div class="content" :style="{ width: graph.percent + '%' }"></div>
         </div>
-        <!-- </RouterLink> -->
       </div>
     </div>
     <div class="walk-result">
@@ -78,10 +76,12 @@
           <p>{{ user.username }}님은 뇌졸중과 치매, 파킨슨에 대한 범위는 정상범위 안으로 나타났지만 퇴행성 관절염에 관한...</p>
         </div>
       </div>
-    </div>
-    <div v-if="diseaseModal" class="diseaseModal">
-      <DiseaseDetail @closeModalBtn="closeModalBtn" :paramAppId="appId" :graphList="graphList" :user="user"/>
-    </div>
+    </div>    
+    <Transition name="slide-fade">
+      <div class="diseaseModal" v-if="diseaseModal">
+        <DiseaseDetail @closeModalBtn="closeModalBtn" :paramAppId="appId" :graphList="graphList" :user="user"/>
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -294,5 +294,16 @@ export default {
   top: 0;
   left: 0;
   z-index: 999;
+  transition: 300ms;
+}
+
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(100%);
 }
 </style>

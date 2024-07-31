@@ -29,7 +29,6 @@
 </template>
 
 <script>
-
 export default {
     name: "reqFollowChk",
     data() {
@@ -146,5 +145,6 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #111;
 }
 </style>

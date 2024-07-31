@@ -32,7 +32,7 @@ export default {
                 {
                     id: 5,
                     username: "박지훈",
-                    imgUrl: '../../public/img/accessories-8826708_640.jpg',
+                    imgUrl: '../img/accessories-8826708_640.jpg',
                 },
             ],
         }

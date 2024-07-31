@@ -10,7 +10,7 @@
             <div class="logo-img-box">
                 <img src="@/assets/img/app_logo_02.png" alt="logo header">
             </div>
-            <div></div>
+            <div style="width: 40px;"></div>
         </header>
         <div class="disease-detail">
             <h2>{{ currentGraph.disease }}</h2>
