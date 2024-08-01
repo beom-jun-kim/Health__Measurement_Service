@@ -10,8 +10,11 @@ class Follow {
   async followReq(data) {
     return await http.post('/invite', data)
   }
-  async followReqDel(data) {
-    return await http.delete('/invite', data)
+  async followReqDel(id) {
+    return await http.delete(`/invite?guardianSid=${id}`)
+  }
+  async followCancelReq(id) {
+    return await http.delete(`/invite?userSid=${id}`)
   }
   async followReqAccept(data) {
     return await http.patch('/invite', data)
@@ -21,6 +24,9 @@ class Follow {
   }
   async getFollowGList() {
     return await http.get('/invite/user')
+  }
+  async getFollowPList() {
+    return await http.get('/invite/guardian')
   }
   async getFollowReqDetail(id) {
     return await http.get(`/invite/user-detail?userSid=${id}`)

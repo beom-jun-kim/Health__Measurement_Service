@@ -30,8 +30,10 @@
                         <div class="user-not-profile"></div>
                     </div>
                     <p class="username">{{ foundIdUser.name }}</p>
-                    <button v-if="foundIdUser.relationsStatus == null" class="req-follow" @click="addRequest(foundIdUser.userSid)">친구 신청하기</button>
-                    <button v-if="foundIdUser.relationsStatus === 'N'" class="req-follow" @click="cancelRequest(foundIdUser.userSid)">신청 취소</button>
+                    <button v-if="foundIdUser.relationsStatus == null" class="req-follow"
+                        @click="addRequest(foundIdUser.userSid)">친구 신청하기</button>
+                    <button v-if="foundIdUser.relationsStatus === 'N'" class="req-follow"
+                        @click="cancelRequest(foundIdUser.userSid)">신청 취소</button>
                 </div>
                 <div v-else>
                     <p>해당 유저가 없습니다</p>
@@ -53,9 +55,10 @@
                         <div class="user-not-profile"></div>
                     </div>
                     <p class="username">{{ foundPhoneUser.name }}</p>
-                    <button class="req-follow" @click="addRequest(foundPhoneUser.userSid)">친구 신청하기</button>
-                    <!-- <button class="req-follow" @click="addRequest(foundIdUser.id)" @click="cancelRequest">신청 취소</button>
-                    <button class="req-follow" @click="addRequest(foundIdUser.id)" >친구 신청하기</button> -->
+                    <button v-if="foundPhoneUser.relationsStatus == null" class="req-follow"
+                        @click="addPhoneRequest(foundPhoneUser.userSid)">친구 신청하기</button>
+                    <button v-if="foundPhoneUser.relationsStatus === 'N'" class="req-follow"
+                        @click="cancelPhoneRequest(foundPhoneUser.userSid)">신청 취소</button>
                 </div>
                 <div v-else>
                     <p>해당 유저가 없습니다</p>
@@ -113,7 +116,7 @@ export default {
                     this.followPhoneBox = true;
                 }
             } catch (error) {
-                console.log(error);
+                console.log("휴대전화로 찾기 실패",error);
             }
         },
         // formatPhone(phone) {
@@ -127,23 +130,39 @@ export default {
         async addRequest(userId) {
             try {
                 const data = {
-                    userSid : userId,
-                }                
+                    userSid: userId,
+                }
                 await Follow.followReq(data);
                 await this.findIdAdd(this.findIdChk);
-            } catch (error) {            
+            } catch (error) {
                 console.log("친구추가 요청 실패", error);
             }
         },
         async cancelRequest(userId) {
             try {
-                const data = {
-                    userSid : userId,
-                }
-                await Follow.followReqDel(data);
+                await Follow.followCancelReq(userId)
                 await this.findIdAdd(this.findIdChk);
             } catch (error) {
-                console.log("요청 취소 실패", error);
+                console.log("거절하기 실패", error);
+            }
+        },
+        async addPhoneRequest(userId) {
+            try {
+                const data = {
+                    userSid: userId,
+                }
+                await Follow.followReq(data);
+                await this.findPhoneAdd(this.findPhoneChk);
+            } catch (error) {
+                console.log("친구추가 요청 실패", error);
+            }
+        },
+        async cancelPhoneRequest(userId) {
+            try {
+                await Follow.followCancelReq(userId)
+                await this.findPhoneAdd(this.findPhoneChk);
+            } catch (error) {
+                console.log("거절하기 실패", error);
             }
         }
     },

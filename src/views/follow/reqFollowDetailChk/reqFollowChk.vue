@@ -52,8 +52,9 @@ export default {
                 const data = {
                     guardianSid: this.$route.params.id,
                 }
-                const response = await Follow.followReqAccept(data)
-                console.log("수락하기 성공", response);
+                await Follow.followReqAccept(data)
+                alert("수락하시겠습니까?");
+                alert("수락되었습니다");
                 this.$router.push("/follow/followList");
             } catch (error) {
                 console.log("수락하기 실패", error);
@@ -61,11 +62,9 @@ export default {
         },
         async reject() {
             try {
-                const data = {
-                    guardianSid: this.$route.params.id,
-                }
-                const response = await Follow.followReqDel(data)
-                console.log("거절하기 성공", response.data);
+                await Follow.followReqDel(this.$route.params.id)
+                alert("거절하시겠습니까?");
+                alert("거절되었습니다");
                 this.$router.push("/follow/reqFollowList");
             } catch (error) {
                 console.log("거절하기 실패", error);

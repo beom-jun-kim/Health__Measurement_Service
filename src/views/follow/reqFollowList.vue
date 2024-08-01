@@ -4,7 +4,7 @@
             <h2>보호자 추가 신청</h2>
             <p>나를 보호자로 신청한 보호자 리스트입니다.</p>
         </div>
-        <div class="list-box" v-for="(user, index) in userList" :key="index">
+        <div v-if="userList.length > 0" class="list-box" v-for="(user, index) in userList" :key="index">
             <div class="list-box-wrap">
                 <div v-if="user.imgUrl" class="user-img-box">
                     <div class="user-profile" :style="{ backgroundImage: `url(${user.imgUrl})` }"></div>
@@ -19,6 +19,9 @@
                     <button class="follow-detail-btn">확인하기</button>
                 </RouterLink>
             </div>
+        </div>
+        <div v-else class="not-list">
+            <p style="text-align: center;">추가를 요청한 보호자가 없습니다.</p>
         </div>
     </div>
 </template>
@@ -167,5 +170,11 @@ export default {
 
 .del-btn {
     background: var(--input-border-color);
+}
+
+.not-list {
+    width: 100%;
+    background: #ebebeb;
+    padding: 10px 0;
 }
 </style>

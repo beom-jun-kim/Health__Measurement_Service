@@ -7,13 +7,13 @@
             <div v-else class="user-img-box">
                 <div class="user-not-profile"></div>
             </div>
-            <span class="username">{{ user.username }}</span>
+            <span class="username">{{ user.name }}</span>
         </div>
         <div class="list-box-wrap">
-            <RouterLink :to="`/follow/followDetail/${user.id}`">
+            <RouterLink :to="`/follow/followDetail/${user.userSid}`">
                 <button class="follow-detail-btn">상세보기</button>
             </RouterLink>
-            <button class="del-btn" @click="delFollow">삭제</button>
+            <button class="del-btn" @click="delFollow(user.userSid)">삭제</button>
         </div>
     </div>
     <div v-else class="not-list">
@@ -33,21 +33,22 @@ export default {
         }
     },
     methods: {
-        delFollow() {
+        async delFollow(userSid) {
             if (confirm("친구를 삭제하시겠습니까?")) {
                 try {
-                    // 삭제로직 추가
+                    await Follow.followReqDel(userSid)
+                    await this.getFollowList();
                 } catch (error) {
-                    console.log("친구 삭제 실패", error);
+                    console.log("삭제하기 실패", error);
                 }
             }
         },
         async getFollowList() {
             try {
                 const response = await Follow.getFollowGList();
-                console.log("보호자 리스트 조회 성공", response);
+                this.userList = response.data;
             } catch (error) {
-                console.log("보호자 리스트 조회실패", error);
+                console.log("나의 보호자 리스트 조회실패", error);
             }
         },
     },
