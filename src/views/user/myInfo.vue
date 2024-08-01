@@ -75,9 +75,8 @@ export default {
         },
         async logout() {
             try {
-                const response = await UserDataService.logout();
+                await UserDataService.logout();
                 alert("로그아웃 하시겠습니까?");
-                console.log("로그아웃 성공", response);
                 this.$router.push("/login/userLogin");
             } catch (error) {
                 console.log("로그아웃 실패", error);

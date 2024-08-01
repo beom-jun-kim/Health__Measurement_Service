@@ -40,7 +40,6 @@ export default {
         async getFollowReceptionList() {
             try {
                 const response = await Follow.getFollowReceptionList();
-                console.log("보호자 요청 리스트 조회 성공", response.data);
                 this.userList = response.data
             } catch (error) {
                 console.log("보호자 요청 리스트 조회 실패", error);

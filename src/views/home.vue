@@ -5,7 +5,7 @@
         </header>
         <div class="welcome-section">
             <img src="@/assets/img/img_main.png" alt="Health Illustration" class="illustration">
-            <h1 class="home-text-user">{{ user.username }}님</h1>
+            <h1 class="home-text-user">{{ user.name }}님</h1>
             <p class="home-text">오늘 하루도 건강을 잘 챙기시고 계시나요?</p>
         </div>
         <div class="action-buttons">
@@ -20,20 +20,28 @@
 </template>
 
 <script>
+import UserDataService from '@/api/UserDataService';
 
 export default {
     name: 'home',
     data() {
         return {
-            user: {
-                id: 1,
-                username: '김범준',
-                password: 'ddd',
-                생년월일: '1995.12.05',
-                성별: '남'
+            user: {}
+        }
+    },
+    methods: {
+        async getMyInfo() {
+            try {
+                const response = await UserDataService.getUserInfo();
+                this.user = response.data;
+            } catch (error) {
+                console.log("유저조회 실패", error);
             }
         }
     },
+    async mounted() {
+        await this.getMyInfo();
+    }
 };
 </script>
 

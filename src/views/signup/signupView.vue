@@ -126,8 +126,7 @@ export default {
                     birthday: birthday,
                     phoneNumber: this.form.phone,
                 }
-                const response = await UserDataService.createUser(data);
-                console.log("회원가입 성공", response);
+                await UserDataService.createUser(data);
                 alert("회원가입이 완료되었습니다");
                 this.$router.push("/signup/welcome");
             } catch (error) {
@@ -139,8 +138,7 @@ export default {
                 const data = {
                     phoneNumber: this.form.phone,
                 }
-                const response = await UserDataService.sms(data);
-                console.log("인증번호 발급 성공", response);
+                await UserDataService.sms(data);
                 this.verificationSent = true;
                 alert("인증번호가 발송되었습니다");
             } catch (error) {
@@ -153,8 +151,7 @@ export default {
                     phoneNumber: this.form.phone,
                     verificationCode: this.form.verificationCode
                 }
-                const response = await UserDataService.smsChk(data);
-                console.log("인증번호 확인 성공", response);
+                await UserDataService.smsChk(data);
                 this.isVerified = true;
                 alert("인증번호가 확인되었습니다");
             } catch (error) {

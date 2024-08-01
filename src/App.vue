@@ -17,7 +17,7 @@
           <span>측정기록</span>
         </RouterLink>
         <RouterLink to="/follow/followList"
-          :class="{ active: isActive(['/follow/followList', '/follow/addFollow', '/follow/followDetail']).value }">
+          :class="{ active: isActive(['/follow/followList', '/follow/addFollow', '/follow/followDetail','/follow/reqFollowList','/follow/reqFollowDetailChk']).value }">
           <div class="bottom-bar-img">
             <img src="@/assets/img/bottom_menu_05.png" alt="">
           </div>

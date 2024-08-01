@@ -54,8 +54,7 @@ export default {
           userId: this.userId,
           password: this.password,
         }
-        const response = await UserDataService.login(data);
-        console.log("로그인성공", response);
+        await UserDataService.login(data);
         this.$router.push("/signup/welcome");
       } catch (error) {
         console.log("로그인실패", error);
