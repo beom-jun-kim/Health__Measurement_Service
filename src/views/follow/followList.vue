@@ -42,23 +42,7 @@ export default {
     },
     data() {
         return {
-            userList: [
-                {
-                    id: 1,
-                    username: "김범준",
-                    imgUrl: '../../public/img/accessories-8826708_640.jpg',
-                },
-                {
-                    id: 2,
-                    username: "최지콘",
-                    imgUrl: "",
-                },
-                {
-                    id: 3,
-                    username: "박메라",
-                    imgUrl: "",
-                },
-            ],
+            userList: [],
             currentComponent: 'GuardianList',
             addFollowIcon:true,
         }

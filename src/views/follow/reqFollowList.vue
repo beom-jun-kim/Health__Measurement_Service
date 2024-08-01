@@ -12,10 +12,10 @@
                 <div v-else class="user-img-box">
                     <div class="user-not-profile"></div>
                 </div>
-                <span class="username">{{ user.username }}</span>
+                <span class="username">{{ user.name }}</span>
             </div>
             <div class="list-box-wrap">
-                <RouterLink :to="`/follow/reqFollowDetailChk/${user.id}`"> 
+                <RouterLink :to="`/follow/reqFollowDetailChk/${user.userSid}`">
                     <button class="follow-detail-btn">확인하기</button>
                 </RouterLink>
             </div>
@@ -24,20 +24,28 @@
 </template>
 
 <script>
+import Follow from "@/api/Follow";
+
 export default {
     name: "reqFollowList",
     data() {
         return {
-            userList: [
-                {
-                    id: 7,
-                    username: "이창준",
-                    imgUrl: '',
-                },
-            ],
+            userList: [],
         }
     },
     methods: {
+        async getFollowReceptionList() {
+            try {
+                const response = await Follow.getFollowReceptionList();
+                console.log("보호자 요청 리스트 조회 성공", response.data);
+                this.userList = response.data
+            } catch (error) {
+                console.log("보호자 요청 리스트 조회 실패", error);
+            }
+        }
+    },
+    async mounted() {
+        this.getFollowReceptionList();
     }
 }
 </script>

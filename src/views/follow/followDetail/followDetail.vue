@@ -9,29 +9,28 @@
                 <div v-else class="user-img-box">
                     <div class="user-not-profile"></div>
                 </div>
-                <span class="username">{{ user.username }}</span>
+                <span class="username">{{ user.name }}</span>
             </div>
             <div class="user-info-box">
                 <div class="user-info">
-                    <!-- <p>연락처</p> -->
                     <p>아이디</p>
                     <p>성별</p>
-                    <p>생년월일</p> 
+                    <p>생년월일</p>
                 </div>
                 <div>
-                    <!-- <p class="username">{{ user.phone }}</p> -->
                     <p class="username">{{ user.userId }}</p>
-                    <p class="username">{{ user.gender }}</p>
-                    <p class="username">{{ user.birth }}</p>
+                    <p class="username">{{ user.gender === "M" ? "남" : "여" }}</p>
+                    <p class="username">{{ user.birthday }}</p>
                 </div>
             </div>
         </div>
     </div>
-</template> 
+</template>
 
 
 
 <script>
+import Follow from "@/api/Follow"
 import GoBack from "@/components/GoBack.vue"
 
 export default {
@@ -41,15 +40,21 @@ export default {
     },
     data() {
         return {
-            user: {
-                id: 1,
-                username: "김범준",
-                imgUrl: '../../img/accessories-8826708_640.jpg',
-                userId: "gcon1945",
-                gender: "남",
-                birth:"1995.12.05"
-            },
+            user: {},
         }
+    },
+    methods: {
+        async getFollowReqDetail(id) {
+            try {
+                const response = await Follow.getFollowReqDetail(id)
+                this.user = response.data;
+            } catch (error) {
+                console.log("요청 보호자 상세보기 실패", error);
+            }
+        },
+    },
+    async mounted() {
+        await this.getFollowReqDetail(this.$route.params.id);
     }
 }
 </script>

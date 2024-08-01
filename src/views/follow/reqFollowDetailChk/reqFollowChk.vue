@@ -20,7 +20,7 @@
             <button @click="accept">수락하기</button>
             <button @click="reject">거절하기</button>
             <button>
-                <RouterLink :to="`/follow/followDetail/${user.id}`">
+                <RouterLink :to="`/follow/followDetail/${user.userSid}`">
                     정보보기
                 </RouterLink>
             </button>
@@ -29,24 +29,51 @@
 </template>
 
 <script>
+import Follow from "@/api/Follow"
+
 export default {
     name: "reqFollowChk",
     data() {
         return {
-            user: {
-                id: 2,
-                name: "김범준",
-                imgUrl: ""
-            }
+            user: {}
         }
     },
     methods: {
+        async getFollowReqDetail(id) {
+            try {
+                const response = await Follow.getFollowReqDetail(id)
+                this.user = response.data;
+            } catch (error) {
+                console.log("요청 보호자 상세보기 실패", error);
+            }
+        },
         async accept() {
-            // 수락 로직
+            try {
+                const data = {
+                    guardianSid: this.$route.params.id,
+                }
+                const response = await Follow.followReqAccept(data)
+                console.log("수락하기 성공", response);
+                this.$router.push("/follow/followList");
+            } catch (error) {
+                console.log("수락하기 실패", error);
+            }
         },
         async reject() {
-            // 거절 로직
+            try {
+                const data = {
+                    guardianSid: this.$route.params.id,
+                }
+                const response = await Follow.followReqDel(data)
+                console.log("거절하기 성공", response.data);
+                this.$router.push("/follow/reqFollowList");
+            } catch (error) {
+                console.log("거절하기 실패", error);
+            }
         },
+    },
+    async mounted() {
+        await this.getFollowReqDetail(this.$route.params.id);
     }
 }
 </script>

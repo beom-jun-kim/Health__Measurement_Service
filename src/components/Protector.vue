@@ -1,5 +1,5 @@
 <template>
-    <div class="list-box" v-for="(user, index) in userList" :key="index">
+    <div v-if="userList.length > 0" class="list-box" v-for="(user, index) in userList" :key="index">
         <div class="list-box-wrap">
             <div v-if="user.imgUrl" class="user-img-box">
                 <div class="user-profile" :style="{ backgroundImage: `url(${user.imgUrl})` }"></div>
@@ -16,25 +16,18 @@
             <button class="del-btn" @click="delFollow">삭제</button>
         </div>
     </div>
+    <div v-else class="not-list">
+        <p style="text-align: center;">나의 보호인이 등록되어 있지 않습니다.</p>
+    </div>
 </template>
 
 <script>
+
 export default {
     name: "GuardianList",
     data() {
         return {
-            userList: [
-                {
-                    id: 4,
-                    username: "최기철",
-                    imgUrl: '',
-                },
-                {
-                    id: 5,
-                    username: "박지훈",
-                    imgUrl: '../img/accessories-8826708_640.jpg',
-                },
-            ],
+            userList: [],
         }
     },
     methods: {
@@ -109,5 +102,10 @@ export default {
 
 .del-btn {
     background: var(--input-border-color);
+}
+
+.not-list {
+    background: #ebebeb;
+    padding: 10px 0;
 }
 </style>

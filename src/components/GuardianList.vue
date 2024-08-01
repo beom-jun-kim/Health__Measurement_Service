@@ -1,5 +1,5 @@
 <template>
-    <div class="list-box" v-for="(user, index) in userList" :key="index">
+    <div v-if="userList.length > 0" class="list-box" v-for="(user, index) in userList" :key="index">
         <div class="list-box-wrap">
             <div v-if="user.imgUrl" class="user-img-box">
                 <div class="user-profile" :style="{ backgroundImage: `url(${user.imgUrl})` }"></div>
@@ -16,30 +16,20 @@
             <button class="del-btn" @click="delFollow">삭제</button>
         </div>
     </div>
+    <div v-else class="not-list">
+        <p style="text-align: center;">나의 보호자가 등록되어 있지 않습니다.</p>
+    </div>
 </template>
 
 <script>
+import Follow from '@/api/Follow';
+
 export default {
     name: "GuardianList",
     data() {
         return {
-            userList: [
-                {
-                    id: 1,
-                    username: "김범준",
-                    imgUrl: '../img/accessories-8826708_640.jpg',
-                },
-                {
-                    id: 2,
-                    username: "최지콘",
-                    imgUrl: "",
-                },
-                {
-                    id: 3,
-                    username: "박메라",
-                    imgUrl: "",
-                },
-            ],
+            userList: [],
+            user: {},
         }
     },
     methods: {
@@ -52,6 +42,17 @@ export default {
                 }
             }
         },
+        async getFollowList() {
+            try {
+                const response = await Follow.getFollowGList();
+                console.log("보호자 리스트 조회 성공", response);
+            } catch (error) {
+                console.log("보호자 리스트 조회실패", error);
+            }
+        },
+    },
+    async mounted() {
+        await this.getFollowList();
     }
 }
 </script>
@@ -114,5 +115,10 @@ export default {
 
 .del-btn {
     background: var(--input-border-color);
+}
+
+.not-list {
+    background: #ebebeb;
+    padding: 10px 0;
 }
 </style>

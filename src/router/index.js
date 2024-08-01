@@ -107,7 +107,8 @@ const router = createRouter({
     {
       path: '/follow/reqFollowDetailChk/:id',
       name: 'reqFollowChk',
-      component: () => import('../views/follow/reqFollowDetailChk/reqFollowChk.vue')
+      component: () => import('../views/follow/reqFollowDetailChk/reqFollowChk.vue'),
+      props: true
     }
   ]
 })
