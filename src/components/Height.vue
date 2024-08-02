@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import UserDataService from "@/api/UserDataService";
+
 export default {
     name: 'Height',
     data() {
@@ -44,18 +46,19 @@ export default {
         };
     },
     methods: {
-        bodyInfoSave() {
+        async bodyInfoSave() {
             if (this.selectedHeight === null) {
                 alert("키를 입력하여 주세요");
             } else if (this.selectedweight === null) {
                 alert("몸무게를 입력하여 주세요");
             } else {
                 try {
-                    // 몸무게 , 키 저장 로직
-                    this.$emit('save-body-info', {
+                    const data = {
                         height: this.selectedHeight,
                         weight: this.selectedweight,
-                    });
+                    }
+                    await UserDataService.editUserInfo(data);
+                    this.$emit('save-body-info', { data });
                     alert("키와 몸무게는 '내정보 > 내정보 변경하기'에서 수정할 수 있습니다");
                 } catch (error) {
                     console.log("키, 몸무게 저장실패", error);

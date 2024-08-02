@@ -24,10 +24,11 @@
       <h2>가장 가까운 거리순</h2>
       <ul>
         <li v-for="(location, index) in sortedLocations" :key="index">
-          <a :href="`https://map.naver.com/v5/search/${encodeURIComponent(location.address)}`">
+          <a :href="`https://map.naver.com/v5/search/${encodeURIComponent(location.roadAddress)}`">
             <div class="location-text">
               <span>
-                {{ location.address.length > 17 ? `${location.address.slice(0, 17)}...` : location.address }}
+                {{ location.roadAddress.length > 17 ? `${location.roadAddress.slice(0, 17)}...` : location.roadAddress
+                }}
               </span>
               <span>
                 {{ formatDistance(location.distance) }} km
@@ -73,12 +74,7 @@ export default {
       map: null,
       markers: [],
       container: [],
-      locations: [
-        { lat: 35.876083, lng: 128.596031, address: '대구 광역시 중구 동성로 2가 1' },
-        { lat: 37.458666, lng: 126.4419679, address: '인천광역시 서구 경서동 120-1' },
-        { lat: 35.1728688, lng: 128.9471783, address: '경상남도 창원시 마산합포구 창포동2가 30-1' },
-        { lat: 35.1689218, lng: 129.1296311, address: '부산광역시 해운대구 중동 1392-102' },
-      ],
+      locations: [],
       sortedLocations: [],
     };
   },
@@ -383,7 +379,7 @@ export default {
     updateMap(latitude, longitude) {
       this.markers.forEach(marker => marker.setMap(null));
       this.markers = [];
-      
+
       const position = new naver.maps.LatLng(latitude, longitude);
       this.map.setCenter(position);
       this.map.setZoom(15);
@@ -394,30 +390,36 @@ export default {
       });
       this.markers.push(marker);
     },
-    placeMarkers() {
-      this.locations.forEach(location => {
-        const marker = new naver.maps.Marker({
-          position: new naver.maps.LatLng(location.lat, location.lng),
-          map: this.map,
-          icon: {
-            url: './img/app_logo_04.png',
-            size: new naver.maps.Size(55, 53),
-          }
+    async placeMarkers() {
+      try {
+        const response = await Map.containerInfo();
+        this.locations = response.data;
+        this.locations.forEach(location => {
+          const marker = new naver.maps.Marker({
+            position: new naver.maps.LatLng(location.latitude, location.longitude),
+            map: this.map,
+            icon: {
+              url: './img/app_logo_04.png',
+              size: new naver.maps.Size(55, 53),
+            }
+          });
+          const infowindow = new naver.maps.InfoWindow({
+            content: `<div style="padding:10px;"><a href="https://map.naver.com/v5/search/${encodeURIComponent(location.roadAddress)}" style="color: rgb(0, 104, 195);">${location.roadAddress}</a></div>`,
+            borderWidth: 0,
+            disableAnchor: true,
+          });
+          naver.maps.Event.addListener(marker, 'click', () => {
+            if (infowindow.getMap()) {
+              infowindow.close();
+            } else {
+              infowindow.open(this.map, marker);
+            }
+          });
+          this.container.push(marker);
         });
-        const infowindow = new naver.maps.InfoWindow({
-          content: `<div style="padding:10px;"><a href="https://map.naver.com/v5/search/${encodeURIComponent(location.address)}" style="color: rgb(0, 104, 195);">${location.address}</a></div>`,
-          borderWidth: 0,
-          disableAnchor: true,
-        });
-        naver.maps.Event.addListener(marker, 'click', () => {
-          if (infowindow.getMap()) {
-            infowindow.close();
-          } else {
-            infowindow.open(this.map, marker);
-          }
-        });
-        this.container.push(marker);
-      });
+      } catch (error) {
+        console.log("컨테이너 위치 조회 실패", error);
+      }
     },
     sortLocationsByDistance(lat, lng) {
       const calculateDistance = (lat1, lng1, lat2, lng2) => {
@@ -435,18 +437,19 @@ export default {
       this.sortedLocations = this.locations.map(location => {
         return {
           ...location,
-          distance: calculateDistance(lat, lng, location.lat, location.lng)
+          distance: calculateDistance(lat, lng, location.latitude, location.longitude)
         };
       }).sort((a, b) => a.distance - b.distance);
     },
     formatDistance(distance) {
       const formattedDistance = distance.toFixed(2);
-      return parseFloat(formattedDistance) % 1 === 0 ? parseInt(formattedDistance) : formattedDistance;
-    }
+      const result = parseFloat(formattedDistance) % 1 === 0 ? parseInt(formattedDistance) : formattedDistance;
+      return result;
+    },
   },
-  mounted() {
+  async mounted() {
     this.map = new naver.maps.Map('map', this.placeMarkers());
-    this.placeMarkers();
+    await this.placeMarkers();
   }
 };
 </script>
