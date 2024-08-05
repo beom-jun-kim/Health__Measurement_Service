@@ -6,7 +6,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/login/loginChk'
+      redirect: '/home'
     },
     {
       path: '/login/userLogin',
@@ -113,18 +113,36 @@ const router = createRouter({
   ]
 })
 
-// router.beforeEach(async (to, from, next) => {
-//   try {
-//     const response = await UserDataService.userLoginInfo(id)
-//     if (response.data.id !== null) {
-//       next({ path: '/home' })
-//     } else {
-//       next()
-//     }
-//   } catch (error) {
-//     console.error('경로이동 실패:', error)
-//     next()
-//   }
-// })
+router.beforeEach(async (to, from, next) => {
+  try {
+    const response = await UserDataService.getUserInfo()
+    if (response.data.userSid !== null) {
+      if (
+        to.path === '/login/loginChk' ||
+        to.path === '/login/userLogin' ||
+        to.path === '/user/userIdFind' ||
+        to.path === '/signup/signupView'
+      ) {
+        next({ path: '/home' })
+      } else {
+        next()
+      }
+    } else {
+      if (
+        to.path !== '/login/loginChk' &&
+        to.path !== '/login/userLogin' &&
+        to.path !== '/user/userIdFind' &&
+        to.path !== '/signup/signupView'
+      ) {
+        next({ path: '/login/loginChk' })
+      } else {
+        next()
+      }
+    }
+  } catch (error) {
+    console.error('경로 이동 실패:', error)
+    next()
+  }
+})
 
 export default router

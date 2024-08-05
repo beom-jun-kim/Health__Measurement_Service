@@ -27,9 +27,17 @@ class UserDataService {
   async editUserInfo(data) {
     return await http.patch('/user/info', data)
   }
-
   async deleteUser() {
     return await http.delete('/user')
+  }
+  async findIdSmsVerification(data) {
+    return await http.post('/user/verification', data)
+  }
+  async getfindId(username, userPhoneNum) {
+    return await http.get(`/user/id?name=${username}&phoneNumber=${userPhoneNum}`)
+  }
+  async postUserPw(data) {
+    return await http.patch('/user/password', data)
   }
 }
 

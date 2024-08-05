@@ -14,5 +14,20 @@ const service = axios.create({
   },
 });
 
+// service.interceptors.request.use(
+//   (config) => {
+//     const user = localStorage.getItem("user");
+//     const userData = JSON.parse(user);
+
+//     if (userData && userData.accessToken) {
+//       // accessToken만을 헤더에 추가
+//       config.headers["Authorization"] = `Bearer ${userData.accessToken}`;
+//     }
+//     return config;
+//   },
+//   (error) => {
+//     Promise.reject(error);
+//   }
+// );
 
 export default service;
