@@ -116,7 +116,6 @@ export default {
     font-size: var(--font-n-size);
     color: #fff;
     background-color: var(--main-color);
-    cursor: pointer;
     margin-bottom: 20px;
 }
 

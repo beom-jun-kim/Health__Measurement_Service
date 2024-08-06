@@ -67,12 +67,6 @@ import UserDataService from '@/api/UserDataService';
 
 export default {
     name: 'SignupView',
-    // props: {
-    //     userType: {
-    //         type: String,
-    //         required: true,
-    //     }
-    // },
     data() {
         return {
             currentYear: new Date().getFullYear(),
