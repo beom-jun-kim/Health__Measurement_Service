@@ -19,7 +19,7 @@
       </div>
       <button type="submit" class="search-button" @click="getGeocode">검색하기</button>
     </form>
-    <div id="map" style="width: 100%; height: 400px"></div>
+    <div id="map" style="width: 100%; height: 300px"></div>
     <div class="g-con-list" v-if="sortedLocations.length > 0">
       <h2>가장 가까운 거리순</h2>
       <ul>

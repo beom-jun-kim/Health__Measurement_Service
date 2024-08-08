@@ -137,11 +137,11 @@ router.beforeEach(async (to, from, next) => {
   const authRequired = !publicPages.includes(to.path)
 
   if (authRequired && !isAuthenticated) {
-    return next('/login/userLogin')
+    return next({ path: '/login/userLogin' })
   }
 
   if (!authRequired && isAuthenticated) {
-    return next('/home')
+    return next({ path: '/home' })
   }
 
   next()

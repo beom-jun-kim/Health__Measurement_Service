@@ -54,7 +54,7 @@ export default {
 .home-header {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 .notification-icon {
@@ -64,21 +64,24 @@ export default {
 
 .welcome-section {
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .welcome-section img {
-    max-width: 100%;
+    max-width: 95%;
 }
 
 .home-text-user {
     font-size: var(--font-b-size);
     margin: 15px 0 10px;
     font-weight: var(--font-b-weight);
+    text-align: left;
 }
 
 .home-text {
-    font-size: var(--font-b-size);
+    font-size: var(--font-n-size);
     color: #666;
+    text-align: left;
 }
 
 .action-buttons {
@@ -109,7 +112,7 @@ export default {
     padding-bottom: 15px;
     line-height: 25px;
     flex: 1;
-    height: 200px;
+    height: 150px;
     font-size: var(--font-n-size);
     border-radius: 10px;
     color: #fff;

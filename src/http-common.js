@@ -14,16 +14,28 @@ const service = axios.create({
   }
 })
 
-// respone.data === "access token expired";
+const getNewAccessToken = async () => {
+  try {
+    const response = await axios.post(`${baseURL}/auth/refresh`, {}, { withCredentials: true })
+    const newAccessToken = response.data.accessToken
+    const tokenData = { accessToken: `Bearer ${newAccessToken}` } // Bearer 포함
+    localStorage.setItem('Authorization', JSON.stringify(tokenData))
+    return tokenData.accessToken
+  } catch (error) {
+    console.error('Failed to refresh access token', error)
+    throw error
+  }
+}
 
 // 로컬스토리지 조회 인터셉터
 service.interceptors.request.use(
   (config) => {
     const user = localStorage.getItem('Authorization')
-    const userData = JSON.parse(user)
-
-    if (userData && userData.accessToken) {
-      config.headers['Authorization'] = `${userData.accessToken}`
+    if (user) {
+      const userData = JSON.parse(user)
+      if (userData && userData.accessToken) {
+        config.headers['Authorization'] = userData.accessToken
+      }
     }
     return config
   },
@@ -37,7 +49,7 @@ service.interceptors.response.use(
   (response) => {
     const authHeader = response.headers['authorization'] || response.headers['Authorization']
     if (authHeader) {
-      const tokenData = { accessToken: authHeader.split(' ')[1] }
+      const tokenData = { accessToken: `Bearer ${authHeader.split(' ')[1]}` }
       localStorage.setItem('Authorization', JSON.stringify(tokenData))
     } else {
       console.warn('No Authorization header found in response')
@@ -45,16 +57,16 @@ service.interceptors.response.use(
     return response
   },
   async (error) => {
+    const originalRequest = error.config
     if (error.response.status === 401 || error.response.status === 403) {
+      originalRequest._retry = true
       try {
-        const response = await axios.post(`${baseURL}/auth/refresh`)
-        const newAccessToken = response.headers.authorization
-        const tokenData = { accessToken: newAccessToken }
-        localStorage.setItem('Authorization', JSON.stringify(tokenData))
-        return newAccessToken
-      } catch (refreshError) {
-        console.log('refreshError', refreshError)
-        return Promise.reject(refreshError)
+        const newAccessToken = await getNewAccessToken()
+        axios.defaults.headers.common['Authorization'] = newAccessToken
+        originalRequest.headers['Authorization'] = newAccessToken
+        return service(originalRequest)
+      } catch (err) {
+        return Promise.reject(err)
       }
     }
     return Promise.reject(error)
