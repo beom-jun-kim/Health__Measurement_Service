@@ -14,18 +14,6 @@ const service = axios.create({
   }
 })
 
-const getNewAccessToken = async () => {
-  try {
-    const response = await service.post('/auth/refresh')
-    const newAccessToken = response.data.accessToken
-    const tokenData = { accessToken: newAccessToken }
-    localStorage.setItem('Authorization', JSON.stringify(tokenData))
-    return newAccessToken
-  } catch (error) {
-    throw error
-  }
-}
-
 // respone.data === "access token expired";
 
 // 로컬스토리지 조회 인터셉터
@@ -35,7 +23,7 @@ service.interceptors.request.use(
     const userData = JSON.parse(user)
 
     if (userData && userData.accessToken) {
-      config.headers['Authorization'] = `Bearer ${userData.accessToken}`
+      config.headers['Authorization'] = `${userData.accessToken}`
     }
     return config
   },
@@ -56,7 +44,19 @@ service.interceptors.response.use(
     }
     return response
   },
-  (error) => {
+  async (error) => {
+    if (error.response.status === 401 || error.response.status === 403) {
+      try {
+        const response = await axios.post(`${baseURL}/auth/refresh`)
+        const newAccessToken = response.headers.authorization
+        const tokenData = { accessToken: newAccessToken }
+        localStorage.setItem('Authorization', JSON.stringify(tokenData))
+        return newAccessToken
+      } catch (refreshError) {
+        console.log('refreshError', refreshError)
+        return Promise.reject(refreshError)
+      }
+    }
     return Promise.reject(error)
   }
 )

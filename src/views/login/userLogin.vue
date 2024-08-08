@@ -58,7 +58,7 @@ export default {
         this.$router.push("/signup/welcome");
       } catch (error) {
         console.log("로그인실패", error);
-        if (error.response.data === "Invalid password" || error.response.data.includes("subject not found with userid")) {
+        if (error.response.status === 400) {
           alert("아이디 또는 비밀번호가 잘못되었습니다");
         }
       }

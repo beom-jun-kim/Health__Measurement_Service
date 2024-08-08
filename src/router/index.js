@@ -126,35 +126,25 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  try {
-    const response = await UserDataService.getUserInfo()
-    if (response.data.userSid !== null) {
-      if (
-        to.path === '/login/loginChk' ||
-        to.path === '/login/userLogin' ||
-        to.path === '/user/userIdFind' ||
-        to.path === '/signup/signupView'
-      ) {
-        next({ path: '/home' })
-      } else {
-        next()
-      }
-    } else {
-      if (
-        to.path !== '/login/loginChk' &&
-        to.path !== '/login/userLogin' &&
-        to.path !== '/user/userIdFind' &&
-        to.path !== '/signup/signupView'
-      ) {
-        next({ path: '/login/loginChk' })
-      } else {
-        next()
-      }
-    }
-  } catch (error) {
-    console.error('경로 이동 실패:', error)
-    next()
+  const isAuthenticated = localStorage.getItem('Authorization') !== null
+
+  const publicPages = [
+    '/login/userLogin',
+    '/login/loginChk',
+    '/user/userIdFind',
+    '/signup/signupView'
+  ]
+  const authRequired = !publicPages.includes(to.path)
+
+  if (authRequired && !isAuthenticated) {
+    return next('/login/userLogin')
   }
+
+  if (!authRequired && isAuthenticated) {
+    return next('/home')
+  }
+
+  next()
 })
 
 export default router
