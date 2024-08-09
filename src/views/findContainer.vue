@@ -455,6 +455,9 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  padding: 20px;
+}
 header {
   margin-bottom: 20px;
 }
