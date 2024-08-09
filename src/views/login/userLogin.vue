@@ -58,7 +58,7 @@ export default {
         this.$router.push("/signup/welcome");
       } catch (error) {
         console.log("로그인실패", error);
-        if (error.response.status === 400) {
+        if (error.response.status === 401 || error.response.status === 403) {
           alert("아이디 또는 비밀번호가 잘못되었습니다");
         }
       }

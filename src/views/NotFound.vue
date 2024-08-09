@@ -28,7 +28,7 @@ export default {
 }
 
 button {
-    width: 100%;
+    width: 60%;
     padding: 15px;
     border: none;
     border-radius: 5px;

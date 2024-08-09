@@ -14,28 +14,14 @@ const service = axios.create({
   }
 })
 
-const getNewAccessToken = async () => {
-  try {
-    const response = await axios.post(`${baseURL}/auth/refresh`, {}, { withCredentials: true })
-    const newAccessToken = response.data.accessToken
-    const tokenData = { accessToken: `Bearer ${newAccessToken}` } // Bearer 포함
-    localStorage.setItem('Authorization', JSON.stringify(tokenData))
-    return tokenData.accessToken
-  } catch (error) {
-    console.error('Failed to refresh access token', error)
-    throw error
-  }
-}
-
 // 로컬스토리지 조회 인터셉터
 service.interceptors.request.use(
   (config) => {
     const user = localStorage.getItem('Authorization')
-    if (user) {
-      const userData = JSON.parse(user)
-      if (userData && userData.accessToken) {
-        config.headers['Authorization'] = userData.accessToken
-      }
+    const userData = JSON.parse(user)
+
+    if (userData && userData.accessToken) {
+      config.headers['Authorization'] = `${userData.accessToken}`
     }
     return config
   },
@@ -49,7 +35,7 @@ service.interceptors.response.use(
   (response) => {
     const authHeader = response.headers['authorization'] || response.headers['Authorization']
     if (authHeader) {
-      const tokenData = { accessToken: `Bearer ${authHeader.split(' ')[1]}` }
+      const tokenData = { accessToken: authHeader }
       localStorage.setItem('Authorization', JSON.stringify(tokenData))
     } else {
       console.warn('No Authorization header found in response')
@@ -59,14 +45,19 @@ service.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config
     if (error.response.status === 401 || error.response.status === 403) {
-      originalRequest._retry = true
-      try {
-        const newAccessToken = await getNewAccessToken()
-        axios.defaults.headers.common['Authorization'] = newAccessToken
-        originalRequest.headers['Authorization'] = newAccessToken
-        return service(originalRequest)
-      } catch (err) {
-        return Promise.reject(err)
+      if (localStorage.getItem('Authorization') !== null) {
+        try {
+          const response = await axios.post(`${baseURL}/auth/refresh`)
+          const newAccessToken = response.headers.authorization
+          const tokenData = { accessToken: newAccessToken }
+          localStorage.setItem('Authorization', JSON.stringify(tokenData))
+          return service(originalRequest)
+        } catch (refreshError) {
+          localStorage.removeItem('Authorization')
+          await axios.post(`${baseURL}/auth/logout`)
+          window.location.href = '/login/userLogin'
+          return Promise.reject(refreshError)
+        }
       }
     }
     return Promise.reject(error)

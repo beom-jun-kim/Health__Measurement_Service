@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import UserDataService from '@/api/UserDataService'
 import Resize from '../views/Resize.vue'
 
 const router = createRouter({
@@ -142,6 +141,12 @@ router.beforeEach(async (to, from, next) => {
 
   if (!authRequired && isAuthenticated) {
     return next({ path: '/home' })
+  }
+
+  if (window.innerWidth > 800){
+    if (from.path === '/largeScreen') {
+      window.location.reload()
+    }
   }
 
   next()

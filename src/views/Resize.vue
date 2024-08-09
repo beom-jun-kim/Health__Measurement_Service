@@ -5,6 +5,7 @@
 </template>
 
 <script>
+
 export default {
     name: 'ResizeHandler',
     data() {
@@ -24,9 +25,9 @@ export default {
             if (window.innerWidth > this.maxWidth) {
                 this.$router.push('/largeScreen');
             } else {
-                return;
+                return
             }
-        }
+        },
     }
 };
 </script>

@@ -75,8 +75,8 @@ export default {
         },
         async logout() {
             try {
-                await UserDataService.logout();
                 alert("로그아웃 하시겠습니까?");
+                await UserDataService.logout();
                 localStorage.removeItem('Authorization');
                 this.$router.push("/login/userLogin");
             } catch (error) {

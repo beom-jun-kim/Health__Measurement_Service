@@ -1,7 +1,7 @@
 <template>
     <div class="width-container">
         <h1>화면 크기 초과</h1>
-        <p>화면의 크기가 너무 큽니다. 모바일로 확인하여주세요</p>
+        <p>화면의 크기가 너무 큽니다. <br>창 크기를 줄이시거나 모바일로 확인하여 주세요</p>
     </div>
 </template>
 
@@ -29,5 +29,16 @@ h1 {
 p {
     margin: 10px 0;
     font-size: var(--font-b-size);
+    word-break: keep-all;
+}
+
+button {
+    width: 60%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: var(--font-n-size);
+    color: #fff;
+    background-color: var(--main-color);
 }
 </style>
