@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <GoBack />
         <div class="tab-menu">
             <button :class="{ 'active-tab': currentComponent === 'FindId' }"
                 @click="updateState('FindId')">아이디찾기</button>
@@ -15,6 +16,7 @@
 <script>
 import FindId from "@/components/FindId.vue";
 import FindPassword from "@/components/FindPassword.vue";
+import GoBack from "@/components/GoBack.vue"
 
 export default {
     name: 'userIdFind',
@@ -26,6 +28,7 @@ export default {
     components: {
         FindId,
         FindPassword,
+        GoBack,
     },
     methods: {
         updateState(componentName) {
@@ -36,6 +39,9 @@ export default {
 </script>
 
 <style scoped>
+.container {
+    padding: 20px;
+}
 .tab-menu {
     width: 100%;
     display: flex;
@@ -52,6 +58,7 @@ export default {
     font-size: var(--font-n-size);
     border-bottom: 2px solid var(--input-border-color);
     word-break: keep-all;
+    white-space: nowrap;
 }
 
 .tab-menu .active-tab {

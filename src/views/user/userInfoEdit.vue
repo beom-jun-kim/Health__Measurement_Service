@@ -2,7 +2,7 @@
     <div class="myInfo-container margin-bottom">
         <GoBack />
         <div class="profile-section">
-            <label for="profile-img">
+            <!-- <label for="profile-img">
                 <div class="img-upload">
                     <div v-if="!imgPathUrl" class="null-img">
                         <span>+</span>
@@ -10,8 +10,8 @@
                     <div v-else class="v-img" :style="{ 'background-image': 'url(' + imgPathUrl + ')' }"></div>
                 </div>
             </label>
-            <input id="profile-img" type="file" class="profile-input" name="profile-img" accept="image/*">
-            <input type="text" class="value" name="username" v-model="user.name">
+            <input id="profile-img" type="file" class="profile-input" name="profile-img" accept="image/*"> -->
+            <input type="text" class="value" name="username" v-model="user.name" required>
             <p>G-CON 사용자</p>
             <div class="buttons">
                 <h1 class="info-button">내정보 변경하기</h1>
@@ -22,33 +22,36 @@
                 <h3>내 정보</h3>
                 <div class="info-item">
                     <span class="label">연락처</span>
-                    <input type="text" class="value" name="phoneNum" v-model="user.phoneNumber">
+                    <!-- <input type="text" class="value" name="phoneNum" v-model="user.phoneNumber"> -->
+                    <span>{{ user.phoneNumber }}</span>
                 </div>
                 <div class="info-item">
                     <span class="label">성별</span>
-                    <div class="gender-chk">
-                        <input type="radio" id="men" class="value" name="gender" value="M"v-model="user.gender">
+                    <span>{{ user.gender === 'M' ? '남자' : '여자' }}</span>
+                    <!-- <div class="gender-chk">
+                        <input type="radio" id="men" class="value" name="gender" value="M" v-model="user.gender">
                         <label for="men">남</label>
-    
+
                         <input type="radio" id="woman" class="value" name="gender" value="F" v-model="user.gender">
                         <label for="woman">여</label>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="info-item">
                     <span class="label">생년월일</span>
-                    <input type="text" class="value" name="birth" v-model="user.birthday">
+                    <span>{{ user.birthday }}</span>
+                    <!-- <input type="text" class="value" name="birth" v-model="user.birthday"> -->
                 </div>
                 <div class="info-item">
                     <span class="label">키</span>
                     <div class="info-item-box">
-                        <input type="text" class="value" name="height" v-model="user.height">
+                        <input type="text" class="value" name="height" v-model="user.height" required>
                         <span class="height">cm</span>
                     </div>
                 </div>
                 <div class="info-item">
                     <span class="label">체중</span>
                     <div class="info-item-box">
-                        <input type="text" class="value" name="weight" v-model="user.weight">
+                        <input type="text" class="value" name="weight" v-model="user.weight" required>
                         <span class="weight">kg</span>
                     </div>
                 </div>
@@ -77,23 +80,31 @@ export default {
             this.$router.go(-1);
         },
         async editSave() {
-            if (confirm("수정하시겠습니까?")) {
-                try {
-                    const data = {
-                        name: this.user.name,
-                        gender: this.user.gender,
-                        birthday: this.user.birthday,
-                        phoneNumber: this.user.phoneNumber,
-                        height: this.user.height,
-                        weight: this.user.weight,
+            const height = Number(this.user.height);
+            const weight = Number(this.user.weight);
+
+            if (isNaN(height) || isNaN(weight)) {
+                alert("키와 체중은 숫자를 입력하여 주세요");
+            } else {
+                if (confirm("수정하시겠습니까?")) {
+                    try {
+                        const data = {
+                            name: this.user.name,
+                            gender: this.user.gender,
+                            birthday: this.user.birthday,
+                            phoneNumber: this.user.phoneNumber,
+                            height: this.user.height,
+                            weight: this.user.weight,
+                        }
+                        await UserDataService.editUserInfo(data);
+                        alert("수정되었습니다");
+                        this.$router.push("/user/myInfo");
+                    } catch (error) {
+                        console.log("수정실패", error);
                     }
-                    await UserDataService.editUserInfo(data);
-                    alert("수정되었습니다");
-                    this.$router.push("/user/myInfo");
-                } catch (error) {
-                    console.log("수정실패", error);
                 }
             }
+
         },
         async getUserInfo() {
             try {
@@ -221,10 +232,11 @@ input {
 
 input[class="value"] {
     padding: 10px 5px;
+    text-align: right;
 }
 
 input[name="username"] {
-    margin: 15px 0;
+    margin: 0 0 15px;
     text-align: center;
 }
 

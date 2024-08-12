@@ -1,16 +1,18 @@
 <template>
     <div v-if="userList.length > 0" class="list-box" v-for="(user, index) in userList" :key="index">
-        <div class="list-box-wrap">
-            <div v-if="user.imgUrl" class="user-img-box">
-                <div class="user-profile" :style="{ backgroundImage: `url(${user.imgUrl})` }"></div>
+        <RouterLink :to="`/follow/followDetail/${user.userSid}`">
+            <div class="list-box-wrap">
+                <!-- <div v-if="user.imgUrl" class="user-img-box">
+                    <div class="user-profile" :style="{ backgroundImage: `url(${user.imgUrl})` }"></div>
+                </div>
+                <div v-else class="user-img-box">
+                    <div class="user-not-profile"></div>
+                </div> -->
+                <span class="username">{{ user.name }}</span>
             </div>
-            <div v-else class="user-img-box">
-                <div class="user-not-profile"></div>
-            </div>
-            <span class="username">{{ user.name }}</span>
-        </div>
+        </RouterLink>
         <div class="list-box-wrap">
-            <RouterLink :to="`/follow/followDetail/${user.userSid}`">
+            <RouterLink :to="`/user/reportList/${user.userSid}`">
                 <button class="follow-detail-btn">상세보기</button>
             </RouterLink>
             <button class="del-btn" @click="delFollow(user.userSid)">삭제</button>

@@ -6,12 +6,12 @@
         </div>
         <div v-if="userList.length > 0" class="list-box" v-for="(user, index) in userList" :key="index">
             <div class="list-box-wrap">
-                <div v-if="user.imgUrl" class="user-img-box">
+                <!-- <div v-if="user.imgUrl" class="user-img-box">
                     <div class="user-profile" :style="{ backgroundImage: `url(${user.imgUrl})` }"></div>
                 </div>
                 <div v-else class="user-img-box">
                     <div class="user-not-profile"></div>
-                </div>
+                </div> -->
                 <span class="username">{{ user.name }}</span>
             </div>
             <div class="list-box-wrap">

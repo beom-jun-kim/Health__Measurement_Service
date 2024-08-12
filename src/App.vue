@@ -10,14 +10,14 @@
           </div>
           <span>Home</span>
         </RouterLink>
-        <RouterLink to="/user/report" :class="{ active: isActive(['/user/report']).value }">
+        <RouterLink :to="`/user/reportList/${user.userSid}`" :class="{ active: isActive(['/user/report']).value }">
           <div class="bottom-bar-img">
             <img src="@/assets/img/bottom_menu_02.png" alt="">
           </div>
           <span>측정기록</span>
         </RouterLink>
         <RouterLink to="/follow/followList"
-          :class="{ active: isActive(['/follow/followList', '/follow/addFollow', '/follow/followDetail','/follow/reqFollowList','/follow/reqFollowDetailChk']).value }">
+          :class="{ active: isActive(['/follow/followList', '/follow/addFollow', '/follow/followDetail', '/follow/reqFollowList', '/follow/reqFollowDetailChk']).value }">
           <div class="bottom-bar-img">
             <img src="@/assets/img/bottom_menu_05.png" alt="">
           </div>
@@ -52,6 +52,33 @@ const isActive = (paths) => {
   return computedValue;
 };
 
+</script>
+
+<script>
+import UserDataService from "@/api/UserDataService"
+
+export default {
+  name: "App",
+  data() {
+    return {
+      user: {},
+    }
+  },
+  methods: {
+    async getUserInfo() {
+      try {
+        const response = await UserDataService.getUserInfo();        
+        this.user = response.data;
+      } catch (error) {
+        console.log("유저조회 실패", error);
+      }
+
+    }
+  },
+  async mounted() {
+    await this.getUserInfo();
+  }
+}
 </script>
 
 <style scoped>

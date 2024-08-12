@@ -12,7 +12,7 @@
             <RouterLink to="/signup/qr">
                 <button class="qr-button">MY 건강 Data<br>측정하기<br>(QR 코드 생성)</button>
             </RouterLink>
-            <RouterLink to="/user/report">
+            <RouterLink :to="`/user/reportList/${user.userSid}`">
                 <button class="chk-button">측정기록<br>확인하기</button>
             </RouterLink>
         </div>
@@ -34,7 +34,6 @@ export default {
             try {
                 const response = await UserDataService.getUserInfo();
                 this.user = response.data;
-
             } catch (error) {
                 console.log("유저조회 실패", error);
             }

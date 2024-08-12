@@ -3,12 +3,12 @@
         <GoBack />
         <div class="profile-section">
             <div class="profile-image">
-                <div v-if="user.imgUrl" class="user-img-box">
+                <!-- <div v-if="user.imgUrl" class="user-img-box">
                     <div class="user-profile" :style="{ backgroundImage: `url(${user.imgUrl})` }"></div>
                 </div>
                 <div v-else class="user-img-box">
                     <div class="user-not-profile"></div>
-                </div>
+                </div> -->
             </div>
             <h2>{{ user.name }}</h2>
             <p>G-CON 사용자</p>
@@ -27,7 +27,7 @@
             </div>
             <div class="info-item">
                 <span class="label">성별</span>
-                <span class="value">{{ user.gender === "M" ? "남" : "여" }}</span>
+                <span class="value">{{ user.gender === "M" ? "남자" : "여자" }}</span>
             </div>
             <div class="info-item">
                 <span class="label">생년월일</span>
@@ -134,7 +134,7 @@ export default {
 }
 
 .profile-section h2 {
-    margin: 10px 0 5px;
+    margin: 0 0 10px;
 }
 
 .profile-section p {

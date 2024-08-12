@@ -59,9 +59,9 @@ const router = createRouter({
           component: () => import('../views/user/mypage.vue')
         },
         {
-          path: '/user/report',
+          path: '/user/reportList/:id',
           name: 'report',
-          component: () => import('../views/user/report.vue')
+          component: () => import('../views/user/reportList/report.vue')
         },
         {
           path: '/user/report/:id',

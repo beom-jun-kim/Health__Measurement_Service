@@ -23,12 +23,12 @@
             </div>
             <div v-if="followIdBox" class="profile-box">
                 <div v-if="foundIdUser">
-                    <div class="user-img-box" v-if="foundIdUser.imgUrl">
+                    <!-- <div class="user-img-box" v-if="foundIdUser.imgUrl">
                         <div class="user-profile" :style="{ backgroundImage: `url(${foundIdUser.imgUrl})` }"></div>
                     </div>
                     <div v-else class="user-img-box">
                         <div class="user-not-profile"></div>
-                    </div>
+                    </div> -->
                     <p class="username">{{ foundIdUser.name }}</p>
                     <button v-if="foundIdUser.relationsStatus == null" class="req-follow"
                         @click="addRequest(foundIdUser.userSid)">친구 신청하기</button>
@@ -48,12 +48,12 @@
             </div>
             <div v-if="followPhoneBox" class="profile-box">
                 <div v-if="foundPhoneUser">
-                    <div class="user-img-box" v-if="foundPhoneUser.imgUrl">
+                    <!-- <div class="user-img-box" v-if="foundPhoneUser.imgUrl">
                         <div class="user-profile" :style="{ backgroundImage: `url(${foundPhoneUser.imgUrl})` }"></div>
                     </div>
                     <div v-else class="user-img-box">
                         <div class="user-not-profile"></div>
-                    </div>
+                    </div> -->
                     <p class="username">{{ foundPhoneUser.name }}</p>
                     <button v-if="foundPhoneUser.relationsStatus == null" class="req-follow"
                         @click="addPhoneRequest(foundPhoneUser.userSid)">친구 신청하기</button>
@@ -116,7 +116,7 @@ export default {
                     this.followPhoneBox = true;
                 }
             } catch (error) {
-                console.log("휴대전화로 찾기 실패",error);
+                console.log("휴대전화로 찾기 실패", error);
             }
         },
         // formatPhone(phone) {
@@ -222,6 +222,10 @@ export default {
     padding: 20px 0;
 }
 
+.profile-box .username {
+    font-size: var(--font-n-size);
+}
+
 .user-img-box {
     width: 70px;
     height: 70px;
@@ -249,7 +253,7 @@ export default {
     border: none;
     border-radius: 5px;
     padding: 5px 10px;
-    margin-top: 5px;
+    margin-top: 10px;
     color: #fff;
     letter-spacing: 1px;
     font-size: var(--font-n-sec-size);

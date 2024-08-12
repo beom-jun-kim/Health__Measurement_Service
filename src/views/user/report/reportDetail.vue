@@ -156,7 +156,7 @@ export default {
 
 <style scoped>
 .container {
-  padding: 20px;
+  padding: 20px 25px;
 }
 
 .total-title {

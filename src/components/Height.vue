@@ -139,4 +139,8 @@ export default {
 .submit-button:disabled {
     background-color: var(--input-border-color);
 }
+
+.logo {
+    margin-bottom: 35px;
+}
 </style>

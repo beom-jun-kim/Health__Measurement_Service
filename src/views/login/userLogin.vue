@@ -33,6 +33,12 @@
     <div class="links">
       <RouterLink to="/user/userIdFind">아이디 찾기</RouterLink> | <RouterLink to="/user/userIdFind">비밀번호 찾기</RouterLink>
     </div>
+    <div class="moveSignup">
+      <span>스마트 신발 회원이 아니신가요?</span>
+      <RouterLink to="/signup/signupView">
+        <span style="color: blue;">회원가입</span>
+      </RouterLink>
+    </div>
   </div>
 </template>
 
@@ -106,14 +112,28 @@ export default {
 .login-button {
   padding: 15px;
   margin-top: 10px;
-
   border: none;
   border-radius: 5px;
   font-size: var(--font-n-size);
   color: #fff;
   background-color: var(--main-color);
-  cursor: pointer;
 }
+
+/* .login-button:last-child {
+  width: 100%;
+  height: 56px;
+  position: relative;
+  text-align: center;
+  line-height: 53px;
+}
+
+.login-button:last-child a {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+} */
 
 .links {
   margin-top: 20px;
@@ -169,5 +189,11 @@ export default {
   left: 0;
   transform: translateY(-50%);
   z-index: 1;
+}
+.moveSignup {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
 }
 </style>

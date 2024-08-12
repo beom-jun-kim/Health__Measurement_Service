@@ -3,12 +3,12 @@
         <GoBack />
         <div class="detail-info">
             <div class="profile-box">
-                <div v-if="user.imgUrl" class="user-img-box">
+                <!-- <div v-if="user.imgUrl" class="user-img-box">
                     <div class="user-profile" :style="{ backgroundImage: `url(${user.imgUrl})` }"></div>
                 </div>
                 <div v-else class="user-img-box">
                     <div class="user-not-profile"></div>
-                </div>
+                </div> -->
                 <span class="username">{{ user.name }}</span>
             </div>
             <div class="user-info-box">
@@ -19,7 +19,7 @@
                 </div>
                 <div>
                     <p class="username">{{ user.userId }}</p>
-                    <p class="username">{{ user.gender === "M" ? "남" : "여" }}</p>
+                    <p class="username">{{ user.gender === "M" ? "남자" : "여자" }}</p>
                     <p class="username">{{ user.birthday }}</p>
                 </div>
             </div>

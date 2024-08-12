@@ -4,19 +4,26 @@
         <p class="form-text">회원가입시 입력하셨던 아이디와 이름, 휴대폰번호를 입력하세요.</p>
         <form class="find-password-form">
             <div class="input-group">
-                <input type="text" placeholder="아이디" v-model="form.userId" />
+                <input type="text" placeholder="아이디" v-model="form.userId" :disabled="verificationSent" />
             </div>
             <div class="input-group">
-                <input type="text" placeholder="이름" v-model="form.name" />
+                <input type="text" placeholder="이름" v-model="form.name" :disabled="verificationSent" />
             </div>
             <div class="input-group">
-                <input type="text" placeholder="휴대폰번호" v-model="form.phoneNumber" />
+                <input type="text" placeholder="휴대폰번호" v-model="form.phoneNumber" :disabled="verificationSent" />
             </div>
-            <button type="submit" class="send-code-button" @click="findPwSendVerificationCode">인증번호 발송</button>
+            <button v-if="verificationSent === false" type="submit" class="send-code-button"
+                @click="findPwSendVerificationCode">인증번호 발송</button>
+            <button v-if="verificationSent" type="submit" class="send-code-button" @click="findPwSendVerificationCode"
+                :disabled="isVerified">인증번호 재발송</button>
             <div class="input-group" v-if="verificationSent">
-                <label for="verification-code">인증번호</label>
+                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                    <label for="verification-code">인증번호</label>
+                    <span v-if="isTimerActive">남은 시간 : {{ formattedTime }}</span>
+                </div>
                 <input type="text" id="verification-code" name="verification-code" v-model="form.verificationCode">
-                <button type="button" class="send-code-button" @click="verifyCode">인증번호 확인</button>
+                <button :disabled="isVerified" type="button" class="send-code-button" @click="verifyCode">인증번호
+                    확인</button>
             </div>
             <div class="input-group" v-if="isVerified">
                 <label for="postPassword">비밀번호 입력하기</label>
@@ -47,6 +54,9 @@ export default {
             },
             verificationSent: false,
             isVerified: false,
+            timer: 0,
+            isTimerActive: false,
+            countdown: null,
         }
     },
     methods: {
@@ -60,6 +70,10 @@ export default {
                 }
                 await UserDataService.findIdSmsVerification(data);
                 this.verificationSent = true;
+                if (this.countdown) {
+                    clearInterval(this.countdown);
+                }
+                this.timerStartPassword();
                 alert("인증번호가 발송되었습니다");
             } catch (error) {
                 console.log("인증번호 발송실패", error.response.data.errorMessage)
@@ -76,6 +90,9 @@ export default {
                 }
                 await UserDataService.smsChk(data);
                 alert("인증번호가 확인되었습니다");
+                if (this.countdown) {
+                    clearInterval(this.countdown);
+                }
                 this.isVerified = true;
             } catch (error) {
                 console.log("인증번호 확인 실패", error);
@@ -96,13 +113,42 @@ export default {
                         }
                         await UserDataService.postUserPw(data)
                         alert("변경되었습니다");
+                        this.$router.push("/login/userLogin")
                     } catch (error) {
                         console.log("비밀번호 패치 실패", error);
                     }
                 }
             }
+        },
+        timerStartPassword() {
+            this.timer = 300;
+            this.isTimerActive = true;
+
+            this.countdown = setInterval(() => {
+                if (this.timer > 0) {
+                    this.timer--;
+                } else {
+                    clearInterval(this.countdown)
+                    this.isTimerActive = false;
+                    alert("인증번호가 만료되었습니다. 다시 인증번호를 요청해주세요.")
+                    this.isVerified = false;
+                    this.verificationSent = false;
+                }
+            }, 1000)
         }
-    }
+    },
+    computed: {
+        formattedTime() {
+            const minutes = Math.floor(this.timer / 60);
+            const seconds = this.timer % 60;
+            return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+    },
+    beforeUnmount() {
+        if (this.countdown) {
+            clearInterval(this.countdown);
+        }
+    },
 };
 </script>
 
@@ -137,6 +183,11 @@ export default {
     color: #fff;
     background-color: var(--main-color);
     margin-bottom: 20px;
+}
+
+.send-code-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
 
 input[id="verification-code"] {

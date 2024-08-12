@@ -8,24 +8,28 @@
         <form class="signup-form" @submit.prevent="userJoin">
             <div class="input-group">
                 <label for="username">아이디</label>
-                <input type="text" id="username" name="username" v-model="form.id">
-                <button type="button" class="signup-button" @click="idCheck(form.id)">중복확인</button>
+                <input type="text" id="username" name="username" v-model="form.id" required
+                    :disabled="verificationSent">
+                <button type="button" class="signup-button" :disabled="verificationSent"
+                    @click="idCheck(form.id)">중복확인</button>
             </div>
             <div class="input-group">
                 <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password" v-model="form.password">
+                <input type="password" id="password" name="password" v-model="form.password" required
+                    :disabled="verificationSent">
             </div>
             <div class="input-group">
                 <label for="password-confirm">비밀번호확인</label>
-                <input type="password" id="password-confirm" name="password-confirm" v-model="form.pwdChk">
+                <input type="password" id="password-confirm" name="password-confirm" v-model="form.pwdChk" required
+                    :disabled="verificationSent">
             </div>
             <div class="input-group">
                 <label for="name">이름</label>
-                <input type="text" id="name" name="name" v-model="form.username">
+                <input type="text" id="name" name="name" v-model="form.username" required :disabled="verificationSent">
             </div>
             <div class="input-group">
                 <label for="gender">성별</label>
-                <select id="gender" v-model="form.gender">
+                <select id="gender" v-model="form.gender" required :disabled="verificationSent">
                     <option value="M">남</option>
                     <option value="F">여</option>
                 </select>
@@ -33,15 +37,15 @@
             <div class="input-group">
                 <label for="birth">생년월일</label>
                 <div class="birth-select">
-                    <select id="year" v-model="form.birth">
+                    <select id="year" v-model="form.birth" required :disabled="verificationSent">
                         <option value="">년</option>
                         <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
                     </select>
-                    <select id="month" v-model="form.month">
+                    <select id="month" v-model="form.month" required :disabled="verificationSent">
                         <option value="">월</option>
                         <option v-for="month in months" :key="month" :value="month">{{ month }}</option>
                     </select>
-                    <select id="day" v-model="form.day">
+                    <select id="day" v-model="form.day" required :disabled="verificationSent">
                         <option value="">일</option>
                         <option v-for="day in days" :key="day" :value="day">{{ day }}</option>
                     </select>
@@ -49,13 +53,22 @@
             </div>
             <div class="input-group">
                 <label for="phone">전화번호 (-없이 입력)</label>
-                <input type="tel" id="phone" name="phone" v-model="form.phone">
-                <button type="button" class="signup-button" @click="sendVerificationCode">인증번호 발급</button>
+                <input type="tel" id="phone" name="phone" v-model="form.phone" required :disabled="isVerified">
+                <button v-if="verificationSent === false" type="button" class="signup-button"
+                    @click="sendVerificationCode">인증번호 발급</button>
+                <button v-if="verificationSent === true" type="button" class="signup-button"
+                    @click="sendVerificationCode" :disabled="isVerified">재발급</button>
             </div>
             <div class="input-group" v-if="verificationSent">
-                <label for="verification-code">인증번호</label>
-                <input type="text" id="verification-code" name="verification-code" v-model="form.verificationCode">
-                <button type="button" class="signup-button" @click="verifyCode">인증번호 확인</button>
+                <div style="display: flex; justify-content: space-between">
+                    <label for="verification-code">인증번호</label>
+                    <span v-if="isTimerActive" class="timer">
+                        남은 시간: {{ formattedTime }}
+                    </span>
+                </div>
+                <input type="text" id="verification-code" name="verification-code" v-model="form.verificationCode"
+                    required :disabled="isVerified">
+                <button type="button" class="signup-button" @click="verifyCode" :disabled="isVerified">인증번호 확인</button>
             </div>
             <button type="submit" class="signup-button" :disabled="!isVerified">회원가입</button>
         </form>
@@ -88,6 +101,9 @@ export default {
             verificationSent: false,
             isVerified: false,
             idChk: "",
+            timer: 0,
+            isTimerActive: false,
+            countdown: null,
         };
     },
     methods: {
@@ -128,32 +144,73 @@ export default {
             }
         },
         async sendVerificationCode() {
-            try {
-                const data = {
-                    phoneNumber: this.form.phone,
+            const phone = Number(this.form.phone);
+            if (isNaN(phone)) {
+                alert("숫자를 입력하여 주세요");
+            } else if (this.form.id === ""
+                || this.form.password === ""
+                || this.form.pwdChk === ""
+                || this.form.username === ""
+                || this.form.gender === ""
+                || this.form.birth === ""
+                || this.form.month === ""
+                || this.form.day === ""
+                || this.form.phone === "") {
+                alert("입력칸을 모두 입력하여주세요")
+            } else {
+                try {
+                    const data = {
+                        phoneNumber: this.form.phone,
+                    }
+                    await UserDataService.sms(data);
+                    this.verificationSent = true;
+                    if (this.countdown) {
+                        clearInterval(this.countdown);
+                    }
+                    this.startTimer();
+                    alert("인증번호가 발송되었습니다");
+                } catch (error) {
+                    console.log("인증번호 발급 실패", error);
                 }
-                await UserDataService.sms(data);
-                this.verificationSent = true;
-                alert("인증번호가 발송되었습니다");
-            } catch (error) {
-                console.log("인증번호 발급 실패", error);
             }
         },
         async verifyCode() {
-            try {
-                const data = {
-                    phoneNumber: this.form.phone,
-                    verificationCode: this.form.verificationCode
+            if (this.form.verificationCode === "") {
+                alert("인증번호를 입력하여 주세요")
+            } else {
+                try {
+                    const data = {
+                        phoneNumber: this.form.phone,
+                        verificationCode: this.form.verificationCode
+                    }
+                    await UserDataService.smsChk(data);
+                    this.isVerified = true;
+                    alert("인증번호가 확인되었습니다");
+                    if (this.countdown) {
+                        clearInterval(this.countdown);
+                    }
+                } catch (error) {
+                    console.log("인증번호 확인 실패", error);
+                    this.isVerified = false;
+                    alert("인증번호가 올바르지 않습니다");
                 }
-                await UserDataService.smsChk(data);
-                this.isVerified = true;
-                alert("인증번호가 확인되었습니다");
-            } catch (error) {
-                console.log("인증번호 확인 실패", error);
-                this.isVerified = false;
-                alert("인증번호가 올바르지 않습니다");
             }
-        }
+        },
+        startTimer() {
+            this.timer = 300;
+            this.isTimerActive = true;
+
+            this.countdown = setInterval(() => {
+                if (this.timer > 0) {
+                    this.timer--;
+                } else {
+                    clearInterval(this.countdown);
+                    this.isTimerActive = false;
+                    alert("인증 시간이 만료되었습니다. 다시 인증번호를 요청해주세요.");
+                    this.verificationSent = false;
+                }
+            }, 1000);
+        },
     },
     computed: {
         years() {
@@ -162,8 +219,18 @@ export default {
                 years.push(year);
             }
             return years;
+        },
+        formattedTime() {
+            const minutes = Math.floor(this.timer / 60);
+            const seconds = this.timer % 60;
+            return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         }
-    }
+    },
+    beforeUnmount() {
+        if (this.countdown) {
+            clearInterval(this.countdown);
+        }
+    },
 };
 </script>
 
@@ -228,7 +295,7 @@ export default {
     border-radius: 5px;
     font-size: 18px;
     color: #fff;
-    background-color: #00BFA5;
+    background-color: var(--main-color);
     cursor: pointer;
     text-align: center;
     font-weight: bold;
