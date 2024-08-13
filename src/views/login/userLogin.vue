@@ -44,6 +44,7 @@
 
 <script>
 import UserDataService from '@/api/UserDataService';
+import Cookies from 'js-cookie';
 
 const snsBaseURL =
   process.env.NODE_ENV === 'production'
@@ -56,6 +57,7 @@ export default {
     return {
       userId: "",
       password: "",
+      cookiesValus: "",
     }
   },
   methods: {
@@ -79,8 +81,8 @@ export default {
     },
     redirectToKakao() {
       window.location.href = `${snsBaseURL}/oauth2/authorization/kakao`;
-    }
-  }
+    },
+  },
 };
 </script>
 

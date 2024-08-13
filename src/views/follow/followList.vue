@@ -4,18 +4,18 @@
             <h2>친구리스트</h2>
             <div class="add-follow-icon">
                 <RouterLink to="/follow/addFollow">
-                    <div class="req-chk-icon">
+                    <!-- <div class="req-chk-icon"> -->
                         <button class="add-follow-btn">
                             추가하기
                         </button>
-                    </div>
+                    <!-- </div> -->
                 </RouterLink>
-                <RouterLink to="/follow/reqFollowList">
+                <!-- <RouterLink to="/follow/reqFollowList">
                     <img src="@/assets/img/alarm_mint.png" alt="친구리스트 알림 이미지">
                     <div v-if="addFollowIcon" class="new-icon-box">
                         <div class="new-icon">N</div>
                     </div>
-                </RouterLink>
+                </RouterLink> -->
             </div>
         </div>
         <div class="tab-menu">
@@ -121,22 +121,22 @@ export default {
     color: #111;
 }
 
-.add-follow-icon {
+/* .add-follow-icon {
     display: flex;
     align-items: center;
-}
+} */
 
-.add-follow-icon a:last-child {
+/* .add-follow-icon a:last-child {
     margin-left: 10px;
     width: 30px;
     transform: translateY(2px);
-}
+} */
 
-.req-chk-icon {
+/* .req-chk-icon {
     position: relative;
-}
+} */
 
-.new-icon-box {
+/* .new-icon-box {
     border: 1px solid red;
     border-radius: 50%;
     width: 16px;
@@ -151,5 +151,5 @@ export default {
     font-size: 11px;
     background: #fff;
     font-weight: var(--font-b-weight);
-}
+} */
 </style>

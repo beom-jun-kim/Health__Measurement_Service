@@ -1,7 +1,14 @@
 <template>
     <div class="home-container margin-bottom">
         <header class="home-header">
-            <img src="@/assets/img/icon_alarm.png" alt="Notification" class="notification-icon">
+            <RouterLink to="/notification/pushList">
+                <div class="new-push-box">
+                    <img src="@/assets/img/icon_alarm.png" alt="Notification" class="notification-icon">
+                    <div v-if="newPush" class="new-icon-box">
+                        <div class="new-icon">N</div>
+                    </div>
+                </div>
+            </RouterLink>
         </header>
         <div class="welcome-section">
             <img src="@/assets/img/img_main.png" alt="Health Illustration" class="illustration">
@@ -21,12 +28,14 @@
 
 <script>
 import UserDataService from '@/api/UserDataService';
+import Push from "@/api/Push";
 
 export default {
     name: 'home',
     data() {
         return {
-            user: {}
+            user: {},
+            newPush: false,
         }
     },
     methods: {
@@ -38,9 +47,19 @@ export default {
                 console.log("유저조회 실패", error);
             }
         },
+        async getReadNewPush() {
+            try {
+                const response = await Push.newPush()
+                this.newPush = response.data;
+                console.log("this.newPush", this.newPush);
+            } catch (error) {
+                console.log("새로운 알림 조회 실패", error);
+            }
+        },
     },
     async mounted() {
         await this.getMyInfo();
+        await this.getReadNewPush();
     }
 };
 </script>
@@ -57,8 +76,8 @@ export default {
 }
 
 .notification-icon {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
 }
 
 .welcome-section {
@@ -117,5 +136,23 @@ export default {
     color: #fff;
     font-weight: var(--font-b-weight);
     border: none;
+}
+
+.new-push-box {
+    position: relative;
+}
+
+.new-icon-box {
+    background: red;
+    text-align: center;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12px;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 </style>

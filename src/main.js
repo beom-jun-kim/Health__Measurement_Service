@@ -1,4 +1,3 @@
-
 import './assets/main.css'
 
 import { createApp } from 'vue'
@@ -8,6 +7,7 @@ import router from './router'
 const app = createApp(App)
 
 app.use(router)
+
 
 // 네이버 맵 스크립트 동적으로 추가
 const naverMapScript = document.createElement('script')
