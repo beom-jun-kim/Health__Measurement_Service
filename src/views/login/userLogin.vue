@@ -14,12 +14,12 @@
       <button type="submit" class="login-button">로그인</button>
     </form>
     <div class="sns-login">
-      <div class="sns-login-box">
+      <div class="sns-login-box" @click="redirectToNaver">
         <div class="sns-login-naver">
           <img src="@/assets/img/naver_login.png" alt="">
         </div>
       </div>
-      <div class="sns-login-box">
+      <div class="sns-login-box" @click="redirectToKakao">
         <div class="sns-login-kakao">
           <img src="@/assets/img/kakao_login.png" alt="">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 20 19">
@@ -45,6 +45,11 @@
 <script>
 import UserDataService from '@/api/UserDataService';
 
+const snsBaseURL =
+  process.env.NODE_ENV === 'production'
+    ? import.meta.env.VITE_APP_API_SNS_URL_PROD
+    : import.meta.env.VITE_APP_API_SNS_URL_LOCAL
+
 export default {
   name: 'userLogin',
   data() {
@@ -68,6 +73,12 @@ export default {
           alert("아이디 또는 비밀번호가 잘못되었습니다");
         }
       }
+    },
+    redirectToNaver() {
+      window.location.href = `${snsBaseURL}/oauth2/authorization/naver`;
+    },
+    redirectToKakao() {
+      window.location.href = `${snsBaseURL}/oauth2/authorization/kakao`;
     }
   }
 };
@@ -190,6 +201,7 @@ export default {
   transform: translateY(-50%);
   z-index: 1;
 }
+
 .moveSignup {
   display: flex;
   align-items: center;

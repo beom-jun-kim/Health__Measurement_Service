@@ -7,11 +7,15 @@
         </div>
         <form class="signup-form" @submit.prevent="userJoin">
             <div class="input-group">
-                <label for="username">아이디</label>
+                <div style="display: flex; justify-content: space-between">
+                    <label for="username">아이디</label>
+                    <span class="idChk" :class="{ 'red': idChk === true, 'blue': idChk === false }">{{ idChkText
+                        }}</span>
+                </div>
                 <input type="text" id="username" name="username" v-model="form.id" required
                     :disabled="verificationSent">
-                <button type="button" class="signup-button" :disabled="verificationSent"
-                    @click="idCheck(form.id)">중복확인</button>
+                <!-- <button type="button" class="signup-button" :disabled="verificationSent"
+                    @click="idCheck(form.id)">중복확인</button> -->
             </div>
             <div class="input-group">
                 <label for="password">비밀번호</label>
@@ -101,20 +105,29 @@ export default {
             verificationSent: false,
             isVerified: false,
             idChk: "",
+            idChkText: "",
             timer: 0,
             isTimerActive: false,
             countdown: null,
         };
     },
+    watch: {
+        'form.id'(newValue) {
+            this.idCheck(newValue)
+        }
+    },
     methods: {
         async idCheck(id) {
+            if (this.form.id === '') {
+                this.idChkText = '';
+            }
             try {
                 const response = await UserDataService.idChk(id);
-                this.idChk = response.data;
+                this.idChk = response.data.existsUser;
                 if (this.idChk === true) {
-                    alert("이미 존재하는 아이디가 있습니다");
+                    this.idChkText = '이미 존재하는 아이디가 있습니다'
                 } else {
-                    alert("사용 가능한 아이디 입니다");
+                    this.idChkText = '사용 가능한 아이디 입니다'
                 }
             } catch (error) {
                 console.log("아이디중복체크 실패", error);
@@ -235,10 +248,6 @@ export default {
 </script>
 
 <style scoped>
-/* form {
-    margin-bottom: 100px;
-} */
-
 .page-title {
     text-align: center;
     margin-bottom: 20px;
@@ -304,5 +313,13 @@ export default {
 .signup-button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
+}
+
+.idChk.red {
+    color: red;
+}
+
+.idChk.blue {
+    color: blue;
 }
 </style>
