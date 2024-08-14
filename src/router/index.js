@@ -141,8 +141,8 @@ router.beforeEach(async (to, from, next) => {
   ]
   const authRequired = !publicPages.includes(to.path)
 
-  if (authRequired && !isAuthenticated) {
-    return next({ path: '/login/userLogin' })
+  if(authRequired && !isAuthenticated && window.innerWidth < 800){
+    next({ path: '/login/userLogin' })
   }
 
   if (!authRequired && isAuthenticated) {
@@ -157,6 +157,5 @@ router.beforeEach(async (to, from, next) => {
 
   next()
 })
-
 
 export default router
