@@ -51,7 +51,6 @@ export default {
             try {
                 const response = await Push.newIconPush()
                 this.newPush = response.data.readCk;
-                console.log("this.newPush", this.newPush);
             } catch (error) {
                 console.log("새로운 알림 조회 실패", error);
             }

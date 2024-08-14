@@ -29,11 +29,10 @@ export default {
             } else if (currentWidth < this.maxWidth && this.previousWidth >= this.maxWidth) {
                 this.smallResizeWindow();
             }
-
             this.previousWidth = currentWidth;
         },
         smallResizeWindow() {
-            if(localStorage.getItem('Authorization') !== null){
+            if (localStorage.getItem('Authorization') !== null) {
                 this.$router.push('/home');
             } else {
                 this.$router.push('/login/userLogin');

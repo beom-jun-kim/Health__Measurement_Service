@@ -3,10 +3,12 @@ import './assets/main.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import VueCookies from 'vue3-cookies'
 
 const app = createApp(App)
 
 app.use(router)
+app.use(VueCookies);
 
 
 // 네이버 맵 스크립트 동적으로 추가

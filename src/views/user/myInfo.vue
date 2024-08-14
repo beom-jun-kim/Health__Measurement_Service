@@ -74,13 +74,14 @@ export default {
             this.$router.go(-1);
         },
         async logout() {
-            try {
-                alert("로그아웃 하시겠습니까?");
-                await UserDataService.logout();
-                localStorage.removeItem('Authorization');
-                this.$router.push("/login/userLogin");
-            } catch (error) {
-                console.log("로그아웃 실패", error);
+            if (confirm("로그아웃 하시겠습니까?")) {
+                try {
+                    await UserDataService.logout();
+                    localStorage.removeItem('Authorization');
+                    this.$router.push("/login/userLogin");
+                } catch (error) {
+                    console.log("로그아웃 실패", error);
+                }
             }
 
         },

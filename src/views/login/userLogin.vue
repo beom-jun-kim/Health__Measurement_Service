@@ -82,6 +82,15 @@ export default {
       window.location.href = `${snsBaseURL}/oauth2/authorization/kakao`;
     },
   },
+  async mounted() {
+    if (this.$route.query.socialLogin) {
+      const response = await UserDataService.refreshToken()
+      const newAccessToken = response.headers.authorization
+      const tokenData = { accessToken: newAccessToken }
+      localStorage.setItem('Authorization', JSON.stringify(tokenData))
+      window.location.href = '/home'
+    }
+  }
 };
 </script>
 

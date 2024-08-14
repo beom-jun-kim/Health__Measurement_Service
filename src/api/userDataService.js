@@ -39,6 +39,9 @@ class UserDataService {
   async postUserPw(data) {
     return await http.patch('/user/password', data)
   }
+  async refreshToken() {
+    return await http.post('/auth/refresh')
+  }
 }
 
 export default new UserDataService()

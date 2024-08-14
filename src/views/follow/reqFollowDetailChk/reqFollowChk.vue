@@ -48,26 +48,28 @@ export default {
             }
         },
         async accept() {
-            try {
-                const data = {
-                    guardianSid: this.$route.params.id,
+            if (confirm("수락하시겠습니까?")) {
+                try {
+                    const data = {
+                        guardianSid: this.$route.params.id,
+                    }
+                    await Follow.followReqAccept(data)
+                    alert("수락되었습니다");
+                    this.$router.push("/follow/followList");
+                } catch (error) {
+                    console.log("수락하기 실패", error);
                 }
-                await Follow.followReqAccept(data)
-                alert("수락하시겠습니까?");
-                alert("수락되었습니다");
-                this.$router.push("/follow/followList");
-            } catch (error) {
-                console.log("수락하기 실패", error);
             }
         },
         async reject() {
-            try {
-                await Follow.followReqDel(this.$route.params.id)
-                alert("거절하시겠습니까?");
-                alert("거절되었습니다");
-                this.$router.push("/follow/reqFollowList");
-            } catch (error) {
-                console.log("거절하기 실패", error);
+            if (confirm("거절하시겠습니까?")) {
+                try {
+                    await Follow.followReqDel(this.$route.params.id)
+                    alert("거절되었습니다");
+                    this.$router.push("/follow/reqFollowList");
+                } catch (error) {
+                    console.log("거절하기 실패", error);
+                }
             }
         },
     },

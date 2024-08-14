@@ -130,13 +130,6 @@ const router = createRouter({
   ]
 })
 
-// 쿠키 값을 읽어오는 유틸리티 함수
-function getCookie(name) {
-  const value = `; ${document.cookie}`
-  const parts = value.split(`; ${name}=`)
-  if (parts.length === 2) return parts.pop().split(';').shift()
-}
-
 router.beforeEach(async (to, from, next) => {
   const isAuthenticated = localStorage.getItem('Authorization') !== null
 
@@ -148,17 +141,9 @@ router.beforeEach(async (to, from, next) => {
   ]
   const authRequired = !publicPages.includes(to.path)
 
-  // // 쿠키에 refresh가 있는지 확인
-  // const hasRefreshCookie = getCookie('refresh') !== undefined
-
-  // // 로그인 페이지로 이동할 때 쿠키에 refresh가 있는 경우 home으로 리다이렉트
-  // if (to.path === '/login/userLogin' && hasRefreshCookie) {
-  //   return next({ path: '/home' })
-  // }
-
-  // if (authRequired && !isAuthenticated) {
-  //   return next({ path: '/login/userLogin' })
-  // }
+  if (authRequired && !isAuthenticated) {
+    return next({ path: '/login/userLogin' })
+  }
 
   if (!authRequired && isAuthenticated) {
     return next({ path: '/home' })
@@ -172,5 +157,6 @@ router.beforeEach(async (to, from, next) => {
 
   next()
 })
+
 
 export default router
