@@ -130,18 +130,16 @@ export default {
     padding: 20px;
 }
 
+.myInfo-container * {
+    font-size: var(--font-n-sec-size);
+
+}
+
 .header {
     width: 100%;
     display: flex;
     justify-content: flex-start;
     margin-bottom: 20px;
-}
-
-.back-button {
-    font-size: 30px;
-    border: none;
-    background: none;
-    cursor: pointer;
 }
 
 .profile-section {
@@ -207,8 +205,8 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
     border-bottom: 1px solid var(--input-border-color);
+    height: 60px;
 }
 
 .info-section .label {
@@ -231,7 +229,7 @@ input {
 }
 
 input[class="value"] {
-    padding: 10px 5px;
+    padding: 7px 5px;
     text-align: right;
 }
 
@@ -260,9 +258,10 @@ input[name="username"] {
     padding: 8px 20px;
     position: absolute;
     right: 0;
-    margin-top: 10px;
+    margin-top: 15px;
     font-weight: var(--font-b-weight);
     font-size: var(--font-n-sec-size);
+    border-radius: 5px;
 }
 
 .gender-chk label {

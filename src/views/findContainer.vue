@@ -2,20 +2,22 @@
   <div class="container">
     <header>
       <h1>가까운 컨테이너 찾기</h1>
-      <p>검색하시고자 하는 지역을 선택해주세요</p>
+      <!-- <p>검색하시고자 하는 지역을 선택해주세요</p> -->
     </header>
     <form class="search-form" @submit.prevent="searchAddress">
-      <div class="input-group">
-        <select v-model="selectedCity" @change="updateDistricts">
-          <option disabled value="">시/도 선택</option>
-          <option v-for="city in cities" :key="city">{{ city }}</option>
-        </select>
-      </div>
-      <div class="input-group">
-        <select v-model="selectedDistrict">
-          <option disabled value="">지역구 선택</option>
-          <option v-for="district in districts" :key="district">{{ district }}</option>
-        </select>
+      <div style="display: flex; justify-content: space-between; gap: 10px;">
+        <div class="input-group">
+          <select v-model="selectedCity" @change="updateDistricts">
+            <option disabled value="">시/도 선택</option>
+            <option v-for="city in cities" :key="city">{{ city }}</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <select v-model="selectedDistrict">
+            <option disabled value="">지역구 선택</option>
+            <option v-for="district in districts" :key="district">{{ district }}</option>
+          </select>
+        </div>
       </div>
       <button type="submit" class="search-button" @click="getGeocode">검색하기</button>
     </form>
@@ -459,7 +461,8 @@ export default {
   padding: 20px;
 }
 header {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 h1 {
@@ -479,6 +482,7 @@ p {
 
 .input-group {
   margin-bottom: 15px;
+  width: 50%;
 }
 
 select {
@@ -519,8 +523,8 @@ select {
 
 .g-con-list li {
   border-bottom: 1px solid var(--input-border-color);
-  height: 68px;
-  line-height: 68px;
+  height: 60px;
+  line-height: 60px;
 }
 
 .g-con-list li:last-child {

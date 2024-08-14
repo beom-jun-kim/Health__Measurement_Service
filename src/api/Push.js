@@ -1,11 +1,14 @@
 import http from '../http-common'
 
 class Push {
-  async newPush() {
-    return await http.get('/notifications/read')
+  async newPush(pushListId) {
+    return await http.patch('/notifications/read', pushListId)
   }
   async pushList() {
     return await http.get('/notifications/list')
+  }
+  async newIconPush() {
+    return await http.get('/notifications/readCheck')
   }
 }
 

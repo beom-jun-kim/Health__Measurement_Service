@@ -148,17 +148,17 @@ router.beforeEach(async (to, from, next) => {
   ]
   const authRequired = !publicPages.includes(to.path)
 
-  // 쿠키에 refresh가 있는지 확인
-  const hasRefreshCookie = getCookie('refresh') !== undefined
+  // // 쿠키에 refresh가 있는지 확인
+  // const hasRefreshCookie = getCookie('refresh') !== undefined
 
-  // 로그인 페이지로 이동할 때 쿠키에 refresh가 있는 경우 home으로 리다이렉트
-  if (to.path === '/login/userLogin' && hasRefreshCookie) {
-    return next({ path: '/home' })
-  }
+  // // 로그인 페이지로 이동할 때 쿠키에 refresh가 있는 경우 home으로 리다이렉트
+  // if (to.path === '/login/userLogin' && hasRefreshCookie) {
+  //   return next({ path: '/home' })
+  // }
 
-  if (authRequired && !isAuthenticated) {
-    return next({ path: '/login/userLogin' })
-  }
+  // if (authRequired && !isAuthenticated) {
+  //   return next({ path: '/login/userLogin' })
+  // }
 
   if (!authRequired && isAuthenticated) {
     return next({ path: '/home' })

@@ -2,7 +2,7 @@
     <div class="container">
         <GoBack />
         <RouterLink class="push-move" :to="push.categoryName" v-for="(push, index) in pushList" :key="index"
-            :class="{ 'unRead': push.readCk === false }">
+            :class="{ 'unRead': push.readCk === false }" @click="readChk(push.notificationSid)">
             <div class="push-list">
                 <div class="push-list-img">
                     <img src="@/assets/img/alarm_mint.png" alt="">
@@ -40,6 +40,18 @@ export default {
             } catch (error) {
                 console.log("알림 리스트 조회 실패", error);
             }
+        },
+        async readChk(pushListId) {
+            console.log("pushListId", pushListId);
+            try {
+                const data = {
+                    notificationSid: pushListId,
+                }
+                const response = await Push.newPush(data);
+                console.log("response", response);
+            } catch (error) {
+                console.log("읽음처리 실패", error);
+            }
         }
     },
     async mounted() {
@@ -71,10 +83,6 @@ export default {
     color: #5c5c5c;
 }
 
-.push-list.unRead {
-    background: #eeeeee85;
-}
-
 .push-move {
     width: 100%;
     padding: 0;
@@ -90,5 +98,4 @@ export default {
     bottom: 11px;
     color: #5c5c5c;
 } */
-
 </style>

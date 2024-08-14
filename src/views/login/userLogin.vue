@@ -44,7 +44,6 @@
 
 <script>
 import UserDataService from '@/api/UserDataService';
-import Cookies from 'js-cookie';
 
 const snsBaseURL =
   process.env.NODE_ENV === 'production'

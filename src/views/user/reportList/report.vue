@@ -1,7 +1,9 @@
 <template>
   <div class="report-container margin-bottom">
     <header>
-      <img src="@/assets/img/app_logo_02.png" alt="G-CON Logo" class="logo">
+      <div class="logo-box">
+        <img src="@/assets/img/app_logo_02.png" alt="G-CON Logo" class="logo">
+      </div>
       <h1>REPORT</h1>
       <p v-if="reportList.length > 0">지난측정과 오늘의 측정결과를 볼 수 있습니다.</p>
       <p v-else>측정된 데이터가 없습니다</p>
@@ -12,7 +14,7 @@
           <div class="report-date">{{ report.date }}</div>
           <div class="report-label">
             측정한 리포트
-            <span v-if="report.new" class="new-label">new</span>
+            <span v-if="report.new" class="new-label">NEW</span>
           </div>
         </RouterLink>
       </div>
@@ -57,7 +59,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 20px;
+  padding: 30px 20px;
 }
 
 .report-container header {
@@ -150,5 +152,13 @@ footer a.active {
 footer img {
   width: 24px;
   height: 24px;
+}
+
+.logo-box {
+  width: 150px;
+  margin: 0 auto;
+}
+.logo {
+  margin-bottom: 15px;
 }
 </style>

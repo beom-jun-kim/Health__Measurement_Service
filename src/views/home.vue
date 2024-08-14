@@ -4,7 +4,7 @@
             <RouterLink to="/notification/pushList">
                 <div class="new-push-box">
                     <img src="@/assets/img/icon_alarm.png" alt="Notification" class="notification-icon">
-                    <div v-if="newPush" class="new-icon-box">
+                    <div v-if="newPush === false" class="new-icon-box">
                         <div class="new-icon">N</div>
                     </div>
                 </div>
@@ -49,8 +49,8 @@ export default {
         },
         async getReadNewPush() {
             try {
-                const response = await Push.newPush()
-                this.newPush = response.data;
+                const response = await Push.newIconPush()
+                this.newPush = response.data.readCk;
                 console.log("this.newPush", this.newPush);
             } catch (error) {
                 console.log("새로운 알림 조회 실패", error);

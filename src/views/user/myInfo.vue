@@ -1,6 +1,6 @@
 <template>
     <div class="myInfo-container margin-bottom">
-        <GoBack />
+        <!-- <GoBack /> -->
         <div class="profile-section">
             <div class="profile-image">
                 <!-- <div v-if="user.imgUrl" class="user-img-box">
@@ -89,7 +89,7 @@ export default {
                 const response = await UserDataService.getUserInfo()
                 this.user = response.data;
             } catch (error) {
-                console.log("조회실패",error);
+                console.log("조회실패", error);
             }
         }
     },
@@ -149,7 +149,7 @@ export default {
 }
 
 .buttons button {
-    color: inherit;
+    background: none;
 }
 
 .secession {
