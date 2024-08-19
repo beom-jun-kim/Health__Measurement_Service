@@ -56,7 +56,6 @@ export default {
     return {
       userId: "",
       password: "",
-      cookiesValus: "",
     }
   },
   methods: {

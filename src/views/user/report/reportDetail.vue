@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="container">
     <GoBack />
     <div class="aberrant-range">
@@ -209,12 +209,6 @@ export default {
   margin-top: 20px;
 }
 
-/* .graph-wrap a {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-} */
-
 .graph-box {
   width: 80%;
   height: 15px;
@@ -305,5 +299,304 @@ export default {
 .slide-fade-enter-from,
 .slide-fade-leave-to {
   transform: translateX(100%);
+}
+</style> -->
+
+<template>
+  <div class="report-detail-container">
+    <GoBack />
+    <Carousel :wrap-around="true">
+      <Slide key=index01 style="margin-top: 50px;">
+        <h1 class="carousel__item--title">보행동작 분석</h1>
+        <div class="carousel__item">
+          <div class="people-walk">
+            <img src="@/assets/img/people-walk.png" alt="보행동작분석">
+          </div>
+          <div class="desc">
+            <div class="desc-box">
+              <img src="" alt="">
+              <p>회원님의 어깨각도는 0/0도이며 평균보다 약간 좁습니다. 생활습관에서 어느 부분을 사용할 때 유의해주세요</p>
+            </div>
+            <div class="desc-box">
+              <img src="" alt="">
+              <p>당신의 팔꿈치 각도는 0/0도이며 평균보다 약간 넓습니다. 생활습관에서 어느 부분을 사용할 때 유의해주세요</p>
+            </div>
+            <div class="desc-box">
+              <img src="" alt="">
+              <p>당신의 골반각도는 0/0도이며 평균에 가깝습니다. 생활습관에서 어느 부분을 사용할 때 유의해주세요</p>
+            </div>
+            <div class="desc-box">
+              <img src="" alt="">
+              <p>당신의 무릎각도 0/0도이며 평균에 가깝습니다. 생활습관에서 어느 부분을 사용할 때 유의해주세요</p>
+            </div>
+            <div class="desc-box">
+              <img src="" alt="">
+              <p>당신의 발목각도는 0/0도이며 평균보다 약간 좁습니다. 생활습관에서 어느 부분을 사용할 때 유의해주세요</p>
+            </div>
+          </div>
+          <div class="level">
+            <img src="@/assets/img/level_1.png" alt="">
+          </div>
+        </div>
+      </Slide>
+      <Slide key=index02 style="margin-top: 50px; height: 800px;">
+        <h1 class="carousel__item--title">보행패턴 분석</h1>
+        <div class="carousel__item">
+          <div class="people-walk-box">
+            <div class="people-walk" style="background: #f4f4f4; border-radius: 15px; position: relative;">
+              <div class="foot-table-box">
+                <img src="@/assets/img/foot-table.png" alt="보행패턴분석">
+              </div>
+              <span class="foot-data1">102cm</span>
+              <span class="foot-data2">54cm</span>
+              <span class="foot-data3">10º</span>
+              <span class="foot-data4">10º</span>
+              <span class="foot-data5">48cm</span>
+              <span class="foot-data6">2.0</span>
+              <span class="foot-data7">1.0</span>
+            </div>
+            <div class="people-walk" style="position: relative;">
+              <div class="foot-table-box">
+                <img src="@/assets/img/people.png" alt="보행패턴분석">
+              </div>
+              <span class="people-data1">54%</span>
+              <span class="people-data2">48%</span>
+            </div>
+          </div>
+          <table class="walk-table" border="1">
+            <thead>
+              <tr>
+                <th colspan="2"></th>
+                <th>LEET</th>
+                <th>RIGHT</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="2">Step Length</td>
+                <td>000</td>
+                <td>000</td>
+              </tr>
+              <tr>
+                <td colspan="2">Step Angle</td>
+                <td>000</td>
+                <td>000</td>
+              </tr>
+              <tr>
+                <td colspan="2">Step Force</td>
+                <td>000</td>
+                <td>000</td>
+              </tr>
+              <tr>
+                <td colspan="2">Stance phase</td>
+                <td>000</td>
+                <td>000</td>
+              </tr>
+              <tr>
+                <td colspan="2">Swing phase</td>
+                <td>000</td>
+                <td>000</td>
+              </tr>
+              <tr>
+                <td colspan="2">Step Length</td>
+                <td>000</td>
+                <td>000</td>
+              </tr>
+              <tr>
+                <td colspan="2">Step Length</td>
+                <td>000</td>
+                <td>000</td>
+              </tr>
+              <tr>
+                <td colspan="2">COP Length</td>
+                <td>000</td>
+                <td>000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Slide>
+
+      <template #addons>
+        <Navigation />
+      </template>
+
+    </Carousel>
+  </div>
+</template>
+
+<script>
+import { defineComponent } from "vue";
+// import { Carousel, Slide } from "vue3-carousel";
+import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel'
+import "vue3-carousel/dist/carousel.css";
+import GoBack from "@/components/GoBack.vue"
+
+export default defineComponent({
+  name: "reportDetail",
+  components: {
+    Carousel,
+    Slide,
+    GoBack,
+    // Pagination,
+    Navigation,
+  },
+  data() {
+    return {
+    };
+  },
+});
+</script>
+
+<style scoped>
+.report-detail-container {
+  padding: 20px;
+  /* margin-bottom: 24px; */
+}
+
+.carousel {
+  position: relative;
+  /* margin-top: 50px; */
+}
+
+.carousel__item {
+  position: relative;
+}
+
+.carousel__item--title {
+  position: absolute;
+  top: -55px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+}
+
+:deep(.carousel__viewport) {
+  overflow-y: visible;
+}
+
+:deep(.carousel__prev),
+:deep(.carousel__next) {
+  box-sizing: content-box;
+  position: fixed;
+  /* top: -3%; */
+  font-size: 0;
+  border: 3px solid;
+  background: #fff;
+  width: 35px;
+  height: 35px;
+}
+
+:deep(.carousel__prev) {
+  left: 5%;
+}
+
+:deep(.carousel__next) {
+  right: 5%;
+}
+
+:deep(.carousel__prev):before {
+  content: '\f104';
+  font-size: 30px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform: translateY(2px);
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+
+:deep(.carousel__next):before {
+  content: '\f105';
+  font-size: 30px;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  width: 100%;
+  height: 100%;
+  transform: translateY(2px);
+  position: absolute;
+}
+
+.people-walk {
+  margin: 0 auto 20px;
+}
+
+.desc-box {
+  display: flex;
+  border: 2px solid var(--main-color);
+  border-radius: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.level {
+  margin: 30px 0 44px;
+}
+
+.people-walk-box {
+  display: flex;
+  gap: 5px;
+}
+
+.walk-table tr {
+  border-style: dotted;
+}
+
+.foot-data1,
+.foot-data2,
+.foot-data3,
+.foot-data4,
+.foot-data5,
+.foot-data6,
+.foot-data7,
+.people-data1,
+.people-data2 {
+  position: absolute;
+  font-size: 3.3333333333333335vw;
+}
+
+.foot-data1 {
+  top: 23.61111111111111vw;
+  left: 11.11111111111111vw;
+}
+
+.foot-data2 {
+  top: 33.88888888888889vw;
+  left: 11.11111111111111vw;
+}
+
+.foot-data3 {
+  top: 47.22222222222222vw;
+  left: 16.666666666666664vw;
+}
+
+.foot-data4 {
+  top: 27.77777777777778vw;
+  right: 11.11111111111111vw;
+}
+
+.foot-data5 {
+  top: 40.27777777777778vw;
+  right: 5.555555555555555vw;
+}
+
+.foot-data6 {
+  bottom: 2.7777777777777777vw;
+  left: 5.555555555555555vw;
+}
+
+.foot-data7 {
+  bottom: 2.7777777777777777vw;
+  right: 5.555555555555555vw;
+}
+
+.people-data1 {
+  bottom: 11.11111111111111vw;
+  left: 4.166666666666666vw;
+}
+
+.people-data2 {
+  bottom: 11.11111111111111vw;
+  right: 4.166666666666666vw;
 }
 </style>
