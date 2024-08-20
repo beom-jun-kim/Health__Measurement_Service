@@ -19,7 +19,7 @@
       </div>
       <div class="carousel__item">
         <div class="people-walk-box">
-          <div class="people-walk">
+          <div class="people-walk" style="background: #f4f4f4;">
             <div class="foot-table-box">
               <img src="@/assets/img/foot-table.png" alt="보행패턴분석">
             </div>
@@ -31,7 +31,7 @@
             <span class="foot-data6">2.0</span>
             <span class="foot-data7">1.0</span>
           </div>
-          <div class="people-walk" style="background: #d2eceb;">
+          <div class="people-walk">
             <div class="foot-table-box">
               <img src="@/assets/img/people.png" alt="보행패턴분석">
             </div>
@@ -137,7 +137,7 @@ export default {
 .people-walk {
   position: relative;
   margin: 0 auto 20px;
-  background: #f4f4f4;
+  /* background: #f4f4f4; */
   border-radius: 15px;
 }
 
