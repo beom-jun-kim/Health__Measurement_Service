@@ -31,14 +31,12 @@
 import Height from "@/components/Height.vue";
 import UserDataService from "@/api/UserDataService";
 import Qr from "@/api/Qr";
-import QRCodeVue3 from "qrcode-vue3";
 import QrcodeVue from 'qrcode.vue';
 
 export default {
     name: 'qr',
     components: {
         Height,
-        QRCodeVue3,
         QrcodeVue
     },
     data() {
