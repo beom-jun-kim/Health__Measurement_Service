@@ -5,15 +5,17 @@
       <div class="pattern-box">
         <div style="width: 30px;"></div>
         <h1 class="carousel__item--title">보행패턴 분석</h1>
-        <div @click="modalApp">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="30" height="30">
-            <path
-              w
-              fill="#36b1a7"
-              d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80L0 432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z" />
-          </svg>
-          <div class="next-btn">NEXT</div>
-        </div>
+        <RouterLink :to="`/user/walkReport/${this.$route.params.id}`">
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="30" height="30">
+              <path
+                w
+                fill="#36b1a7"
+                d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80L0 432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z" />
+            </svg>
+            <div class="next-btn">NEXT</div>
+          </div>
+        </RouterLink>
       </div>
       <div class="carousel__item">
         <div class="people-walk-box">
@@ -88,11 +90,11 @@
             </tr>
           </tbody>
         </table>
-        <Transition name="slide-fade">
+        <!-- <Transition name="slide-fade">
           <div class="diseaseModal" v-if="diseaseModal">
             <DiseaseDetail @closeModalBtn="closeModalBtn" />
           </div>
-        </Transition>
+        </Transition> -->
       </div>
     </div>
   </div>
@@ -106,22 +108,7 @@ export default {
   name: 'reportDetail',
   components: {
     GoBack,
-    DiseaseDetail,
   },
-  data() {
-    return {
-      diseaseModal: false,
-    }
-  },
-  methods: {
-    modalApp(appId) {
-      this.appId = appId;
-      this.diseaseModal = true;
-    },
-    closeModalBtn() {
-      this.diseaseModal = false;
-    }
-  }
 };
 </script>
 
@@ -142,20 +129,9 @@ export default {
   color: var(--main-color);
 }
 
-.diseaseModal {
-  width: 100%;
-  height: 140%;
-  background: #fff;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  transition: 300ms;
-}
-
 .people-walk-box {
   display: flex;
-  gap: 5px;
+  gap: 10px;
 }
 
 .people-walk {

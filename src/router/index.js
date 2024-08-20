@@ -69,6 +69,12 @@ const router = createRouter({
           component: () => import('../views/user/report/reportDetail.vue')
         },
         {
+          path: '/user/walkReport/:id',
+          name: 'walkReport',
+          component: () => import('../views/user/walkReport/walkReport.vue'),
+          meta: { transition: 'slide-fade' }
+        },
+        {
           path: '/findContainer',
           name: 'findContainer',
           component: () => import('../views/findContainer.vue')

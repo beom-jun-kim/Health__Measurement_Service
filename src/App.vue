@@ -1,5 +1,7 @@
 <template>
-  <RouterView />
+  <transition :name="$route.meta.transition" mode="out-in">
+    <RouterView :key="$route.fullPath"/>
+  </transition>
   <header
     v-if="route.path !== '/signup/welcome' && route.path !== '/login/loginChk' && route.path !== '/user/userIdFind' && route.path !== '/signup/signupView' && route.path !== '/login/userLogin'">
     <div class="wrapper">
@@ -67,7 +69,7 @@ export default {
   methods: {
     async getUserInfo() {
       try {
-        const response = await UserDataService.getUserInfo();        
+        const response = await UserDataService.getUserInfo();
         this.user = response.data;
       } catch (error) {
         console.log("유저조회 실패", error);
@@ -82,6 +84,18 @@ export default {
 </script>
 
 <style scoped>
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-enter-from {
+  transform: translateX(100%);
+}
+.slide-fade-leave-to {
+  /* transform: translateX(100%); */
+}
+
 nav {
   width: 100%;
   border-top: 1px solid var(--input-border-color);
