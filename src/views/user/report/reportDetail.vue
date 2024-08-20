@@ -1,3 +1,255 @@
+<template>
+  <div class="container">
+    <GoBack />
+    <div class="pattern">
+      <div class="pattern-box">
+        <h1 class="carousel__item--title">보행패턴 분석</h1>
+        <div @click="modalApp">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="30" height="30">
+            <path
+              w
+              fill="#36b1a7"
+              d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80L0 432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z" />
+          </svg>
+          <div class="next-btn">NEXT</div>
+        </div>
+      </div>
+      <div class="carousel__item">
+        <div class="people-walk-box">
+          <div class="people-walk">
+            <div class="foot-table-box">
+              <img src="@/assets/img/foot-table.png" alt="보행패턴분석">
+            </div>
+            <span class="foot-data1">102cm</span>
+            <span class="foot-data2">54cm</span>
+            <span class="foot-data3">10º</span>
+            <span class="foot-data4">10º</span>
+            <span class="foot-data5">48cm</span>
+            <span class="foot-data6">2.0</span>
+            <span class="foot-data7">1.0</span>
+          </div>
+          <div class="people-walk">
+            <div class="foot-table-box">
+              <img src="@/assets/img/people.png" alt="보행패턴분석">
+            </div>
+            <span class="people-data1">54%</span>
+            <span class="people-data2">48%</span>
+          </div>
+        </div>
+        <table class="walk-table" border="1">
+          <thead>
+            <tr>
+              <th colspan="2"></th>
+              <th>LEET</th>
+              <th>RIGHT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="2">Step Length</td>
+              <td>000</td>
+              <td>000</td>
+            </tr>
+            <tr>
+              <td colspan="2">Step Angle</td>
+              <td>000</td>
+              <td>000</td>
+            </tr>
+            <tr>
+              <td colspan="2">Step Force</td>
+              <td>000</td>
+              <td>000</td>
+            </tr>
+            <tr>
+              <td colspan="2">Stance phase</td>
+              <td>000</td>
+              <td>000</td>
+            </tr>
+            <tr>
+              <td colspan="2">Swing phase</td>
+              <td>000</td>
+              <td>000</td>
+            </tr>
+            <tr>
+              <td colspan="2">Step Length</td>
+              <td>000</td>
+              <td>000</td>
+            </tr>
+            <tr>
+              <td colspan="2">Step Length</td>
+              <td>000</td>
+              <td>000</td>
+            </tr>
+            <tr>
+              <td colspan="2">COP Length</td>
+              <td>000</td>
+              <td>000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <Transition name="slide-fade">
+      <div class="diseaseModal" v-if="diseaseModal">
+        <DiseaseDetail @closeModalBtn="closeModalBtn" />
+      </div>
+    </Transition>
+  </div>
+</template>
+
+<script>
+import GoBack from "@/components/GoBack.vue";
+import DiseaseDetail from "@/components/DiseaseDetail.vue";
+
+export default {
+  name: 'reportDetail',
+  components: {
+    GoBack,
+    DiseaseDetail,
+  },
+  data() {
+    return {
+      diseaseModal: false,
+    }
+  },
+  methods: {
+    modalApp(appId) {
+      this.appId = appId;
+      this.diseaseModal = true;
+    },
+    closeModalBtn() {
+      this.diseaseModal = false;
+    }
+  }
+};
+</script>
+
+<style scoped>
+.container {
+  padding: 20px 25px;
+  margin-bottom: 44px;
+}
+
+.pattern-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.next-btn {
+  font-size: var(--font-small-size);
+  color: var(--main-color);
+}
+
+.carousel__item .desc-box {
+  border: 2px solid var(--main-color);
+  border-radius: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.carousel__item .desc {
+  margin-top: 20px;
+}
+
+.carousel__item .level {
+  margin-top: 20px;
+}
+
+.diseaseModal {
+  width: 100%;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  transition: 300ms;
+}
+
+.people-walk-box {
+  display: flex;
+  gap: 5px;
+}
+
+.people-walk {
+  position: relative;
+  margin: 0 auto 20px;
+  background: #f4f4f4;
+  border-radius: 15px;
+}
+
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(100%);
+}
+
+.foot-data1,
+.foot-data2,
+.foot-data3,
+.foot-data4,
+.foot-data5,
+.foot-data6,
+.foot-data7,
+.people-data1,
+.people-data2 {
+  position: absolute;
+  font-size: 3.3333333333333335vw;
+}
+
+.foot-data1 {
+  top: 23.61111111111111vw;
+  left: 11.11111111111111vw;
+}
+
+.foot-data2 {
+  top: 33.88888888888889vw;
+  left: 11.11111111111111vw;
+}
+
+.foot-data3 {
+  top: 47.22222222222222vw;
+  left: 16.666666666666664vw;
+}
+
+.foot-data4 {
+  top: 27.77777777777778vw;
+  right: 11.11111111111111vw;
+}
+
+.foot-data5 {
+  top: 40.27777777777778vw;
+  right: 5.555555555555555vw;
+}
+
+.foot-data6 {
+  bottom: 2.7777777777777777vw;
+  left: 5.555555555555555vw;
+}
+
+.foot-data7 {
+  bottom: 2.7777777777777777vw;
+  right: 5.555555555555555vw;
+}
+
+.people-data1 {
+  bottom: 11.11111111111111vw;
+  left: 4.166666666666666vw;
+}
+
+.people-data2 {
+  bottom: 11.11111111111111vw;
+  right: 4.166666666666666vw;
+}
+</style>
+
+
+
 <!-- <template>
   <div class="container">
     <GoBack />
@@ -302,7 +554,14 @@ export default {
 }
 </style> -->
 
-<template>
+
+
+
+
+
+
+
+<!-- <template>
   <div class="report-detail-container">
     <GoBack />
     <Carousel :wrap-around="true">
@@ -599,4 +858,4 @@ export default defineComponent({
   bottom: 11.11111111111111vw;
   right: 4.166666666666666vw;
 }
-</style>
+</style> -->

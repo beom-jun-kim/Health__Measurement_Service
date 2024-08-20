@@ -1,4 +1,111 @@
 <template>
+  <div class="container">
+    <header class="logo-header">
+      <div class="arrow" @click="$emit('closeModalBtn')">
+        <span><svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 24 24" fill="none">
+            <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="#000000" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg></span>
+      </div>
+      <div class="logo-img-box">
+        <img src="@/assets/img/app_logo_02.png" alt="logo header">
+      </div>
+      <div style="width: 40px;"></div>
+    </header>
+    <div class="walk-report-wrap">
+      <h1 class="carousel__item--title">보행동작 분석</h1>
+      <div class="carousel__item">
+        <div class="people-walk">
+          <img src="@/assets/img/people-walk.png" alt="보행동작분석">
+        </div>
+        <div class="desc">
+          <div class="desc-box">
+            <!-- <img src="" alt="">   -->
+            <i class="fas fa-solid fa-child fa-2x"></i>
+            <p>회원님의 어깨각도는 0/0도이며 평균보다 약간 좁습니다. 생활습관에서 어느 부분을 사용할 때 유의해주세요</p>
+          </div>
+          <div class="desc-box">
+            <!-- <img src="" alt=""> -->
+            <i class="fas fa-solid fa-child fa-2x"></i>
+            <p>당신의 팔꿈치 각도는 0/0도이며 평균보다 약간 넓습니다. 생활습관에서 어느 부분을 사용할 때 유의해주세요</p>
+          </div>
+          <div class="desc-box">
+            <!-- <img src="" alt=""> -->
+            <i class="fas fa-solid fa-child fa-2x"></i>
+            <p>당신의 골반각도는 0/0도이며 평균에 가깝습니다. 생활습관에서 어느 부분을 사용할 때 유의해주세요</p>
+          </div>
+          <div class="desc-box">
+            <!-- <img src="" alt=""> -->
+            <i class="fas fa-solid fa-child fa-2x"></i>
+            <p>당신의 무릎각도 0/0도이며 평균에 가깝습니다. 생활습관에서 어느 부분을 사용할 때 유의해주세요</p>
+          </div>
+          <div class="desc-box">
+            <!-- <img src="" alt=""> -->
+            <i class="fas fa-solid fa-child fa-2x"></i>
+            <p>당신의 발목각도는 0/0도이며 평균보다 약간 좁습니다. 생활습관에서 어느 부분을 사용할 때 유의해주세요</p>
+          </div>
+        </div>
+        <div class="level">
+          <img src="@/assets/img/level_1.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import GoBack from "@/components/GoBack.vue";
+
+export default {
+  name: 'DiseaseDetail',
+  components: {
+    GoBack,
+  },
+  data() {
+    return {
+    }
+  },
+  methods: {
+  }
+};
+</script>
+
+<style scoped>
+.container {
+  padding: 20px 25px;
+  margin-bottom: 44px;
+}
+
+.carousel__item .desc-box {
+  border: 2px solid var(--main-color);
+  border-radius: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.carousel__item .desc-box p {
+  margin-left: 15px;
+  word-break: keep-all;
+}
+
+.carousel__item .desc {
+  margin-top: 20px;
+}
+
+.carousel__item .level {
+  margin-top: 20px;
+}
+
+.carousel__item--title {
+  /* text-align: center; */
+  margin-bottom: 20px;
+}
+</style>
+
+
+<!-- <template>
     <div class="container">
         <header class="logo-header">
             <div class="arrow" @click="$emit('closeModalBtn')">
@@ -238,4 +345,4 @@
 }
 
 </style>
-  
+   -->
