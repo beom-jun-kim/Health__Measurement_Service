@@ -493,6 +493,7 @@ select {
   border-radius: 5px;
   box-sizing: border-box;
   appearance: none;
+  background: #fff;
 }
 
 .search-button {

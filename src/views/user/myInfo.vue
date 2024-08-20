@@ -151,6 +151,7 @@ export default {
 
 .buttons button {
     background: none;
+    color:#111;
 }
 
 .secession {
