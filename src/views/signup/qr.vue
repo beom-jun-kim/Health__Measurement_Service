@@ -20,7 +20,7 @@
             <button v-if="qrCreateBtn" class="qr-btn" @click="displayNone">인증용 QR생성하기</button>
             <div class="img_box" v-if="qr">
                 <p>생성된 QR을 키오스크에 대어 주세요 </p>
-                <QRCodeVue3 :value="qr.qrCode" />
+                <qrcode-vue :value="qr.qrCode" :size="200" />
             </div>
         </div>
         <Height v-if="user.height === null || user.weight === null" @save-body-info="updateBodyInfo" />
@@ -32,12 +32,14 @@ import Height from "@/components/Height.vue";
 import UserDataService from "@/api/UserDataService";
 import Qr from "@/api/Qr";
 import QRCodeVue3 from "qrcode-vue3";
+import QrcodeVue from 'qrcode.vue';
 
 export default {
     name: 'qr',
     components: {
         Height,
-        QRCodeVue3
+        QRCodeVue3,
+        QrcodeVue
     },
     data() {
         return {
@@ -55,7 +57,7 @@ export default {
             this.bigLogoImg = false;
             try {
                 const response = await Qr.qrCreate()
-                console.log("response.data",response.data);
+                console.log("response.data", response.data);
                 this.qr = response.data;
             } catch (error) {
                 console.log("qr생성실패", error);
