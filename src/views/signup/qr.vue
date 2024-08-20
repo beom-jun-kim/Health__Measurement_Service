@@ -55,7 +55,6 @@ export default {
             this.bigLogoImg = false;
             try {
                 const response = await Qr.qrCreate()
-                console.log("response.data", response.data);
                 this.qr = response.data;
             } catch (error) {
                 console.log("qr생성실패", error);

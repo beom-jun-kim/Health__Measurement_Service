@@ -3,6 +3,7 @@
     <GoBack />
     <div class="pattern">
       <div class="pattern-box">
+        <div style="width: 30px;"></div>
         <h1 class="carousel__item--title">보행패턴 분석</h1>
         <div @click="modalApp">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="30" height="30">
@@ -28,7 +29,7 @@
             <span class="foot-data6">2.0</span>
             <span class="foot-data7">1.0</span>
           </div>
-          <div class="people-walk">
+          <div class="people-walk" style="background: #d2eceb;">
             <div class="foot-table-box">
               <img src="@/assets/img/people.png" alt="보행패턴분석">
             </div>
@@ -87,13 +88,13 @@
             </tr>
           </tbody>
         </table>
+        <Transition name="slide-fade">
+          <div class="diseaseModal" v-if="diseaseModal">
+            <DiseaseDetail @closeModalBtn="closeModalBtn" />
+          </div>
+        </Transition>
       </div>
     </div>
-    <Transition name="slide-fade">
-      <div class="diseaseModal" v-if="diseaseModal">
-        <DiseaseDetail @closeModalBtn="closeModalBtn" />
-      </div>
-    </Transition>
   </div>
 </template>
 
@@ -126,8 +127,7 @@ export default {
 
 <style scoped>
 .container {
-  padding: 20px 25px;
-  margin-bottom: 44px;
+  padding: 10px;
 }
 
 .pattern-box {
@@ -142,28 +142,14 @@ export default {
   color: var(--main-color);
 }
 
-.carousel__item .desc-box {
-  border: 2px solid var(--main-color);
-  border-radius: 20px;
-  margin-bottom: 10px;
-  padding: 10px;
-}
-
-.carousel__item .desc {
-  margin-top: 20px;
-}
-
-.carousel__item .level {
-  margin-top: 20px;
-}
-
 .diseaseModal {
   width: 100%;
+  height: 140%;
   background: #fff;
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 999;
+  z-index: 9999;
   transition: 300ms;
 }
 
@@ -203,27 +189,27 @@ export default {
 }
 
 .foot-data1 {
-  top: 23.61111111111111vw;
-  left: 11.11111111111111vw;
+  top: 23.7vw;
+  left: 11.8vw;
 }
 
 .foot-data2 {
-  top: 33.88888888888889vw;
-  left: 11.11111111111111vw;
+  top: 40vw;
+  left: 14vw;
 }
 
 .foot-data3 {
-  top: 47.22222222222222vw;
-  left: 16.666666666666664vw;
+  top: 53vw;
+  left: 19vw;
 }
 
 .foot-data4 {
-  top: 27.77777777777778vw;
-  right: 11.11111111111111vw;
+  top: 32vw;
+  right: 10vw;
 }
 
 .foot-data5 {
-  top: 40.27777777777778vw;
+  top: 43vw;
   right: 5.555555555555555vw;
 }
 
