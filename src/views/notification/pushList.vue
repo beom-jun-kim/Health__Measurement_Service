@@ -1,19 +1,25 @@
 <template>
     <div class="container">
         <GoBack />
-        <RouterLink class="push-move" :to="push.categoryName" v-for="(push, index) in pushList" :key="index"
-            :class="{ 'unRead': push.readCk === false }" @click="readChk(push.notificationSid)">
-            <div class="push-list">
-                <div class="push-list-img">
-                    <img src="@/assets/img/alarm_mint.png" alt="">
+        <template v-if="pushList.length > 0">
+            <small class="desc">최근 7일간의 알림만 표시됩니다</small>
+            <RouterLink class="push-move" :to="push.categoryName" v-for="(push, index) in pushList" :key="index"
+                :class="{ 'unRead': push.readCk === false }" @click="readChk(push.notificationSid)">
+                <div class="push-list">
+                    <div class="push-list-img">
+                        <img src="@/assets/img/alarm_mint.png" alt="">
+                    </div>
+                    <div class="push-info">
+                        <p class="push-text">{{ push.message }}</p>
+                        <small class="push-create">{{ push.createDate }}</small>
+                    </div>
+                    <!-- <small class="push-nuread" v-if="push.readCk === false">읽지않음</small> -->
                 </div>
-                <div class="push-info">
-                    <p class="push-text">{{ push.message }}</p>
-                    <small class="push-create">{{ push.createDate }}</small>
-                </div>
-                <!-- <small class="push-nuread" v-if="push.readCk === false">읽지않음</small> -->
-            </div>
-        </RouterLink>
+            </RouterLink>
+        </template>
+        <template v-else>
+            <p class="noList">새로운 알림이 없습니다</p>
+        </template>
     </div>
 </template>
 
@@ -90,6 +96,20 @@ export default {
 
 .push-move.unRead {
     background: #e6e6e67b;
+}
+
+.noList {
+    width: 100%;
+    background: #ebebeb;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.desc {
+    text-align: left;
+    width: 100%;
+    /* margin-bottom: 10px; */
+    padding: 10px 15px;
 }
 
 /* .push-nuread {

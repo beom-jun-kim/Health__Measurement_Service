@@ -57,6 +57,7 @@ export default {
             timer: 0,
             isTimerActive: false,
             countdown: null,
+            excessPhrase: "",
         }
     },
     methods: {
@@ -80,6 +81,13 @@ export default {
                 if (error.response.data.errorMessage === "사용자를 찾을 수 없습니다.") {
                     alert("사용자를 찾을 수 없습니다 입력한 정보를 다시 확인하여주세요")
                 }
+                if (error.response.data.errorCode === "SMS_LIMIT_EXCEEDED") {
+                    alert("인증번호 발급 요청 횟수를 초과했습니다. 24시간 후에 다시 시도해주세요")
+                    this.verificationSent = false;
+                    if (this.countdown) {
+                        clearInterval(this.countdown);
+                    }
+                }
             }
         },
         async verifyCode() {
@@ -88,12 +96,24 @@ export default {
                     phoneNumber: this.form.phoneNumber,
                     verificationCode: this.form.verificationCode
                 }
-                await UserDataService.smsChk(data);
-                alert("인증번호가 확인되었습니다");
-                if (this.countdown) {
-                    clearInterval(this.countdown);
+                const response = await UserDataService.smsChk(data);
+                if (response.data.verified === true) {
+                    alert("인증번호가 확인되었습니다");
+                    if (this.countdown) {
+                        clearInterval(this.countdown);
+                    }
+                    this.isVerified = true;
+                } else {
+                    alert("인증번호가 일치하지 않습니다");
                 }
-                this.isVerified = true;
+                if (response.data.message === "인증 코드가 일치하지 않습니다. 인증 시도 횟수를 초과했습니다.") {
+                    this.excessPhrase = "인증 시도 횟수를 초과했으니 인증번호를 다시 발급받아 주세요"
+                    alert(this.excessPhrase);
+                    this.verificationSent = false;
+                    if (this.countdown) {
+                        clearInterval(this.countdown);
+                    }
+                }
             } catch (error) {
                 console.log("인증번호 확인 실패", error);
                 alert("인증번호가 올바르지 않습니다");

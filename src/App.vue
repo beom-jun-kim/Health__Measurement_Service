@@ -1,18 +1,20 @@
 <template>
   <transition :name="$route.meta.transition" mode="out-in">
-    <RouterView :key="$route.fullPath"/>
+    <!-- <RouterView :key="$route.fullPath"/> -->
+    <RouterView :key="shouldUseFullPathKey ? $route.fullPath : $route.name" />
   </transition>
   <header
     v-if="route.path !== '/signup/welcome' && route.path !== '/login/loginChk' && route.path !== '/user/userIdFind' && route.path !== '/signup/signupView' && route.path !== '/login/userLogin'">
     <div class="wrapper">
       <nav>
-        <RouterLink to="/home" :class="{ active: isActive(['/home', '/signup/qr']).value }">
+        <RouterLink to="/home" :class="{ active: isActive(['/home', '/signup/qr', '/notification/pushList']).value }">
           <div class="bottom-bar-img">
             <img src="@/assets/img/bottom_menu_01.png" alt="">
           </div>
           <span>Home</span>
         </RouterLink>
-        <RouterLink :to="`/user/reportList/${user.userSid}`" :class="{ active: isActive(['/user/report']).value }">
+        <RouterLink :to="`/user/reportList/${user.userSid}`"
+          :class="{ active: isActive(['/user/report', '/user/walkReport']).value }">
           <div class="bottom-bar-img">
             <img src="@/assets/img/bottom_menu_02.png" alt="">
           </div>
@@ -54,6 +56,10 @@ const isActive = (paths) => {
   return computedValue;
 };
 
+const shouldUseFullPathKey = computed(() => {
+  return route.path.startsWith('/user/walkReport');
+});
+
 </script>
 
 <script>
@@ -92,6 +98,7 @@ export default {
 .slide-fade-enter-from {
   transform: translateX(100%);
 }
+
 .slide-fade-leave-to {
   /* transform: translateX(100%); */
 }

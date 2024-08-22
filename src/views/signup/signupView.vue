@@ -12,15 +12,19 @@
                     <span class="idChk" :class="{ 'red': idChk === true, 'blue': idChk === false }">{{ idChkText
                         }}</span>
                 </div>
-                <input type="text" id="username" name="username" v-model="form.id" required
-                    :disabled="verificationSent">
+                <input type="text" id="username" name="username" v-model="form.id" required :disabled="verificationSent"
+                    maxlength="16" minlength="6">
                 <!-- <button type="button" class="signup-button" :disabled="verificationSent"
                     @click="idCheck(form.id)">중복확인</button> -->
             </div>
             <div class="input-group">
-                <label for="password">비밀번호</label>
+                <div style="display: flex; justify-content: space-between">
+                    <label for="password">비밀번호</label>
+                    <span class="passwordChk" :class="{ 'red': passwordChk === true, 'blue': passwordChk === false }">{{
+            passwordChkText }}</span>
+                </div>
                 <input type="password" id="password" name="password" v-model="form.password" required
-                    :disabled="verificationSent">
+                    :disabled="verificationSent" maxlength="16" minlength="6">
             </div>
             <div class="input-group">
                 <label for="password-confirm">비밀번호확인</label>
@@ -28,8 +32,14 @@
                     :disabled="verificationSent">
             </div>
             <div class="input-group">
-                <label for="name">이름</label>
-                <input type="text" id="name" name="name" v-model="form.username" required :disabled="verificationSent">
+                <div style="display: flex; justify-content: space-between">
+                    <label for="name">이름</label>
+                    <span class="usernameChk" :class="{ 'red': usernameChk === true, 'blue': usernameChk === false }">{{
+            usernameChkText
+        }}</span>
+                </div>
+                <input type="text" id="name" name="name" v-model="form.username" required maxlength="20"
+                    :disabled="verificationSent">
             </div>
             <div class="input-group">
                 <label for="gender">성별</label>
@@ -106,20 +116,47 @@ export default {
             isVerified: false,
             idChk: "",
             idChkText: "",
+            passwordChk: "",
+            passwordChkText: "",
+            usernameChk: "",
+            usernameChkText: "",
             timer: 0,
             isTimerActive: false,
             countdown: null,
+            excessPhrase: "",
         };
     },
     watch: {
         'form.id'(newValue) {
             this.idCheck(newValue)
+        },
+        'form.password'(newValue) {
+            this.passwordCheck(newValue)
+        },
+        'form.username'(newValue) {
+            this.validateUsername(newValue);
         }
     },
     methods: {
         async idCheck(id) {
             if (this.form.id === '') {
                 this.idChkText = '';
+            }
+            const specialCharacters = /[^a-zA-Z0-9]/.test(id);
+            if (specialCharacters) {
+                this.idChkText = '한글과 특수 문자는 제외하여 주세요';
+                this.idChk = true;
+                return;
+            }
+            if (this.form.id.length < 6) {
+                this.idChkText = '6자리 이상 입력하여주세요';
+                this.idChk = true;
+                return;
+            }
+            if (/^\d+$/.test(this.form.id)) {
+                this.idChkText = '숫자로만 아이디를 생성할 수 없습니다';
+                this.idChk = true;
+                return;
             }
             try {
                 const response = await UserDataService.idChk(id);
@@ -132,6 +169,34 @@ export default {
             } catch (error) {
                 console.log("아이디중복체크 실패", error);
             }
+        },
+        passwordCheck(password) {
+            if (this.form.password === '') {
+                this.passwordChkText = '';
+            }
+
+            const hasLetterAndNumber = /^(?=.*[A-Za-z])(?=.*\d)/.test(password);
+            if (!hasLetterAndNumber) {
+                this.passwordChkText = '영문과 숫자를 필수로 넣어주세요';
+                this.passwordChk = true;
+                return;
+            }
+
+            if (password.length < 6) {
+                this.passwordChkText = '6자리 이상 입력하여주세요';
+                this.passwordChk = true;
+                return;
+            }
+
+            const specialCharactersAllowed = /^[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]+$/.test(password);
+            if (!specialCharactersAllowed) {
+                this.passwordChkText = `!@#$%^&*()_+-=[]{};':"\\|,.<>/?의 특수문자만 포함 할 수 있습니다`;
+                this.passwordChk = true;
+                return;
+            }
+
+            this.passwordChkText = '사용 가능한 비밀번호 입니다';
+            this.passwordChk = false;
         },
         async userJoin() {
             if (this.form.password !== this.form.pwdChk) {
@@ -154,6 +219,23 @@ export default {
                 this.$router.push("/signup/welcome");
             } catch (error) {
                 console.log("회원가입 실패", error);
+            }
+        },
+        validateUsername(username) {
+            const trimmedUsername = username.trim().replace(/\s+/g, '');
+            const isHangulOnly = /^[가-힣]+$/.test(trimmedUsername);
+            const isEnglishOnly = /^[a-zA-Z]+$/.test(trimmedUsername);
+            const isInvalidUsername = !isHangulOnly && !isEnglishOnly;
+
+            if (username !== trimmedUsername) {
+                this.form.username = trimmedUsername;
+            }
+            if (isInvalidUsername) {
+                this.usernameChkText = "특수기호/공백/숫자는 사용불가 합니다";
+                this.usernameChk = true;
+            } else {
+                this.usernameChkText = "사용 가능한 이름입니다.";
+                this.usernameChk = false;
             }
         },
         async sendVerificationCode() {
@@ -184,6 +266,16 @@ export default {
                     alert("인증번호가 발송되었습니다");
                 } catch (error) {
                     console.log("인증번호 발급 실패", error);
+                    if (error.response.data.errorCode === "SMS_LIMIT_EXCEEDED") {
+                        alert("인증번호 발급 요청 횟수를 초과했습니다. 24시간 후에 다시 시도해주세요")
+                        this.verificationSent = false;
+                        if (this.countdown) {
+                            clearInterval(this.countdown);
+                        }
+                    }
+                    if (error.response.status === 409) {
+                        alert("해당 번호로 가입된 사용자가 있습니다")
+                    }
                 }
             }
         },
@@ -196,11 +288,23 @@ export default {
                         phoneNumber: this.form.phone,
                         verificationCode: this.form.verificationCode
                     }
-                    await UserDataService.smsChk(data);
-                    this.isVerified = true;
-                    alert("인증번호가 확인되었습니다");
-                    if (this.countdown) {
-                        clearInterval(this.countdown);
+                    const response = await UserDataService.smsChk(data);
+                    if (response.data.verified === true) {
+                        this.isVerified = true;
+                        alert("인증번호가 확인되었습니다");
+                        if (this.countdown) {
+                            clearInterval(this.countdown);
+                        }
+                    } else {
+                        alert("인증번호가 일치하지 않습니다");
+                    }
+                    if (response.data.message === "인증 코드가 일치하지 않습니다. 인증 시도 횟수를 초과했습니다.") {
+                        this.excessPhrase = "인증 시도 횟수를 초과했으니 인증번호를 다시 발급받아 주세요"
+                        alert(this.excessPhrase);
+                        this.verificationSent = false;
+                        if (this.countdown) {
+                            clearInterval(this.countdown);
+                        }
                     }
                 } catch (error) {
                     console.log("인증번호 확인 실패", error);
@@ -320,6 +424,26 @@ export default {
 }
 
 .idChk.blue {
+    color: blue;
+}
+
+.passwordChk {
+    margin-bottom: 10px;
+}
+
+.passwordChk.red {
+    color: red;
+}
+
+.passwordChk.blue {
+    color: blue;
+}
+
+.usernameChk.red {
+    color: red;
+}
+
+.usernameChk.blue {
     color: blue;
 }
 </style>
