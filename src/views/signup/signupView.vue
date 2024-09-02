@@ -3,7 +3,7 @@
         <img src="@/assets/img/app_logo_02.png" alt="G-CON Logo" class="logo">
         <div class="page-title">
             <h2>회원가입</h2>
-            <p>회원가입을 위한 정보들을 입력해주세요</p>
+            <!-- <p>회원가입을 위한 정보들을 입력해주세요</p> -->
         </div>
         <form class="signup-form" @submit.prevent="userJoin">
             <div class="input-group">
@@ -13,23 +13,23 @@
                         }}</span>
                 </div>
                 <input type="text" id="username" name="username" v-model="form.id" required :disabled="verificationSent"
-                    maxlength="16" minlength="6">
+                    maxlength="16" minlength="6" placeholder="6~16자의 영문 혹은 영문+숫자 조합">
                 <!-- <button type="button" class="signup-button" :disabled="verificationSent"
                     @click="idCheck(form.id)">중복확인</button> -->
             </div>
             <div class="input-group">
-                <div style="display: flex; justify-content: space-between">
+                <div style="display: flex; justify-content: space-between;">
                     <label for="password">비밀번호</label>
                     <span class="passwordChk" :class="{ 'red': passwordChk === true, 'blue': passwordChk === false }">{{
             passwordChkText }}</span>
                 </div>
                 <input type="password" id="password" name="password" v-model="form.password" required
-                    :disabled="verificationSent" maxlength="16" minlength="6">
+                    :disabled="verificationSent" maxlength="16" minlength="6" placeholder="비밀번호를 입력하여 주세요">
             </div>
             <div class="input-group">
-                <label for="password-confirm">비밀번호확인</label>
+                <label for="password-confirm">비밀번호 확인</label>
                 <input type="password" id="password-confirm" name="password-confirm" v-model="form.pwdChk" required
-                    :disabled="verificationSent">
+                    :disabled="verificationSent" placeholder="비밀번호를 다시 한번 입력하여 주세요">
             </div>
             <div class="input-group">
                 <div style="display: flex; justify-content: space-between">
@@ -39,14 +39,26 @@
         }}</span>
                 </div>
                 <input type="text" id="name" name="name" v-model="form.username" required maxlength="20"
-                    :disabled="verificationSent">
+                    :disabled="verificationSent" placeholder="예) 홍지콘">
             </div>
             <div class="input-group">
-                <label for="gender">성별</label>
-                <select id="gender" v-model="form.gender" required :disabled="verificationSent">
+                <label>성별</label>
+                <div class="gender">
+                    <div class="gender-box">
+                        <input type="radio" id="man" v-model="form.gender" name="genderChk" value="M">
+                        <label for="man" class="custom-radio">남자</label>
+                    </div>
+
+                    <div class="gender-box">
+                        <input type="radio" id="women" v-model="form.gender" name="genderChk" value="F">
+                        <label for="women" class="custom-radio">여자</label>
+                    </div>
+                </div>
+
+                <!-- <select id="gender" v-model="form.gender" required :disabled="verificationSent">
                     <option value="M">남</option>
                     <option value="F">여</option>
-                </select>
+                </select> -->
             </div>
             <div class="input-group">
                 <label for="birth">생년월일</label>
@@ -65,15 +77,16 @@
                     </select>
                 </div>
             </div>
-            <div class="input-group">
-                <label for="phone">전화번호 (-없이 입력)</label>
-                <input type="tel" id="phone" name="phone" v-model="form.phone" required :disabled="isVerified">
+            <div class="input-group" style="margin-bottom: 10px;">
+                <label for="phone">전화번호</label>
+                <input type="tel" id="phone" name="phone" v-model="form.phone" required :disabled="isVerified"
+                    placeholder="(-없이 입력)">
                 <button v-if="verificationSent === false" type="button" class="signup-button"
                     @click="sendVerificationCode">인증번호 발급</button>
                 <button v-if="verificationSent === true" type="button" class="signup-button"
                     @click="sendVerificationCode" :disabled="isVerified">재발급</button>
             </div>
-            <div class="input-group" v-if="verificationSent">
+            <div class="input-group" v-if="verificationSent" style="margin:20px 0 10px;">
                 <div style="display: flex; justify-content: space-between">
                     <label for="verification-code">인증번호</label>
                     <span v-if="isTimerActive" class="timer">
@@ -84,7 +97,7 @@
                     required :disabled="isVerified">
                 <button type="button" class="signup-button" @click="verifyCode" :disabled="isVerified">인증번호 확인</button>
             </div>
-            <button type="submit" class="signup-button" :disabled="!isVerified">회원가입</button>
+            <button type="submit" class="signup-button" style="border:none;" :disabled="!isVerified">회원가입</button>
         </form>
     </div>
 </template>
@@ -105,7 +118,7 @@ export default {
                 password: "",
                 pwdChk: "",
                 username: "",
-                gender: "",
+                gender: "M",
                 birth: "",
                 month: "",
                 day: "",
@@ -214,6 +227,7 @@ export default {
                     birthday: birthday,
                     phoneNumber: this.form.phone,
                 }
+                console.log("1234",data);
                 await UserDataService.createUser(data);
                 alert("회원가입이 완료되었습니다");
                 this.$router.push("/signup/welcome");
@@ -242,6 +256,8 @@ export default {
             const phone = Number(this.form.phone);
             if (isNaN(phone)) {
                 alert("숫자를 입력하여 주세요");
+            } else if (this.idChk === true || this.passwordChk === true || this.usernameChk === true){
+                alert("양식에 맞게 입력하여주세요")
             } else if (this.form.id === ""
                 || this.form.password === ""
                 || this.form.pwdChk === ""
@@ -372,27 +388,36 @@ export default {
 
 .signup-form {
     width: 100%;
+    margin-top: 30px;
     max-width: 300px;
 }
 
 .input-group {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .input-group label {
+    /* width: 100%; */
     display: block;
     margin-bottom: 5px;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 
 .input-group input,
 .input-group select {
     width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 5px 0;
+    font-size: var(--input-font-size);
+    /* border: 1px solid #ccc; */
+    border-bottom: 2px solid var(--input-border-color) !important;
+    /* border-radius: 5px; */
     box-sizing: border-box;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    font-weight: var(--font-t-weight);
+    /* -webkit-appearance: none; */
+    -webkit-border-radius: 0;
 }
 
 .birth-select {
@@ -400,10 +425,14 @@ export default {
     gap: 5px;
 }
 
+.gender {
+    display: flex;
+}
+
 .signup-button {
-    width: 100%;
+    /* width: 100%;
     padding: 15px;
-    margin-top: 10px;
+    margin-top: 20px;
     border: none;
     border-radius: 5px;
     font-size: 18px;
@@ -411,7 +440,71 @@ export default {
     background-color: var(--main-color);
     cursor: pointer;
     text-align: center;
-    font-weight: bold;
+    font-weight: bold; */
+
+    width: 100%;
+    padding: 12px;
+    /* height: 41px; */
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: var(--font-n-sec-size);
+    color: #fff;
+    background-color: var(--main-color);
+    margin-top: 10px;
+}
+
+label[for="man"],
+label[for="women"] {
+    width: 100%;
+    margin-right: 20px;
+}
+
+.gender-box {
+    /* display: flex; */
+
+    /* display: inline-block; */
+    margin-right: 30px;
+    /* position: relative; */
+    /* cursor: pointer; */
+}
+
+.gender-box input[type="radio"] {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    display: none;
+}
+
+.gender-box .custom-radio::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 17px;
+    border: 2px solid var(--input-border-color);
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.gender-box input[type="radio"]:checked+.custom-radio::before {
+    border-color: var(--main-color);
+    content: '';
+    color: var(--main-color);
+    accent-color: var(--main-color);
+    text-align: center;
+    font-size: var(--font-small-size);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2336b1a7"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 20.59 7.41 19.17 6l-10 10.17z"/></svg>');
+}
+
+.gender-box .custom-radio {
+    font-size: var(--font-n-sec-size);
+    color: #B7B7B7;
+}
+
+.gender-box input[type="radio"]:checked+.custom-radio {
+    color: var(--main-color);
+    accent-color: var(--main-color);
 }
 
 .signup-button:disabled {

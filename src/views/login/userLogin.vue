@@ -1,15 +1,16 @@
 <template>
   <div class="container margin-bottom-zero">
     <img src="@/assets/img/app_logo_02.png" alt="G-CON Logo" class="logo">
-    <p class="login-text">아이디, 비밀번호를 입력 후<br><span>로그인 버튼</span>을 눌러주세요</p>
+    <!-- <p class="login-text">아이디, 비밀번호를 입력 후<br><span>로그인 버튼</span>을 눌러주세요</p> -->
+
     <form class="login-form" @submit.prevent="login">
       <div class="input-group">
-        <label for="username">아이디</label>
-        <input type="text" id="username" name="username" v-model="userId" required>
+        <!-- <label for="username">아이디</label> -->
+        <input type="text" id="username" name="username" v-model="userId" required placeholder="아이디">
       </div>
       <div class="input-group">
-        <label for="password">비밀번호</label>
-        <input type="password" id="password" name="password" v-model="password" required>
+        <!-- <label for="password">비밀번호</label> -->
+        <input type="password" id="password" name="password" v-model="password" required placeholder="비밀번호">
       </div>
       <button type="submit" class="login-button">로그인</button>
     </form>
@@ -33,10 +34,11 @@
     <div class="links">
       <RouterLink to="/user/userIdFind">아이디 찾기</RouterLink> | <RouterLink to="/user/userIdFind">비밀번호 찾기</RouterLink>
     </div>
+
     <div class="moveSignup">
       <span>스마트 신발 회원이 아니신가요?</span>
       <RouterLink to="/signup/signupView">
-        <span style="color: blue;">회원가입</span>
+        <span style="color: var(--main-color);">회원가입</span>
       </RouterLink>
     </div>
   </div>
@@ -94,7 +96,7 @@ export default {
 </script>
 
 <style scoped>
-.login-text {
+/* .login-text {
   word-break: keep-all;
   text-align: center;
 }
@@ -102,7 +104,7 @@ export default {
 .login-text span {
   color: var(--main-color);
   font-weight: var(--font-b-weight);
-}
+} */
 
 .login-form {
   width: 100%;
@@ -123,18 +125,19 @@ export default {
 }
 
 .input-group input {
-  padding: 10px;
-  font-size: var(--font-n-sec-size);
+  padding: 12px;
+  font-size: var(--input-font-size); 
   border: 1px solid var(--input-border-color);
-  border-radius: 5px;
+  border-radius: var(--border-radius);
+  font-weight: var(--font-t-weight);
 }
 
 .login-button {
   padding: 15px;
   margin-top: 10px;
   border: none;
-  border-radius: 5px;
-  font-size: var(--font-n-size);
+  border-radius: var(--border-radius);
+  font-size: var(--font-n-sec-size);
   color: #fff;
   background-color: var(--main-color);
 }
@@ -158,6 +161,7 @@ export default {
 .links {
   margin-top: 20px;
   font-size: var(--font-n-sec-size);
+  color: #B7B7B7;
 }
 
 .sns-login {
@@ -167,7 +171,7 @@ export default {
 .sns-login-box {
   display: flex;
   justify-content: center;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   width: 300px;
 }
 

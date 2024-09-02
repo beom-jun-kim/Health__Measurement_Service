@@ -59,12 +59,13 @@ export default {
     border-bottom: 2px solid var(--input-border-color);
     word-break: keep-all;
     white-space: nowrap;
+    font-weight: var(--font-t-weight);
 }
 
 .tab-menu .active-tab {
-    color: #000;
+    color: var(--main-color);
     font-weight: var(--font-b-weight);
-    border-bottom: 6px solid var(--main-color);
+    border-bottom: 4px solid var(--main-color);
 }
 
 .component-box {

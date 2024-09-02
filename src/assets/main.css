@@ -48,6 +48,7 @@ select, option {
 
 .logo {
   margin-bottom: 25px;
+  width: 150px;
 }
 
 img {

@@ -6,22 +6,26 @@
             <div class="input-group">
                 <input type="text" placeholder="이름" v-model="form.name" :disabled="verificationSent" />
             </div>
-            <div class="input-group">
-                <input type="text" placeholder="휴대폰번호" v-model="form.phoneNumber" :disabled="verificationSent" />
-            </div>
-            <button v-if="verificationSent === false" type="submit" class="send-code-button"
-                @click="findIdSendVerificationCode">인증번호 발송</button>
-            <button v-if="verificationSent" type="submit" class="send-code-button" @click="findIdSendVerificationCode"
-                :disabled="isVerified">인증번호 재발송</button>
-            <div class="input-group" v-if="verificationSent">
-                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
-                    <label for="verification-code">인증번호</label>
-                    <span v-if="isTimerActive">남은 시간 : {{ formattedTime }}</span>
+            <div style="display: flex; justify-content: space-between; gap: 5px;">
+                <div class="input-group">
+                    <input type="text" placeholder="전화번호 (-없이 입력)" v-model="form.phoneNumber"
+                        :disabled="verificationSent" class="input-phone-num"/>
                 </div>
-                <input type="text" id="verification-code" name="verification-code" v-model="form.verificationCode"
-                    :disabled="isVerified">
-                <button type="button" class="send-code-button" @click="verifyCode" :disabled="isVerified">인증번호
-                    확인</button>
+                <button v-if="verificationSent === false" type="submit" class="send-code-button"
+                    @click="findIdSendVerificationCode">전송</button>
+                <button v-if="verificationSent" type="submit" class="send-code-button"
+                    @click="findIdSendVerificationCode" :disabled="isVerified">재전송</button>
+            </div>
+            <div class="input-group" v-if="verificationSent">
+                <div style="display: flex; justify-content: space-between; margin: 20px 0 5px;">
+                    <label for="verification-code">인증번호</label>
+                    <span class="timeOut" v-if="isTimerActive">남은 시간 : {{ formattedTime }}</span>
+                </div>
+                <!-- <div style="display: flex; justify-content: space-between; align-items: center; gap: 5px; margin-top: 10px;"> -->
+                    <input type="text" id="verification-code" name="verification-code" v-model="form.verificationCode"
+                        :disabled="isVerified">
+                    <button type="button" class="send-code-button02" @click="verifyCode" :disabled="isVerified">아이디 찾기</button>
+                <!-- </div> -->
             </div>
         </form>
         <div class="findIdResult" v-if="isVerified">
@@ -160,15 +164,16 @@ export default {
 }
 
 .input-group {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    width: 100%;
 }
 
 .input-group input {
     width: 100%;
     padding: 10px;
-    font-size: var(--font-n-sec-size);
     border: 1px solid var(--input-border-color);
-    border-radius: 5px;
+    border-radius: var(--border-radius);
+    font-size: var(--input-font-size);
 }
 
 .form-text {
@@ -176,26 +181,46 @@ export default {
 }
 
 .send-code-button {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 5px;
-    font-size: var(--font-n-size);
-    color: #fff;
-    background-color: var(--main-color);
+    /* width: 100%; */
+    padding: 0 15px;
+    height: 41px;
+    border: 1px solid var(--main-color);
+    border-radius: var(--border-radius);
+    /* font-size: var(--font-n-sec-size); */
+    color: var(--main-color);
+    background: none;
+    /* background-color: var(--main-color);      */
     /* margin-bottom: 20px; */
 }
 
+.send-code-button02 {
+    width: 100%;
+    padding: 12px;
+    /* height: 41px; */
+    border: 1px solid var(--main-color);
+    border-radius: var(--border-radius);
+    font-size: var(--font-n-sec-size);
+    color: #fff;
+    background-color: var(--main-color);     
+    margin-top: 10px;
+}
+
 .send-code-button:disabled {
-    background-color: #ccc;
+    /* background-color: #ccc; */
     cursor: not-allowed;
+    color: #36b1a798;
+    border: 1px solid #36b1a798;
 }
 
-input[id="verification-code"] {
+/* input[id="verification-code"] {
     margin: 10px 0 15px;
+} */
+     
+.findIdResult {
+    font-size: var(--font-n-sec-size)
 }
 
-.findIdResult {
-    font-size: var(--font-n-size)
+.timeOut {
+    font-size: var(--input-font-size);
 }
 </style>

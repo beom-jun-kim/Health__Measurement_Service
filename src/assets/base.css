@@ -5,9 +5,12 @@
   --font-b-size : 24px;
   --font-n-size : 18px;
   --font-n-sec-size : 16px;
-  --font-small-size:12px;
-  --input-border-color : #ccc;
+  --font-small-size :12px;
+  --input-font-size : 14px;
+  --input-border-color : #E7E7E7;
   --font-b-weight : 600;
+  --border-radius : 10px;
+  --font-t-weight : 300;
 }
 
 *,
