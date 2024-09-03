@@ -1,10 +1,11 @@
 <template>
     <div class="container">
-        <img src="@/assets/img/app_logo_02.png" alt="G-CON Logo" class="logo">
-        <div class="page-title">
+        <GoBack :goBackText="goBackText"/>
+        <!-- <img src="@/assets/img/app_logo_02.png" alt="G-CON Logo" class="logo"> -->
+        <!-- <div class="page-title">
             <h2>회원가입</h2>
-            <!-- <p>회원가입을 위한 정보들을 입력해주세요</p> -->
-        </div>
+            <p>회원가입을 위한 정보들을 입력해주세요</p>
+        </div> -->
         <form class="signup-form" @submit.prevent="userJoin">
             <div class="input-group">
                 <div style="display: flex; justify-content: space-between">
@@ -104,9 +105,13 @@
 
 <script>
 import UserDataService from '@/api/UserDataService';
+import GoBack from "@/components/GoBack.vue";
 
 export default {
     name: 'SignupView',
+    components:{
+        GoBack,
+    },
     data() {
         return {
             currentYear: new Date().getFullYear(),
@@ -137,6 +142,7 @@ export default {
             isTimerActive: false,
             countdown: null,
             excessPhrase: "",
+            goBackText:"회원가입",
         };
     },
     watch: {
@@ -227,7 +233,7 @@ export default {
                     birthday: birthday,
                     phoneNumber: this.form.phone,
                 }
-                console.log("1234",data);
+                console.log("1234", data);
                 await UserDataService.createUser(data);
                 alert("회원가입이 완료되었습니다");
                 this.$router.push("/signup/welcome");
@@ -256,7 +262,7 @@ export default {
             const phone = Number(this.form.phone);
             if (isNaN(phone)) {
                 alert("숫자를 입력하여 주세요");
-            } else if (this.idChk === true || this.passwordChk === true || this.usernameChk === true){
+            } else if (this.idChk === true || this.passwordChk === true || this.usernameChk === true) {
                 alert("양식에 맞게 입력하여주세요")
             } else if (this.form.id === ""
                 || this.form.password === ""
@@ -443,7 +449,7 @@ export default {
     font-weight: bold; */
 
     width: 100%;
-    padding: 12px;
+    padding: 15px;
     /* height: 41px; */
     border: none;
     border-radius: var(--border-radius);
@@ -460,12 +466,7 @@ label[for="women"] {
 }
 
 .gender-box {
-    /* display: flex; */
-
-    /* display: inline-block; */
     margin-right: 30px;
-    /* position: relative; */
-    /* cursor: pointer; */
 }
 
 .gender-box input[type="radio"] {
@@ -499,7 +500,7 @@ label[for="women"] {
 
 .gender-box .custom-radio {
     font-size: var(--font-n-sec-size);
-    color: #B7B7B7;
+    color: var(--light-font-color);
 }
 
 .gender-box input[type="radio"]:checked+.custom-radio {

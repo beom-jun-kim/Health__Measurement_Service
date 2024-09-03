@@ -7,7 +7,7 @@
                 <span>회원가입</span>이 완료 되었습니다.<br>
                 G-CON과 함께 건강과 행복을 챙겨가세요.
             </p>
-            <img src="@/assets/img/app_img_people.png" alt="welcome join">
+            <img src="@/assets/img/Team spirit-cuate.png" alt="welcome join">
         </div>
     </transition>
 </template>
@@ -33,6 +33,7 @@ export default {
 
 <style scoped>
 .container {
+    padding: 40px 20px;
     text-align: center;
 }
 

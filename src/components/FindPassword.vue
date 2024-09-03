@@ -212,7 +212,7 @@ export default {
 
 .send-code-button02 {
     width: 100%;
-    padding: 12px;
+    padding: 15px;
     /* height: 41px; */
     border: 1px solid var(--main-color);
     border-radius: var(--border-radius);

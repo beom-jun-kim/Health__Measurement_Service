@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <GoBack />
+        <GoBack :goBackText="goBackText"/>
         <div class="tab-menu">
             <button :class="{ 'active-tab': currentComponent === 'FindId' }"
                 @click="updateState('FindId')">아이디찾기</button>
@@ -23,6 +23,7 @@ export default {
     data() {
         return {
             currentComponent: 'FindId',
+            goBackText:"아이디 / 비밀번호 찾기"
         }
     },
     components: {

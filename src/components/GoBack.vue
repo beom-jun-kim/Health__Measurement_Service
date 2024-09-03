@@ -7,7 +7,8 @@
                 </svg></span>
         </div>
         <div class="logo-img-box">
-            <img src="@/assets/img/app_logo_02.png" alt="logo header">
+            <!-- <img src="@/assets/img/app_logo_02.png" alt="logo header"> -->
+            {{ goBackText }}
         </div>
         <div style="width: 40px;"></div>
     </header>
@@ -16,6 +17,11 @@
 <script>
 export default {
     name: "GoBack",
+    props: {
+        goBackText: {
+            type: String,
+        }
+    },
     methods: {
         goBack() {
             this.$router.go(-1);
@@ -34,7 +40,8 @@ export default {
 }
 
 .logo-img-box {
-    width: 100px;
+    /* width: 100px; */
+    font-weight: var(--font-b-weight);
 }
 
 .arrow {

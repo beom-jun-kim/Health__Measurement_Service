@@ -1,37 +1,48 @@
 <template>
     <div class="myInfo-container margin-bottom">
-        <!-- <GoBack /> -->
+        <GoBack :goBackText="goBackText" />
         <div class="profile-section">
-            <div class="profile-image">
-                <!-- <div v-if="user.imgUrl" class="user-img-box">
+            <!-- <div class="profile-image">
+                <div v-if="user.imgUrl" class="user-img-box">
                     <div class="user-profile" :style="{ backgroundImage: `url(${user.imgUrl})` }"></div>
                 </div>
                 <div v-else class="user-img-box">
                     <div class="user-not-profile"></div>
-                </div> -->
-            </div>
-            <h2>{{ user.name }}</h2>
-            <p>G-CON 사용자</p>
-            <div class="buttons">
-                <RouterLink to="/user/userInfoEdit">
-                    <button class="info-button">내정보 변경하기</button>
-                </RouterLink>
-                <button class="logout-button" @click="logout">로그아웃</button>
+                </div>
+            </div> -->
+            <div class="user-box">
+                <div v-if="user.gender === 'F'" class="profile-img">
+                    <img src="@/assets/img/charac_w.png" alt="프로필 이미지">
+                </div>
+                <div v-if="user.gender === 'M'" class="profile-img">
+                    <img src="@/assets/img/charac_m.png" alt="프로필 이미지">
+                </div>
+                <div class="user-text-info">
+                    <h2>
+                        {{ user.name }} 님
+                    </h2>
+                    <span>안녕하세요 !</span>
+                    <div class="buttons">
+                        <RouterLink to="/user/userInfoEdit">
+                            <button class="info-button">내정보 변경하기</button>
+                        </RouterLink>
+                        <button class="logout-button" @click="logout">로그아웃</button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="info-section">
-            <h3>내 정보</h3>
             <div class="info-item">
-                <span class="label">연락처</span>
-                <span class="value">{{ user.phoneNumber }}</span>
+                <p class="label">연락처</p>
+                <p class="value">{{ user.phoneNumber }}</p>
             </div>
             <div class="info-item">
-                <span class="label">성별</span>
-                <span class="value">{{ user.gender === "M" ? "남자" : "여자" }}</span>
+                <p class="label">성별</p>
+                <p class="value">{{ user.gender === "M" ? "남자" : user.gender === "F" ? "여자" : "입력하신 정보가 없습니다"}}</p>
             </div>
             <div class="info-item">
-                <span class="label">생년월일</span>
-                <span class="value">{{ user.birthday }}</span>
+                <p class="label">생년월일</p>
+                <p class="value">{{ user.birthday }}</p>
             </div>
             <div class="info-item">
                 <span class="label">키</span>
@@ -66,7 +77,8 @@ export default {
     },
     data() {
         return {
-            user: {}
+            user: {},
+            goBackText:"마이페이지"
         }
     },
     methods: {
@@ -102,14 +114,32 @@ export default {
 
 <style scoped>
 .myInfo-container {
-    padding: 20px;
+    padding: 20px 30px;
+}
+
+.profile-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid var(--input-border-color);
+    overflow: hidden;
+    text-align: center;
+    margin-right: 15px;
+}
+
+.profile-img img {
+    height: 100%;
+}
+
+.user-box {
+    display: flex;
 }
 
 .profile-section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    /* text-align: center; */
     margin-bottom: 20px;
 }
 
@@ -135,7 +165,7 @@ export default {
 }
 
 .profile-section h2 {
-    margin: 0 0 10px;
+    margin: 0 0 3px;
 }
 
 .profile-section p {
@@ -145,13 +175,13 @@ export default {
 
 .buttons {
     display: flex;
-    gap: 10px;
+    gap: 6px;
     margin-top: 10px;
 }
 
 .buttons button {
-    background: none;
-    color:#111;
+    background: var(--main-color);
+    color:#fff;
 }
 
 .secession {
@@ -164,11 +194,11 @@ export default {
 .logout-button {
     /* padding: 10px 20px; */
     border: 1px solid var(--input-border-color);
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     background-color: #f5f5f5;
     cursor: pointer;
-    font-size: var(--font-n-sec-size);
-    height: 51px;
+    font-size: var(--input-font-size);
+    height: 35px;
 }
 
 .info-button {
@@ -182,28 +212,27 @@ export default {
 
 .info-section {
     margin-bottom: 20px;
-}
-
-.info-section h3 {
-    margin-bottom: 10px;
+    font-size: var(--input-font-size);
 }
 
 .info-item {
     display: flex;
     justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--input-border-color);
+    align-items: center;
+    padding: 5px 0;
+    margin-bottom: 20px;
 }
 
-.info-section .label {
-    color: var(--main-color);
+.info-item:last-child {
+    border-bottom: 1px solid var(--input-border-color);
+    padding-bottom: 20px;
 }
 
 .actions-section {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; 
 }
 
 .action-item {

@@ -1,10 +1,7 @@
 <template>
   <div class="report-container margin-bottom">
+    <GoBack :goBackText="goBackText" />
     <header>
-      <div class="logo-box">
-        <img src="@/assets/img/app_logo_02.png" alt="G-CON Logo" class="logo">
-      </div>
-      <h1>REPORT</h1>
       <p v-if="reportList.length > 0">지난측정과 오늘의 측정결과를 볼 수 있습니다.</p>
       <p v-else>측정된 데이터가 없습니다</p>
     </header>
@@ -23,8 +20,13 @@
 </template>
 
 <script>
+import GoBack from "@/components/GoBack.vue"
+
 export default {
   name: 'report',
+  components: {
+    GoBack,
+  },
   data() {
     return {
       reportList: [
@@ -49,6 +51,7 @@ export default {
           new: false,
         },
       ],
+      goBackText: "리포트",
     };
   },
 };
@@ -59,12 +62,12 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px 20px;
+  padding: 20px 30px;
 }
 
 .report-container header {
-  text-align: center;
-  margin-bottom: 20px;
+  width: 100%; 
+  /* margin-bottom: 20px; */
 }
 
 .report-container h1 {
@@ -81,6 +84,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-top: 20px;
 }
 
 .report-item.new-report {
@@ -158,6 +162,7 @@ footer img {
   width: 150px;
   margin: 0 auto;
 }
+
 .logo {
   margin-bottom: 15px;
 }

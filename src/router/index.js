@@ -39,6 +39,11 @@ const router = createRouter({
           component: () => import('../views/home.vue')
         },
         {
+          path: '/signup/gender',
+          name: 'gender',
+          component: () => import('../views/signup/gender.vue')
+        },
+        {
           path: '/signup/qr',
           name: 'qr',
           component: () => import('../views/signup/qr.vue')
@@ -147,7 +152,7 @@ router.beforeEach(async (to, from, next) => {
   ]
   const authRequired = !publicPages.includes(to.path)
 
-  if(authRequired && !isAuthenticated && window.innerWidth < 800){
+  if (authRequired && !isAuthenticated && window.innerWidth < 800) {
     next({ path: '/login/userLogin' })
   }
 

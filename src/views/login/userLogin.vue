@@ -106,6 +106,10 @@ export default {
   font-weight: var(--font-b-weight);
 } */
 
+.container {
+  padding: 40px 20px;
+}
+
 .login-form {
   width: 100%;
   max-width: 300px;
@@ -126,7 +130,7 @@ export default {
 
 .input-group input {
   padding: 12px;
-  font-size: var(--input-font-size); 
+  font-size: var(--input-font-size);
   border: 1px solid var(--input-border-color);
   border-radius: var(--border-radius);
   font-weight: var(--font-t-weight);
@@ -161,7 +165,7 @@ export default {
 .links {
   margin-top: 20px;
   font-size: var(--font-n-sec-size);
-  color: #B7B7B7;
+  color: var(--light-font-color);
 }
 
 .sns-login {

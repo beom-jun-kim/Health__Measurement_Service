@@ -1,6 +1,6 @@
 <template>
     <div class="myInfo-container margin-bottom">
-        <GoBack />
+        <GoBack :goBackText="goBackText" />
         <div class="profile-section">
             <!-- <label for="profile-img">
                 <div class="img-upload">
@@ -11,15 +11,20 @@
                 </div>
             </label>
             <input id="profile-img" type="file" class="profile-input" name="profile-img" accept="image/*"> -->
-            <input type="text" class="value" name="username" v-model="user.name" required>
-            <p>G-CON 사용자</p>
-            <div class="buttons">
-                <h1 class="info-button">내정보 변경하기</h1>
+            <div class="user-box">
+                <div v-if="user.gender === 'F'" class="profile-img">
+                    <img src="@/assets/img/charac_w.png" alt="프로필 이미지">
+                </div>
+                <div v-if="user.gender === 'M'" class="profile-img">
+                    <img src="@/assets/img/charac_m.png" alt="프로필 이미지">
+                </div>
+                <div class="user-text-info">
+                    <input type="text" class="value" name="username" v-model="user.name" required>
+                </div>
             </div>
         </div>
         <div class="info-section">
             <form class="edit-form" @submit.prevent="editSave">
-                <h3>내 정보</h3>
                 <div class="info-item">
                     <span class="label">연락처</span>
                     <!-- <input type="text" class="value" name="phoneNum" v-model="user.phoneNumber"> -->
@@ -48,7 +53,7 @@
                         <span class="height">cm</span>
                     </div>
                 </div>
-                <div class="info-item">
+                <div class="info-item" style="border-bottom: 1px solid var(--input-border-color); padding-bottom: 20px;">
                     <span class="label">체중</span>
                     <div class="info-item-box">
                         <input type="text" class="value" name="weight" v-model="user.weight" required>
@@ -72,7 +77,8 @@ export default {
     },
     data() {
         return {
-            user: {}
+            user: {},
+            goBackText: "내 정보 변경하기",
         }
     },
     methods: {
@@ -127,19 +133,21 @@ export default {
 }
 
 .myInfo-container {
-    padding: 20px;
+    padding: 20px 30px;
 }
 
-.myInfo-container * {
-    font-size: var(--font-n-sec-size);
-
+.profile-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid var(--input-border-color);
+    overflow: hidden;
+    margin-bottom: 10px;
+    margin: 0 auto 10px;
 }
 
-.header {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 20px;
+.profile-img img {
+    height: 100%;
 }
 
 .profile-section {
@@ -195,6 +203,7 @@ export default {
 
 .info-section {
     margin-bottom: 20px;
+    font-size: var(--input-font-size);
 }
 
 .info-section h3 {
@@ -205,12 +214,8 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--input-border-color);
-    height: 60px;
-}
-
-.info-section .label {
-    color: var(--main-color);
+    padding: 5px 0;
+    margin-bottom: 20px;
 }
 
 .actions-section {
@@ -226,10 +231,11 @@ export default {
 
 input {
     border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius);
 }
 
 input[class="value"] {
-    padding: 7px 5px;
+    padding: 7px 10px;
     text-align: right;
 }
 
@@ -258,9 +264,7 @@ input[name="username"] {
     padding: 8px 20px;
     position: absolute;
     right: 0;
-    margin-top: 15px;
-    font-weight: var(--font-b-weight);
-    font-size: var(--font-n-sec-size);
+    font-size: var(--input-font-size);
     border-radius: 5px;
 }
 

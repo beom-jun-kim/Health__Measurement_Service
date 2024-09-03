@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <GoBack />
+        <GoBack :goBackText="goBackText" />
         <template v-if="pushList.length > 0">
             <small class="desc">최근 7일간의 알림만 표시됩니다</small>
             <RouterLink class="push-move" :to="push.categoryName" v-for="(push, index) in pushList" :key="index"
@@ -31,7 +31,8 @@ export default {
     name: "pushList",
     data() {
         return {
-            pushList: []
+            pushList: [],
+            goBackText: "알림",
         }
     },
     components: {

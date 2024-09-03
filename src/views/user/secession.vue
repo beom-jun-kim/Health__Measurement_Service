@@ -1,6 +1,6 @@
 <template>
     <div class="delete-account-container margin-bottom">
-        <GoBack />
+        <GoBack :goBackText="goBackText" />
         <div class="content">
             <p class="username"><span>{{ user.name }}</span> 님</p>
             <h3>회원탈퇴시 주의사항</h3>
@@ -33,6 +33,7 @@ export default {
     data() {
         return {
             user: {},
+            goBackText: "회원탈퇴",
         }
     },
     methods: {
@@ -119,10 +120,9 @@ delete-account-container .warnings {
     display: flex;
     justify-content: center;
     width: 50%;
-    padding: 18px 0;
+    padding: 12px 0;
     border-radius: 5px;
-    font-size: var(--font-n-size);
-    font-weight: var(--font-b-weight);
+    font-size: var(--input-font-size);
     color: #fff;
     border: none;
 }
