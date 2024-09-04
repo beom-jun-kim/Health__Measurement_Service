@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <GoBack :goBackText="goBackText" />
     <header>
       <h1>가까운 컨테이너 찾기</h1>
       <!-- <p>검색하시고자 하는 지역을 선택해주세요</p> -->
@@ -45,9 +46,13 @@
 
 <script>
 import Map from '@/api/Map';
+import GoBack from "@/components/GoBack.vue";
 
 export default {
   name: 'findContainer',
+  components:{
+    GoBack,
+  },
   data() {
     return {
       selectedCity: '',
@@ -78,6 +83,7 @@ export default {
       container: [],
       locations: [],
       sortedLocations: [],
+      goBackText: "컨테이너 찾기",
     };
   },
   methods: {
@@ -460,8 +466,8 @@ export default {
 .container {
   padding: 20px;
 }
+
 header {
-  margin-bottom: 10px;
   width: 100%;
 }
 

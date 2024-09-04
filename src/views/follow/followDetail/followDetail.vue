@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <GoBack />
+        <GoBack :goBackText="goBackText"/>
         <div class="detail-info">
             <div class="profile-box">
                 <!-- <div v-if="user.imgUrl" class="user-img-box">
@@ -9,7 +9,14 @@
                 <div v-else class="user-img-box">
                     <div class="user-not-profile"></div>
                 </div> -->
-                <span class="username">{{ user.name }}</span>
+                <div v-if="user.gender === 'F'" class="profile-img">
+                    <img src="@/assets/img/charac_w.png" alt="프로필 이미지">
+                </div>
+                <div v-if="user.gender === 'M'" class="profile-img">
+                    <img src="@/assets/img/charac_m.png" alt="프로필 이미지">
+                </div>
+                <p class="username">{{ user.name }}</p>
+                <small>@{{ user.userId }}</small>
             </div>
             <div class="user-info-box">
                 <div class="user-info">
@@ -41,6 +48,7 @@ export default {
     data() {
         return {
             user: {},
+            goBackText:"친구 리스트 상세",
         }
     },
     methods: {
@@ -99,13 +107,29 @@ export default {
 .user-info-box {
     display: flex;
     justify-content: space-between;
+    font-size: var(--input-font-size);
 }
 
 .user-info-box p {
     margin-bottom: 15px;
 }
 
-.user-info {
-    color: var(--main-color);
+.profile-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid var(--input-border-color);
+    overflow: hidden;
+    text-align: center;
+    margin: 0 auto 10px;
+}
+
+.profile-img img {
+    height: 100%;
+}
+
+.profile-box small {
+    color: var(--light-font-color);
+    font-weight: var(--font-t-weight);
 }
 </style>

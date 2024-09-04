@@ -137,13 +137,14 @@ export default {
 }
 
 .login-button {
-  padding: 15px;
+  padding: 12px;
   margin-top: 10px;
   border: none;
   border-radius: var(--border-radius);
-  font-size: var(--font-n-sec-size);
+  font-size: 19px;
   color: #fff;
   background-color: var(--main-color);
+  font-weight: var(--font-t-weight);
 }
 
 /* .login-button:last-child {

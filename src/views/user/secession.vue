@@ -133,7 +133,7 @@ delete-account-container .warnings {
 }
 
 .cancel-button {
-    background-color: var(--input-border-color);
+    background-color: var(--light-font-color);
     margin-left: 5px;
 }
 </style>

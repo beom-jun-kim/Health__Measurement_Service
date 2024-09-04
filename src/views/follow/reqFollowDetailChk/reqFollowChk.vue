@@ -12,18 +12,18 @@
                 <div class="user-profile" :style="{ backgroundImage: `url(${user.imgUrl})` }"></div>
             </div>
             <div v-else class="user-img-box">
-                <div class="user-not-profile"></div>
+                <div class="user-not-profile"></div> 
             </div>
             <span class="username">{{ user.name }}</span>
         </div>
         <div class="follow-res-buttons">
             <button @click="accept">수락하기</button>
             <button @click="reject">거절하기</button>
-            <button>
+            <!-- <button>
                 <RouterLink :to="`/follow/followDetail/${user.userSid}`">
                     정보보기
                 </RouterLink>
-            </button>
+            </button> -->
         </div>
     </div>
 </template>
@@ -35,7 +35,7 @@ export default {
     name: "reqFollowChk",
     data() {
         return {
-            user: {}
+            user: {},
         }
     },
     methods: {

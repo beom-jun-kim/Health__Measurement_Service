@@ -237,6 +237,7 @@ input {
 input[class="value"] {
     padding: 7px 10px;
     text-align: right;
+    font-size: var(--input-font-size);
 }
 
 input[name="username"] {

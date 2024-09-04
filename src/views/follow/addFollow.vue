@@ -1,25 +1,31 @@
 <template>
     <div class="container">
-        <!-- <GoBack /> -->
-        <div class="add-follow-title">
+        <GoBack :goBackText="goBackText" />
+        <!-- <div class="add-follow-title">
             <h3>친구추가하기</h3>
             <p>아이디 혹은 전화번호로 친구추가가 가능합니다.</p>
-        </div>
+        </div> -->
         <div class="radio-box">
-            <div class="radio-box-wrap">
-                <input type="radio" id="addId" name="addId" v-model="addRadio" value="id">
-                <label for="addId">아이디로 추가</label>
-            </div>
             <div class="radio-box-wrap">
                 <input type="radio" id="addPhone" name="addId" v-model="addRadio" value="phone">
                 <label for="addPhone">전화번호로 추가</label>
             </div>
+            <div class="radio-box-wrap">
+                <input type="radio" id="addId" name="addId" v-model="addRadio" value="id">
+                <label for="addId">아이디로 추가</label>
+            </div>
         </div>
         <div class="add-friend-wrap" v-if="addRadio === 'id'">
             <div class="add-friend">
-                <h3>아이디로 친구 찾기</h3>
-                <input type="text" id="userId" name="userId" placeholder="추가할 유저의 아이디를 입력" v-model="findIdChk">
-                <button class="add-fri-btn" @click="findIdAdd">확인</button>
+                <!-- <h3>아이디로 친구 찾기</h3> -->
+                <input type="text" id="userId" name="userId" placeholder="아이디 입력" v-model="findIdChk">
+                <button class="add-fri-btn" @click="findIdAdd">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22px" height="22px" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z"
+                            stroke="#36b1a7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
             </div>
             <div v-if="followIdBox" class="profile-box">
                 <div v-if="foundIdUser">
@@ -29,11 +35,23 @@
                     <div v-else class="user-img-box">
                         <div class="user-not-profile"></div>
                     </div> -->
+                    <div v-if="foundIdUser.gender === 'F'" class="profile-img">
+                        <img src="@/assets/img/charac_w.png" alt="프로필 이미지">
+                    </div>
+                    <div v-if="foundIdUser.gender === 'M'" class="profile-img">
+                        <img src="@/assets/img/charac_m.png" alt="프로필 이미지">
+                    </div>
                     <p class="username">{{ foundIdUser.name }}</p>
-                    <button v-if="foundIdUser.relationsStatus == null" class="req-follow"
-                        @click="addRequest(foundIdUser.userSid)">친구 신청하기</button>
-                    <button v-if="foundIdUser.relationsStatus === 'N'" class="req-follow"
-                        @click="cancelRequest(foundIdUser.userSid)">신청 취소</button>
+                    <small class="user-id">@{{ foundIdUser.userId }}</small>
+                    <div v-if="foundIdUser.relationsStatus == null">
+                        <button class="req-follow" @click="addRequest(foundIdUser.userSid)">친구 추가</button>
+                    </div>
+                    <div v-if="foundIdUser.relationsStatus === 'N'">
+                        <button class="req-follow" @click="cancelRequest(foundIdUser.userSid)">신청 취소</button>
+                    </div>
+                    <div v-if="foundIdUser.relationsStatus === 'Y'">
+                        <p>친구가 되어있습니다</p>
+                    </div>
                 </div>
                 <div v-else>
                     <p>해당 유저가 없습니다</p>
@@ -42,9 +60,15 @@
         </div>
         <div class="add-friend-wrap" v-if="addRadio === 'phone'">
             <div class="add-friend">
-                <h3>연락처로 친구 찾기</h3>
+                <!-- <h3>연락처로 친구 찾기</h3> -->
                 <input type="text" id="usePhone" name="usePhone" placeholder="'-'를 제외하고 입력" v-model="findPhoneChk">
-                <button class="add-fri-btn" @click="findPhoneAdd">확인</button>
+                <button class="add-fri-btn" @click="findPhoneAdd">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22px" height="22px" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z"
+                            stroke="#36b1a7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
             </div>
             <div v-if="followPhoneBox" class="profile-box">
                 <div v-if="foundPhoneUser">
@@ -54,11 +78,23 @@
                     <div v-else class="user-img-box">
                         <div class="user-not-profile"></div>
                     </div> -->
+                    <div v-if="foundPhoneUser.gender === 'F'" class="profile-img">
+                        <img src="@/assets/img/charac_w.png" alt="프로필 이미지">
+                    </div>
+                    <div v-if="foundPhoneUser.gender === 'M'" class="profile-img">
+                        <img src="@/assets/img/charac_m.png" alt="프로필 이미지">
+                    </div>
                     <p class="username">{{ foundPhoneUser.name }}</p>
-                    <button v-if="foundPhoneUser.relationsStatus == null" class="req-follow"
-                        @click="addPhoneRequest(foundPhoneUser.userSid)">친구 신청하기</button>
-                    <button v-if="foundPhoneUser.relationsStatus === 'N'" class="req-follow"
-                        @click="cancelPhoneRequest(foundPhoneUser.userSid)">신청 취소</button>
+                    <small class="user-id">@{{ foundPhoneUser.userId }}</small>
+                    <div v-if="foundPhoneUser.relationsStatus == null">
+                        <button class="req-follow" @click="addPhoneRequest(foundPhoneUser.userSid)">친구 추가</button>
+                    </div>
+                    <div v-if="foundPhoneUser.relationsStatus === 'N'">
+                        <button class="req-follow" @click="cancelPhoneRequest(foundPhoneUser.userSid)">신청 취소</button>
+                    </div>
+                    <div v-if="foundPhoneUser.relationsStatus === 'Y'">
+                        <p>친구가 되어있습니다</p>
+                    </div>
                 </div>
                 <div v-else>
                     <p>해당 유저가 없습니다</p>
@@ -70,12 +106,13 @@
 
 <script>
 import Follow from '@/api/Follow';
+import GoBack from "@/components/GoBack.vue";
 
 export default {
     name: "addFollow",
-    // components: {
-    //     GoBack,
-    // }, 
+    components: {
+        GoBack,
+    },
     data() {
         return {
             user: {},
@@ -85,7 +122,8 @@ export default {
             followPhoneBox: false,
             foundIdUser: null,
             foundPhoneUser: null,
-            addRadio: "id",
+            addRadio: "phone",
+            goBackText: "친구추가",
         }
     },
     methods: {
@@ -170,12 +208,13 @@ export default {
 </script>
 
 <style scoped>
-.container {
-    padding: 20px;
-}
+/* .container {
+    padding: 20px 30px;
+} */
 
 .add-friend {
     width: 100%;
+    position: relative;
 }
 
 .add-friend h3 {
@@ -183,15 +222,28 @@ export default {
 }
 
 .add-friend input {
-    border: 1px solid var(--input-border-color);
-    width: 80%;
+    border-bottom: 2px solid var(--main-color);
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    width: 100%;
     height: 35px;
     margin: 10px 10px 30px 0;
-    padding: 0 5px;
+    padding: 0 5px 0 35px;
     font-size: var(--font-n-sec-size);
+    -webkit-border-radius: 0;
 }
 
-.add-follow-title {
+.add-fri-btn {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+/* .add-follow-title {
     border-bottom: 1px solid var(--input-border-color);
     width: 100%;
     padding-bottom: 10px;
@@ -200,9 +252,9 @@ export default {
 .add-follow-title h3 {
     margin-bottom: 10px;
     color: var(--main-color);
-}
+} */
 
-.add-friend button {
+/* .add-friend button {
     height: 35px;
     padding: 0 10px;
     background: #8c8c8c;
@@ -211,19 +263,22 @@ export default {
     color: #fff;
     font-size: var(--font-n-size);
     transform: translateY(1px);
-}
+} */
 
 .profile-box {
     text-align: center;
     margin-bottom: 30px;
-    background: #ebebeb;
+    /* background: #ebebeb; */
     width: 100%;
     width: 100%;
     padding: 20px 0;
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.1);
 }
 
 .profile-box .username {
+    margin-top: 5px;
     font-size: var(--font-n-size);
+    font-weight: var(--font-b-weight);
 }
 
 .user-img-box {
@@ -251,18 +306,18 @@ export default {
 .req-follow {
     background: var(--main-color);
     border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    margin-top: 10px;
+    border-radius: 25px;
+    padding: 7px 35px;
+    margin-top: 5px;
     color: #fff;
     letter-spacing: 1px;
-    font-size: var(--font-n-sec-size);
+    font-size: var(--input-font-size);
 }
 
 .radio-box {
     display: flex;
     width: 100%;
-    margin: 25px 0;
+    margin: 0 0 25px;
 }
 
 .radio-box .radio-box-wrap {
@@ -280,5 +335,24 @@ export default {
 
 .add-friend-wrap {
     width: 100%;
+}
+
+.profile-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid var(--input-border-color);
+    overflow: hidden;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.profile-img img {
+    height: 100%;
+}
+
+.user-id {
+    color: var(--light-font-color);
+    vertical-align: super;
 }
 </style>

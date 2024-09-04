@@ -1,5 +1,5 @@
 <template>
-    <div class="home-container margin-bottom">
+    <div class="home-container">
         <header class="home-header">
             <div class="home-logo">
                 <img src="@/assets/img/app_logo_02.png" alt="G-CON Logo" class="logo">
@@ -41,14 +41,6 @@
                 </RouterLink>
             </div>
         </div>
-        <!-- <div class="action-buttons">
-            <RouterLink to="/signup/qr">
-                <button class="qr-button">MY 건강 Data<br>측정하기<br>(QR 코드 생성)</button>
-            </RouterLink>
-            <RouterLink :to="`/user/reportList/${user.userSid}`">
-                <button class="chk-button">측정기록<br>확인하기</button>
-            </RouterLink>
-        </div> -->
     </div>
 </template>
 
@@ -127,7 +119,7 @@ header .logo {
 .welcome-section .home-text {
     font-size: var(--font-n-size);
 }
-
+ 
 .welcome-section small {
     color: var(--light-font-color);
     font-weight: var(--font-t-weight);
@@ -137,9 +129,7 @@ header .logo {
     display: grid;
     grid-template: repeat(2, 1fr) / repeat(2, 1fr);
     gap: 10px;
-    margin: 50px 0;
-    /* width: 600px;
-    height: 400px; */
+    margin: 50px 0 0;
 }
 
 .grid-item {
@@ -151,7 +141,6 @@ header .logo {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* text-align: center; */
 }
 
 .health-data-text {
@@ -178,7 +167,6 @@ header .logo {
     display: flex;
     flex-direction: row;
     gap: 5px;
-    /* align-items: start; */
 }
 
 .grid-container .grid-item p {
@@ -192,14 +180,6 @@ header .logo {
     width: 80px;
 }
 
-/* .action-buttons {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    gap: 20px;
-    margin-bottom: 20px;
-} */
-
 .qr-button {
     background: url("@/assets/img/main_img_01_bg.png") no-repeat center/cover;
 }
@@ -207,26 +187,6 @@ header .logo {
 .chk-button {
     background: url("@/assets/img/main_img_02.png") no-repeat center/cover;
 }
-
-/* .action-buttons a {
-    width: 100%;
-}
-
-.action-buttons button {
-    width: 100%;
-    display: flex;
-    align-items: end;
-    justify-content: center;
-    padding-bottom: 15px;
-    line-height: 25px;
-    flex: 1;
-    height: 150px;
-    font-size: var(--font-n-size);
-    border-radius: 10px;
-    color: #fff;
-    font-weight: var(--font-b-weight);
-    border: none;
-} */
 
 .new-push-box {
     position: relative;

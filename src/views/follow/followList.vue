@@ -1,23 +1,6 @@
 <template>
     <div class="container">
-        <div class="follow-list">
-            <h2>친구리스트</h2>
-            <div class="add-follow-icon">
-                <RouterLink to="/follow/addFollow">
-                    <!-- <div class="req-chk-icon"> -->
-                        <button class="add-follow-btn">
-                            추가하기
-                        </button>
-                    <!-- </div> -->
-                </RouterLink>
-                <!-- <RouterLink to="/follow/reqFollowList">
-                    <img src="@/assets/img/alarm_mint.png" alt="친구리스트 알림 이미지">
-                    <div v-if="addFollowIcon" class="new-icon-box">
-                        <div class="new-icon">N</div>
-                    </div>
-                </RouterLink> -->
-            </div>
-        </div>
+        <GoBack :goBackText="goBackText" />
         <div class="tab-menu">
             <button :class="{ 'active-tab': currentComponent === 'GuardianList' }"
                 @click="updateState('GuardianList')">나의 보호자</button>
@@ -33,18 +16,21 @@
 <script>
 import GuardianList from "@/components/GuardianList.vue";
 import Protector from "@/components/Protector.vue";
+import GoBack from "@/components/GoBack.vue";
 
 export default {
     name: "followList",
     components: {
         GuardianList,
         Protector,
+        GoBack,
     },
     data() {
         return {
             userList: [],
             currentComponent: 'GuardianList',
-            addFollowIcon:true,
+            addFollowIcon: true,
+            goBackText: "친구 리스트"
         }
     },
     methods: {
@@ -85,71 +71,19 @@ export default {
     font-size: var(--font-n-size);
     border-bottom: 2px solid var(--input-border-color);
     word-break: keep-all;
+    white-space: nowrap;
+    font-weight: var(--font-t-weight);
 }
 
 .tab-menu .active-tab {
-    color: #000;
+    color: var(--main-color);
     font-weight: var(--font-b-weight);
-    border-bottom: 6px solid var(--main-color);
+    border-bottom: 4px solid var(--main-color);
 }
 
 .component-box {
-    padding: 20px 0;
+    /* padding: 20px 0; */
     word-break: keep-all;
     width: 100%;
 }
-
-.follow-list {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 20px;
-    color: var(--main-color);
-    font-size: var(--font-n-size);
-}
-
-.add-follow-btn {
-    padding: 0 10px;
-    text-align: right;
-    width: 110px;
-    height: 35px;
-    background: url("@/assets/img/empty_person_add_black.png") no-repeat left 10px center / 20px auto;
-    border-radius: 5px;
-    border: 1px solid #000;
-    font-size: var(--font-n-sec-size);
-    color: #111;
-}
-
-/* .add-follow-icon {
-    display: flex;
-    align-items: center;
-} */
-
-/* .add-follow-icon a:last-child {
-    margin-left: 10px;
-    width: 30px;
-    transform: translateY(2px);
-} */
-
-/* .req-chk-icon {
-    position: relative;
-} */
-
-/* .new-icon-box {
-    border: 1px solid red;
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
-    color: red;
-    text-align: center;
-    line-height: 15px;
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 11px;
-    background: #fff;
-    font-weight: var(--font-b-weight);
-} */
 </style>

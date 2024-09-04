@@ -10,7 +10,10 @@ class Follow {
   async followReq(data) {
     return await http.post('/invite', data)
   }
-  async followReqDel(id) {
+  async followReqDelPro(id) {
+    return await http.delete(`/invite?userSid=${id}`)
+  }
+  async followReqDelGuar(id) {
     return await http.delete(`/invite?guardianSid=${id}`)
   }
   async followCancelReq(id) {

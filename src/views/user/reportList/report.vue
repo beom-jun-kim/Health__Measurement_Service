@@ -8,11 +8,11 @@
     <div class="report-list">
       <div class="report-item" v-for="(report, index) in reportList" :key="index" :class="{ 'new-report': report.new }">
         <RouterLink :to="`/user/report/${report.id}`">
-          <div class="report-date">{{ report.date }}</div>
           <div class="report-label">
-            측정한 리포트
-            <span v-if="report.new" class="new-label">NEW</span>
+            측정하신 리포트가 도착하였습니다
+            <span v-if="report.new" class="new-label"></span>
           </div>
+          <small class="report-date">측정일 : {{ report.date }}</small>
         </RouterLink>
       </div>
     </div>
@@ -66,7 +66,7 @@ export default {
 }
 
 .report-container header {
-  width: 100%; 
+  width: 100%;
   /* margin-bottom: 20px; */
 }
 
@@ -88,7 +88,8 @@ export default {
 }
 
 .report-item.new-report {
-  border: 3px solid var(--main-color);
+  border: 2px solid var(--main-color);
+  color: var(--main-color);
 }
 
 .report-item {
@@ -96,9 +97,9 @@ export default {
   padding: 15px;
   margin-bottom: 10px;
   border: 1px solid var(--input-border-color);
-  border-radius: 10px;
-  text-align: center;
+  border-radius: var(--border-radius);
   height: 92px;
+  font-weight: var(--font-b-weight)
 }
 
 .report-item a {
@@ -107,29 +108,25 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  padding: 20px 20px 20px 30px;
 }
 
 .report-date {
-  font-size: var(--font-n-size);
-  margin-bottom: 5px;
+  font-weight: var(--font-t-weight);
+  color: var(--light-font-color);
+  vertical-align: sub;
 }
 
 .report-label {
   font-size: var(--font-n-sec-size);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .new-label {
-  margin-left: 10px;
-  color: red;
-  font-size: var(--font-n-sec-size);
-  font-weight: bold;
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #FF0000;
+  border-radius: 50%;
 }
 
 footer {
