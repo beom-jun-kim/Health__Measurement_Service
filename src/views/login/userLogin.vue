@@ -9,6 +9,9 @@
         <div class="input-group">
           <input type="password" id="password" name="password" v-model="password" required placeholder="비밀번호">
         </div>
+        <div class="error-message-cnt-box"v-if="errorMessageCntBox">
+          <small>{{ errorMessageCnt }}</small>
+        </div>
         <button type="submit" class="login-button">로그인</button>
       </form>
       <!-- <div class="sns-login">
@@ -36,7 +39,7 @@
           <small>비밀번호 찾기</small>
         </RouterLink>
       </div>
-  
+
       <div class="sns-login">
         <div class="sns-title-box">
           <div class="sns-border-flex">
@@ -78,6 +81,8 @@ export default {
     return {
       userId: "",
       password: "",
+      errorMessageCnt: "",
+      errorMessageCntBox: false,
     }
   },
   methods: {
@@ -91,8 +96,9 @@ export default {
         this.$router.push("/signup/welcome");
       } catch (error) {
         console.log("로그인실패", error);
-        if (error.response.status === 401 || error.response.status === 403) {
-          alert("아이디 또는 비밀번호가 잘못되었습니다");
+        if (error.response.data.errorMessage) {
+          this.errorMessageCntBox = true;
+          this.errorMessageCnt = error.response.data.errorMessage;
         }
       }
     },
@@ -110,6 +116,13 @@ export default {
       const tokenData = { accessToken: newAccessToken }
       localStorage.setItem('Authorization', JSON.stringify(tokenData))
       window.location.href = '/home'
+    }
+    if (this.$route.query.error) {
+      alert("카카오 계정에 전화번호가 등록되지 않았습니다. 카카오에서 전화번호를 등록한 후 회원가입을 진행해주세요.");
+      const params = new URLSearchParams(window.location.search);
+      params.delete('error');
+      const newUrl = window.location.origin + window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+      window.location.href = newUrl;
     }
   }
 };
@@ -158,7 +171,7 @@ export default {
 
 .login-button {
   padding: 12px;
-  margin-top: 10px;
+  margin-top: 20px;
   border: none;
   border-radius: var(--border-radius);
   font-size: var(--font-n-sec-size);
@@ -214,80 +227,6 @@ export default {
   height: 50px;
 }
 
-/* .sns-title-box:before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: -105%;
-  transform: translateY(-50%);
-  width: 27.320843091334897vw;
-  height: 1px;
-  background: var(--input-border-color);
-}
-
-.sns-title-box:after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: -105%;
-  transform: translateY(-50%);
-  width: 27.320843091334897vw;
-  height: 1px;
-  background: var(--input-border-color);
-} */
-
-
-/* .sns-login {
-  margin-top: 20px;
-}
-
-.sns-login-box {
-  display: flex;
-  justify-content: center;
-  border-radius: var(--border-radius);
-  width: 300px;
-}
-
-.sns-login-box:first-child {
-  background: #03c75a;
-  height: 53.33px;
-  margin-bottom: 10px;
-}
-
-.sns-login-box:last-child {
-  background: #fee500;
-  height: 53.33px;
-  line-height: 90.5px;
-}
-
-.sns-login .sns-login-naver,
-.sns-login .sns-login-kakao {
-  width: 200px;
-}
-
-.sns-login-kakao {
-  position: relative;
-}
-
-.sns-login-kakao svg {
-  position: absolute;
-  top: 50%;
-  left: 32px;
-  transform: translateY(-50%);
-  z-index: 100;
-}
-
-.hidden-box {
-  background: #fee500;
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  z-index: 1;
-} */
-
 .move-signup {
   position: absolute;
   bottom: 50px;
@@ -297,5 +236,10 @@ export default {
 .move-signup small {
   margin-right: 5px;
   color: var(--light-font-color);
+}
+
+.error-message-cnt-box small {
+  color: red;
+  word-break: keep-all;
 }
 </style>

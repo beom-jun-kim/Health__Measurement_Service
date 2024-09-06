@@ -18,7 +18,8 @@
         <div class="add-friend-wrap" v-if="addRadio === 'id'">
             <div class="add-friend">
                 <!-- <h3>아이디로 친구 찾기</h3> -->
-                <input type="text" id="userId" name="userId" placeholder="아이디 입력" v-model="findIdChk">
+                <input type="text" id="userId" name="userId" placeholder="아이디 입력" v-model="findIdChk"
+                    @keyup.enter="findIdAdd">
                 <button class="add-fri-btn" @click="findIdAdd">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22px" height="22px" viewBox="0 0 24 24" fill="none">
                         <path
@@ -29,39 +30,42 @@
             </div>
             <div v-if="followIdBox" class="profile-box">
                 <div v-if="foundIdUser">
-                    <!-- <div class="user-img-box" v-if="foundIdUser.imgUrl">
-                        <div class="user-profile" :style="{ backgroundImage: `url(${foundIdUser.imgUrl})` }"></div>
-                    </div>
-                    <div v-else class="user-img-box">
-                        <div class="user-not-profile"></div>
-                    </div> -->
-                    <div v-if="foundIdUser.gender === 'F'" class="profile-img">
-                        <img src="@/assets/img/charac_w.png" alt="프로필 이미지">
-                    </div>
-                    <div v-if="foundIdUser.gender === 'M'" class="profile-img">
-                        <img src="@/assets/img/charac_m.png" alt="프로필 이미지">
-                    </div>
-                    <p class="username">{{ foundIdUser.name }}</p>
-                    <small class="user-id">@{{ foundIdUser.userId }}</small>
-                    <div v-if="foundIdUser.relationsStatus == null">
-                        <button class="req-follow" @click="addRequest(foundIdUser.userSid)">친구 추가</button>
-                    </div>
-                    <div v-if="foundIdUser.relationsStatus === 'N'">
-                        <button class="req-follow" @click="cancelRequest(foundIdUser.userSid)">신청 취소</button>
-                    </div>
-                    <div v-if="foundIdUser.relationsStatus === 'Y'">
-                        <p>친구가 되어있습니다</p>
+                    <div class="profile-box-info">
+                        <!-- <div class="user-img-box" v-if="foundIdUser.imgUrl">
+                            <div class="user-profile" :style="{ backgroundImage: `url(${foundIdUser.imgUrl})` }"></div>
+                        </div>
+                        <div v-else class="user-img-box">
+                            <div class="user-not-profile"></div>
+                        </div> -->
+                        <div v-if="foundIdUser.gender === 'F'" class="profile-img">
+                            <img src="@/assets/img/charac_w.png" alt="프로필 이미지">
+                        </div>
+                        <div v-if="foundIdUser.gender === 'M'" class="profile-img">
+                            <img src="@/assets/img/charac_m.png" alt="프로필 이미지">
+                        </div>
+                        <p class="username">{{ foundIdUser.name }}</p>
+                        <small class="user-id">@{{ foundIdUser.userId }}</small>
+                        <div v-if="foundIdUser.relationsStatus == null">
+                            <button class="req-follow" @click="addRequest(foundIdUser.userSid)">친구 추가</button>
+                        </div>
+                        <div v-if="foundIdUser.relationsStatus === 'N'">
+                            <button class="req-follow" @click="cancelRequest(foundIdUser.userSid)">신청 취소</button>
+                        </div>
+                        <div v-if="foundIdUser.relationsStatus === 'Y'">
+                            <p>친구가 되어있습니다</p>
+                        </div>
                     </div>
                 </div>
-                <div v-else>
-                    <p>해당 유저가 없습니다</p>
+                <div class="no-search" v-else>
+                    <p>해당 유저가 검색되지 않습니다</p>
                 </div>
             </div>
         </div>
         <div class="add-friend-wrap" v-if="addRadio === 'phone'">
             <div class="add-friend">
                 <!-- <h3>연락처로 친구 찾기</h3> -->
-                <input type="text" id="usePhone" name="usePhone" placeholder="'-'를 제외하고 입력" v-model="findPhoneChk">
+                <input type="text" id="usePhone" name="usePhone" placeholder="'-'를 제외하고 입력" v-model="findPhoneChk"
+                    @keyup.enter="findPhoneAdd">
                 <button class="add-fri-btn" @click="findPhoneAdd">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22px" height="22px" viewBox="0 0 24 24" fill="none">
                         <path
@@ -72,32 +76,35 @@
             </div>
             <div v-if="followPhoneBox" class="profile-box">
                 <div v-if="foundPhoneUser">
-                    <!-- <div class="user-img-box" v-if="foundPhoneUser.imgUrl">
-                        <div class="user-profile" :style="{ backgroundImage: `url(${foundPhoneUser.imgUrl})` }"></div>
-                    </div>
-                    <div v-else class="user-img-box">
-                        <div class="user-not-profile"></div>
-                    </div> -->
-                    <div v-if="foundPhoneUser.gender === 'F'" class="profile-img">
-                        <img src="@/assets/img/charac_w.png" alt="프로필 이미지">
-                    </div>
-                    <div v-if="foundPhoneUser.gender === 'M'" class="profile-img">
-                        <img src="@/assets/img/charac_m.png" alt="프로필 이미지">
-                    </div>
-                    <p class="username">{{ foundPhoneUser.name }}</p>
-                    <small class="user-id">@{{ foundPhoneUser.userId }}</small>
-                    <div v-if="foundPhoneUser.relationsStatus == null">
-                        <button class="req-follow" @click="addPhoneRequest(foundPhoneUser.userSid)">친구 추가</button>
-                    </div>
-                    <div v-if="foundPhoneUser.relationsStatus === 'N'">
-                        <button class="req-follow" @click="cancelPhoneRequest(foundPhoneUser.userSid)">신청 취소</button>
-                    </div>
-                    <div v-if="foundPhoneUser.relationsStatus === 'Y'">
-                        <p>친구가 되어있습니다</p>
+                    <div class="profile-box-info">
+                        <!-- <div class="user-img-box" v-if="foundPhoneUser.imgUrl">
+                            <div class="user-profile" :style="{ backgroundImage: `url(${foundPhoneUser.imgUrl})` }"></div>
+                        </div>
+                        <div v-else class="user-img-box">
+                            <div class="user-not-profile"></div>
+                        </div> -->
+                        <div v-if="foundPhoneUser.gender === 'F'" class="profile-img">
+                            <img src="@/assets/img/charac_w.png" alt="프로필 이미지">
+                        </div>
+                        <div v-if="foundPhoneUser.gender === 'M'" class="profile-img">
+                            <img src="@/assets/img/charac_m.png" alt="프로필 이미지">
+                        </div>
+                        <p class="username">{{ foundPhoneUser.name }}</p>
+                        <small class="user-id">@{{ foundPhoneUser.userId }}</small>
+                        <div v-if="foundPhoneUser.relationsStatus == null">
+                            <button class="req-follow" @click="addPhoneRequest(foundPhoneUser.userSid)">친구 추가</button>
+                        </div>
+                        <div v-if="foundPhoneUser.relationsStatus === 'N'">
+                            <button class="req-follow" @click="cancelPhoneRequest(foundPhoneUser.userSid)">신청
+                                취소</button>
+                        </div>
+                        <div v-if="foundPhoneUser.relationsStatus === 'Y'">
+                            <p>친구가 되어있습니다</p>
+                        </div>
                     </div>
                 </div>
-                <div v-else>
-                    <p>해당 유저가 없습니다</p>
+                <div class="no-search" v-else>
+                    <p>해당 유저가 검색되지 않습니다</p>
                 </div>
             </div>
         </div>
@@ -143,18 +150,23 @@ export default {
             }
         },
         async findPhoneAdd() {
-            try {
-                const response = await Follow.getFollowPhone(this.findPhoneChk);
-                this.user = response.data;
-                if (this.user.phoneNumber === this.findPhoneChk) {
-                    this.foundPhoneUser = this.user;
-                    this.followPhoneBox = true;
-                } else {
-                    this.foundPhoneUser = null;
-                    this.followPhoneBox = true;
+            const findPhoneChk = Number(this.findPhoneChk);
+            if (isNaN(findPhoneChk)) {
+                alert("번호를 입력하여주세요");
+            } else {
+                try {
+                    const response = await Follow.getFollowPhone(this.findPhoneChk);
+                    this.user = response.data;
+                    if (this.user.phoneNumber === this.findPhoneChk) {
+                        this.foundPhoneUser = this.user;
+                        this.followPhoneBox = true;
+                    } else {
+                        this.foundPhoneUser = null;
+                        this.followPhoneBox = true;
+                    }
+                } catch (error) {
+                    console.log("휴대전화로 찾기 실패", error);
                 }
-            } catch (error) {
-                console.log("휴대전화로 찾기 실패", error);
             }
         },
         // formatPhone(phone) {
@@ -265,10 +277,9 @@ export default {
     transform: translateY(1px);
 } */
 
-.profile-box {
+.profile-box-info {
     text-align: center;
     margin-bottom: 30px;
-    /* background: #ebebeb; */
     width: 100%;
     width: 100%;
     padding: 20px 0;
@@ -354,5 +365,11 @@ export default {
 .user-id {
     color: var(--light-font-color);
     vertical-align: super;
+}
+
+.no-search {
+    background: var(--input-border-color);
+    padding: 10px 0;
+    text-align: center;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container margin-bottom-zero">
         <GoBack :goBackText="goBackText"/>
         <div class="tab-menu">
             <button :class="{ 'active-tab': currentComponent === 'FindId' }"

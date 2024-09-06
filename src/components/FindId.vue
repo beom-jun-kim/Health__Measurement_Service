@@ -9,7 +9,7 @@
             <div style="display: flex; justify-content: space-between; gap: 5px;">
                 <div class="input-group">
                     <input type="text" placeholder="전화번호 (-없이 입력)" v-model="form.phoneNumber"
-                        :disabled="verificationSent" class="input-phone-num"/>
+                        :disabled="verificationSent" class="input-phone-num" />
                 </div>
                 <button v-if="verificationSent === false" type="submit" class="send-code-button"
                     @click="findIdSendVerificationCode">전송</button>
@@ -21,15 +21,49 @@
                     <label for="verification-code">인증번호</label>
                     <span class="timeOut" v-if="isTimerActive">남은 시간 : {{ formattedTime }}</span>
                 </div>
-                <!-- <div style="display: flex; justify-content: space-between; align-items: center; gap: 5px; margin-top: 10px;"> -->
-                    <input type="text" id="verification-code" name="verification-code" v-model="form.verificationCode"
-                        :disabled="isVerified">
-                    <button type="button" class="send-code-button02" @click="verifyCode" :disabled="isVerified">아이디 찾기</button>
-                <!-- </div> -->
+                
+                <input type="text" id="verification-code" name="verification-code" v-model="form.verificationCode"
+                    :disabled="isVerified">
+                <button type="button" class="send-code-button02" @click="verifyCode" :disabled="isVerified">아이디
+                    찾기</button>
+                
             </div>
         </form>
-        <div class="findIdResult" v-if="isVerified">
-            <span> 조회된 아이디 : {{ findIdResult.userId }}</span>
+        <div class="findIdResult" v-if="isVerified && findIdModal">
+            <div class="close-btn" @click="closeBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px"
+                    height="20px" viewBox="0 -0.5 21 21" version="1.1">
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Dribbble-Light-Preview" transform="translate(-419.000000, -240.000000)" fill="#000000">
+                            <g id="icons" transform="translate(56.000000, 160.000000)">
+                                <polygon id="close-[#1511]"
+                                    points="375.0183 90 384 98.554 382.48065 100 373.5 91.446 364.5183 100 363 98.554 371.98065 90 363 81.446 364.5183 80 373.5 88.554 382.48065 80 384 81.446">
+                                </polygon>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            <div class="result-box">
+                <div class="gcon-icon-img">
+                    <img src="@/assets/img/favicon_48.png" alt="gcon icon">
+                </div>
+                <div class="find-id-wrap">
+                    <div class="smart-shoes-id">
+                        <p class="smart-shoes-id-left">가입된 아이디</p>
+                        <p class="">{{ findIdResult.userId === false ? "조회된 아이디가 없습니다" : findIdResult.userId }}</p>
+                    </div>
+                    <div class="smart-sns-id">
+                        <p class="smart-shoes-id-left">연결된 SNS 계정</p>
+                        <p class="smart-sns-id-title">카카오 아이디 <span class="spa">|</span> {{ findIdResult.naverId ===
+                    null ?
+                    "연결된 아이디가 없습니다" : findIdResult.naverId }}</p>
+                        <p class="smart-sns-id-title">네이버 아이디 <span class="spa">|</span> {{ findIdResult.kakaoId ===
+                    null ?
+                    "연결된 아이디가 없습니다" : findIdResult.kakaoId }}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -53,6 +87,7 @@ export default {
             isTimerActive: false,
             countdown: null,
             excessPhrase: "",
+            findIdModal : false,
         }
     },
     methods: {
@@ -93,8 +128,9 @@ export default {
                 }
                 const response = await UserDataService.smsChk(data);
                 if (response.data.verified === true) {
-                    this.isVerified = true;
                     alert("인증번호가 확인되었습니다");
+                    this.isVerified = true;
+                    this.findIdModal = true;
                     if (this.countdown) {
                         clearInterval(this.countdown);
                     }
@@ -120,6 +156,7 @@ export default {
             try {
                 const response = await UserDataService.getfindId(this.form.name, this.form.phoneNumber)
                 this.findIdResult = response.data;
+                console.log("dfdfdfdfdf", this.findIdResult);
             } catch (error) {
                 console.log("아이디 찾기 실패", error);
             }
@@ -139,6 +176,9 @@ export default {
                     this.verificationSent = false;
                 }
             }, 1000)
+        },
+        closeBtn(){
+            this.findIdModal = false;
         }
     },
     computed: {
@@ -181,46 +221,93 @@ export default {
 }
 
 .send-code-button {
-    /* width: 100%; */
     padding: 0 15px;
     height: 41px;
     border: 1px solid var(--main-color);
     border-radius: var(--border-radius);
-    /* font-size: var(--font-n-sec-size); */
     color: var(--main-color);
     background: none;
-    /* background-color: var(--main-color);      */
-    /* margin-bottom: 20px; */
 }
 
 .send-code-button02 {
     width: 100%;
     padding: 15px;
-    /* height: 41px; */
     border: 1px solid var(--main-color);
     border-radius: var(--border-radius);
     font-size: var(--font-n-sec-size);
     color: #fff;
-    background-color: var(--main-color);     
+    background-color: var(--main-color);
     margin-top: 10px;
 }
 
 .send-code-button:disabled {
-    /* background-color: #ccc; */
     cursor: not-allowed;
     color: #36b1a798;
     border: 1px solid #36b1a798;
 }
 
-/* input[id="verification-code"] {
-    margin: 10px 0 15px;
-} */
-     
-.findIdResult {
-    font-size: var(--font-n-sec-size)
+.send-code-button02:disabled {
+    background-color: #36b1a798;
+    cursor: not-allowed;
+    border: none;
 }
 
 .timeOut {
     font-size: var(--input-font-size);
+}
+
+.findIdResult {
+    padding: 20px 20px 0 20px;
+    /* display: flex; */
+    /* margin-top: 20px; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+}
+
+.result-box {
+    border: 1px solid var(--input-border-color);
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    padding: 20px;
+}
+
+.find-id-wrap {
+    width: 100%;
+}
+
+.gcon-icon-img {
+    width: 25px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.smart-shoes-id {
+    border-bottom: 1px solid var(--input-border-color);
+    padding: 0 20px 20px 0;
+}
+
+.smart-sns-id {
+    padding: 20px 0 0;
+}
+
+.smart-shoes-id-left {
+    margin-bottom: 10px;
+}
+
+.smart-sns-id-title {
+    font-size: var(--input-font-size);
+}
+
+.spa {
+    color: var(--light-font-color);
+    margin: 0 5px;
 }
 </style>

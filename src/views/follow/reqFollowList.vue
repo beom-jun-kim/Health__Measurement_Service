@@ -216,7 +216,7 @@ export default {
 
 .not-list {
     width: 100%;
-    background: #ebebeb;
+    background: var(--input-border-color);
     padding: 10px 0;
 }
 

@@ -7,6 +7,12 @@ class Map {
   async containerInfo() {
     return await http.get(`/container/info`)
   }
+  async getCityes() {
+    return await http.get(`/code?type=city`)
+  }
+  async getContainer(code) {
+    return await http.get(`/container/info?code=${code}`)
+  }
 }
 
 export default new Map()

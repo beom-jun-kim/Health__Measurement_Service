@@ -150,7 +150,7 @@ export default {
 }
 
 .not-list {
-    background: #ebebeb;
+    background: var(--input-border-color);
     padding: 10px 0;
 }
 
