@@ -1,46 +1,68 @@
 <template>
     <div class="home-container">
         <header class="home-header">
-            <div class="home-logo">
-                <img src="@/assets/img/app_logo_02.png" alt="G-CON Logo" class="logo">
-            </div>
+            <div></div>
             <RouterLink to="/notification/pushList">
                 <div class="new-push-box">
-                    <img src="@/assets/img/icon_alarm.png" alt="Notification" class="notification-icon">
+                    <img src="@/assets/img/alarm_white.png" alt="Notification" class="notification-icon">
                     <div v-if="newPush === false" class="new-icon-box">
                         <div class="new-icon">N</div>
                     </div>
                 </div>
             </RouterLink>
         </header>
-        <div class="welcome-section">
-            <h1 class="home-text-user">{{ user.name }}님</h1>
-            <p class="home-text">오늘 하루도 건강을 잘 챙기시고 계시나요?</p>
-            <small>오늘도 G-con과 함께 건강상태를 체크해 보아요</small>
+        <section class="main-greeting-wrap">
+            <div class="main-greeting-box">
+                <div class="main-greeting-img">
+                    <img src="@/assets/img/img_main_woman.png" alt="메인 사람 이미지">
+                </div>
+                <div class="main-greeting-text">
+                    <div class="main-greeting-gcon">
+                        <img src="@/assets/img/app_logo_02_white.png" alt="지콘 아이콘">
+                    </div>
+                    <div class="main-greeting-desc">
+                        <div class="main-greeting-desc-name">
+                            <h1>{{ user.name }}님</h1>
+                        </div>
+                        <div class="main-greeting-desc-hello">
+                            <p>반갑습니다</p>
+                        </div>
+                        <div class="main-greeting-desc-long">
+                            <p>
+                                오늘 하루도<br>
+                                건강을 잘 챙기고<br>
+                                계시나요?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="welcome-section">
             <div class="grid-container">
-                <div class="grid-item item1">
-                    <RouterLink to="/signup/qr">  
+                <RouterLink to="/signup/qr" class="item1">
+                    <div class="grid-item">
                         <div class="health-data-text">
-                            <p>MY 건강 데이터<br /> 측정하기</p>
+                            <p>MY 건강 데이터 측정하기</p>
                             <small>(QR 코드 생성)</small>
                         </div>
                         <img src="@/assets/img/Online Doctor-rafiki.png" alt="Health Data Measurement">
-                    </RouterLink>
-                </div>
-                <RouterLink :to="`/user/reportList/${user.userSid}`" class="move">
-                    <div class="grid-item item2 report-chk">
+                    </div>
+                </RouterLink>
+                <RouterLink :to="`/user/reportList/${user.userSid}`" class="move item2">
+                    <div class="grid-item report-chk">
                         <p>측정기록 확인하기</p>
                         <img src="@/assets/img/Medical prescription-bro.png" alt="Check Records">
                     </div>
                 </RouterLink>
-                <RouterLink to="/findContainer" class="move">
-                    <div class="grid-item item3 find-con">
+                <RouterLink to="/findContainer" class="move item3">
+                    <div class="grid-item find-con">
                         <p>G-CON<br />찾기</p>
                         <img src="@/assets/img/Thinking face-bro.png" alt="Find G-Con">
                     </div>
                 </RouterLink>
             </div>
-        </div>
+        </section>
     </div>
 </template>
 
@@ -61,7 +83,7 @@ export default {
             try {
                 const response = await UserDataService.getUserInfo();
                 this.user = response.data;
-                if(this.user.gender === "") {
+                if (this.user.gender === "") {
                     this.$router.push("/signup/gender");
                 }
             } catch (error) {
@@ -90,39 +112,73 @@ export default {
 }
 
 .home-container {
-    padding: 20px 30px;
-}
-
-header .logo {
-    width: 80px;
-    margin-bottom: 0;
+    background: var(--main-color);
+    padding: 20px 0 0;
 }
 
 .home-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 50px;
+    /* margin-bottom: 10px; */
+    padding: 0 30px;
 }
 
 .notification-icon {
-    width: 30px;
-    height: 30px;
+    height: 25px;
 }
 
-.welcome-section .home-text-user {
+.main-greeting-text {
+    padding-top: 30px;
+}
+
+.main-greeting-wrap {
+    margin-bottom: -50px;
+    padding: 0 20px;
+}
+
+.main-greeting-box {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.main-greeting-desc-name {
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.main-greeting-gcon {
+    width: 100px;
+    margin-bottom: 40px;
+}
+
+.main-greeting-desc-hello {
     color: var(--main-color);
-    margin-bottom: 10px;
-    font-size: var(--font-b-size);
+    background: #fff;
+    text-align: center;
+    border-radius: 50px;
+    padding: 3px;
+    font-size: var(--font-n-size);
+    font-weight: var(--font-b-weight);
+    margin-bottom: 20px;
 }
 
-.welcome-section .home-text {
+.main-greeting-desc-long {
+    color: #fff;
     font-size: var(--font-n-size);
 }
- 
-.welcome-section small {
-    color: var(--light-font-color);
-    font-weight: var(--font-t-weight);
+
+.main-greeting-desc-long p {
+    word-break: keep-all;
+}
+
+.welcome-section {
+    background: #fff;
+    border-radius: 10% 10% 0 0;
+    padding: 10px 30px 80px;
 }
 
 .grid-container {
@@ -133,28 +189,27 @@ header .logo {
 }
 
 .grid-item {
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px 0 0 20px;
+    border-radius: var(--border-radius);
+    padding: 0 20px;
     box-shadow: -3px 3px 7px rgba(0, 0, 0, 0.1);
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    height: 110px;
 }
 
-.health-data-text {
-    width: 100%;
+.grid-item img {
+    width: 140px;
 }
 
 .item1 {
-    grid-column: 1 / 2;
-    grid-row: 1 / 3;
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
 }
 
 .item2 {
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
 }
 
 .item3 {
@@ -171,11 +226,14 @@ header .logo {
 
 .grid-container .grid-item p {
     word-break: keep-all;
-    font-size: var(--input-font-size);
+    font-size: var(--font-n-sec-size);
     font-weight: var(--font-b-weight);
 }
 
-.grid-container .report-chk img,
+.grid-container .report-chk img {
+    width: 70px;
+}
+
 .grid-container .find-con img {
     width: 80px;
 }
@@ -197,10 +255,10 @@ header .logo {
     text-align: center;
     color: #fff;
     border-radius: 50%;
-    font-size: 12px;
-    width: 15px;
-    height: 15px;
-    line-height: 15px;
+    font-size: 8px;
+    width: 12px;
+    height: 12px;
+    line-height: 12px;
     position: absolute;
     top: 0;
     right: 0;
