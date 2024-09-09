@@ -233,7 +233,6 @@ export default {
                     birthday: birthday,
                     phoneNumber: this.form.phone,
                 }
-                console.log("1234", data);
                 await UserDataService.createUser(data);
                 alert("회원가입이 완료되었습니다");
                 this.$router.push("/signup/welcome");

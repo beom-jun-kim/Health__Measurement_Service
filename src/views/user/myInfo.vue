@@ -33,6 +33,10 @@
         </div>
         <div class="info-section">
             <div class="info-item">
+                <p class="label">아이디</p>
+                <p class="value">{{ user.userId }}</p>
+            </div>
+            <div class="info-item">
                 <p class="label">연락처</p>
                 <p class="value">{{ user.phoneNumber }}</p>
             </div>
@@ -46,11 +50,11 @@
             </div>
             <div class="info-item">
                 <span class="label">키</span>
-                <span class="value">{{ user.height ? user.height : "정보가 없습니다." }}</span>
+                <span class="value">{{ user.height ? user.height + " cm" : "정보가 없습니다." }}</span>
             </div>
             <div class="info-item">
                 <span class="label">체중</span>
-                <span class="value">{{ user.weight ? user.weight : "정보가 없습니다." }}</span>
+                <span class="value">{{ user.weight ? user.weight + " kg" : "정보가 없습니다." }}</span>
             </div>
         </div>
         <RouterLink to="/user/secession" class="secession">

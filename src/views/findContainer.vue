@@ -59,7 +59,7 @@
     </div>
     <div style="width: 40px;"></div>
   </header>
-  <div id="map" style="width: 100%; height: 600px"></div>
+  <div id="map" style="width: 100%; height: 595px"></div>
   <div class="search-result">
     <div class="search-result-title">
       <p>G-CON 검색결과</p>

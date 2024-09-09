@@ -6,8 +6,8 @@
                 <div class="arrow" @click="goBack">
                     <span><svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 24 24"
                             fill="none">
-                            <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="#fff" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M15 7L10 12L15 17" stroke="#fff" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
                         </svg></span>
                 </div>
                 <div class="logo-img-box">
@@ -16,7 +16,7 @@
                 <div style="width: 40px;"></div>
             </div>
             <div class="qr-container" v-if="user.height && user.weight">
-                <GoBack v-if="qrCreateBtn" :goBackText="goBackText"/>
+                <GoBack v-if="qrCreateBtn" :goBackText="goBackText" />
                 <div v-if="qrCreateBtn">
                     <div class="qr-hand-img">
                         <img src="@/assets/img/QR Code-bro.png" alt="QR">
@@ -26,9 +26,7 @@
                     <button class="qr-btn" @click="displayNone">QR생성하기</button>
                 </div>
                 <div class="img_box" v-if="qr">
-                    <!-- <div class="border-radius01"></div><div class="border-radius02"></div> -->
                     <qrcode-vue :value="qr.qrCode" :size="150" />
-                    <!-- <div class="border-radius03"></div><div class="border-radius04"></div> -->
                     <p>QR 코드를 생성하였습니다</p>
                     <small>나의 건강상태를체크해 건강과 행복을 찾아가세요.</small>
                 </div>
@@ -172,7 +170,7 @@ export default {
     background-color: var(--main-color);
 }
 
-.img_box { 
+.img_box {
     letter-spacing: .5px;
     position: relative;
 }

@@ -199,7 +199,7 @@ export default {
 }
 
 .grid-item img {
-    width: 140px;
+    width: 120px;
 }
 
 .item1 {
