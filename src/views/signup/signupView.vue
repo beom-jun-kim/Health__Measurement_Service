@@ -218,27 +218,28 @@ export default {
             this.passwordChk = false;
         },
         async userJoin() {
+            const birthday = `${this.form.birth}-${String(this.form.month).padStart(2, '0')}-${String(this.form.day).padStart(2, '0')}`;
             if (this.form.password !== this.form.pwdChk) {
                 alert("비밀번호가 일치하지 않습니다");
-            }
-
-            const birthday = `${this.form.birth}-${String(this.form.month).padStart(2, '0')}-${String(this.form.day).padStart(2, '0')}`;
-
-            try {
-                const data = {
-                    userId: this.form.id,
-                    password: this.form.password,
-                    name: this.form.username,
-                    gender: this.form.gender,
-                    birthday: birthday,
-                    phoneNumber: this.form.phone,
+            } else {
+                try {
+                    const data = {
+                        userId: this.form.id,
+                        password: this.form.password,
+                        name: this.form.username,
+                        gender: this.form.gender,
+                        birthday: birthday,
+                        phoneNumber: this.form.phone,
+                    }
+                    await UserDataService.createUser(data);
+                    alert("회원가입이 완료되었습니다");
+                    this.$router.push("/signup/welcome");
+                } catch (error) {
+                    console.log("회원가입 실패", error);
                 }
-                await UserDataService.createUser(data);
-                alert("회원가입이 완료되었습니다");
-                this.$router.push("/signup/welcome");
-            } catch (error) {
-                console.log("회원가입 실패", error);
             }
+
+
         },
         validateUsername(username) {
             const trimmedUsername = username.trim().replace(/\s+/g, '');
