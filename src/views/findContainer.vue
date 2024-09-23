@@ -70,7 +70,7 @@
       <span class="cate-city">{{ selectedContainer.containerName }}</span>
     </div>
     <div class="city-addr">
-      <p>{{ selectedContainer.lnmAddress }}</p>
+      <p>{{ selectedContainer.rdAdr }}</p>
     </div>
     <div class="city-tel">
       <p>TEL. {{ selectedContainer.telNo ? telFormat(selectedContainer.telNo) : '제공된 전화번호가 없습니다' }}</p>
@@ -167,11 +167,11 @@ export default {
         alert('컨테이너를 선택해 주세요.');
         return;
       }
-      const { latitude, longitude, lnmAddress } = this.selectedContainer;
-      this.updateMap(latitude, longitude, lnmAddress);
+      const { latitude, longitude, rdAdr } = this.selectedContainer;
+      this.updateMap(latitude, longitude, rdAdr);
       this.findSearch = false;
     },
-    updateMap(latitude, longitude, lnmAddress) {
+    updateMap(latitude, longitude, rdAdr) {
       this.markers.forEach(marker => marker.setMap(null));
       this.markers = [];
 
@@ -188,7 +188,7 @@ export default {
         }
       });
       const infowindow = new naver.maps.InfoWindow({
-        content: `<div style="padding:10px;"><a href="https://map.naver.com/v5/search/${encodeURIComponent(lnmAddress)}" style="color: rgb(0, 104, 195);">${lnmAddress}</a></div>`,
+        content: `<div style="padding:10px;"><a href="https://map.naver.com/v5/search/${encodeURIComponent(rdAdr)}" style="color: rgb(0, 104, 195);">${rdAdr}</a></div>`,
         borderWidth: 0,
         disableAnchor: true,
       });
@@ -216,7 +216,7 @@ export default {
             }
           });
           const infowindow = new naver.maps.InfoWindow({
-            content: `<div style="padding:10px;"><a href="https://map.naver.com/v5/search/${encodeURIComponent(location.roadAddress)}" style="color: rgb(0, 104, 195);">${location.roadAddress}</a></div>`,
+            content: `<div style="padding:10px;"><a href="https://map.naver.com/v5/search/${encodeURIComponent(location.rdAdr)}" style="color: rgb(0, 104, 195);">${location.rdAdr}</a></div>`,
             borderWidth: 0,
             disableAnchor: true,
           });
