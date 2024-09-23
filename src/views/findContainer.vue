@@ -343,8 +343,7 @@ export default {
 }
 
 .city-list-wrap {
-  display: grid;
-  grid-template: repeat(2, 1fr) / repeat(4, 1fr);
+  display: flex;
   flex-wrap: wrap;
   width: 100%;
   gap: 5px;
