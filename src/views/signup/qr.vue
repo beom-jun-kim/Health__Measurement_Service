@@ -26,7 +26,7 @@
                 <button class="qr-btn" @click="displayNone">QR생성하기</button>
             </div>
             <div class="img_box" v-if="qr">
-                <qrcode-vue :value="qr.qrCode" :size="150" />
+                <qrcode-vue :value="qr.qrCode" :size="180" />
                 <p>QR 코드를 생성하였습니다</p>
                 <small>나의 건강상태를체크해 건강과 행복을 찾아가세요.</small>
             </div>
@@ -128,7 +128,6 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 50px;
     /* padding: 20px 30px 50px; */
 }
 
@@ -174,17 +173,21 @@ export default {
 }
 
 .img_box {
+    width: 100%;
     letter-spacing: .5px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    text-wrap: nowrap;
 }
 
 .img_box p {
     font-size: var(--font-n-size);
     margin: 30px 0 5px;
+    word-break: keep-all;
 }
 
+.img_box small {
+    word-break: keep-all;
+}
 </style>
