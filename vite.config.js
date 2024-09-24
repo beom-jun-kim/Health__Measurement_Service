@@ -18,7 +18,7 @@ export default defineConfig({
         changeOrigin: true
       },
       '/api/prod': {
-        target: 'http://221.161.177.191',
+        target: 'http://221.161.177.193',
         changeOrigin: true
       }
     }

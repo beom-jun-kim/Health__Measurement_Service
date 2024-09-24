@@ -146,6 +146,7 @@ export default {
 
 .qr-container {
     text-align: center;
+    /* position: relative; */
 }
 
 .qr-container p {
@@ -174,11 +175,16 @@ export default {
 
 .img_box {
     letter-spacing: .5px;
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-wrap: nowrap;
 }
 
 .img_box p {
     font-size: var(--font-n-size);
     margin: 30px 0 5px;
 }
+
 </style>
