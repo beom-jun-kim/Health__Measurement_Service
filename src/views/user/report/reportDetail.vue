@@ -1,21 +1,42 @@
 <template>
   <div class="container">
-    <GoBack />
+    <GoBack :goBackText="goBackText" />
+    <div class="report-sub-title">
+      <p>동작 걸음걸이 <span>|</span> <span><strong>홍길동</strong>님의 결과</span></p>
+      <small>측정일: 2024.06.13</small>
+    </div>
     <div class="pattern">
-      <div class="pattern-box">
-        <div style="width: 30px;"></div>
-        <h1 class="carousel__item--title">보행패턴 분석</h1>
-        <RouterLink :to="`/user/walkReport/${this.$route.params.id}`">
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="30" height="30">
-              <path
-                w
-                fill="#36b1a7"
-                d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80L0 432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z" />
-            </svg>
-            <div class="next-btn">NEXT</div>
+      <div class="stance-phase">
+        <div class="left-foot">
+          <div class="left-foot-title">
+            <span>왼발</span>
           </div>
-        </RouterLink>
+          <div class="left-foot-info">
+            <div class="left-foot-num">
+              <span>입각기</span>
+              <span>15</span>
+            </div>
+            <div class="left-foot-num">
+              <span>유각기</span>
+              <span>15</span>
+            </div>
+          </div>
+        </div>
+        <div class="left-foot">
+          <div class="left-foot-title">
+            <span>오른발</span>
+          </div>
+          <div class="left-foot-info">
+            <div class="left-foot-num">
+              <span>유각기</span>
+              <span>15</span>
+            </div>
+            <div class="left-foot-num">
+              <span>입각기</span>
+              <span>15</span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="carousel__item">
         <div class="people-walk-box">
@@ -39,57 +60,106 @@
             <span class="people-data2">48%</span>
           </div>
         </div>
-        <table class="walk-table" border="1">
+        <div class="level">
+          <div class="level-img">
+            <img src="" alt="">
+          </div>
+          <div class="coment">
+            <p>코멘트</p>
+          </div>
+        </div>
+        <div class="walk-table">
+          <div class="walk-table-box walk-table-th">
+            <span></span>
+            <span>왼발</span>
+            <span>오른발</span>
+            <span>표준범위</span>
+          </div>
+          <div class="walk-table-box">
+            <span>보행길이 (cm)</span>
+            <span>000</span>
+            <span>000</span>
+            <span>000</span>
+          </div>
+          <div class="walk-table-box">
+            <span>보행 시간 (s)</span>
+            <span>000</span>
+            <span>000</span>
+            <span>000</span>
+          </div>
+          <div class="walk-table-box">
+            <span>보행 속도 (m/s)</span>
+            <span>000</span>
+            <span>000</span>
+            <span>000</span>
+          </div>
+          <div class="walk-table-box">
+            <span>보행 각도 (도)</span>
+            <span>000</span>
+            <span>000</span>
+            <span>000</span>
+          </div>
+          <div class="walk-table-box">
+            <span>보행 균형 (%)</span>
+            <span>000</span>
+            <span>000</span>
+            <span>000</span>
+          </div>
+          <div class="walk-table-box">
+            <span>보간 (cm)</span>
+            <span>000</span>
+            <span>000</span>
+            <span>000</span>
+          </div>
+        </div>
+        <!-- <table class="walk-table" border="1">
           <thead>
             <tr>
-              <th colspan="2"></th>
-              <th>LEET</th>
-              <th>RIGHT</th>
+              <th colspan="2" style="width: 35%;"></th>
+              <th style="width: 20%;">왼발</th>
+              <th style="width: 20%;">오른발</th>
+              <th style="color: var(--main-color)">표준범위</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td colspan="2">Step Length</td>
+              <td colspan="2">보행길이 (cm)</td>
               <td>000</td>
-              <td>000</td>
-            </tr>
-            <tr>
-              <td colspan="2">Step Angle</td>
               <td>000</td>
               <td>000</td>
             </tr>
             <tr>
-              <td colspan="2">Step Force</td>
+              <td colspan="2">보행 시간 (s)</td>
               <td>000</td>
-              <td>000</td>
-            </tr>
-            <tr>
-              <td colspan="2">Stance phase</td>
               <td>000</td>
               <td>000</td>
             </tr>
             <tr>
-              <td colspan="2">Swing phase</td>
+              <td colspan="2">보행 속도 (m/s)</td>
               <td>000</td>
-              <td>000</td>
-            </tr>
-            <tr>
-              <td colspan="2">Step Length</td>
               <td>000</td>
               <td>000</td>
             </tr>
             <tr>
-              <td colspan="2">Step Length</td>
+              <td colspan="2">보행 각도 (도)</td>
+              <td>000</td>
               <td>000</td>
               <td>000</td>
             </tr>
             <tr>
-              <td colspan="2">COP Length</td>
+              <td colspan="2">보행 균형 (%)</td>
+              <td>000</td>
+              <td>000</td>
+              <td>000</td>
+            </tr>
+            <tr>
+              <td colspan="2">보간 (cm)</td>
+              <td>000</td>
               <td>000</td>
               <td>000</td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
         <!-- <Transition name="slide-fade">
           <div class="diseaseModal" v-if="diseaseModal">
             <DiseaseDetail @closeModalBtn="closeModalBtn" />
@@ -102,19 +172,84 @@
 
 <script>
 import GoBack from "@/components/GoBack.vue";
-import DiseaseDetail from "@/components/DiseaseDetail.vue";
+import UserDataService from "@/api/UserDataService";
 
 export default {
   name: 'reportDetail',
   components: {
     GoBack,
   },
+  data() {
+    return {
+      goBackText: "보행패턴 분석",
+    }
+  },
+  methods: {
+    async getUserReport() {
+      try {
+        const response = await UserDataService.userReport(this.$route.params.id);
+        console.log("response", response.data);
+      } catch (e) {
+        console.log("리포트 조회 실패", e);
+      }
+    }
+  },
+  async mounted() {
+    await this.getUserReport();
+  }
 };
 </script>
 
 <style scoped>
 .container {
-  padding: 10px;
+  padding: 20px 25px;
+  font-size: var(--input-font-size);
+}
+
+.report-sub-title {
+  margin: -15px 0 25px;
+  text-align: center;
+}
+
+.report-sub-title p {
+  color: var(--main-color);
+}
+
+.report-sub-title p span:first-child {
+  margin: 0 5px;
+  color: var(--light-font-color);
+}
+
+.report-sub-title p span:last-child {
+  color: #111;
+}
+
+.report-sub-title small {
+  color: var(--light-font-color);
+}
+
+.stance-phase {
+  margin-bottom: 25px;
+}
+
+.left-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.left-foot-info {
+  display: flex;
+  width: 83%;
+  background: #f2f2f2;
+  border-radius: var(--border-radius);
+  justify-content: space-around;
+  padding: 3px 0;
+}
+
+.left-foot-num span:first-child {
+  margin-right: 12px;
 }
 
 .pattern-box {
@@ -125,7 +260,6 @@ export default {
 }
 
 .next-btn {
-  font-size: var(--font-small-size);
   color: var(--main-color);
 }
 
@@ -137,7 +271,6 @@ export default {
 .people-walk {
   position: relative;
   margin: 0 auto 20px;
-  /* background: #f4f4f4; */
   border-radius: 15px;
 }
 
@@ -207,6 +340,63 @@ export default {
 .people-data2 {
   bottom: 11.11111111111111vw;
   right: 4.166666666666666vw;
+}
+
+.coment {
+  border: 1px solid var(--input-border-color);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* .walk-table tbody tr td {
+  padding: 8px 0;
+}
+
+.walk-table tbody tr td:first-child {
+  color: var(--main-color);
+} */
+
+.walk-table {
+  background: #f2f2f2;
+  padding: 15px;
+  border-radius: var(--border-radius)
+}
+
+.walk-table-box {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #c9c9c9;
+  /* text-align: center */
+}
+
+.walk-table-box span {
+  flex: 1;
+  padding: 5px 0;
+}
+
+.walk-table-box span:first-child {
+  flex: 2;
+  padding-left: 5px;
+}
+.walk-table-box span:last-child {
+  flex: 1.5;
+}
+
+.walk-table-box span:nth-child(n+2) {
+  text-align: center;
+}
+
+.walk-table-box:last-child {
+  border: none;
+}
+
+
+.walk-table-th {
+  background: #fff;
+  border-radius: 50px;
+  /* padding: 0 10px; */
+  margin-bottom: 10px;
+  border: none;
 }
 </style>
 

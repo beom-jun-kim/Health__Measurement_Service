@@ -42,6 +42,12 @@ class UserDataService {
   async refreshToken() {
     return await http.post('/auth/refresh')
   }
+
+  //리포트
+  async userReport(id) {
+    return await http.get(`/basedata?userSid=${id}`)
+  }
+
 }
 
 export default new UserDataService()
