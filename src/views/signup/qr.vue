@@ -1,37 +1,37 @@
 <template>
     <div class="container">
-        <div v-if="qrCreateBtn === false" class="background-img"></div>
-        <div :class="{ 'overlay': qrCreateBtn === false }">
-            <div class="go-back-btn" v-if="qrCreateBtn === false">
-                <div class="arrow" @click="goBack">
-                    <span><svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 24 24"
-                            fill="none">
-                            <path d="M15 7L10 12L15 17" stroke="#fff" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg></span>
-                </div>
-                <div class="logo-img-box">
-                    <span>QR 생성</span>
-                </div>
-                <div style="width: 40px;"></div>
+        <!-- <div v-if="qrCreateBtn === false" class="background-img"></div> -->
+        <!-- <div :class="{ 'overlay': qrCreateBtn === false }"> -->
+        <div class="go-back-btn" v-if="qrCreateBtn === false">
+            <div class="arrow" @click="goBack">
+                <span><svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 24 24"
+                        fill="none">
+                        <path d="M15 7L10 12L15 17" stroke="#111" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg></span>
             </div>
-            <div class="qr-container" v-if="user.height && user.weight">
-                <GoBack v-if="qrCreateBtn" :goBackText="goBackText" />
-                <div v-if="qrCreateBtn">
-                    <div class="qr-hand-img">
-                        <img src="@/assets/img/QR Code-bro.png" alt="QR">
-                    </div>
-                    <p>인증용 QR를 생성해 보세요</p>
-                    <small>나의 건강상태를 체크해 건강과 행복을 찾아가세요.</small>
-                    <button class="qr-btn" @click="displayNone">QR생성하기</button>
+            <div class="logo-img-box">
+                <span>QR 생성</span>
+            </div>
+            <div style="width: 40px;"></div>
+        </div>
+        <div class="qr-container" v-if="user.height && user.weight">
+            <GoBack v-if="qrCreateBtn" :goBackText="goBackText" />
+            <div v-if="qrCreateBtn">
+                <div class="qr-hand-img">
+                    <img src="@/assets/img/QR Code-bro.png" alt="QR">
                 </div>
-                <div class="img_box" v-if="qr">
-                    <qrcode-vue :value="qr.qrCode" :size="150" />
-                    <p>QR 코드를 생성하였습니다</p>
-                    <small>나의 건강상태를체크해 건강과 행복을 찾아가세요.</small>
-                </div>
+                <p>인증용 QR를 생성해 보세요</p>
+                <small>나의 건강상태를 체크해 건강과 행복을 찾아가세요.</small>
+                <button class="qr-btn" @click="displayNone">QR생성하기</button>
+            </div>
+            <div class="img_box" v-if="qr">
+                <qrcode-vue :value="qr.qrCode" :size="150" />
+                <p>QR 코드를 생성하였습니다</p>
+                <small>나의 건강상태를체크해 건강과 행복을 찾아가세요.</small>
             </div>
         </div>
+        <!-- </div> -->
         <Height v-if="user.height === null || user.weight === null" @save-body-info="updateBodyInfo" />
     </div>
 </template>
@@ -103,7 +103,7 @@ export default {
     margin-bottom: 0;
 }
 
-.background-img {
+/* .background-img {
     position: absolute;
     top: 0;
     left: 0;
@@ -111,9 +111,9 @@ export default {
     height: 100%;
     background: url("@/assets/img/walk-img.jpeg") no-repeat center/cover;
     filter: blur(2px);
-}
+} */
 
-.overlay {
+/* .overlay {
     color: #fff;
     background: rgba(0, 0, 0, 0.3);
     position: absolute;
@@ -121,13 +121,15 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-}
+} */
 
 .go-back-btn {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 30px 50px;
+    padding-bottom: 50px;
+    /* padding: 20px 30px 50px; */
 }
 
 .logo-img-box {
@@ -178,50 +180,5 @@ export default {
 .img_box p {
     font-size: var(--font-n-size);
     margin: 30px 0 5px;
-    /* margin: 70px 0 5px; */
 }
-
-/* .border-radius01 {
-    position: absolute;
-    top: -5vw;
-    left: 25vw;
-    width: 6.666666666666667vw;
-    height: 6.666666666666667vw;
-    border-radius: 5px 0 0 0;
-    border-left: 3px solid var(--main-color);
-    border-top: 3px solid var(--main-color);
-}
-
-.border-radius02 {
-    position: absolute;
-    top: -5vw;
-    right: 25vw;
-    width: 6.666666666666667vw;
-    height: 6.666666666666667vw;
-    border-radius: 0 5px 0 0;
-    border-right: 3px solid var(--main-color);
-    border-top: 3px solid var(--main-color);
-}
-
-.border-radius03 {
-    position: absolute;
-    bottom: 26vw;
-    left: 25vw;
-    width: 6.666666666666667vw;
-    height: 6.666666666666667vw;
-    border-radius: 0 0 0 5px;
-    border-left: 3px solid var(--main-color);
-    border-bottom: 3px solid var(--main-color);
-}
-
-.border-radius04 {
-    position: absolute;
-    bottom: 26vw;
-    right: 25vw;
-    width: 6.666666666666667vw;
-    height: 6.666666666666667vw;
-    border-radius: 0 0 5px 0;
-    border-right: 3px solid var(--main-color);
-    border-bottom: 3px solid var(--main-color);
-} */
 </style>
