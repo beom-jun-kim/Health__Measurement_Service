@@ -46,18 +46,18 @@
             <div class="foot-table-box">
               <img src="@/assets/img/foot-table.png" alt="보행패턴분석">
             </div>
-            <span class="foot-data1">{{ reportDetail.stridelength4 }}</span>
-            <span class="foot-data2">{{ reportDetail.steplength1 }}</span>
-            <span class="foot-data3">{{ reportDetail.stepangle1 }}</span>
-            <span class="foot-data4">{{ reportDetail.stepangle2 }}</span>
-            <span class="foot-data5">{{ reportDetail.steplength2 }}</span>
+            <span class="foot-data1">{{ reportDetail.stridelength4 }} cm</span>
+            <span class="foot-data2">{{ reportDetail.steplength1 }} cm</span>
+            <span class="foot-data3">{{ reportDetail.stepangle1 }} º</span>
+            <span class="foot-data4">{{ reportDetail.stepangle2 }} º</span>
+            <span class="foot-data5">{{ reportDetail.steplength2 }} cm</span>
           </div>
           <div class="people-walk">
             <div class="foot-table-box" style="width: 50%; margin: 0 auto;">
               <img src="@/assets/img/people.png" alt="보행패턴분석" style="transform: translateX(8px);">
             </div>
-            <span class="people-data1">오른발<br>{{ reportDetail.stepforce1 }}</span>
-            <span class="people-data2">왼발<br>{{ reportDetail.stepforce2 }}</span>
+            <span class="people-data1">오른발<br>{{ reportDetail.stepforce1 }} %</span>
+            <span class="people-data2">왼발<br>{{ reportDetail.stepforce2 }} %</span>
           </div>
         </div>
         <div class="level">
@@ -195,10 +195,10 @@ export default {
 
 .left-foot-info {
   display: flex;
-  width: 75%;
+  width: 83%;
   background: #f2f2f2;
   border-radius: var(--border-radius);
-  justify-content: space-around;
+  justify-content: space-evenly;
   padding: 3px 0;
 }
 
