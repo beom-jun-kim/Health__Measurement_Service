@@ -68,6 +68,7 @@ export default {
             try {
                 const response = await Qr.qrCreate()
                 this.qr = response.data;
+                this.qrTimeOut();
             } catch (error) {
                 console.log("qr생성실패", error);
             }
@@ -88,8 +89,14 @@ export default {
         goBack() {
             this.qrCreateBtn = true;
             this.qr = "";
-            // this.bigLogoImg = true;
-            // this.goBackBtn = false;
+        },
+        qrTimeOut() {
+            if (this.qr) {
+                setTimeout(() => {
+                    this.qrCreateBtn = true;
+                    this.qr = "";
+                }, 300000)
+            }
         }
     },
     async mounted() {

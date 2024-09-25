@@ -40,7 +40,7 @@
       </div>
       <div class="carousel__item">
         <div class="people-walk-box">
-          <div class="people-walk" style="background: #f4f4f4;">
+          <div class="people-walk">
             <div class="foot-table-box">
               <img src="@/assets/img/foot-table.png" alt="보행패턴분석">
             </div>
@@ -49,20 +49,18 @@
             <span class="foot-data3">10º</span>
             <span class="foot-data4">10º</span>
             <span class="foot-data5">48cm</span>
-            <span class="foot-data6">2.0</span>
-            <span class="foot-data7">1.0</span>
           </div>
           <div class="people-walk">
-            <div class="foot-table-box">
-              <img src="@/assets/img/people.png" alt="보행패턴분석">
+            <div class="foot-table-box" style="width: 50%; margin: 0 auto;">
+              <img src="@/assets/img/people.png" alt="보행패턴분석" style="transform: translateX(8px);">
             </div>
-            <span class="people-data1">54%</span>
-            <span class="people-data2">48%</span>
+            <span class="people-data1">오른발<br>54%</span>
+            <span class="people-data2">왼발<br>48%</span>
           </div>
         </div>
         <div class="level">
           <div class="level-img">
-            <img src="" alt="">
+            <img src="@/assets/img/level_1.png" alt="등급 이미지">
           </div>
           <div class="coment">
             <p>코멘트</p>
@@ -73,98 +71,45 @@
             <span></span>
             <span>왼발</span>
             <span>오른발</span>
-            <span>표준범위</span>
+            <span style="color: var(--main-color);">표준범위</span>
           </div>
           <div class="walk-table-box">
             <span>보행길이 (cm)</span>
             <span>000</span>
             <span>000</span>
-            <span>000</span>
+            <span>70-72</span>
           </div>
           <div class="walk-table-box">
             <span>보행 시간 (s)</span>
             <span>000</span>
             <span>000</span>
-            <span>000</span>
+            <span>0.33~0.73</span>
           </div>
           <div class="walk-table-box">
             <span>보행 속도 (m/s)</span>
             <span>000</span>
             <span>000</span>
-            <span>000</span>
+            <span>1.37</span>
           </div>
           <div class="walk-table-box">
             <span>보행 각도 (도)</span>
             <span>000</span>
             <span>000</span>
-            <span>000</span>
+            <span>5~8</span>
           </div>
           <div class="walk-table-box">
             <span>보행 균형 (%)</span>
             <span>000</span>
             <span>000</span>
-            <span>000</span>
+            <span>48~52</span>
           </div>
           <div class="walk-table-box">
             <span>보간 (cm)</span>
             <span>000</span>
             <span>000</span>
-            <span>000</span>
+            <span>8~10</span>
           </div>
         </div>
-        <!-- <table class="walk-table" border="1">
-          <thead>
-            <tr>
-              <th colspan="2" style="width: 35%;"></th>
-              <th style="width: 20%;">왼발</th>
-              <th style="width: 20%;">오른발</th>
-              <th style="color: var(--main-color)">표준범위</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td colspan="2">보행길이 (cm)</td>
-              <td>000</td>
-              <td>000</td>
-              <td>000</td>
-            </tr>
-            <tr>
-              <td colspan="2">보행 시간 (s)</td>
-              <td>000</td>
-              <td>000</td>
-              <td>000</td>
-            </tr>
-            <tr>
-              <td colspan="2">보행 속도 (m/s)</td>
-              <td>000</td>
-              <td>000</td>
-              <td>000</td>
-            </tr>
-            <tr>
-              <td colspan="2">보행 각도 (도)</td>
-              <td>000</td>
-              <td>000</td>
-              <td>000</td>
-            </tr>
-            <tr>
-              <td colspan="2">보행 균형 (%)</td>
-              <td>000</td>
-              <td>000</td>
-              <td>000</td>
-            </tr>
-            <tr>
-              <td colspan="2">보간 (cm)</td>
-              <td>000</td>
-              <td>000</td>
-              <td>000</td>
-            </tr>
-          </tbody>
-        </table> -->
-        <!-- <Transition name="slide-fade">
-          <div class="diseaseModal" v-if="diseaseModal">
-            <DiseaseDetail @closeModalBtn="closeModalBtn" />
-          </div>
-        </Transition> -->
       </div>
     </div>
   </div>
@@ -265,12 +210,13 @@ export default {
 
 .people-walk-box {
   display: flex;
-  gap: 10px;
+  align-items: center;
 }
 
 .people-walk {
+  flex: 1;
   position: relative;
-  margin: 0 auto 20px;
+  margin: 0 auto 15px;
   border-radius: 15px;
 }
 
@@ -298,63 +244,48 @@ export default {
 }
 
 .foot-data1 {
-  top: 23.7vw;
-  left: 11.8vw;
+  top: 11.5vw;
+  left: 9vw;
 }
 
 .foot-data2 {
-  top: 40vw;
+  top: 35vw;
   left: 14vw;
 }
 
 .foot-data3 {
-  top: 53vw;
-  left: 19vw;
+  top: 47vw;
+  left: 20vw;
 }
 
 .foot-data4 {
-  top: 32vw;
-  right: 10vw;
+  top: 26vw;
+  right: 14vw;
 }
 
 .foot-data5 {
-  top: 43vw;
-  right: 5.555555555555555vw;
-}
-
-.foot-data6 {
-  bottom: 2.7777777777777777vw;
-  left: 5.555555555555555vw;
-}
-
-.foot-data7 {
-  bottom: 2.7777777777777777vw;
-  right: 5.555555555555555vw;
+  top: 11.5vw;
+  right: 7.5vw;
 }
 
 .people-data1 {
-  bottom: 11.11111111111111vw;
-  left: 4.166666666666666vw;
+  bottom: 11vw;
+  left: 4vw;
+  text-align: center;
 }
 
 .people-data2 {
-  bottom: 11.11111111111111vw;
-  right: 4.166666666666666vw;
+  bottom: 11vw;
+  right: 4vw;
+  text-align: center;
 }
 
 .coment {
   border: 1px solid var(--input-border-color);
   padding: 10px;
   margin-bottom: 10px;
+  
 }
-
-/* .walk-table tbody tr td {
-  padding: 8px 0;
-}
-
-.walk-table tbody tr td:first-child {
-  color: var(--main-color);
-} */
 
 .walk-table {
   background: #f2f2f2;
@@ -366,7 +297,6 @@ export default {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #c9c9c9;
-  /* text-align: center */
 }
 
 .walk-table-box span {
@@ -377,6 +307,7 @@ export default {
 .walk-table-box span:first-child {
   flex: 2;
   padding-left: 5px;
+  color:var(--main-color);
 }
 .walk-table-box span:last-child {
   flex: 1.5;
@@ -394,7 +325,6 @@ export default {
 .walk-table-th {
   background: #fff;
   border-radius: 50px;
-  /* padding: 0 10px; */
   margin-bottom: 10px;
   border: none;
 }
