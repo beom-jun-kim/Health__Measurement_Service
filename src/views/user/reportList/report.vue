@@ -71,6 +71,7 @@ export default {
   display: flex;
   justify-content: center;
   gap: 10px;
+  margin-top: 15px;
 }
 
 .page li {
