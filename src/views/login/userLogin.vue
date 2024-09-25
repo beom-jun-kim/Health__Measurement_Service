@@ -93,7 +93,7 @@ export default {
           password: this.password,
         }
         await UserDataService.login(data);
-        this.$router.push("/signup/welcome");
+        window.location.href = '/signup/welcome'
       } catch (error) {
         console.log("로그인실패", error);
         if (error.response.data.errorMessage) {

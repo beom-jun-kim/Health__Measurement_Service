@@ -32,14 +32,14 @@
                 </div>
                 <div class="info-item">
                     <span class="label">성별</span>
-                    <span>{{ user.gender === 'M' ? '남자' : '여자' }}</span>
-                    <!-- <div class="gender-chk">
+                    <!-- <span>{{ user.gender === 'M' ? '남자' : '여자' }}</span> -->
+                    <div class="gender-chk">
                         <input type="radio" id="men" class="value" name="gender" value="M" v-model="user.gender">
                         <label for="men">남</label>
 
                         <input type="radio" id="woman" class="value" name="gender" value="F" v-model="user.gender">
                         <label for="woman">여</label>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="info-item">
                     <span class="label">생년월일</span>

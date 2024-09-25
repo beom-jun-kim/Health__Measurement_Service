@@ -1,12 +1,12 @@
 <template>
-    <div class="move-add-follow-btn">
+    <!-- <div class="move-add-follow-btn">
         <RouterLink to="/follow/addFollow">
             <button class="add-follow-btn">
                 <span>+</span>
                 <span>추가하기</span>
             </button>
         </RouterLink>
-    </div>
+    </div> -->
     <div v-if="userList.length > 0" class="list-box" v-for="(user, index) in userList" :key="index">
         <RouterLink :to="`/follow/followDetail/${user.userSid}`">
             <div class="list-box-wrap">
@@ -155,6 +155,7 @@ export default {
 .not-list {
     background: var(--input-border-color);
     padding: 10px 0;
+    margin-top: 20px;
 }
 
 .profile-img {

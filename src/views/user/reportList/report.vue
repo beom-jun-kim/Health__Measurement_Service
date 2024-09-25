@@ -1,8 +1,8 @@
 <template>
   <div class="report-container margin-bottom">
-    <GoBack :goBackText="goBackText"/>
+    <GoBack :goBackText="goBackText" />
     <header>
-      <p v-if="reportList.length === 0">측정된 데이터가 없습니다</p>
+      <p v-if="!reportList || !reportList.content || reportList.content.length === 0">측정된 데이터가 없습니다</p>
       <p v-else>지난측정과 오늘의 측정결과를 볼 수 있습니다.</p>
     </header>
     <div class="report-list">
@@ -43,6 +43,7 @@ export default {
       reportPage: 0,
       size: 4,
       indexPage: 1,
+      userSid: "",
     };
   },
   methods: {
@@ -58,7 +59,7 @@ export default {
       this.indexPage = page;
       this.reportPage = page - 1;
       await this.getReportList(this.$route.params.id);
-    }
+    },
   },
   async mounted() {
     await this.getReportList(this.$route.params.id);

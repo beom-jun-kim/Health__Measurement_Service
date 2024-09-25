@@ -99,7 +99,6 @@ export default {
                     console.log("로그아웃 실패", error);
                 }
             }
-
         },
         async getUserInfo() {
             try {

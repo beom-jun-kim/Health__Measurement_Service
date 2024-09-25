@@ -37,15 +37,6 @@ export default {
         updateState(componentName) {
             this.currentComponent = componentName;
         },
-        delFollow() {
-            if (confirm("친구를 삭제하시겠습니까?")) {
-                try {
-                    // 삭제로직 추가
-                } catch (error) {
-                    console.log("친구 삭제 실패", error);
-                }
-            }
-        },
     }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <GoBack :goBackText="goBackText"/>
+        <GoBack :goBackText="goBackText" />
         <!-- <img src="@/assets/img/app_logo_02.png" alt="G-CON Logo" class="logo"> -->
         <!-- <div class="page-title">
             <h2>회원가입</h2>
@@ -22,7 +22,7 @@
                 <div style="display: flex; justify-content: space-between;">
                     <label for="password">비밀번호</label>
                     <span class="passwordChk" :class="{ 'red': passwordChk === true, 'blue': passwordChk === false }">{{
-            passwordChkText }}</span>
+                        passwordChkText }}</span>
                 </div>
                 <input type="password" id="password" name="password" v-model="form.password" required
                     :disabled="verificationSent" maxlength="16" minlength="6" placeholder="비밀번호를 입력하여 주세요">
@@ -36,8 +36,8 @@
                 <div style="display: flex; justify-content: space-between">
                     <label for="name">이름</label>
                     <span class="usernameChk" :class="{ 'red': usernameChk === true, 'blue': usernameChk === false }">{{
-            usernameChkText
-        }}</span>
+                        usernameChkText
+                        }}</span>
                 </div>
                 <input type="text" id="name" name="name" v-model="form.username" required maxlength="20"
                     :disabled="verificationSent" placeholder="예) 홍지콘">
@@ -109,7 +109,7 @@ import GoBack from "@/components/GoBack.vue";
 
 export default {
     name: 'SignupView',
-    components:{
+    components: {
         GoBack,
     },
     data() {
@@ -142,7 +142,7 @@ export default {
             isTimerActive: false,
             countdown: null,
             excessPhrase: "",
-            goBackText:"회원가입",
+            goBackText: "회원가입",
         };
     },
     watch: {
@@ -260,8 +260,13 @@ export default {
         },
         async sendVerificationCode() {
             const phone = Number(this.form.phone);
-            if (isNaN(phone)) {
-                alert("숫자를 입력하여 주세요");
+            const phoneNumTest = /^\d{10,11}$/.test(this.form.phone);
+            if (!phoneNumTest) {
+                alert("전화번호는 10~11자리로 입력하여주세요")
+            } else if (this.form.password !== this.form.pwdChk) {
+                alert("비밀번호가 일치하지 않습니다");
+            } else if (isNaN(phone)) {
+                alert("전화번호를 올바르게 입력하여 주세요");
             } else if (this.idChk === true || this.passwordChk === true || this.usernameChk === true) {
                 alert("양식에 맞게 입력하여주세요")
             } else if (this.form.id === ""
@@ -357,7 +362,7 @@ export default {
             for (let year = this.startYear; year <= this.currentYear; year++) {
                 years.push(year);
             }
-            return years;
+            return years.reverse();;
         },
         formattedTime() {
             const minutes = Math.floor(this.timer / 60);

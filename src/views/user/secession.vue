@@ -42,7 +42,8 @@ export default {
                 try {
                     await UserDataService.deleteUser();
                     alert('탈퇴가 완료되었습니다');
-                    this.$router.push("/");
+                    localStorage.removeItem('Authorization');
+                    this.$router.push("/login/userLogin");
                 } catch (error) {
                     console.log("회원 탈퇴 실패", error);
                 }
