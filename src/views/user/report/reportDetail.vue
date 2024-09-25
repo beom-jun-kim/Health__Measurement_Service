@@ -2,7 +2,7 @@
   <div class="container">
     <GoBack :goBackText="goBackText" />
     <div class="report-sub-title">
-      <p>동작 걸음걸이 <span>|</span> <span><strong>홍길동</strong>님의 결과</span></p>
+      <p><span style="font-weight: var(--font-b-weight);">동작 걸음걸이</span><span class="report-sub-title-sepa">|</span> <span><strong>홍길동</strong>님의 결과</span></p>
       <small>측정일: 2024.06.13</small>
     </div>
     <div class="pattern">
@@ -160,7 +160,7 @@ export default {
   color: var(--main-color);
 }
 
-.report-sub-title p span:first-child {
+.report-sub-title p .report-sub-title-sepa {
   margin: 0 5px;
   color: var(--light-font-color);
 }
@@ -182,6 +182,11 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+}
+
+.left-foot-title {
+  color: var(--main-color);
+  font-weight: var(--font-b-weight);
 }
 
 .left-foot-info {
