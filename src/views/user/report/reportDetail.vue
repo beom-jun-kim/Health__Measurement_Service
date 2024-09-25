@@ -2,8 +2,10 @@
   <div class="container">
     <GoBack :goBackText="goBackText" />
     <div class="report-sub-title">
-      <p><span style="font-weight: var(--font-b-weight);">동작 걸음걸이</span><span class="report-sub-title-sepa">|</span> <span><strong>홍길동</strong>님의 결과</span></p>
-      <small>측정일: 2024.06.13</small>
+      <p><span style="font-weight: var(--font-b-weight);">동작 걸음걸이</span><span class="report-sub-title-sepa">|</span>
+        <span><strong>{{ reportDetail.userName }}</strong>님의 결과</span>
+      </p>
+      <small>{{ reportDetail.createDate }}</small>
     </div>
     <div class="pattern">
       <div class="stance-phase">
@@ -14,11 +16,11 @@
           <div class="left-foot-info">
             <div class="left-foot-num">
               <span>입각기</span>
-              <span>15</span>
+              <span>{{ reportDetail.stancephase1 }}</span>
             </div>
             <div class="left-foot-num">
               <span>유각기</span>
-              <span>15</span>
+              <span>{{ reportDetail.swingphase1 }}</span>
             </div>
           </div>
         </div>
@@ -29,11 +31,11 @@
           <div class="left-foot-info">
             <div class="left-foot-num">
               <span>유각기</span>
-              <span>15</span>
+              <span>{{ reportDetail.swingphase2 }}</span>
             </div>
             <div class="left-foot-num">
               <span>입각기</span>
-              <span>15</span>
+              <span>{{ reportDetail.stancephase2 }}</span>
             </div>
           </div>
         </div>
@@ -44,18 +46,18 @@
             <div class="foot-table-box">
               <img src="@/assets/img/foot-table.png" alt="보행패턴분석">
             </div>
-            <span class="foot-data1">102cm</span>
-            <span class="foot-data2">54cm</span>
-            <span class="foot-data3">10º</span>
-            <span class="foot-data4">10º</span>
-            <span class="foot-data5">48cm</span>
+            <span class="foot-data1">{{ reportDetail.stridelength4 }}</span>
+            <span class="foot-data2">{{ reportDetail.steplength1 }}</span>
+            <span class="foot-data3">{{ reportDetail.stepangle1 }}</span>
+            <span class="foot-data4">{{ reportDetail.stepangle2 }}</span>
+            <span class="foot-data5">{{ reportDetail.steplength2 }}</span>
           </div>
           <div class="people-walk">
             <div class="foot-table-box" style="width: 50%; margin: 0 auto;">
               <img src="@/assets/img/people.png" alt="보행패턴분석" style="transform: translateX(8px);">
             </div>
-            <span class="people-data1">오른발<br>54%</span>
-            <span class="people-data2">왼발<br>48%</span>
+            <span class="people-data1">오른발<br>{{ reportDetail.stepforce1 }}</span>
+            <span class="people-data2">왼발<br>{{ reportDetail.stepforce2 }}</span>
           </div>
         </div>
         <div class="level">
@@ -75,38 +77,38 @@
           </div>
           <div class="walk-table-box">
             <span>보행길이 (cm)</span>
-            <span>000</span>
-            <span>000</span>
+            <span>{{ reportDetail.steplength1 }}</span>
+            <span>{{ reportDetail.steplength2 }}</span>
             <span>70-72</span>
           </div>
           <div class="walk-table-box">
             <span>보행 시간 (s)</span>
-            <span>000</span>
-            <span>000</span>
+            <span>{{ reportDetail.singlesteptime1 }}</span>
+            <span>{{ reportDetail.singlesteptime2 }}</span>
             <span>0.33~0.73</span>
           </div>
           <div class="walk-table-box">
             <span>보행 속도 (m/s)</span>
-            <span>000</span>
-            <span>000</span>
+            <span>{{ reportDetail.stridetime1 }}</span>
+            <span>{{ reportDetail.stridetime2 }}</span>
             <span>1.37</span>
           </div>
           <div class="walk-table-box">
             <span>보행 각도 (도)</span>
-            <span>000</span>
-            <span>000</span>
+            <span>{{ reportDetail.stepangle1 }}</span>
+            <span>{{ reportDetail.stepangle2 }}</span>
             <span>5~8</span>
           </div>
           <div class="walk-table-box">
             <span>보행 균형 (%)</span>
-            <span>000</span>
-            <span>000</span>
+            <span>{{ reportDetail.stepforce1 }}</span>
+            <span>{{ reportDetail.stepforce2 }}</span>
             <span>48~52</span>
           </div>
           <div class="walk-table-box">
             <span>보간 (cm)</span>
-            <span>000</span>
-            <span>000</span>
+            <span>{{ reportDetail.baseofgait4 }}</span>
+            <span>{{ reportDetail.baseofgait4 }}</span>
             <span>8~10</span>
           </div>
         </div>
@@ -127,20 +129,21 @@ export default {
   data() {
     return {
       goBackText: "보행패턴 분석",
+      reportDetail: {},
     }
   },
   methods: {
-    async getUserReport() {
+    async getUserReport(id) {
       try {
-        const response = await UserDataService.userReport(this.$route.params.id);
-        console.log("response", response.data);
+        const response = await UserDataService.userReport(id);
+        this.reportDetail = response.data;
       } catch (e) {
         console.log("리포트 조회 실패", e);
       }
     }
   },
   async mounted() {
-    await this.getUserReport();
+    await this.getUserReport(this.$route.params.id);
   }
 };
 </script>
@@ -148,7 +151,6 @@ export default {
 <style scoped>
 .container {
   padding: 20px 25px;
-  font-size: var(--input-font-size);
 }
 
 .report-sub-title {
@@ -200,6 +202,10 @@ export default {
 
 .left-foot-num span:first-child {
   margin-right: 12px;
+}
+
+.pattern {
+  font-size: var(--input-font-size);
 }
 
 .pattern-box {
@@ -289,7 +295,7 @@ export default {
   border: 1px solid var(--input-border-color);
   padding: 10px;
   margin-bottom: 10px;
-  
+  color: var(--light-font-color);
 }
 
 .walk-table {
@@ -312,8 +318,9 @@ export default {
 .walk-table-box span:first-child {
   flex: 2;
   padding-left: 5px;
-  color:var(--main-color);
+  color: var(--main-color);
 }
+
 .walk-table-box span:last-child {
   flex: 1.5;
 }

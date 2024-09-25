@@ -44,10 +44,12 @@ class UserDataService {
   }
 
   //리포트
-  async userReport(id) {
-    return await http.get(`/basedata?userSid=${id}`)
+  async userReportList(id, page, size) {
+    return await http.get(`/basedata/list?userSid=${id}&page=${page}&size=${size}`)
   }
-
+  async userReport(baseSid) {
+    return await http.get(`/basedata/detail?baseSid=${baseSid}`)
+  }
 }
 
 export default new UserDataService()

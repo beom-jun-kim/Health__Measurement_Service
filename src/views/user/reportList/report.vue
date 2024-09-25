@@ -1,25 +1,34 @@
 <template>
   <div class="report-container margin-bottom">
-    <GoBack :goBackText="goBackText" />
+    <GoBack :goBackText="goBackText"/>
     <header>
-      <p v-if="reportList.length > 0">지난측정과 오늘의 측정결과를 볼 수 있습니다.</p>
-      <p v-else>측정된 데이터가 없습니다</p>
+      <p v-if="reportList.length === 0">측정된 데이터가 없습니다</p>
+      <p v-else>지난측정과 오늘의 측정결과를 볼 수 있습니다.</p>
     </header>
     <div class="report-list">
-      <div class="report-item" v-for="(report, index) in reportList" :key="index" :class="{ 'new-report': report.new }">
-        <RouterLink :to="`/user/report/${report.id}`">
+      <div class="report-item" v-for="(report, index) in reportList.content" :key="index"
+        :class="{ 'new-report': report.check === false }">
+        <RouterLink :to="`/user/report/${report.baseSid}`">
           <div class="report-label">
             측정하신 리포트가 도착하였습니다
-            <span v-if="report.new" class="new-label"></span>
+            <span v-if="report.check === false" class="new-label"></span>
           </div>
-          <small class="report-date">측정일 : {{ report.date }}</small>
+          <small class="report-date">측정일 : {{ report.createDate }}</small>
         </RouterLink>
       </div>
+      <ul class="page">
+        <li class="border mx-1 text-center li" v-for="page in reportList.totalPages" :key="page"
+          :class="{ active: indexPage === page }">
+          <span @click.prevent="indexPageLoadAllUser(page)" style="display: block;">{{ page
+            }}</span>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
+import UserDataService from "@/api/UserDataService";
 import GoBack from "@/components/GoBack.vue"
 
 export default {
@@ -29,35 +38,57 @@ export default {
   },
   data() {
     return {
-      reportList: [
-        {
-          id: 1,
-          date: '2024-07-01',
-          new: true,
-        },
-        {
-          id: 2,
-          date: '2024-07-02',
-          new: false,
-        },
-        {
-          id: 3,
-          date: '2024-07-03',
-          new: false,
-        },
-        {
-          id: 4,
-          date: '2024-07-04',
-          new: false,
-        },
-      ],
+      reportList: [],
       goBackText: "리포트",
+      reportPage: 0,
+      size: 4,
+      indexPage: 1,
     };
   },
+  methods: {
+    async getReportList(id) {
+      try {
+        const response = await UserDataService.userReportList(id, this.reportPage, this.size)
+        this.reportList = response.data;
+      } catch (e) {
+        console.log("리포트 리스트 조회 실패", e);
+      }
+    },
+    async indexPageLoadAllUser(page) {
+      this.indexPage = page;
+      this.reportPage = page - 1;
+      await this.getReportList(this.$route.params.id);
+    }
+  },
+  async mounted() {
+    await this.getReportList(this.$route.params.id);
+  }
 };
 </script>
 
 <style scoped>
+.page {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.page li {
+  list-style: none;
+  width: 20px;
+  height: 25px;
+  line-height: 25px;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  font-size: var(--input-font-size);
+}
+
+.page li.active {
+  color: #fff;
+  background: var(--main-color);
+}
+
 .report-container {
   display: flex;
   flex-direction: column;
