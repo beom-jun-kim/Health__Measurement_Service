@@ -5,7 +5,7 @@
       <p><span style="font-weight: var(--font-b-weight);">동작 걸음걸이</span><span class="report-sub-title-sepa">|</span>
         <span><strong>{{ reportDetail.userName }}</strong>님의 결과</span>
       </p>
-      <small>{{ reportDetail.createDate }}</small>
+      <small>측정일 : {{ reportDetail.createDate }}</small>
     </div>
     <div class="pattern">
       <div class="stance-phase">
@@ -173,10 +173,12 @@ export default {
 
 .report-sub-title small {
   color: var(--light-font-color);
+  font-weight: var(--font-t-weight);
 }
 
 .stance-phase {
   margin-bottom: 25px;
+  padding: 0 8px;
 }
 
 .left-foot {
@@ -193,7 +195,7 @@ export default {
 
 .left-foot-info {
   display: flex;
-  width: 83%;
+  width: 80%;
   background: #f2f2f2;
   border-radius: var(--border-radius);
   justify-content: space-around;
