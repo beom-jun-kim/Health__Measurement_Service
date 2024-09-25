@@ -195,7 +195,7 @@ export default {
 
 .left-foot-info {
   display: flex;
-  width: 77%;
+  width: 75%;
   background: #f2f2f2;
   border-radius: var(--border-radius);
   justify-content: space-around;
