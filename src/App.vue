@@ -76,8 +76,7 @@ export default {
     async getUserInfo() {
       try {
         const response = await UserDataService.getUserInfo();
-        this.user = response.data;        
-        console.log("3131", this.user.userSid);
+        this.user = response.data;
       } catch (error) {
         console.log("유저조회 실패", error);
       }

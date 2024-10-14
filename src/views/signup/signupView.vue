@@ -362,7 +362,7 @@ export default {
             for (let year = this.startYear; year <= this.currentYear; year++) {
                 years.push(year);
             }
-            return years.reverse();;
+            return years.reverse();
         },
         formattedTime() {
             const minutes = Math.floor(this.timer / 60);

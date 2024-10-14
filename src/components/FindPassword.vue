@@ -7,16 +7,16 @@
                 <input type="text" placeholder="아이디" v-model="form.userId" :disabled="verificationSent" />
             </div>
             <div class="input-group">
-                <input type="text" placeholder="이름" v-model= "form.name" :disabled="verificationSent" />
+                <input type="text" placeholder="이름" v-model="form.name" :disabled="verificationSent" />
             </div>
             <div style="display: flex; justify-content: space-between; gap: 5px;">
                 <div class="input-group">
-                    <input type="text" placeholder="휴대폰번호" v-model="form.phoneNumber" :disabled="verificationSent" />
+                    <input type="text" placeholder="전화번호 (-없이 입력)" v-model="form.phoneNumber" :disabled="verificationSent" />
                 </div>
                 <button v-if="verificationSent === false" type="submit" class="send-code-button"
                     @click="findPwSendVerificationCode">전송</button>
-                <button v-if="verificationSent" type="submit" class="send-code-button" @click="findPwSendVerificationCode"
-                    :disabled="isVerified">재전송</button>
+                <button v-if="verificationSent" type="submit" class="send-code-button"
+                    @click="findPwSendVerificationCode" :disabled="isVerified">재전송</button>
             </div>
             <div class="input-group" v-if="verificationSent">
                 <div style="display: flex; justify-content: space-between; margin: 20px 0 5px;">
@@ -24,7 +24,8 @@
                     <span v-if="isTimerActive">남은 시간 : {{ formattedTime }}</span>
                 </div>
                 <input type="text" id="verification-code" name="verification-code" v-model="form.verificationCode">
-                <button :disabled="isVerified" type="button" class="send-code-button02" @click="verifyCode">비밀번호 변경하기</button>
+                <button :disabled="isVerified" type="button" class="send-code-button02" @click="verifyCode">비밀번호
+                    변경하기</button>
             </div>
             <div class="input-group" v-if="isVerified">
                 <label for="postPassword">비밀번호 입력하기</label>
@@ -67,7 +68,7 @@ export default {
             try {
                 const data = {
                     name: this.form.name,
-                       userId: this.form.userId,
+                    userId: this.form.userId,
                     phoneNumber: this.form.phoneNumber,
                 }
                 await UserDataService.findIdSmsVerification(data);
@@ -128,9 +129,10 @@ export default {
                 if (confirm("비밀번호를 변경하시겠습니까?")) {
                     try {
                         const data = {
-                            password: this.form.password,
                             userId: this.form.userId,
+                            password: this.form.password,
                             phoneNumber: this.form.phoneNumber,
+                            name: this.form.name,
                         }
                         await UserDataService.postUserPw(data)
                         alert("변경되었습니다");
@@ -218,7 +220,7 @@ export default {
     border-radius: var(--border-radius);
     font-size: var(--font-n-sec-size);
     color: #fff;
-    background-color: var(--main-color);     
+    background-color: var(--main-color);
     margin-top: 10px;
 }
 
