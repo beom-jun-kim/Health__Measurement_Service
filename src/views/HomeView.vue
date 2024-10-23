@@ -71,7 +71,7 @@ import UserDataService from '@/api/UserDataService';
 import Push from "@/api/Push";
 
 export default {
-    name: 'home',
+    name: 'HomeView',
     data() {
         return {
             user: {},
