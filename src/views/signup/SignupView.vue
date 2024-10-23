@@ -207,6 +207,7 @@ export default {
                 return;
             }
 
+            // eslint-disable-next-line no-useless-escape
             const specialCharactersAllowed = /^[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]+$/.test(password);
             if (!specialCharactersAllowed) {
                 this.passwordChkText = `!@#$%^&*()_+-=[]{};':"\\|,.<>/?의 특수문자만 포함 할 수 있습니다`;
