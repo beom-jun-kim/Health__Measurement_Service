@@ -32,7 +32,7 @@ import UserDataService from "@/api/UserDataService";
 import GoBack from "@/components/GoBack.vue"
 
 export default {
-  name: 'report',
+  name: 'ReportView',
   components: {
     GoBack,
   },

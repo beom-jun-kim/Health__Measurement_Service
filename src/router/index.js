@@ -60,8 +60,8 @@ const router = createRouter({
         },
         {
           path: '/user/ReportList/:id',
-          name: 'Report',
-          component: () => import('../views/user/reportList/Report.vue')
+          name: 'ReportView',
+          component: () => import('../views/user/reportList/ReportView.vue')
         },
         {
           path: '/user/Report/:id',
@@ -82,7 +82,7 @@ const router = createRouter({
         {
           path: '/signup/Welcome',
           name: 'Welcome',
-          component: () => import('../views/signup/Welcome.vue')
+          component: () => import('../views/signup/WelcomeView.vue')
         },
         {
           path: '/user/UserInfoEdit',

@@ -14,7 +14,7 @@
 
 <script>
 export default {
-    name: "welcome",
+    name: "WelcomeView",
     data() {
         return {
             visible: true,

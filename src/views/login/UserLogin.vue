@@ -9,7 +9,7 @@
         <div class="input-group">
           <input type="password" id="password" name="password" v-model="password" required placeholder="비밀번호">
         </div>
-        <div class="error-message-cnt-box"v-if="errorMessageCntBox">
+        <div class="error-message-cnt-box" v-if="errorMessageCntBox">
           <small>{{ errorMessageCnt }}</small>
         </div>
         <button type="submit" class="login-button">로그인</button>
@@ -71,7 +71,7 @@
 import UserDataService from '@/api/UserDataService';
 
 const snsBaseURL =
-  process.env.NODE_ENV === 'production'
+  import.meta.env.MODE === 'production'
     ? import.meta.env.VITE_APP_API_SNS_URL_PROD
     : import.meta.env.VITE_APP_API_SNS_URL_LOCAL
 

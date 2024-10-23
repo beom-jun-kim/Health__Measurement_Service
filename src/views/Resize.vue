@@ -17,7 +17,7 @@ export default {
         window.addEventListener('resize', this.checkWidth);
         this.checkWidth();
     },
-    beforeDestroy() {
+    beforeUnmount() {
         window.removeEventListener('resize', this.checkWidth);
     },
     methods: {

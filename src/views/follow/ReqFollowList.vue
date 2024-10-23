@@ -1,40 +1,42 @@
 <template>
     <div class="container">
-        <GoBack :goBackText="goBackText"/>
+        <GoBack :goBackText="goBackText" />
         <div class="follow-list">
             <h2>보호자 추가 신청</h2>
             <p>나의 보호자로 신청한 보호자 리스트입니다.</p>
         </div>
-        <div v-if="userList.length > 0" class="list-box" v-for="(user, index) in userList" :key="index">
-            <div class="list-box-wrap">
-                <!-- <div v-if="user.imgUrl" class="user-img-box">
+        <div v-if="userList.length > 0">
+            <div class="list-box" v-for="(user, index) in userList" :key="index">
+                <div class="list-box-wrap">
+                    <!-- <div v-if="user.imgUrl" class="user-img-box">
                     <div class="user-profile" :style="{ backgroundImage: `url(${user.imgUrl})` }"></div>
                 </div>
                 <div v-else class="user-img-box">
                     <div class="user-not-profile"></div>
                 </div> -->
-                <RouterLink :to="`/follow/followDetail/${user.userSid}`" class="user-profile-detail">
-                    <div v-if="user.gender === 'F'" class="profile-img">
-                        <img src="@/assets/img/charac_w.png" alt="프로필 이미지">
-                    </div>
-                    <div v-if="user.gender === 'M'" class="profile-img">
-                        <img src="@/assets/img/charac_m.png" alt="프로필 이미지">
-                    </div>
-                    <div class="user-profile-info">
-                        <p class="username">{{ user.name }}</p>
-                        <div class="more-profile">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="17px" height="17px" viewBox="0 0 24 24"
-                                fill="none">
-                                <path d="M15 7L10 12L15 17" stroke="#b7b7b7" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                            <small>더보기</small>
+                    <RouterLink :to="`/follow/followDetail/${user.userSid}`" class="user-profile-detail">
+                        <div v-if="user.gender === 'F'" class="profile-img">
+                            <img src="@/assets/img/charac_w.png" alt="프로필 이미지">
                         </div>
+                        <div v-if="user.gender === 'M'" class="profile-img">
+                            <img src="@/assets/img/charac_m.png" alt="프로필 이미지">
+                        </div>
+                        <div class="user-profile-info">
+                            <p class="username">{{ user.name }}</p>
+                            <div class="more-profile">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17px" height="17px" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <path d="M15 7L10 12L15 17" stroke="#b7b7b7" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <small>더보기</small>
+                            </div>
+                        </div>
+                    </RouterLink>
+                    <div class="follow-res-buttons">
+                        <button @click="accept(user.userSid)">수락</button>
+                        <button @click="reject(user.userSid)">거절</button>
                     </div>
-                </RouterLink>
-                <div class="follow-res-buttons">
-                    <button @click="accept(user.userSid)">수락</button>
-                    <button @click="reject(user.userSid)">거절</button>
                 </div>
             </div>
         </div>
@@ -50,13 +52,13 @@ import GoBack from "@/components/GoBack.vue";
 
 export default {
     name: "reqFollowList",
-    components:{
+    components: {
         GoBack,
     },
     data() {
         return {
             userList: [],
-            goBackText:"요청 친구 리스트"
+            goBackText: "요청 친구 리스트"
         }
     },
     methods: {
