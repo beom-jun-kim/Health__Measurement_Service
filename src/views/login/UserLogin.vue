@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import UserDataService from '@/api/U1serDataService';
+import UserDataService from '@/api/UserDataService';
 
 const snsBaseURL =
   import.meta.env.MODE === 'production'

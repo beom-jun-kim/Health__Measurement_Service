@@ -119,7 +119,7 @@
 
 <script>
 import GoBack from "@/components/GoBack.vue";
-import UserDataService from "@/api/U1serDataService";
+import UserDataService from "@/api/UserDataService";
 
 export default {
   name: 'reportDetail',

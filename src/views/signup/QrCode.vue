@@ -38,7 +38,7 @@
 
 <script>
 import Height from "@/components/Height.vue";
-import UserDataService from "@/api/U1serDataService";
+import UserDataService from "@/api/UserDataService";
 import Qr from "@/api/Qr";
 import QrcodeVue from 'qrcode.vue';
 import GoBack from "@/components/GoBack.vue";
