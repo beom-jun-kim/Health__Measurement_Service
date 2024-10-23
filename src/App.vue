@@ -63,7 +63,7 @@ const shouldUseFullPathKey = computed(() => {
 </script>
 
 <script>
-import UserDataService from "@/api/UserDataService"
+import UserDataService from "@/api/U1serDataService"
 
 export default {
   name: "App",

@@ -37,7 +37,7 @@
                     <label for="name">이름</label>
                     <span class="usernameChk" :class="{ 'red': usernameChk === true, 'blue': usernameChk === false }">{{
                         usernameChkText
-                        }}</span>
+                    }}</span>
                 </div>
                 <input type="text" id="name" name="name" v-model="form.username" required maxlength="20"
                     :disabled="verificationSent" placeholder="예) 홍지콘">
@@ -104,7 +104,7 @@
 </template>
 
 <script>
-import UserDataService from '@/api/UserDataService';
+import UserDataService from '@/api/U1serDataService';
 import GoBack from "@/components/GoBack.vue";
 
 export default {

@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import UserDataService from '@/api/UserDataService';
+import UserDataService from '@/api/U1serDataService';
 import Push from "@/api/Push";
 
 export default {

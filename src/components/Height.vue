@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import UserDataService from "@/api/UserDataService";
+import UserDataService from "@/api/U1serDataService";
 import GoBack from "@/components/GoBack.vue";
 
 export default {

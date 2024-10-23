@@ -53,7 +53,8 @@
                         <span class="height">cm</span>
                     </div>
                 </div>
-                <div class="info-item" style="border-bottom: 1px solid var(--input-border-color); padding-bottom: 20px;">
+                <div class="info-item"
+                    style="border-bottom: 1px solid var(--input-border-color); padding-bottom: 20px;">
                     <span class="label">체중</span>
                     <div class="info-item-box">
                         <input type="text" class="value" name="weight" v-model="user.weight" required>
@@ -67,7 +68,7 @@
 </template>
 
 <script>
-import UserDataService from "@/api/UserDataService";
+import UserDataService from "@/api/U1serDataService";
 import GoBack from "@/components/GoBack.vue";
 
 export default {

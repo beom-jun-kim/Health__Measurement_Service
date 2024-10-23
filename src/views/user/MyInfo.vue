@@ -42,7 +42,7 @@
             </div>
             <div class="info-item">
                 <p class="label">성별</p>
-                <p class="value">{{ user.gender === "M" ? "남자" : user.gender === "F" ? "여자" : "입력하신 정보가 없습니다"}}</p>
+                <p class="value">{{ user.gender === "M" ? "남자" : user.gender === "F" ? "여자" : "입력하신 정보가 없습니다" }}</p>
             </div>
             <div class="info-item">
                 <p class="label">생년월일</p>
@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import UserDataService from "@/api/UserDataService";
+import UserDataService from "@/api/U1serDataService";
 import GoBack from "@/components/GoBack.vue";
 
 export default {
@@ -82,7 +82,7 @@ export default {
     data() {
         return {
             user: {},
-            goBackText:"마이페이지"
+            goBackText: "마이페이지"
         }
     },
     methods: {
@@ -184,7 +184,7 @@ export default {
 
 .buttons button {
     background: var(--main-color);
-    color:#fff;
+    color: #fff;
 }
 
 .secession {
@@ -235,7 +235,7 @@ export default {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center; 
+    align-items: center;
 }
 
 .action-item {

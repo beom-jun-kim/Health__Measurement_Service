@@ -11,7 +11,8 @@
             </div>
             <div style="display: flex; justify-content: space-between; gap: 5px;">
                 <div class="input-group">
-                    <input type="text" placeholder="전화번호 (-없이 입력)" v-model="form.phoneNumber" :disabled="verificationSent" />
+                    <input type="text" placeholder="전화번호 (-없이 입력)" v-model="form.phoneNumber"
+                        :disabled="verificationSent" />
                 </div>
                 <button v-if="verificationSent === false" type="submit" class="send-code-button"
                     @click="findPwSendVerificationCode">전송</button>
@@ -40,7 +41,7 @@
 </template>
 
 <script>
-import UserDataService from "@/api/UserDataService"
+import UserDataService from "@/api/U1serDataService"
 
 export default {
     name: "FindPassword",

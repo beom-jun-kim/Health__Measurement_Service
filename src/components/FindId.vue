@@ -21,12 +21,12 @@
                     <label for="verification-code">인증번호</label>
                     <span class="timeOut" v-if="isTimerActive">남은 시간 : {{ formattedTime }}</span>
                 </div>
-                
+
                 <input type="text" id="verification-code" name="verification-code" v-model="form.verificationCode"
                     :disabled="isVerified">
                 <button type="button" class="send-code-button02" @click="verifyCode" :disabled="isVerified">아이디
                     찾기</button>
-                
+
             </div>
         </form>
         <div class="findIdResult" v-if="isVerified && findIdModal">
@@ -56,11 +56,11 @@
                     <div class="smart-sns-id">
                         <p class="smart-shoes-id-left">연결된 SNS 계정</p>
                         <p class="smart-sns-id-title">카카오 아이디 <span class="spa">|</span> {{ findIdResult.naverId ===
-                    null ?
-                    "연결된 아이디가 없습니다" : findIdResult.naverId }}</p>
+                            null ?
+                            "연결된 아이디가 없습니다" : findIdResult.naverId }}</p>
                         <p class="smart-sns-id-title">네이버 아이디 <span class="spa">|</span> {{ findIdResult.kakaoId ===
-                    null ?
-                    "연결된 아이디가 없습니다" : findIdResult.kakaoId }}</p>
+                            null ?
+                            "연결된 아이디가 없습니다" : findIdResult.kakaoId }}</p>
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import UserDataService from "@/api/UserDataService"
+import UserDataService from "@/api/U1serDataService"
 
 export default {
     name: "FindId",
@@ -87,7 +87,7 @@ export default {
             isTimerActive: false,
             countdown: null,
             excessPhrase: "",
-            findIdModal : false,
+            findIdModal: false,
         }
     },
     methods: {
@@ -177,7 +177,7 @@ export default {
                 }
             }, 1000)
         },
-        closeBtn(){
+        closeBtn() {
             this.findIdModal = false;
         }
     },
