@@ -13,117 +13,117 @@ const router = createRouter({
           redirect: '/home'
         },
         {
-          path: '/login/userLogin',
-          name: 'userLogin',
-          component: () => import('../views/login/userLogin.vue')
+          path: '/login/UserLogin',
+          name: 'UserLogin',
+          component: () => import('../views/login/UserLogin.vue')
         },
         {
-          path: '/login/loginChk',
-          name: 'loginChk',
-          component: () => import('../views/login/loginChk.vue')
+          path: '/login/LoginChk',
+          name: 'LoginChk',
+          component: () => import('../views/login/LoginChk.vue')
         },
         {
-          path: '/signup/signupView',
-          name: 'signupView',
-          component: () => import('../views/signup/signupView.vue'),
+          path: '/signup/SignupView',
+          name: 'SignupView',
+          component: () => import('../views/signup/SignupView.vue'),
           props: (route) => ({ userType: route.query.userType })
         },
         {
-          path: '/user/userIdFind',
-          name: 'userIdFind',
-          component: () => import('../views/user/userIdFind.vue')
+          path: '/user/UserIdFind',
+          name: 'UserIdFind',
+          component: () => import('../views/user/UserIdFind.vue')
         },
         {
           path: '/home',
-          name: 'home',
-          component: () => import('../views/home.vue')
+          name: 'Home',
+          component: () => import('../views/Home.vue')
         },
         {
-          path: '/signup/gender',
-          name: 'gender',
-          component: () => import('../views/signup/gender.vue')
+          path: '/signup/Gender',
+          name: 'Gender',
+          component: () => import('../views/signup/Gender.vue')
         },
         {
-          path: '/signup/qr',
-          name: 'qr',
-          component: () => import('../views/signup/qr.vue')
+          path: '/signup/QrCode',
+          name: 'QrCode',
+          component: () => import('../views/signup/QrCode.vue')
         },
         {
-          path: '/user/myInfo',
-          name: 'myInfo',
-          component: () => import('../views/user/myInfo.vue')
+          path: '/user/MyInfo',
+          name: 'MyInfo',
+          component: () => import('../views/user/MyInfo.vue')
         },
         {
-          path: '/user/secession',
-          name: 'secession',
-          component: () => import('../views/user/secession.vue')
+          path: '/user/Secession',
+          name: 'Secession',
+          component: () => import('../views/user/Secession.vue')
         },
         {
-          path: '/user/mypage',
-          name: 'mypage',
-          component: () => import('../views/user/mypage.vue')
+          path: '/user/Mypage',
+          name: 'Mypage',
+          component: () => import('../views/user/Mypage.vue')
         },
         {
-          path: '/user/reportList/:id',
-          name: 'report',
-          component: () => import('../views/user/reportList/report.vue')
+          path: '/user/ReportList/:id',
+          name: 'Report',
+          component: () => import('../views/user/reportList/Report.vue')
         },
         {
-          path: '/user/report/:id',
-          name: 'reportDetail',
-          component: () => import('../views/user/report/reportDetail.vue')
+          path: '/user/Report/:id',
+          name: 'ReportDetail',
+          component: () => import('../views/user/report/ReportDetail.vue')
         },
         {
-          path: '/user/walkReport/:id',
-          name: 'walkReport',
-          component: () => import('../views/user/walkReport/walkReport.vue'),
+          path: '/user/WalkReport/:id',
+          name: 'WalkReport',
+          component: () => import('../views/user/walkReport/WalkReport.vue'),
           meta: { transition: 'slide-fade' }
         },
         {
-          path: '/findContainer',
-          name: 'findContainer',
-          component: () => import('../views/findContainer.vue')
+          path: '/FindContainer',
+          name: 'FindContainer',
+          component: () => import('../views/FindContainer.vue')
         },
         {
-          path: '/signup/welcome',
-          name: 'welcome',
-          component: () => import('../views/signup/welcome.vue')
+          path: '/signup/Welcome',
+          name: 'Welcome',
+          component: () => import('../views/signup/Welcome.vue')
         },
         {
-          path: '/user/userInfoEdit',
-          name: 'userInfoEdit',
-          component: () => import('../views/user/userInfoEdit.vue')
+          path: '/user/UserInfoEdit',
+          name: 'UserInfoEdit',
+          component: () => import('../views/user/UserInfoEdit.vue')
         },
         {
-          path: '/follow/addFollow',
-          name: 'addFollow',
-          component: () => import('../views/follow/addFollow.vue')
+          path: '/follow/AddFollow',
+          name: 'AddFollow',
+          component: () => import('../views/follow/AddFollow.vue')
         },
         {
-          path: '/follow/followList',
-          name: 'followList',
-          component: () => import('../views/follow/followList.vue')
+          path: '/follow/FollowList',
+          name: 'FollowList',
+          component: () => import('../views/follow/FollowList.vue')
         },
         {
-          path: '/follow/followDetail/:id',
-          name: 'followDetail',
-          component: () => import('../views/follow/followDetail/followDetail.vue')
+          path: '/follow/FollowDetail/:id',
+          name: 'FollowDetail',
+          component: () => import('../views/follow/followDetail/FollowDetail.vue')
         },
         {
-          path: '/notification/pushList',
-          name: 'pushList',
-          component: () => import('../views/notification/pushList.vue'),
+          path: '/notification/PushList',
+          name: 'PushList',
+          component: () => import('../views/notification/PushList.vue'),
           props: true
         },
         {
-          path: '/follow/reqFollowList',
-          name: 'reqFollowList',
-          component: () => import('../views/follow/reqFollowList.vue')
+          path: '/follow/ReqFollowList',
+          name: 'ReqFollowList',
+          component: () => import('../views/follow/ReqFollowList.vue')
         },
         {
-          path: '/follow/reqFollowDetailChk/:id',
-          name: 'reqFollowChk',
-          component: () => import('../views/follow/reqFollowDetailChk/reqFollowChk.vue'),
+          path: '/follow/ReqFollowDetailChk/:id',
+          name: 'ReqFollowChk',
+          component: () => import('../views/follow/reqFollowDetailChk/ReqFollowChk.vue'),
           props: true
         },
         {
@@ -132,8 +132,8 @@ const router = createRouter({
           component: () => import('../views/NotFound.vue')
         },
         {
-          path: 'largeScreen',
-          name: 'largeScreen',
+          path: '/LargeScreen',
+          name: 'LargeScreen',
           component: () => import('../views/LargeScreen.vue')
         }
       ]

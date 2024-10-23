@@ -44,7 +44,7 @@ import QrcodeVue from 'qrcode.vue';
 import GoBack from "@/components/GoBack.vue";
 
 export default {
-    name: 'qr',
+    name: 'QrCode',
     components: {
         Height,
         QrcodeVue,
