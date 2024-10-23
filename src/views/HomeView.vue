@@ -83,9 +83,6 @@ export default {
             try {
                 const response = await UserDataService.getUserInfo();
                 this.user = response.data;
-                if (this.user.gender === "") {
-                    this.$router.push("/signup/gender");
-                }
             } catch (error) {
                 console.log("유저조회 실패", error);
             }

@@ -39,11 +39,6 @@ const router = createRouter({
           component: () => import('../views/HomeView.vue')
         },
         {
-          path: '/signup/Gender',
-          name: 'Gender',
-          component: () => import('../views/signup/Gender.vue')
-        },
-        {
           path: '/signup/QrCode',
           name: 'QrCode',
           component: () => import('../views/signup/QrCode.vue')
