@@ -64,6 +64,9 @@
         <small style="color: var(--main-color);">회원가입</small>
       </RouterLink>
     </div>
+    <div class="copy-right">
+      <span>© 2024. (주) 인펙비전 Co. all rights reserved.</span>
+    </div>
   </div>
 </template>
 
@@ -235,6 +238,13 @@ export default {
 
 .move-signup small {
   margin-right: 5px;
+  color: var(--light-font-color);
+}
+
+.copy-right {
+  position: absolute;
+  bottom: 15px;
+  font-size: var(--font-small-size);
   color: var(--light-font-color);
 }
 
