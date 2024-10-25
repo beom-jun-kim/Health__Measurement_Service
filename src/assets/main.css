@@ -1,8 +1,10 @@
 @import './base.css';
 
 #app {
-  max-width: 1280px;
+  min-height: 100vh;
+  border: 1px solid var(--input-border-color);
   margin: 0 auto;
+  max-width: 500px;
 }
 
 html,body {
