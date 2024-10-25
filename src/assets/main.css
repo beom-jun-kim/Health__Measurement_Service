@@ -5,6 +5,7 @@
   border: 1px solid var(--input-border-color);
   margin: 0 auto;
   max-width: 500px;
+  min-width: 430px;
 }
 
 html,body {
