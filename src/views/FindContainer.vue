@@ -246,17 +246,19 @@ export default {
 .container {
   padding: 0;
   overflow-y: hidden;
-  /* position: relative; */
 }
 
 .find-container {
-  position: absolute;
   top: 0;
   width: 100%;
   height: 105vh;
   background: #fff;
   z-index: 999;
   padding: 0 30px 30px;
+}
+
+#map {
+  margin-top: -80px;
 }
 
 .go-back-btn01 {
@@ -274,7 +276,7 @@ export default {
   width: 100%;
   padding: 20px 30px;
   background-color: #ffffff00;
-  position: absolute;
+  position: relative;
   z-index: 5;
 }
 
@@ -372,7 +374,7 @@ export default {
 .search-result {
   position: absolute;
   bottom: 69px;
-  width: 100%;
+  width: 498px;
   background: #fff;
   padding: 30px 20px;
   font-size: var(--input-font-size);

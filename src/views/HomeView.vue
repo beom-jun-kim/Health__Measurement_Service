@@ -40,7 +40,7 @@
         </section>
         <section class="welcome-section">
             <div class="grid-container">
-                <RouterLink to="/signup/qr" class="item1">
+                <RouterLink to="/signup/QrCode" class="item1">
                     <div class="grid-item">
                         <div class="health-data-text">
                             <p>MY 건강 데이터 측정하기</p>
